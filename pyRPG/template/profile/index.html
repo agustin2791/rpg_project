@@ -2,4 +2,5 @@
 {% block content %}
 <h1>{{ user.username }}</h1>
 <h2>{{ user.email }}</h2>
+<a href="/profile/{{user.username}}/campaign/create">Create Campaign</a>
 {% endblock %}

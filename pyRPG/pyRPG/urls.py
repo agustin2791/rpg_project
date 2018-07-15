@@ -22,6 +22,13 @@ from app import views
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
-    url(r'^profile/(?P<username>\w{0,50})/$', views.user_profile, name='profile'),
+    url(r'^profile/(?P<username>\w{0,50})/$',
+        views.user_profile,
+        name='profile'),
+
+    # Campaign
+    url(r'^profile/(?P<username>\w{0,50})/campaign/create/$',
+        views.create_campaign,
+        name='create_campaign'),
     url(r'^admin/', admin.site.urls),
 ]

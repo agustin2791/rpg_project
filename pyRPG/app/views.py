@@ -16,3 +16,9 @@ def user_profile(request, username):
     return render(request,
                   'profile/index.html',
                   context)
+
+def create_campaign(request, username):
+    user = User.objects.get(username=username)
+
+    return render(request,
+                  'campaign/create.html')

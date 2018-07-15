@@ -47,6 +47,10 @@ class CharacterClass(models.Model):
     def __unicode__(self):
         return self.name
 
+class CharacterRace(CharacterClass):
+    def __unicode__(self):
+        return self.name
+
 # Character's attack
 class CharacterAttack(models.Model):
     ATTACK_TYPE = (
@@ -66,6 +70,8 @@ class Character(models.Model):
     level = models.IntegerField(default=1)
     character_class = models.ForeignKey(CharacterClass,
                                         related_name='character_class')
+    character_race = models.ForeignKey(CharacterRace,
+                                       related_name='character_race')
     hp = models.IntegerField(default=100)
     damage = models.IntegerField(default=10)
     defence = models.IntegerField(default=10)
@@ -86,12 +92,13 @@ class Character(models.Model):
 
     def add_class(self, *args, **kwargs):
         cClass = CharacterClass.objects.get(id=self.character_class.id)
-        self.hp += cClass.health
-        self.damage += cClass.damage
-        self.defence += cClass.defence
-        self.luck += cClass.luck
-        self.barter += cClass.barter
-        self.perception += cClass.perception
+        cRace = CharacterRace.objects.get(id=self.character_race.id)
+        self.hp += cClass.health + cRace.health
+        self.damage += cClass.damage + cRace.damage
+        self.defence += cClass.defence + cRace.defence
+        self.luck += cClass.luck + cRace.luck
+        self.barter += cClass.barter + cRace.barter
+        self.perception += cClass.perception + cRace.perception
         super(Character, self).save(*args, **kwargs)
 
 # minion, boss, mini boss
