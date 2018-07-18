@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    friends_list = models.ManyToManyField(User,
+                                          related_name='user_friend_list')
+    friend_request = models.ManyToManyField(User,
+                                            related_name='user_request_list')
+
 # Category for Items in the game
 class ItemCategory(models.Model):
     name = models.CharField(max_length=225)
@@ -150,8 +157,9 @@ class Campaign(models.Model):
     chapters = models.ManyToManyField('CampaignChapter',
                                       related_name='campaign_chapters')
     objective = models.TextField()
-    begining = models.TextField()
+    beginning = models.TextField()
     end = models.TextField()
+    complete = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

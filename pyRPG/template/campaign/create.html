@@ -1,4 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Create Campaign</h2>
+<div class="container-fluid">
+  <div class="col-md-3">
+    <form class="new_campaign">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input type="text" name="campaign_name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="playert_limit">Player Limit: </label>
+        <input type="number" name="campaign_player_limit" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="obj">Objective: </label>
+        <textarea name="campaign_obj" rows="5" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="start">Starting Prompt: </label>
+        <textarea name="campaign_start" rows="5" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="end">Ending Prompt: </label>
+        <textarea name="campaign_end" rows="5" class="form-control"></textarea>
+      </div>
+      <button type="submit" name="button" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
+<script type="text/javascript">
+  $(function() {
+    var url = '/profile/{{ user.username }}/campaign/create/submit/';
+    $(document).on('submit', '.new_campaign', () => {
+      let name = $('input[name="campaign_name"]').val(),
+          limit = $('input[name="campaign_player_limit"]').val(),
+          obj = $('textarea[name="campaign_obj"]').val(),
+          start = $('textarea[name="campaign_start"]').val(),
+          end = $('textarea[name="campaign_end"]').val();
+      console.log(end)
+      newCampaign(csrf='{{ csrf_token }}', url, name, limit, obj, start, end);
+      return false;
+    })
+  })
+</script>
 {% endblock %}
