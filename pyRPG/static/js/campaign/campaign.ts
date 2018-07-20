@@ -27,3 +27,24 @@ var newCampaign = (csrf, url, name, limit, obj, start, end) => {
     }
   });
 };
+// New Chapter for the campaign
+var newChapter = (csrf, url, name, description) => {
+  var slug = name.toLowerCase().split(' ').join('-');
+  $.ajax({
+    type: 'POST',
+    url: url,
+    cahce: false,
+    async: true,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'name': name,
+      'desc': desc
+    },
+    success: (data) => {
+      window.location.href = data;
+    },
+    error: (data) => {
+      console.log(data);
+    }
+  })
+}

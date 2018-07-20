@@ -2,11 +2,10 @@
 {% block content %}
 <h1>{{ user.username }}</h1>
 <h2>{{ user.email }}</h2>
-<a href="/profile/{{user.username}}/campaign/create">Create Campaign</a><br>
-{{campaigns}}
+<a href="/campaign/{{user.username}}/create">Create Campaign</a><br>
 {% if campaigns %}
 {% for camp in campaigns.all %}
-<a href="/profile/{{user.username}}/campaign/{{camp.id}}/edit">{{ camp.name }}</a>
+<a href="/campaign/{{user.username}}/{{camp.slug}}/edit">{{ camp.name }}</a>
 {% endfor %}
 {% endif %}
 {% endblock %}

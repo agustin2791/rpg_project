@@ -56,16 +56,63 @@ def create_campaign_submit(request, username):
             end=request.POST.get('end'),
         )
         new_campaign.save()
-        redirect_to = '/profile/{0}/campaign/{1}/edit/'.format(username, new_campaign.id)
+        redirect_to = '/campaign/{0}/{1}/edit/'.format(username, new_campaign.slug)
         return HttpResponse(redirect_to)
 
-def campaign_edit(request, username, campaign_id):
+def campaign_edit(request, username, slug):
     user = User.objects.get(username=username)
-    campaign = models.Campaign.objects.get(id=campaign_id)
+    campaign = models.Campaign.objects.get(host=user, slug=slug)
+    chapters = models.CampaignChapter.objects.filter(campaign__host=user)
+    context = {
+        'user': user,
+        'campaign': campaign,
+        'chapters': chapters
+    }
+    return render(request,
+                  'campaign/edit.html',
+                  context)
+
+def new_campaign_chapter(request, username, slug):
+    user = User.objects.get(username=username)
+    campaign = models.Campaign.objects.get(host__username=username, slug=slug)
+
     context = {
         'user': user,
         'campaign': campaign
     }
+
     return render(request,
-                  'campaign/edit.html',
+                  'campaign/new_chapter.html',
+                  context)
+
+def submit_campaign_chapter(request, username, slug):
+    user = User.objects.get(username=username)
+    campaign = models.Campaign.objects.get(host__username=username, slug=slug)
+
+    if request.is_ajax and request.POST:
+        new_chapter = models.CampaignChapter.objects.create(
+            name=request.POST.get('name'),
+            slug=request.POST.get('slug'),
+            description=request.POST.get('desc'),
+            campaign=campaign
+        )
+        new_chapter.save()
+        redirect_to = '/campaign/{0}/{1}/chapter/{2}/edit/'.format(username, campaign.slug, new_chapter.slug)
+        return HttpResponse(redirect_to)
+
+def edit_campaign_chapter(request, username, campaign_slug, chapter_slug):
+    user = User.objects.get(username=username)
+    campaign = models.Campaign.objects.get(host__username=username,
+                                           slug=cmapaign_slug)
+    chapter = models.CampaignChapter.objects.get(campaign__host__username=username,
+                                                 campaign_slug=campaign_slug,
+                                                 slug=chapter_slug)
+
+    context = {
+        'user': user,
+        'campaign': campaign
+    }
+
+    return render(request,
+                  'campaign/edit_chapter.html',
                   context)

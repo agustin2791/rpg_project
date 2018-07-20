@@ -27,14 +27,20 @@ urlpatterns = [
         name='profile'),
 
     # Campaign
-    url(r'^profile/(?P<username>\w{0,50})/campaign/create/$',
+    url(r'^campaign/(?P<username>\w{0,50})/create/$',
         views.create_campaign,
         name='create_campaign'),
-    url(r'^profile/(?P<username>\w{0,50})/campaign/create/submit/$',
+    # Submit the campaign
+    url(r'^campaign/(?P<username>\w{0,50})/create/submit/$',
         views.create_campaign_submit,
         name='create_campaign_submit'),
-    url(r'^profile/(?P<username>\w{0,50})/campaign/(?P<campaign_id>[0-9])/edit/$',
+    # Edit campaign
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/edit/$',
         views.campaign_edit,
         name='campaign_edit'),
+    # create new campaign chapter
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[0-9])/chapter/new/$',
+        views.new_campaign_chapter,
+        name='new_campaign_chapter'),
     url(r'^admin/', admin.site.urls),
 ]
