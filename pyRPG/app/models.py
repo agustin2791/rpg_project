@@ -186,6 +186,16 @@ class CampaignChapter(models.Model):
     rooms = models.ManyToManyField('ChapterRoom')
     campaign = models.ForeignKey(Campaign,
                                  related_name='campaign')
+    cleared = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.name
+
+class ChapterArea(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.TextField()
+    number_of_rooms = models.IntegerField(default=3)
+    cleared = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name
@@ -197,6 +207,10 @@ class ChapterRoom(models.Model):
                                  related_name='room_npc')
     enemies = models.ManyToManyField(CampaignEnemies,
                                      related_name='room_enemies')
+    chapter_area = models.ForeignKey(ChapterArea,
+                                     related_name='chapter_area')
+    activity = models.BooleanField(default=False)
+    cleared = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

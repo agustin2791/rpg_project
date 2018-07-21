@@ -36,12 +36,14 @@ def user_profile(request, username):
                   'profile/index.html',
                   context)
 
+# Create campaign
 def create_campaign(request, username):
     user = User.objects.get(username=username)
 
     return render(request,
                   'campaign/create.html')
 
+# Submitting the campaign and finish the campaign creation
 def create_campaign_submit(request, username):
     user = User.objects.get(username=username)
     print request.POST
@@ -59,6 +61,7 @@ def create_campaign_submit(request, username):
         redirect_to = '/campaign/{0}/{1}/edit/'.format(username, new_campaign.slug)
         return HttpResponse(redirect_to)
 
+# Edit the campaign
 def campaign_edit(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host=user, slug=slug)
@@ -72,6 +75,7 @@ def campaign_edit(request, username, slug):
                   'campaign/edit.html',
                   context)
 
+# Creates a new chapter of a campaign
 def new_campaign_chapter(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host__username=username, slug=slug)
@@ -85,6 +89,7 @@ def new_campaign_chapter(request, username, slug):
                   'campaign/new_chapter.html',
                   context)
 
+# Submits and creates the chapter of the campaign
 def submit_campaign_chapter(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host__username=username, slug=slug)
@@ -100,10 +105,11 @@ def submit_campaign_chapter(request, username, slug):
         redirect_to = '/campaign/{0}/{1}/chapter/{2}/edit/'.format(username, campaign.slug, new_chapter.slug)
         return HttpResponse(redirect_to)
 
+# Edit the Campaign's chapter
 def edit_campaign_chapter(request, username, campaign_slug, chapter_slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host__username=username,
-                                           slug=cmapaign_slug)
+                                           campaign_slug=cmapaign_slug)
     chapter = models.CampaignChapter.objects.get(campaign__host__username=username,
                                                  campaign_slug=campaign_slug,
                                                  slug=chapter_slug)

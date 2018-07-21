@@ -11,7 +11,7 @@
       </p>
     </div>
     <div class="col">
-      <a class="btn btn-primary" href="/campaign/{{ user.username }}/{{ campaign.id }}/chapter/new">Add Chapter</a>
+      <a class="btn btn-primary" href="/campaign/{{ user.username }}/{{ campaign.slug }}/chapter/new">Add Chapter</a>
       {% if chapters %}
       {% for chap in chapters %}
       <div class="chapter-container">

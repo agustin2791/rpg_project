@@ -21,7 +21,7 @@
   $(function() {
     $(document).on('submit', '.new_chapter_form', function() {
       let csrf = '{{ csrf_token }}',
-          url = '/campaign/{{ user.username }}/{{ campaign.id }}/chapter/sumbit/',
+          url = '/campaign/{{ user.username }}/{{ campaign.slug }}/chapter/sumbit/',
           name = $('input[name="chapter_name"]')/val(),
           desc = $('textarea[name="chapter_description"]').val();
       newChapter(csrf, url, name, description);
