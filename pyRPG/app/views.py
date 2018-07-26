@@ -46,7 +46,6 @@ def create_campaign(request, username):
 # Submitting the campaign and finish the campaign creation
 def create_campaign_submit(request, username):
     user = User.objects.get(username=username)
-    print request.POST
     if request.is_ajax and request.POST:
         new_campaign = models.Campaign.objects.create(
             name=request.POST.get('name'),
@@ -77,9 +76,11 @@ def campaign_edit(request, username, slug):
                   context)
 
 # Creates a new chapter of a campaign
-def new_campaign_chapter(request, username, slug):
+def new_campaign_chapter(request, username, slug, campaign_id):
     user = User.objects.get(username=username)
-    campaign = models.Campaign.objects.get(host__username=username, slug=slug)
+    campaign = models.Campaign.objects.get(id=campaign_id,
+                                           host__username=username,
+                                           slug=slug)
     print campaign
 
     context = {
@@ -92,9 +93,12 @@ def new_campaign_chapter(request, username, slug):
                   context)
 
 # Submits and creates the chapter of the campaign
-def submit_campaign_chapter(request, username, slug):
+def submit_campaign_chapter(request, username, slug, campaign_id):
     user = User.objects.get(username=username)
-    campaign = models.Campaign.objects.get(host__username=username, slug=slug)
+    campaign = models.Campaign.objects.get(id=campaign_id,
+                                           host__username=username,
+                                           slug=slug)
+    print 'CAMPAIGN: '
     print campaign
     if request.is_ajax and request.POST:
         new_chapter = models.CampaignChapter.objects.create(
@@ -105,17 +109,18 @@ def submit_campaign_chapter(request, username, slug):
         )
         new_chapter.save()
         print '\n'
-        print new_chapter.name
+        print 'New Chapter: ', new_chapter
         redirect_to = '/campaign/{0}/{1}/chapter/{2}/edit/'.format(username, campaign.slug, new_chapter.slug)
         return HttpResponse(redirect_to)
 
 # Edit the Campaign's chapter
-def edit_campaign_chapter(request, username, campaign_slug, chapter_slug):
+def edit_campaign_chapter(request, username, campaign_slug, chapter_slug, chapter_id):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host__username=username,
-                                           campaign_slug=cmapaign_slug)
-    chapter = models.CampaignChapter.objects.get(campaign__host__username=username,
-                                                 campaign_slug=campaign_slug,
+                                           slug=campaign_slug)
+    chapter = models.CampaignChapter.objects.get(id=chapter_id,
+                                                 campaign__host__username=username,
+                                                 campaign__slug=campaign_slug,
                                                  slug=chapter_slug)
 
     context = {
@@ -126,3 +131,15 @@ def edit_campaign_chapter(request, username, campaign_slug, chapter_slug):
     return render(request,
                   'campaign/edit_chapter.html',
                   context)
+
+# global values
+def global_context(request):
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user.username)
+    else:
+        user = None
+
+    context = {
+        'user': user
+    }
+    return context
