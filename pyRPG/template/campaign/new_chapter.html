@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
   <div class="col-3">
-    <form class="new_chaper_form">
+    <form class="new_chapter_form">
       <div class="form-group">
         <label for="chapter_name">Name: </label>
         <input type="text" name="chapter_name" class="form-control" placeholder="Chapter X">
@@ -11,22 +11,23 @@
         <label for="chapter_description">Description: </label>
         <textarea cols="" rows="10" name="chapter_description" class="form-control"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" name="button">Add Chapter</button>
+      <button type="submit" class="btn btn-primary" name="button">New Chapter</button>
     </form>
   </div>
 </div>
 {% endblock %}
 {% block bottomscript %}
+<script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
 <script type="text/javascript">
   $(function() {
-    $(document).on('submit', '.new_chapter_form', function() {
-      let csrf = '{{ csrf_token }}',
-          url = '/campaign/{{ user.username }}/{{ campaign.slug }}/chapter/sumbit/',
-          name = $('input[name="chapter_name"]')/val(),
+    console.log('Something');
+    let url = '/campaign/{{ user.username }}/{{ campaign.slug }}/chapter/sumbit/';
+    $(document).on('submit', '.new_chapter_form', () => {
+      let name = $('input[name="chapter_name"]').val(),
           desc = $('textarea[name="chapter_description"]').val();
-      newChapter(csrf, url, name, description);
+      newChapter(csrf='{{ csrf_token }}', url, name, desc);
       return false;
-    })
+    });
   })
 </script>
 {% endblock %}

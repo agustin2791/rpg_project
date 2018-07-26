@@ -42,7 +42,8 @@ urlpatterns = [
     url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/chapter/new/$',
         views.new_campaign_chapter,
         name='new_campaign_chapter'),
-    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/chapter/submit$',
+    # submit new campaign chapter 
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/chapter/submit/$',
         views.submit_campaign_chapter,
         name='submit_campaign_chapter'),
     url(r'^campaign/(?P<username>\w{0,50})/(?P<chapter_slug>[\w-]+)/chapter/(?P<area_slug>[\w-]+)/$',

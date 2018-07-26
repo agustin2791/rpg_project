@@ -33,7 +33,7 @@
 <script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
 <script type="text/javascript">
   $(function() {
-    var url = '/profile/{{ user.username }}/campaign/create/submit/';
+    var url = '/campaign/{{ user.username }}/create/submit/';
     $(document).on('submit', '.new_campaign', () => {
       let name = $('input[name="campaign_name"]').val(),
           limit = $('input[name="campaign_player_limit"]').val(),

@@ -28,20 +28,22 @@ var newCampaign = (csrf, url, name, limit, obj, start, end) => {
   });
 };
 // New Chapter for the campaign
-var newChapter = (csrf, url, name, description) => {
+var newChapter = (csrf, url, name, desc) => {
   var slug = name.toLowerCase().split(' ').join('-');
   $.ajax({
     type: 'POST',
     url: url,
-    cahce: false,
+    cache: false,
     async: true,
     data: {
       'csrfmiddlewaretoken': csrf,
+      'slug': slug,
       'name': name,
       'desc': desc
     },
     success: (data) => {
       window.location.href = data;
+      console.log('success')
     },
     error: (data) => {
       console.log(data);

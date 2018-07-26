@@ -65,7 +65,8 @@ def create_campaign_submit(request, username):
 def campaign_edit(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host=user, slug=slug)
-    chapters = models.CampaignChapter.objects.filter(campaign__host=user)
+    chapters = models.CampaignChapter.objects.filter(campaign__host=user, campaign=campaign)
+    print chapters
     context = {
         'user': user,
         'campaign': campaign,
@@ -79,6 +80,7 @@ def campaign_edit(request, username, slug):
 def new_campaign_chapter(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host__username=username, slug=slug)
+    print campaign
 
     context = {
         'user': user,
@@ -93,7 +95,7 @@ def new_campaign_chapter(request, username, slug):
 def submit_campaign_chapter(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host__username=username, slug=slug)
-
+    print campaign
     if request.is_ajax and request.POST:
         new_chapter = models.CampaignChapter.objects.create(
             name=request.POST.get('name'),
@@ -102,6 +104,8 @@ def submit_campaign_chapter(request, username, slug):
             campaign=campaign
         )
         new_chapter.save()
+        print '\n'
+        print new_chapter.name
         redirect_to = '/campaign/{0}/{1}/chapter/{2}/edit/'.format(username, campaign.slug, new_chapter.slug)
         return HttpResponse(redirect_to)
 
