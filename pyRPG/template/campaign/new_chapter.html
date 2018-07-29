@@ -20,8 +20,8 @@
 <script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
 <script type="text/javascript">
   $(function() {
-    console.log('Something');
-    let url = '/campaign/{{ user.username }}/{{ campaign.slug }}/chapter/sumbit/';
+    let url = '/campaign/{{ user.username }}/{{ campaign.slug }}/{{ campaign.id }}/chapter/submit/';
+    console.log(url)
     $(document).on('submit', '.new_chapter_form', () => {
       let name = $('input[name="chapter_name"]').val(),
           desc = $('textarea[name="chapter_description"]').val();

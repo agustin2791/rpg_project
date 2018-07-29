@@ -10,7 +10,9 @@
   <body>
     <div class="container-fluid">
         <div class="top-bar">
-          <h6>Top Bar</h6>
+          <ul>
+            <li><a href="/profile/{{ user.username }}/">{{ user.username }}</a></li>
+          </ul>
         </div>
     </div>
     {% block content %}{% endblock %}
