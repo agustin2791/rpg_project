@@ -126,3 +126,7 @@ def edit_campaign_chapter(request, username, campaign_slug, chapter_slug):
     return render(request,
                   'campaign/edit_chapter.html',
                   context)
+
+def campaign(request):
+    return render(request,
+                  'campaign/index.html')
