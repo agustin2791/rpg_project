@@ -97,16 +97,16 @@ class Character(models.Model):
     def __unicode__(self):
         return self.name
 
-    def add_class(self, *args, **kwargs):
-        cClass = CharacterClass.objects.get(id=self.character_class.id)
-        cRace = CharacterRace.objects.get(id=self.character_race.id)
-        self.hp += cClass.health + cRace.health
-        self.damage += cClass.damage + cRace.damage
-        self.defence += cClass.defence + cRace.defence
-        self.luck += cClass.luck + cRace.luck
-        self.barter += cClass.barter + cRace.barter
-        self.perception += cClass.perception + cRace.perception
-        super(Character, self).save(*args, **kwargs)
+    # def add_class(self, *args, **kwargs):
+    #     cClass = CharacterClass.objects.get(id=self.character_class.id)
+    #     cRace = CharacterRace.objects.get(id=self.character_race.id)
+    #     self.hp += cClass.health + cRace.health
+    #     self.damage += cClass.damage + cRace.damage
+    #     self.defence += cClass.defence + cRace.defence
+    #     self.luck += cClass.luck + cRace.luck
+    #     self.barter += cClass.barter + cRace.barter
+    #     self.perception += cClass.perception + cRace.perception
+    #     super(Character, self).save(*args, **kwargs)
 
 # minion, boss, mini boss
 class EnemyCategory(models.Model):
@@ -119,6 +119,7 @@ class EnemyAttack(models.Model):
     name = models.CharField(max_length=150)
     multiple = models.BooleanField(default=False)
     single = models.BooleanField(default=False)
+    description = models.TextField()
 
     def __unicode__(self):
         return self.name
@@ -129,6 +130,7 @@ class Enemy(models.Model):
     damage = models.IntegerField()
     defence = models.IntegerField()
     initiation = models.IntegerField(default=0)
+    type = models.CharField(max_length=100)
     attack = models.ForeignKey(EnemyAttack,
                                related_name='primary_attack')
     subAttack = models.ForeignKey(EnemyAttack,
@@ -169,6 +171,7 @@ class CampaignEnemies(models.Model):
     health = models.IntegerField()
     damage = models.IntegerField()
     defence = models.IntegerField()
+    type = models.CharField(max_length=100)
     initiation = models.IntegerField(default=0)
     attack = models.ForeignKey(EnemyAttack,
                                related_name='primary_enemy_attack')
@@ -211,6 +214,16 @@ class ChapterRoom(models.Model):
                                      related_name='chapter_area')
     activity = models.BooleanField(default=False)
     cleared = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.name
+
+class Battle(models.Model):
+    name = models.CharField(max_length=150)
+    enemies = models.ManyToManyField(CampaignEnemies,
+                                     related_name='enemies')
+    characters = models.ManyToManyField(Character,
+                                        related_name='battle_character')
 
     def __unicode__(self):
         return self.name

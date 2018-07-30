@@ -27,6 +27,9 @@ urlpatterns = [
         name='profile'),
 
     # Campaign
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/play/$',
+        views.campaign,
+        name="campaign"),
     url(r'^campaign/(?P<username>\w{0,50})/create/$',
         views.create_campaign,
         name='create_campaign'),

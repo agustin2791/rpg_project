@@ -27,10 +27,12 @@ def request_approval(request):
 def user_profile(request, username):
     user = User.objects.get(username=username)
     campaigns = models.Campaign.objects.filter(host=user)
+    characters = models.Character.objects.filter(user=user)
     print campaigns
     context = {
         'user': user,
-        'campaigns': campaigns
+        'campaigns': campaigns,
+        'characters': characters
     }
     return render(request,
                   'profile/index.html',
@@ -98,8 +100,7 @@ def submit_campaign_chapter(request, username, slug, campaign_id):
     campaign = models.Campaign.objects.get(id=campaign_id,
                                            host__username=username,
                                            slug=slug)
-    print 'CAMPAIGN: '
-    print campaign
+    
     if request.is_ajax and request.POST:
         new_chapter = models.CampaignChapter.objects.create(
             name=request.POST.get('name'),
@@ -132,9 +133,31 @@ def edit_campaign_chapter(request, username, campaign_slug, chapter_slug, chapte
                   'campaign/edit_chapter.html',
                   context)
 
-def campaign(request):
+def campaign(request, username, slug, campaign_id):
+    campaign = models.Campaign.objects.get(id=campaign_id,
+                                           host__username=username,
+                                           slug=slug)
+
+    # create new enemy
+
+    # use existing enemy list
+
+    # create new battle/room
+
+    # create new NPC
+
+    # start battle
+
+    enemies = models.CampaignEnemies.objects.filter(campaign=campaign)
+    context = {
+        'campaign': campaign,
+        'enemies': enemies
+    }
     return render(request,
-                  'campaign/index.html')
+                  'campaign/index.html',
+                  context)
+
+
 # global values
 def global_context(request):
     if request.user.is_authenticated:
