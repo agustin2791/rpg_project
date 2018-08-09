@@ -38,6 +38,7 @@ def user_profile(request, username):
                   'profile/index.html',
                   context)
 
+# CREATE, EDIT, AND START CAMPAIGN
 # Create campaign
 def create_campaign(request, username):
     user = User.objects.get(username=username)
@@ -67,7 +68,45 @@ def campaign_edit(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host=user, slug=slug)
     chapters = models.CampaignChapter.objects.filter(campaign__host=user, campaign=campaign)
-    print chapters
+    # Invite players
+
+    if request.is_ajax and 'call_modal' in request.POST:
+        modal = request.POST.get('form')
+        return render(request,
+                      'campaign/forms/{0}.html'.format(modal))
+    # create new enemy
+    if request.is_ajax and 'new_enemy' in request.POST:
+        # attack_type = models.Attack.objects.get(id=request.POST.get('attack_type'))
+        # sub_attack_type = models.Attack.objects.get(id=request.POST.get('sub_attack_type'))
+        new_enemy = models.Character.objects.create(
+            name = request.POST.get('name'),
+            hp = request.POST.get('hp'),
+            full_hp = request.POST.get('hp'),
+            damage = request.POST.get('damage'),
+            speed = request.POST.get('speed'),
+            defence = request.POST.get('defence'),
+            dexterity = request.POST.get('dex'),
+            constitution = request.POST.get('constitution'),
+            intelligence = request.POST.get('intelligence'),
+            charisma = request.POST.get('charm'),
+            wisdom = request.POST.get('wisdom'),
+            user = campaign.host,
+            enemy = True,
+            enemy_type = request.POST.get('enemy_type')
+        )
+        new_enemy.save()
+        return HttpResponse(new_enemy)
+    # use existing enemy list
+
+    # create new NPC
+    if request.is_ajax and 'new_npc' in request.POST:
+        new_npc = models.NonPlayableCharacters.objects.create(
+            name=request.POST.get('name'),
+            dialog=request.POST.get('dialog')
+        )
+        new_npc.save()
+        return HttpResponse(new_npc)
+
     context = {
         'user': user,
         'campaign': campaign,
@@ -153,40 +192,6 @@ def campaign(request, username, slug, campaign_id):
         )
         new_race.save()
         return HttpResponse(new_race)
-    # create new enemy
-    if request.is_ajax and 'new_enemy' in request.POST:
-        attack_type = models.Attack.objects.get(id=request.POST.get('attack_type'))
-        sub_attack_type = models.Attack.objects.get(id=request.POST.get('sub_attack_type'))
-        new_enemy = models.Character.objects.create(
-            name = request.POST.get('name'),
-            hp = request.POST.get('hp'),
-            full_hp = request.POST.get('hp'),
-            damage = request.POST.get('damage'),
-            speed = request.POST.get('speed'),
-            defence = request.POST.get('defence'),
-            dexterity = request.POST.get('dex'),
-            constitution = request.POST.get('constitution'),
-            intelligence = request.POST.get('intelligence'),
-            charisma = request.POST.get('charm'),
-            wisdom = request.POST.get('wisdom'),
-            inventory = request.POST.get('inventory'),
-            inventory_limit = request.POST.get('name'),
-            exp = request.POST.get('name'),
-            initiation = request.POST.get('name'),
-            attack = request.POST.get('name'),
-            user = campaign.host,
-            attack_type = attack_type,
-            sub_attack_type = sub_attack_type,
-            enemy = True,
-            enemy_type = request.POST.get('enemy_type')
-        )
-        new_enemy.save()
-        return HttpResponse(new_enemy)
-    # use existing enemy list
-
-    # create new NPC
-
-    # start battle
 
     enemies = models.CampaignEnemies.objects.filter(campaign=campaign)
     context = {

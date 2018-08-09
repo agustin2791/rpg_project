@@ -4,10 +4,11 @@
 <div class="container-fluid">
   <h3>Campaign: {{ campaign.name }}</h3>
   <div class="row">
+
     <div class="col">
       <p>
         <b>Player Limit: </b>{{ campaign.player_limit }}<br>
-        <b></b>
+        {% include 'campaign/components/camp_characters.html' %}
       </p>
     </div>
     <div class="col">
@@ -21,5 +22,65 @@
       {% endif %}
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <hr>
+      {% include 'campaign/components/camp_enemies.html' %}
+    </div>
+    <div class="col">
+      {% include 'campaign/components/camp_battles.html' %}
+    </div>
+    <div class="col">
+      {% include 'campaign/components/camp_npc.html' %}
+    </div>
+  </div>
 </div>
+<div class="modal fade" id="camp_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <!-- Add Modal by pressing button -->
+    <div class="modal-content"></div>
+  </div>
+</div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
+<script type="text/javascript">
+  $(function() {
+    let url = '/campaign/{{ user.username }}/{{ campaign.slug }}/edit/',
+        csrf = '{{ csrf_token }}';
+
+    // Gets form for the modal
+    $(document).on('click', '.create_campaign_component', function() {
+      var form = $(this).attr('data-component');
+      console.log(form);
+      getForm(csrf, url, form);
+
+      return false;
+    })
+
+    // adds more information about the enemy
+    $(document).on('click', '.add-enemy-info', function() {
+      var info = $('.enemy-info');
+      var index = 1;
+      if (!(info.length == 0 || info == undefined || info == null)) {
+        for (var i = 0; i < info.length; i++) {
+          index++;
+        }
+      }
+      var html = `<div class="enemy-info col-6">
+                    <div class="form-group">
+                      <label for="enemy-info">Name:</label>
+                      <input class="form-control" type="text" name="additional-info-name-${index}">
+                    </div>
+                    <div class="form-group">
+                      <label for="enemy-info-desc">Description:</label>
+                      <textarea class="form-control" name="additional-info-desc-${index}" rows="5"></textarea>
+                    </div>
+                  </div>`;
+      $('.additional-enemy-info').append(html)
+
+      return false;
+    })
+  })
+</script>
 {% endblock %}

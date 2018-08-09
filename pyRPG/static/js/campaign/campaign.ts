@@ -4,7 +4,6 @@ var newCampaign = (csrf, url, name, limit, obj, start, end) => {
   // if (name == undefined || name == null) {
   //   return false
   // }
-  console.log('obj: ' + end)
   $.ajax({
     type: 'POST',
     url: url,
@@ -47,6 +46,59 @@ var newChapter = (csrf, url, name, desc) => {
     },
     error: (data) => {
       console.log(data);
+    }
+  })
+}
+// get form
+var getForm = (csrf, url, form): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    cache: false,
+    async: true,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'call_modal': true,
+      'form': form
+    },
+    success: function(data) {
+      $('.modal-content').empty().html(data);
+      $('#camp_modal').modal('show')
+    },
+    error: function(data) {
+      console.log(data);
+    }
+  })
+}
+// Create new enemy
+var newEnemy = (csrf, url, name, type, lvl, hp, dmg, spd, def, dex, con, int, cha, wis, act, info): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    cache: false,
+    async: true,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'new_enemy': true,
+      'name': name,
+      'enemy_type': type,
+      'hp': hp,
+      'damage': dmg,
+      'speed': spd,
+      'defence': def,
+      'dex': dex,
+      'constitution': con,
+      'intelligence': int,
+      'charm': cha,
+      'wisdom': wis,
+      'actions': act,
+      'additional-info': info
+    },
+    success: function(data) {
+      console.log(data)
+    },
+    error: function(data) {
+      console.log(data)
     }
   })
 }

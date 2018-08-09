@@ -1,27 +1,32 @@
-<form class="new_campaign_battle">
-  <div class="form-group">
-    <label for="battle_name">Name:</label>
-    <input type="text" name="battle_name" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="battle_desc">Description:</label>
-    <textarea cols="10" name="battle_desc" class="form-control"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="battle_enemies">Enemy Select:</label>
-    {% if enemies %}
-    <select class="form-control" name="battle_enemies">
-      {% for e in enemies %}
-      <input type="checkbox" name="" value="{{ e.id }}"> {{ e.name }}<br>
-      {% endfor %}
-    </select>
-    {% else %}
-    <p>There are no enemies availble for this campaign</p>
-    {% endif %}
-  </div>
-  <div class="form-group">
-    <label for="battle_minions">Number of Minions:</label>
-    <input type="number" name="battle_minions" class="form-control">
-  </div>
-  <button type="submit" class="btn btn-primary" name="button">Submit</button>
-</form>
+<div class="modal-header">
+  <h3 class="modal-title">New Battle</h3>
+</div>
+<div class="modal-body">
+  <form class="new_campaign_battle">
+    <div class="form-group">
+      <label for="battle_name">Name:</label>
+      <input type="text" name="battle_name" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="battle_desc">Description:</label>
+      <textarea cols="10" name="battle_desc" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="battle_enemies">Enemy Select:</label>
+      {% if enemies %}
+      <select class="form-control" name="battle_enemies">
+        {% for e in enemies %}
+        <input type="checkbox" name="" value="{{ e.id }}"> {{ e.name }}<br>
+        {% endfor %}
+      </select>
+      {% else %}
+      <p>There are no enemies availble for this campaign</p>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="battle_minions">Number of Minions:</label>
+      <input type="number" name="battle_minions" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary" name="button">Submit</button>
+  </form>
+</div>

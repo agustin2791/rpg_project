@@ -1,35 +1,66 @@
-<form class="new_campaign_enemy">
-  <div class="form-group">
-    <label for="enemy_name">Name: </label>
-    <input type="text" name="enemy_name" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="enemy_level">Level: </label>
-    <input type="number" name="enemy_level" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="enemy_description">Description:</label>
-    <textarea name="enemy_description" class="form-control" rows="8" cols="80"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="enemy_health">Health: </label>
-    <input type="number" name="enemy_health" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="enemy_damage">Damage: </label>
-    <input type="number" name="enemy_damage" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="enemy_defence">Defence: </label>
-    <input type="number" name="enemy_defence" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="enemy_primary">Primary Attack: </label>
-    <input type="number" name="enemy_defence" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="enemy_secondary">Secondary Attack: </label>
-    <input type="number" name="enemy_defence" class="form-control">
-  </div>
-  <button type="submit" class="btn btn-primary" name="button">Submit</button>
-</form>
+<div class="modal-header">
+  <h3 class="modal-title">New Enemy</h3>
+</div>
+<div class="modal-body">
+  <form class="new_campaign_enemy">
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="enemy_name">Name: </label>
+        <input type="text" name="enemy_name" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label for="enemy_type">Type: </label>
+        <input type="text" name="enemy_type" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_level">Level: </label>
+        <input type="number" name="enemy_level" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_health">Health: </label>
+        <input type="number" name="enemy_health" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_damage">Damage: </label>
+        <input type="number" name="enemy_damage" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_speed">Speed: </label>
+        <input type="number" name="enemy_speed" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_defence">Defence: </label>
+        <input type="number" name="enemy_defence" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_dex">Dexterity: </label>
+        <input type="number" name="enemy_dex" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_const">Constitution: </label>
+        <input type="number" name="enemy_const" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_int">Intelligence: </label>
+        <input type="number" name="enemy_int" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_charisma">Charisma: </label>
+        <input type="number" name="enemy_charisma" class="form-control">
+      </div>
+      <div class="form-group col-2">
+        <label for="enemy_wisdom">Wisdom: </label>
+        <input type="number" name="enemy_wisdom" class="form-control">
+      </div>
+      <div class="form-group col-12">
+        <label for="enemy_actions">Actions: </label>
+        <textarea type="number" name="enemy_actions" class="form-control"></textarea>
+      </div>
+    </div>
+    <hr>
+    <p>Add additional information</p>
+    <div class="additional-enemy-info row"></div>
+    <button type="button" class="btn btn-success btn-sm add-enemy-info" name="button">+</button><br><br>
+    <button type="submit" class="btn btn-primary" name="button">Submit</button>
+  </form>
+</div>

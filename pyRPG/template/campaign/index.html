@@ -2,19 +2,7 @@
 {% block content %}
 <div class="container-fluid">
   <h1>{{ campaign.name }}</h1>
-  <div class="row">
-    <div class="col">
-      {% include 'campaign/components/camp_characters.html' %}
-      <hr>
-      {% include 'campaign/components/camp_enemies.html' %}
-    </div>
-    <div class="col">
-      {% include 'campaign/components/camp_battles.html' %}
-    </div>
-    <div class="col">
-      {% include 'campaign/components/camp_npc.html' %}
-    </div>
-  </div>
+  
   <div class="modal fade" id="camp_modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <!-- Add Modal by pressing button -->
