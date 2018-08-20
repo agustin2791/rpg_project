@@ -4,39 +4,46 @@
   <div class="row">
     <form class="create_character">
       <div class="col">
+        <!-- New Character name -->
         <div class="form-group">
           <label for="char_name">Character Name:</label>
           <input type="text" class="form-control" name="char_name">
         </div>
+        <!-- New Character class -->
         <div class="form-group">
           <label for="char_class">Character Class:</label>
           <select class="form-control" name="char_class">
             <option value="fighter">Fighter</option>
           </select>
         </div>
+        <!-- New Character race -->
         <div class="form-group">
           <label for="char_race">Character Race:</label>
           <select class="form-control" name="char_race">
             <option value="human">Human</option>
           </select>
         </div>
+        <!-- New Character Alignment -->
         <div class="form-group">
           <label for="char_alignment">Character Alignment:</label>
           <select class="form-control" name="char_alignment">
             <option value="human">Human</option>
           </select>
         </div>
+        <!-- New Character Armor Class -->
         <div class="form-group">
           <label for="char_armor">Armor Class</label>
           <input type="number" class="form-control" name="char_armor">
         </div>
+        <!-- New character Level -->
         <div class="row">
           <div class="col-4">
             <div class="form-group">
               <label for="char_lvl">Level</label>
-              <input type="number" class="form-control" name="char_lvl">
+              <input type="number" class="form-control" name="char_lvl" value="1">
             </div>
           </div>
+          <!-- New Character Speed -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_speed">Speed:</label>
@@ -48,6 +55,7 @@
               </div>
             </div>
           </div>
+          <!-- New Character Full HP -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_hp">Hit Points:</label>
@@ -55,12 +63,15 @@
             </div>
           </div>
         </div>
-
         <hr>
+
         <p>In this section you may choose do determine your character's ability by either doing it yourself or by pressing the button below.  The button will display 6 numbers for you to place them in the characte's ability.</p>
+        <!-- Generates 6 random numbers to populate the character's ability -->
         <button type="button" onclick="ability()" name="button">Generate Numbers</button>
         <div class="ability-numbers"></div>
+        <!-- ability section -->
         <div class="row">
+          <!-- Strength/Damage -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_damage">Strength:</label>
@@ -74,6 +85,7 @@
               </div>
             </div>
           </div>
+          <!-- Dexterity -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_dex">Dexterity:</label>
@@ -87,6 +99,7 @@
               </div>
             </div>
           </div>
+          <!-- Constitution -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_const">Constitution:</label>
@@ -100,6 +113,7 @@
               </div>
             </div>
           </div>
+          <!-- Intelligence -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_int">Intelligence:</label>
@@ -113,6 +127,7 @@
               </div>
             </div>
           </div>
+          <!-- Wisdom -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_wis">Wisdom:</label>
@@ -126,6 +141,7 @@
               </div>
             </div>
           </div>
+          <!-- Charisma -->
           <div class="col-4">
             <div class="form-group">
               <label for="char_charisma">Charisma:</label>
@@ -141,6 +157,7 @@
           </div>
         </div>
       </div>
+      <button type="submit" class="btn btn-primary" name="button">Create Character</button>
     </form>
   </div>
 </div>
@@ -148,6 +165,17 @@
 {% block bottomscript %}
 <script type="text/javascript" src="/static/js/character/character.js"></script>
 <script type="text/javascript">
+  const url = '/profile/{{ user.username }}/character_creation/';
+  const csrf = '{{ csrf_token }}';
+
+  // Submit form
+  $(document).on('submit', '.create_character', function() {
+    var name = $('input[name="char_name"]').val(),
+        char_class = $('select[name="char_class"]').val(),
+        race = $('select[name="char_race"]').val();
+  })
+
+  // generate modifier of ability
   $(document).on('change', '.abilities', function() {
     var modify = this.id;
     var value = $(this).val();
