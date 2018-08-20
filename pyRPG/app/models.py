@@ -108,9 +108,27 @@ class Character(models.Model):
     enemy_type = models.CharField(max_length=150,
                                   blank=True,
                                   null=True)
+    gold = models.IntegerField(default=0)
+    alignment = models.CharField(max_length=150,
+                                 null=True,
+                                 blank=True)
+    hit_dice = models.CharField(max_length=100,
+                                null=True,
+                                blank=True)
+    background = models.CharField(max_length=100,
+                                  null=True,
+                                  blank=True)
+
 
     def __unicode__(self):
         return self.name
+
+    def get_campaign(self):
+        campaigns = Campaign.objects.filter(characters__id=self.id)
+        try:
+            return campaigns[0]
+        except IndexError:
+            return None
 
 class CharacterSkills(models.Model):
     character = models.ForeignKey(Character,
@@ -145,13 +163,6 @@ class CharacterFeature(models.Model):
     def __unicode__(self):
         return self.feature
 
-class NonPlayableCharacters(models.Model):
-    name = models.CharField(max_length=150)
-    script = models.TextField()
-
-    def __unicode__(self):
-        return self.name
-
 class Campaign(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=300)
@@ -160,7 +171,7 @@ class Campaign(models.Model):
     player_limit = models.IntegerField(default=6)
     users = models.ManyToManyField(User,
                                    related_name='campaign_users')
-    chracters = models.ManyToManyField(Character,
+    characters = models.ManyToManyField(Character,
                                        related_name='campaign_characters')
     chapters = models.ManyToManyField('CampaignChapter',
                                       related_name='campaign_chapters')
@@ -168,6 +179,23 @@ class Campaign(models.Model):
     beginning = models.TextField()
     end = models.TextField()
     complete = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.name
+
+    def getEnemies(self):
+        enemies = []
+        for char in self.characters.all():
+            if char.enemy:
+                enemies.append(char)
+        return enemies
+
+class NonPlayableCharacters(models.Model):
+    name = models.CharField(max_length=150)
+    script = models.TextField()
+    campaign = models.ForeignKey(Campaign,
+                                 null=True,
+                                 blank=True)
 
     def __unicode__(self):
         return self.name
@@ -212,6 +240,13 @@ class Battle(models.Model):
                                      related_name='enemies')
     characters = models.ManyToManyField(Character,
                                         related_name='battle_character')
+    number_of_commoner = models.IntegerField(default=0)
+    completed = models.BooleanField(default=False)
+    description = models.TextField()
+    campaign = models.ForeignKey(Campaign,
+                                 on_delete=models.CASCADE,
+                                 blank=True,
+                                 null=True)
 
     def __unicode__(self):
         return self.name

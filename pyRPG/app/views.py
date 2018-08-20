@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import json
 
 import models
 
@@ -27,8 +28,8 @@ def request_approval(request):
 def user_profile(request, username):
     user = User.objects.get(username=username)
     campaigns = models.Campaign.objects.filter(host=user)
-    characters = models.Character.objects.filter(user=user)
-    print campaigns
+    characters = models.Character.objects.filter(user=user, enemy=False)
+
     context = {
         'user': user,
         'campaigns': campaigns,
@@ -38,6 +39,15 @@ def user_profile(request, username):
                   'profile/index.html',
                   context)
 
+def character_creation(request, username):
+    user = User.objects.get(username=username)
+    
+    context = {
+        'user': user
+    }
+    return render(request,
+                  'profile/character/create.html',
+                  context)
 # CREATE, EDIT, AND START CAMPAIGN
 # Create campaign
 def create_campaign(request, username):
@@ -68,14 +78,25 @@ def campaign_edit(request, username, slug):
     user = User.objects.get(username=username)
     campaign = models.Campaign.objects.get(host=user, slug=slug)
     chapters = models.CampaignChapter.objects.filter(campaign__host=user, campaign=campaign)
+    battles = models.Battle.objects.filter(campaign=campaign)
+    npcs = models.NonPlayableCharacters.objects.filter(campaign=campaign)
+
+    try:
+        enemies = campaign.getEnemies
+    except:
+        enemies = None
+    print enemies
     # Invite players
 
     if request.is_ajax and 'call_modal' in request.POST:
         modal = request.POST.get('form')
+        context = {'campaign': campaign}
         return render(request,
-                      'campaign/forms/{0}.html'.format(modal))
+                      'campaign/forms/{0}.html'.format(modal),
+                      context)
     # create new enemy
     if request.is_ajax and 'new_enemy' in request.POST:
+        print 'new_enemy'
         # attack_type = models.Attack.objects.get(id=request.POST.get('attack_type'))
         # sub_attack_type = models.Attack.objects.get(id=request.POST.get('sub_attack_type'))
         new_enemy = models.Character.objects.create(
@@ -92,25 +113,85 @@ def campaign_edit(request, username, slug):
             wisdom = request.POST.get('wisdom'),
             user = campaign.host,
             enemy = True,
-            enemy_type = request.POST.get('enemy_type')
+            enemy_type = request.POST.get('enemy_type'),
+            attack=0
         )
         new_enemy.save()
-        return HttpResponse(new_enemy)
+        # creates the enemy's action
+        new_actions = models.CharacterFeature.objects.create(
+            feature='Actions',
+            description=request.POST.get('actions'),
+            character=new_enemy
+        )
+        # creating additional information for the enemy
+        if request.POST.getlist('additional-info[]') != None:
+            list = request.POST.get('additional-info')
+            add_list = request.POST.getlist('additional-info[]')
+            json_list = json.loads(add_list[0])
+            for i in json_list:
+                char_info = models.CharacterFeature.objects.create(
+                    feature=i[u'name'],
+                    description=i[u'description'],
+                    character=new_enemy
+                )
+        campaign.characters.add(new_enemy)
+        campaign.save()
+        context = {'enemies': campaign.getEnemies}
+        return render(request,
+                      'campaign/components/camp_enemies.html',
+                      context)
     # use existing enemy list
 
+    # Create Battle
+    if request.is_ajax and 'new_campaign_battle' in request.POST:
+        new_battle = models.Battle.objects.create(
+            name=request.POST.get('name'),
+            number_of_commoner=request.POST.get('commoners'),
+            description=request.POST.get('description'),
+            campaign=campaign
+        )
+        enemies = request.POST.getlist('enemies[]')
+        try:
+            for e in enemies:
+                print int(e)
+                enemy = models.Character.objects.get(id=int(e))
+                new_battle.enemies.add(enemy)
+        except:
+            pass
+
+        try:
+            for c in campaign.characters:
+                if c.enemy == False:
+                    new_battle.characters.add(c)
+        except:
+            pass
+        battles = models.Battle.objects.filter(campaign=campaign)
+        context = {'battles': battles}
+        return render(request,
+                      'campaign/components/camp_battles.html',
+                      context)
+
     # create new NPC
-    if request.is_ajax and 'new_npc' in request.POST:
+    if request.is_ajax and 'new_campaign_npc' in request.POST:
         new_npc = models.NonPlayableCharacters.objects.create(
             name=request.POST.get('name'),
-            dialog=request.POST.get('dialog')
+            script=request.POST.get('dialog'),
+            campaign=campaign
         )
         new_npc.save()
-        return HttpResponse(new_npc)
+        npcs = models.NonPlayableCharacters.objects.filter(campaign=campaign)
+        context = {'npcs': npcs}
+        return render(request,
+                      'campaign/components/camp_npc.html',
+                      context)
 
     context = {
         'user': user,
         'campaign': campaign,
-        'chapters': chapters
+        'chapters': chapters,
+        'enemies': enemies,
+        'battles': battles,
+        'npcs': npcs
     }
     return render(request,
                   'campaign/edit.html',

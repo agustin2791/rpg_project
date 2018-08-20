@@ -1,0 +1,21 @@
+#camp_modal {
+  border-radius: 0px;
+
+  .modal-dialog {
+    width: 90%;
+    .modal-content {
+      border-radius: 0px;
+      border: solid #fdcb6e 2px;
+      background-color: #ffeaa7;
+      .modal-header {
+        text-align: center;
+      }
+      .modal-body {
+        .form-control {
+          border-radius: 0px;
+          background-color: #fdcb6e;
+        }
+      }
+    }
+  }
+}

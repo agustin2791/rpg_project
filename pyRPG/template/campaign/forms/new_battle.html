@@ -13,12 +13,12 @@
     </div>
     <div class="form-group">
       <label for="battle_enemies">Enemy Select:</label>
-      {% if enemies %}
-      <select class="form-control" name="battle_enemies">
-        {% for e in enemies %}
-        <input type="checkbox" name="" value="{{ e.id }}"> {{ e.name }}<br>
-        {% endfor %}
-      </select>
+      {% if campaign.getEnemies %}
+      <div class="row">
+      {% for e in campaign.getEnemies %}
+        <div class="col-4"><input type="checkbox" class="selected-enemies" name="" value="{{ e.id }}"> {{ e.name }}</div>
+      {% endfor %}
+      </div>
       {% else %}
       <p>There are no enemies availble for this campaign</p>
       {% endif %}

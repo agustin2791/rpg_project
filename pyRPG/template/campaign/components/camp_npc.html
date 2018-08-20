@@ -2,7 +2,11 @@
   <h2>NPC</h2>
   <button type="button" class="btn btn-primary create_campaign_component" data-component="new_npc" name="button">Add New NPC</button>
 </div>
+{% if npcs %}
+{% for n in npcs %}
 <div class="npc_container">
-  <h3>NPC 1</h3>
+  <h3>{{ n.name }}</h3>
   <button type="button" class="btn btn-primary" name="button">Read Dialog</button>
 </div>
+{% endfor %}
+{% endif %}

@@ -2,33 +2,12 @@
   <h2>Battles</h2>
   <button type="button" class="btn btn-primary create_campaign_component" data-component="new_battle" name="button">Create New Battle</button>
 </div>
-<div class="enemy-container">
-  <h3>Battle 1</h3>
-  <p>Boss: 1 | minions: 4</p>
-  <button class="btn btn-primary" type="button">Start Battle</button>
-  <button type="button" class="btn btn-default" name="button">Edit Battle</button>
-</div>
-<div class="enemy-container">
-  <h3>Battle 2</h3>
-  <p>Boss: 1 | minions: 4</p>
-  <button class="btn btn-primary" type="button">Start Battle</button>
-  <button type="button" class="btn btn-default" name="button">Edit Battle</button>
-</div>
-<div class="enemy-container">
-  <h3>Battle 3</h3>
-  <p>Boss: 1 | minions: 4</p>
-  <button class="btn btn-primary" type="button">Start Battle</button>
-  <button type="button" class="btn btn-default" name="button">Edit Battle</button>
-</div>
-<div class="enemy-container">
-  <h3>Battle 4</h3>
-  <p>Boss: 1 | minions: 4</p>
-  <button class="btn btn-primary" type="button">Start Battle</button>
-  <button type="button" class="btn btn-default" name="button">Edit Battle</button>
-</div>
-<div class="enemy-container">
-  <h3>Battle 5</h3>
-  <p>Boss: 1 | minions: 4</p>
-  <button class="btn btn-primary" type="button">Start Battle</button>
-  <button type="button" class="btn btn-default" name="button">Edit Battle</button>
-</div>
+{% if battles %}
+  {% for b in battles %}
+  <div class="enemy-container">
+    <h3>{{ b.name }}</h3>
+    <p>{% for e in b.enemies.all %}{{ e.name }} | {% endfor %}Minions: {{ b.number_of_commoner }}</p>
+    <button type="button" class="btn btn-default" name="button">Edit Battle</button>
+  </div>
+  {% endfor %}
+{% endif %}

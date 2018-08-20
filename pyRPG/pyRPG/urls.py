@@ -26,6 +26,11 @@ urlpatterns = [
         views.user_profile,
         name='profile'),
 
+    # Character creation
+    url(r'^profile/(?P<username>\w{0,50})/character_creation/$',
+        views.character_creation,
+        name='character_creation'),
+
     # Campaign
     url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/play/$',
         views.campaign,

@@ -6,7 +6,7 @@
   <ul>
     {% if enemies %}
     {% for e in enemies %}
-    <li>Name: {{ e.name }} | HP: {{ e.health }} | Damage: {{ e.damage }} | Defence: {{ e.defence }} | Attack Type: {{ e.attack }} | Enemy Type: {{ e.type }}</li>
+    <li>Name: {{ e.name }} | HP: {{ e.hp }} | Damage: {{ e.damage }} | Defence: {{ e.defence }} | Attack Type: {{ e.attack }} | Enemy Type: {{ e.enemy_type }}</li>
     {% endfor %}
     {% endif %}
   </ul>

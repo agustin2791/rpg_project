@@ -1,5 +1,20 @@
-.col {
-  border: solid thin #ddd;
+#camp_modal {
+  border-radius: 0px;
+}
+#camp_modal .modal-dialog {
+  width: 90%;
+}
+#camp_modal .modal-dialog .modal-content {
+  border-radius: 0px;
+  border: solid #fdcb6e 2px;
+  background-color: #ffeaa7;
+}
+#camp_modal .modal-dialog .modal-content .modal-header {
+  text-align: center;
+}
+#camp_modal .modal-dialog .modal-content .modal-body .form-control {
+  border-radius: 0px;
+  background-color: #fdcb6e;
 }
 
 /*# sourceMappingURL=main.css.map */

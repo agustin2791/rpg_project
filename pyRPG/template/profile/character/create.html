@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <form class="create_character">
+      <div class="col">
+        <div class="form-group">
+          <label for="char_name">Character Name:</label>
+          <input type="text" class="form-control" name="char_name">
+        </div>
+        <div class="form-group">
+          <label for="char_class">Character Class:</label>
+          <select class="form-control" name="char_class">
+            <option value="fighter">Fighter</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="char_race">Character Race:</label>
+          <select class="form-control" name="char_race">
+            <option value="human">Human</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="char_alignment">Character Alignment:</label>
+          <select class="form-control" name="char_alignment">
+            <option value="human">Human</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="char_armor">Armor Class</label>
+          <input type="number" class="form-control" name="char_armor">
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_lvl">Level</label>
+              <input type="number" class="form-control" name="char_lvl">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_speed">Speed:</label>
+              <div class="input-group">
+                <input type="number" class="form-control" name="char_speed">
+                <div class="input-group-append">
+                  <div class="input-group-text">ft.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_hp">Hit Points:</label>
+              <input type="number" class="form-control" name="char_hp">
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <p>In this section you may choose do determine your character's ability by either doing it yourself or by pressing the button below.  The button will display 6 numbers for you to place them in the characte's ability.</p>
+        <button type="button" onclick="ability()" name="button">Generate Numbers</button>
+        <div class="ability-numbers"></div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_damage">Strength:</label>
+              <div class="input-group">
+                <input id="dmg" type="number" class="form-control abilities" name="char_damage">
+                <div class="input-group-append">
+                  <div class="input-group-text" id="dmg-mod">
+                    +/-#
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_dex">Dexterity:</label>
+              <div class="input-group">
+                <input id="dex" type="number" class="form-control abilities" name="char_dex">
+                <div class="input-group-append">
+                  <div class="input-group-text" id="dex-mod">
+                    +/-#
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_const">Constitution:</label>
+              <div class="input-group">
+                <input id="const" type="number" class="form-control abilities" name="char_const">
+                <div class="input-group-append">
+                  <div id="const-mod" class="input-group-text">
+                    +/-#
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_int">Intelligence:</label>
+              <div class="input-group">
+                <input id="int" type="number" class="form-control abilities" name="char_int">
+                <div class="input-group-append">
+                  <div id="int-mod" class="input-group-text">
+                    +/-#
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_wis">Wisdom:</label>
+              <div class="input-group">
+                <input id="wis" type="number" class="form-control abilities" name="char_wis">
+                <div class="input-group-append">
+                  <div id="wis-mod" class="input-group-text">
+                    +/-#
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="char_charisma">Charisma:</label>
+              <div class="input-group">
+                <input id="char" type="number" class="form-control abilities" name="char_charisma">
+                <div class="input-group-append">
+                  <div id="char-mod" class="input-group-text">
+                    +/-#
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript" src="/static/js/character/character.js"></script>
+<script type="text/javascript">
+  $(document).on('change', '.abilities', function() {
+    var modify = this.id;
+    var value = $(this).val();
+    console.log('value: ' + value);
+    var ability = modifier(value);
+    var html = ``;
+    if (ability > 0) {
+      html += `+ ${ability}`;
+    } else {
+      html += `${ability}`;
+    }
+    $('#'+modify+'-mod').empty().html(html);
+
+  })
+</script>
+{% endblock %}

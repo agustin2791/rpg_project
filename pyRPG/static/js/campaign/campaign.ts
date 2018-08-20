@@ -92,13 +92,61 @@ var newEnemy = (csrf, url, name, type, lvl, hp, dmg, spd, def, dex, con, int, ch
       'charm': cha,
       'wisdom': wis,
       'actions': act,
-      'additional-info': info
+      'additional-info[]': info
     },
     success: function(data) {
-      console.log(data)
+      $('#camp_enemies').empty().html(data);
+      $('.new_campaign_enemy')[0].reset();
+      $('#camp_modal').modal('hide');
     },
     error: function(data) {
       console.log(data)
+    }
+  })
+}
+// create new battle
+var newBattle = (csrf, url, name, enemies, commoner, desc): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    cache: false,
+    async: true,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'new_campaign_battle': true,
+      'name': name,
+      'enemies[]': enemies,
+      'commoners': commoner,
+      'description': desc
+    },
+    success: function(data) {
+      $('#camp_battles').empty().html(data);
+      $('.new_campaign_battle')[0].reset();
+      $('#camp_modal').modal('hide');
+    },
+    error: function(data) {
+      console.log(data)
+    }
+  })
+}
+// create new NPC
+var newNPC = (csrf, url, name, dialog): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    cache: false,
+    async: true,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'new_campaign_npc': true,
+      'name': name,
+      'dialog': dialog
+    },
+    success: function(data) {
+      console.log(data);
+      $('#camp_npc').empty().html(data);
+      $('.new_npc_form')[0].reset();
+      $('#camp_modal').modal('hide');
     }
   })
 }
