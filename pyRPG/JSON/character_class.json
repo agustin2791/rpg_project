@@ -154,9 +154,9 @@
         "skills": ["Animal Handeling", "Athletics", "Intimidation", "Natural", "Perception", "Survival"]
       },
       "equipment": {
-        "first": ["Greataxe", "Any Martial Weapon"],
-        "second": ["Two Handaxe", "Any Simple Weapon"],
-        "third": "An Explorer's pack and four javelins",
+        "1": ["Greataxe", "Any Martial Weapon"],
+        "2": ["Two Handaxe", "Any Simple Weapon"],
+        "3": "An Explorer's pack and four javelins",
         "extra": "Alternatively, you can ignore the equipment from your class and background, and start with 2d4 x 10 gp."
       }
     },
@@ -334,172 +334,173 @@
         "skills": ["Choose any three"]
       },
       "equipment": {
-        "first": ["Rapier", "Any Simple Weapon"],
-        "second": ["Diplomat's Pack", "Entertainer's Pack"],
-        "third": ["A Lute", "Any other musical instrument"],
-        "fourth": ["Leather armor and a dagger"],
+        "1": ["Rapier", "Any Simple Weapon"],
+        "2": ["Diplomat's Pack", "Entertainer's Pack"],
+        "3": ["A Lute", "Any other musical instrument"],
+        "4": ["Leather armor and a dagger"],
         "extra": "Alternatively, you may ignore the equipment from your class and background, and start with 5d4 x 10 gp."
       }
     },
-    "bard": {
+    "cleric": {
       "name": "Cleric",
       "levels": [
         {
           "level": 1,
           "proficiencyBonus": "+2",
-          "features": ["Spellcasting", "Bardic Insperation (d6)"],
+          "features": ["Spellcasting", "Divine Domain"],
           "cantripsKnown": 2,
           "spells": [2, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         {
           "level": 2,
           "proficiencyBonus": "+2",
-          "features": ["Jack of All Trades", "Song of Rest (d6)"],
-          "cantripsKnown": 2,
+          "features": ["Channel Devinity (1/rest)", "Divine Domain feature"],
+          "cantripsKnown": 3,
           "spells": [3, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         {
           "level": 3,
           "proficiencyBonus": "+2",
-          "features": ["Bard College", "Expertise"],
-          "cantripsKnown": 2,
+          "features": [],
+          "cantripsKnown": 3,
           "spells": [4, 2, 0, 0, 0, 0, 0, 0, 0]
         },
         {
           "level": 4,
           "proficiencyBonus": "+2",
           "features": ["Ability Score Improvement"],
-          "cantripsKnown": 3,
+          "cantripsKnown": 4,
           "spells": [4, 3, 0, 0, 0, 0, 0, 0, 0]
         },
         {
           "level": 5,
           "proficiencyBonus": "+3",
-          "features": ["Bardic Insperation (d8)", "Font of Insperation"],
-          "cantripsKnown": 3,
+          "features": ["Destroy Undead (CR 1/2)"],
+          "cantripsKnown": 4,
           "spells": [4, 3, 2, 0, 0, 0, 0, 0, 0]
         },
         {
           "level": 6,
           "proficiencyBonus": "+3",
-          "features": ["Countercharm", "Bard College Feature"],
-          "cantripsKnown": 3,
-          "spells": [4, 3, 3, 0, 0, 0, 0, 0, 0]
+          "features": ["Channel Divinity (2/rest)", "Divine Domain feature"],
+          "cantripsKnown": 4,
+          "spells": [4, 3, 2, 0, 0, 0, 0, 0, 0]
         },
         {
           "level": 7,
           "proficiencyBonus": "+3",
           "features": [],
-          "cantripsKnown": 3,
+          "cantripsKnown": 4,
           "spells": [4, 3, 3, 1, 0, 0, 0, 0, 0]
         },
         {
           "level": 8,
           "proficiencyBonus": "+3",
-          "features": ["Ability Score Improvement"],
-          "cantripsKnown": 3,
+          "features": ["Ability Score Improvement", "Destroy Undead (CR 1)", "Divine Domain feature"],
+          "cantripsKnown": 4,
           "spells": [4, 3, 3, 2, 0, 0, 0, 0, 0]
         },
         {
           "level": 9,
           "proficiencyBonus": "+4",
-          "features": ["Song of Rest (d8)"],
-          "cantripsKnown": 3,
+          "features": [],
+          "cantripsKnown": 4,
           "spells": [4, 3, 3, 3, 1, 0, 0, 0, 0]
         },
         {
           "level": 10,
           "proficiencyBonus": "+4",
-          "features": ["Bardic Insperation (d10)", "Expertise", "Magical Secret"],
-          "cantripsKnown": 4,
+          "features": ["Divine Intervention"],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 0, 0, 0, 0]
         },
         {
           "level": 11,
           "proficiencyBonus": "+4",
-          "features": [],
-          "cantripsKnown": 4,
+          "features": ["Destroy Undead (CR 2)"],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 1, 0, 0, 0]
         },
         {
           "level": 12,
           "proficiencyBonus": "+4",
           "features": ["Ability Score Improvement"],
-          "cantripsKnown": 4,
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 1, 0, 0, 0]
         },
         {
           "level": 13,
           "proficiencyBonus": "+5",
-          "features": ["Song of Rest (d10)"],
-          "cantripsKnown": 4,
+          "features": [],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 1, 1, 0, 0]
         },
         {
           "level": 14,
           "proficiencyBonus": "+5",
-          "features": ["Magical Secrets", "Bard College feature"],
-          "cantripsKnown": 4,
+          "features": ["Destroy Undead (CR 3)"],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 2, 1, 0, 0]
         },
         {
           "level": 15,
           "proficiencyBonus": "+5",
-          "features": ["Bardic Insperation (d12)"],
-          "cantripsKnown": 4,
+          "features": [],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 1, 1, 1, 0]
         },
         {
           "level": 16,
           "proficiencyBonus": "+5",
           "features": ["Ability Score Improvement"],
-          "cantripsKnown": 4,
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 1, 1, 1, 0]
         },
         {
           "level": 17,
           "proficiencyBonus": "+6",
-          "features": ["Song of Rest (d12)"],
-          "cantripsKnown": 4,
+          "features": ["Destroy Undead (CR 4)", "Divine Domain feature"],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 2, 1, 1, 1, 1]
         },
         {
           "level": 18,
           "proficiencyBonus": "+6",
-          "features": ["Magical Secrets"],
-          "cantripsKnown": 4,
+          "features": ["Channel Divinity (3/rest)"],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 3, 1, 1, 1, 1]
         },
         {
           "level": 19,
           "proficiencyBonus": "+6",
           "features": ["Ability Score Improvement"],
-          "cantripsKnown": 4,
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 3, 2, 1, 1, 1]
         },
         {
           "level": 20,
           "proficiencyBonus": "+6",
-          "features": ["Superior Insperation"],
-          "cantripsKnown": 4,
+          "features": ["Divine Intervention Improvement"],
+          "cantripsKnown": 5,
           "spells": [4, 3, 3, 3, 3, 2, 2, 1, 1]
         },
       ],
-      "hitDice": "1d8 per Bard Level",
-      "hp": ["8 + your Constitution modifier", "1d8 (or 5) + your Constitution modifier per bard level after 1st"],
+      "hitDice": "1d8 per cleric level",
+      "hp": ["8 + Constitution modifier", "1d8 (or 5) + your Constitution modifier"],
       "proficiencies": {
-        "armor": ["Light Armor"],
-        "weapons": ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswors"],
-        "tools": "Three musical instruments of your choice",
-        "savingThrows": ["Dexterity", "Charisma"],
-        "skills": ["Choose any three"]
+        "armor": ["Light Armor", "Medium Armor", "Shields"],
+        "weapons": ["All Weapons"],
+        "tools": null,
+        "savingThrows": ["Wisdom", "Charisma"],
+        "skills": ["History", "Insight", "Medicine", "Persuasion", "Religion"]
       },
       "equipment": {
-        "first": ["Rapier", "Any Simple Weapon"],
-        "second": ["Diplomat's Pack", "Entertainer's Pack"],
-        "third": ["A Lute", "Any other musical instrument"],
-        "fourth": ["Leather armor and a dagger"],
-        "extra": "Alternatively, you may ignore the equipment from your class and background, and start with 5d4 x 10 gp."
+        "1": ["Mace", "Warhammer"],
+        "2": ["Scale Mail", "Leather Armor", "Chain Mail"],
+        "3": ["Light Crossbow and 20 bolts", "Any Simple Weapon"],
+        "4": ["Priest's pack", "An Explorer's pack"],
+        "5": ["A Shield and a holy symbol"],
+        "extra": "You can also ignore the equipment from your class and background, and start with 5d4 x 10 gp instead."
       }
     },
   }
