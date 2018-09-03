@@ -1,0 +1,184 @@
+{
+  "name": "Barbarian",
+  "levels": [
+    {
+      "level": 1,
+      "proficiencyBonus": 2,
+      "features": ["Rage", "Unarmored Defence"],
+      "rage": 2,
+      "rageDamage": 2
+    },
+    {
+      "level": 2,
+      "proficiencyBonus": 2,
+      "features": ["Reckless Attack", "Danger Sense"],
+      "rage": 2,
+      "rageDamage": 2
+    },
+    {
+      "level": 3,
+      "proficiencyBonus": 2,
+      "features": ["Primal Path"],
+      "rage": 3,
+      "rageDamage": 2
+    },
+    {
+      "level": 4,
+      "proficiencyBonus": 2,
+      "features": ["Ability Score Improvement"],
+      "rage": 3,
+      "rageDamage": 2
+    },
+    {
+      "level": 5,
+      "proficiencyBonus": 3,
+      "features": ["Extra Attack", "Fast Movement"],
+      "rage": 3,
+      "rageDamage": 2
+    },
+    {
+      "level": 6,
+      "proficiencyBonus": 3,
+      "features": ["Path Feature"],
+      "rage": 4,
+      "rageDamage": 2
+    },
+    {
+      "level": 7,
+      "proficiencyBonus": 3,
+      "features": ["Feral Instict"],
+      "rage": 4,
+      "rageDamage": 2
+    },
+    {
+      "level": 8,
+      "proficiencyBonus": 3,
+      "features": ["Ability Score Improvement"],
+      "rage": 4,
+      "rageDamage": 2
+    },
+    {
+      "level": 9,
+      "proficiencyBonus": 4,
+      "features": ["Brutal Critical"],
+      "rage": 4,
+      "rageDamage": 3
+    },
+    {
+      "level": 10,
+      "proficiencyBonus": 4,
+      "features": ["Path Feature"],
+      "rage": 4,
+      "rageDamage": 3
+    },
+    {
+      "level": 11,
+      "proficiencyBonus": 4,
+      "features": ["Relentless Rage"],
+      "rage": 4,
+      "rageDamage": 3
+    },
+    {
+      "level": 12,
+      "proficiencyBonus": 4,
+      "features": ["Ability Score Improvement"],
+      "rage": 5,
+      "rageDamage": 3
+    },
+    {
+      "level": 13,
+      "proficiencyBonus": 5,
+      "features": ["Brutal Critical"],
+      "rage": 5,
+      "rageDamage": 3
+    },
+    {
+      "level": 14,
+      "proficiencyBonus": 5,
+      "features": ["Path Feature"],
+      "rage": 5,
+      "rageDamage": 3
+    },
+    {
+      "level": 15,
+      "proficiencyBonus": 5,
+      "features": ["Presistent Rage"],
+      "rage": 5,
+      "rageDamage": 3
+    },
+    {
+      "level": 16,
+      "proficiencyBonus": 5,
+      "features": ["Ability Score Improvement"],
+      "rage": 5,
+      "rageDamage": 4
+    },
+    {
+      "level": 17,
+      "proficiencyBonus": 6,
+      "features": ["Brutal Critical"],
+      "rage": 6,
+      "rageDamage": 4
+    },
+    {
+      "level": 18,
+      "proficiencyBonus": 6,
+      "features": ["Indomitable Might"],
+      "rage": 6,
+      "rageDamage": 4
+    },
+    {
+      "level": 19,
+      "proficiencyBonus": 6,
+      "features": ["Ability Score Improvement"],
+      "rage": 6,
+      "rageDamage": 4
+    },
+    {
+      "level": 20,
+      "proficiencyBonus": 6,
+      "features": ["Primal Champion"],
+      "rage": 100,
+      "rageDamage": 4
+    },
+  ],
+  "hitDice": "1d12 per Barbarian Level",
+  "hp": ["12 + your Constitution Modifier", "1d12 (or 7) + your Constitution Modifier per barbarian level after 1st"],
+  "proficiencies": {
+    "armor": ["Light Armor", "Medium Armor", "Shields"],
+    "weapons": ["Simple Weapons", "Martial Weapons"],
+    "tools": null,
+    "savingThrows": ["Strength", "Constitution"],
+    "skills": ["Animal Handling", "Athletics", "Intimidation", "Natural", "Perception", "Survival"]
+  },
+  "equipment": {
+    "1": ["Greataxe", "Any Martial Weapon"],
+    "2": ["Two Handaxe", "Any Simple Weapon"],
+    "3": "An Explorer's pack and four javelins",
+    "extra": "Alternatively, you can ignore the equipment from your class and background, and start with 2d4 x 10 gp."
+  },
+  "features": {
+    "1": [
+      {
+        "feature": "Rage",
+        "description": "<p>In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.</p><p>While raging, you gain the following benefits if you aren’t wearing heavy armor:</p><ul><li>You have advantage on Strength checks and Strength saving throws.</li><li>When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.</li><li>You have resistance to bludgeoning, piercing, and slashing damage.</li></ul><p>If you are able to cast spells, you can’t cast them or concentrate on them while raging.<br>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action.<br>Once you have raged the number of times shown
+        for your barbarian level in the Rages column of the 
+        Barbarian table, you must finish a long rest before
+        you can rage again",
+        "option": 1
+      },
+      {
+        "feature": "Unarmored Defence",
+        "description": "<p>While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.</p>",
+        "option": 2
+      }
+    ],
+    "2": [
+      {
+        "feature": "Reckless Attack",
+        "description": "<p>You can throw aside all concern for defense to attack with fierce desperation. When you make your first attack on your turn, you can decide to attack recklessly. Doing so gives you advantage on melee weapon attack rolls using Strength during this turn, but attack rolls against you have advantage until your next turn</p>",
+        "option": 1,
+      }
+    ]
+  }
+}
