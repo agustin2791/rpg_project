@@ -22,8 +22,6 @@ class Item(models.Model):
     category = models.ForeignKey(ItemCategory,
                                  related_name='item_category')
     lvl_req = models.IntegerField(default=1)
-    class_exclusive = models.CharField(max_length=150,
-                                       default='All')
     dextirity = models.IntegerField(null=True,
                                      blank=True)
     damage = models.IntegerField(null=True,
@@ -38,25 +36,88 @@ class Item(models.Model):
 # Character class e.g. Heavy, Archer, Scientist etc.
 class CharacterClass(models.Model):
     name = models.CharField(max_length=150)
-    # hp = models.IntegerField(default=100)
-    # full_hp = models.IntegerField(default=100)
-    # damage = models.IntegerField(default=5)
-    # speed = models.IntegerField(default=5)
-    # defence = models.IntegerField(default=5)
-    # dexterity = models.IntegerField(default=5)
-    # constitution = models.IntegerField(default=5)
-    # intelligence = models.IntegerField(default=5)
-    # charisma = models.IntegerField(default=5)
-    # wisdom = models.IntegerField(default=5)
-    # inventory_limit = models.FloatField(default=50.0)
-    enemy = models.BooleanField(default=False)
+    hit_dice = models.CharField(max_length=200)
+    hp = models.CharField(max_length=200)
+    hp_2 = models.CharField(max_length=200)
+    armor = models.ManyToManyField(ItemCategory,
+                              related_name='armor_category')
+    weapons = models.ManyToManyField(ItemCategory,
+                                     related_name='weapons_category')
+    tools = models.ManyToManyField(ItemCategory,
+                                   related_name='tools_category')
+    saving_throws = models.CharField(max_length=150)
+    skills_limit = models.IntegerField(default=2)
+    skills = models.CharField(max_length=150)
+
 
     def __unicode__(self):
         return self.name
 
-class CharacterRace(CharacterClass):
+class CharacterClassLevel(models.Model):
+    char_class = models.ForeignKey(CharacterClass,
+                                   on_delete=models.CASCADE)
+    level = models.IntegerField()
+    pro_bonus = models.IntegerField()
+    # Barbarian
+    rage = models.IntegerField(null=True,
+                               blank=True)
+    rage_dmg = models.IntegerField(null=True,
+                                   blank=True)
+    # Bard, Cleric, Druid, Sorcerer, Wralock
+    cantrips = models.IntegerField(null=True,
+                                   blank=True)
+    # Bard, Ranger, Sorcerer, Warlock, Wizard
+    spells = models.IntegerField(null=True,
+                                 blank=True)
+    # Monk
+    martial_art = models.CharField(max_length=10,
+                                   null=True,
+                                   blank=True)
+    ki_points = models.IntegerField(null=True,
+                                    blank=True)
+    unarmored_mvm = models.IntegerField(null=True,
+                                        blank=True)
+    # Rogue
+    sneak = models.CharField(max_length=10)
+    # Sorcerer
+    sorcery_points = models.IntegerField(blank=True,
+                                         null=True)
+    # Warlock
+    invocations = models.IntegerField(blank=True,
+                                      null=True)
+    # Spell Slots
+    spell_slots_1 = models.IntegerField(default=0)
+    spell_slots_2 = models.IntegerField(default=0)
+    spell_slots_3 = models.IntegerField(default=0)
+    spell_slots_4 = models.IntegerField(default=0)
+    spell_slots_5 = models.IntegerField(default=0)
+    spell_slots_6 = models.IntegerField(default=0)
+    spell_slots_7 = models.IntegerField(default=0)
+    spell_slots_8 = models.IntegerField(default=0)
+    spell_slots_9 = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return '{0} at Level {1}'.format(self.char_class.name, self.level)
+
+
+class CharacterRace(models.Model):
+    name = models.CharField(max_length=50)
+    desc = models.TextField()
+    ability_score_increase = models.TextField()
+    age = models.TextField()
+    alignment = models.TextField()
+    size = models.TextField()
+    speed = models.TextField()
+    language = models.TextField()
+    sub_race = models.BooleanField(default=False)
+
     def __unicode__(self):
         return self.name
+
+class CharacterRaceTraits(models.Model):
+    char_race = models.ForeignKey(CharacterRace)
+    trait = models.CharField(max_length=50)
+    desc = models.TextField()
 
 # Character's attack
 class Attack(models.Model):
