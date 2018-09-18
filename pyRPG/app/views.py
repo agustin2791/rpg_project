@@ -41,7 +41,7 @@ def user_profile(request, username):
 
 def character_creation(request, username):
     user = User.objects.get(username=username)
-    
+
     context = {
         'user': user
     }

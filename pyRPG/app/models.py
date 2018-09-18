@@ -39,6 +39,7 @@ class Spells(models.Model):
     rang = models.CharField(max_length=50)
     comp = models.CharField(max_length=150)
     duration = models.CharField(max_length=150)
+    school = models.CharField(max_length=150)
     description = models.TextField()
     char_class = models.ManyToManyField('CharacterClass')
 
