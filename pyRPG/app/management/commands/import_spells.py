@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 import glob
 import os
 import datetime as dt
+import pyRPG.settings as settings
 
 class Command(BaseCommand):
     help = ''
@@ -15,7 +16,7 @@ class Command(BaseCommand):
         '''
         This will get the spells and import them to the DB
         '''
-        spell_file = glob.glob(os.path.join('/home/rpg_csv', 'spells.csv'))
+        spell_file = glob.glob(os.path.join(os.path.join(settings.BASE_DIR, '/file/CSV'), 'spells.csv'))
         return (spell_file)
 
     @staticmethod
@@ -27,7 +28,6 @@ class Command(BaseCommand):
                 spell_level = 0
         except:
             spell_level = 0
-        print 'Spell LEVEL:',spell_level
         spell_ritual = row['Ritual']
         if spell_ritual == 'Ritual':
             spell_ritual = True
@@ -59,11 +59,9 @@ class Command(BaseCommand):
 
         for f in spell_file:
             if f:
-                print f
                 print '--------START----------'
                 df = pd.read_csv(f, encoding='latin-1')
                 for row in df.iterrows():
-                    print row[1]
                     self.add_new_spell(row[1])
                     print(dt.datetime.now() - starttime)
 

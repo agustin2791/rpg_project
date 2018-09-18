@@ -1,4 +1,4 @@
-[{
+{
   "name": "Barbarian",
   "levels": [
     {
@@ -142,21 +142,6 @@
       "rageDamage": 4
     },
   ],
-  "hitDice": "1d12 per Barbarian Level",
-  "hp": ["12 + your Constitution Modifier", "1d12 (or 7) + your Constitution Modifier per barbarian level after 1st"],
-  "proficiencies": {
-    "armor": ["Light Armor", "Medium Armor", "Shields"],
-    "weapons": ["Simple Weapons", "Martial Weapons"],
-    "tools": null,
-    "savingThrows": ["Strength", "Constitution"],
-    "skills": ["Animal Handling", "Athletics", "Intimidation", "Natural", "Perception", "Survival"]
-  },
-  "equipment": {
-    "1": ["Greataxe", "Any Martial Weapon"],
-    "2": ["Two Handaxe", "Any Simple Weapon"],
-    "3": "An Explorer's pack and four javelins",
-    "extra": "Alternatively, you can ignore the equipment from your class and background, and start with 2d4 x 10 gp."
-  },
   "features": {
     "1": [
       {

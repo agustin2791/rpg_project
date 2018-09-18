@@ -70,6 +70,10 @@ class CharacterClass(models.Model):
     def __unicode__(self):
         return self.name
 
+class CharacterClassEquipment(models.Model):
+    char_class = models.ForeignKey(CharacterClass)
+    desc = models.CharField(max_length=150)
+
 class CharacterClassLevel(models.Model):
     char_class = models.ForeignKey(CharacterClass,
                                    on_delete=models.CASCADE)
@@ -116,6 +120,13 @@ class CharacterClassLevel(models.Model):
     def __unicode__(self):
         return '{0} at Level {1}'.format(self.char_class.name, self.level)
 
+class CharacterClassFeature(models.Model):
+    char_class = models.ForeignKey(CharacterClass,
+                                   related_name='char_class_feature')
+    level = models.IntegerField(default=0)
+    feature = models.CharField(max_length=150)
+    description = models.TextField()
+    option = models.IntegerField()
 
 class CharacterRace(models.Model):
     name = models.CharField(max_length=50)
