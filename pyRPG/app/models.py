@@ -34,14 +34,18 @@ class Item(models.Model):
         return self.name
 class Spells(models.Model):
     level = models.IntegerField(default=0)
-    name = models.CharField(max_length=150)
+    spell_name = models.CharField(max_length=150)
     time = models.CharField(max_length=50)
     rang = models.CharField(max_length=50)
     comp = models.CharField(max_length=150)
     duration = models.CharField(max_length=150)
     school = models.CharField(max_length=150)
+    ritual = models.BooleanField(default=False)
+    material = models.CharField(max_length=200,
+                                null=True,
+                                blank=True)
     description = models.TextField()
-    char_class = models.ManyToManyField('CharacterClass')
+    classes = models.ManyToManyField('CharacterClass')
 
     def __unicode__(self):
         return self.name
