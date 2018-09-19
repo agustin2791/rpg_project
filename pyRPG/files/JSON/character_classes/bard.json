@@ -3,7 +3,7 @@
   "levels": [
     {
       "level": 1,
-      "pro_bonus": 2,
+      "pro_bonus": "+2",
       "features": ["Spellcasting", "Bardic Insperation (d6)"],
       "cantrips": 2,
       "spells": 4,
@@ -11,7 +11,7 @@
     },
     {
       "level": 2,
-      "pro_bonus": 2,
+      "pro_bonus": "+2",
       "features": ["Jack of All Trades", "Song of Rest (d6)"],
       "cantrips": 2,
       "spells": 5,
@@ -19,7 +19,7 @@
     },
     {
       "level": 3,
-      "pro_bonus": 2,
+      "pro_bonus": "+2",
       "features": ["Bard College", "Expertise"],
       "cantrips": 2,
       "spells": 6,
@@ -27,7 +27,7 @@
     },
     {
       "level": 4,
-      "pro_bonus": 2,
+      "pro_bonus": "+2",
       "features": ["Ability Score Improvement"],
       "cantrips": 3,
       "spells": 7,
@@ -35,7 +35,7 @@
     },
     {
       "level": 5,
-      "pro_bonus": 3,
+      "pro_bonus": "+3",
       "features": ["Bardic Insperation (d8)", "Font of Insperation"],
       "cantrips": 3,
       "spells": 8,
@@ -43,7 +43,7 @@
     },
     {
       "level": 6,
-      "pro_bonus": 3,
+      "pro_bonus": "+3",
       "features": ["Countercharm", "Bard College Feature"],
       "cantrips": 3,
       "spells": 9,
@@ -51,7 +51,7 @@
     },
     {
       "level": 7,
-      "pro_bonus": 3,
+      "pro_bonus": "+3",
       "features": [],
       "cantrips": 3,
       "spells": 10,
@@ -59,7 +59,7 @@
     },
     {
       "level": 8,
-      "pro_bonus": 3,
+      "pro_bonus": "+3",
       "features": ["Ability Score Improvement"],
       "cantrips": 3,
       "spells": 11,
@@ -67,7 +67,7 @@
     },
     {
       "level": 9,
-      "pro_bonus": 4,
+      "pro_bonus": "+4",
       "features": ["Song of Rest (d8)"],
       "cantrips": 3,
       "spells": 12,
@@ -75,7 +75,7 @@
     },
     {
       "level": 10,
-      "pro_bonus": 4,
+      "pro_bonus": "+4",
       "features": ["Bardic Insperation (d10)", "Expertise", "Magical Secret"],
       "cantrips": 4,
       "spells": 14,
@@ -83,7 +83,7 @@
     },
     {
       "level": 11,
-      "pro_bonus": 4,
+      "pro_bonus": "+4",
       "features": [],
       "cantrips": 4,
       "spells": 15,
@@ -91,7 +91,7 @@
     },
     {
       "level": 12,
-      "pro_bonus": 4,
+      "pro_bonus": "+4",
       "features": ["Ability Score Improvement"],
       "cantrips": 4,
       "spells": 15,
@@ -99,7 +99,7 @@
     },
     {
       "level": 13,
-      "pro_bonus": 5,
+      "pro_bonus": "+5",
       "features": ["Song of Rest (d10)"],
       "cantrips": 4,
       "spells": 16,
@@ -107,7 +107,7 @@
     },
     {
       "level": 14,
-      "pro_bonus": 5,
+      "pro_bonus": "+5",
       "features": ["Magical Secrets", "Bard College feature"],
       "cantrips": 4,
       "spells": 18,
@@ -115,7 +115,7 @@
     },
     {
       "level": 15,
-      "pro_bonus": 5,
+      "pro_bonus": "+5",
       "features": ["Bardic Insperation (d12)"],
       "cantrips": 4,
       "spells": 19,
@@ -123,7 +123,7 @@
     },
     {
       "level": 16,
-      "pro_bonus": 5,
+      "pro_bonus": "+5",
       "features": ["Ability Score Improvement"],
       "cantrips": 4,
       "spells": 19,
@@ -131,7 +131,7 @@
     },
     {
       "level": 17,
-      "pro_bonus": 6,
+      "pro_bonus": "+6",
       "features": ["Song of Rest (d12)"],
       "cantrips": 4,
       "spells": 20,
@@ -139,7 +139,7 @@
     },
     {
       "level": 18,
-      "pro_bonus": 6,
+      "pro_bonus": "+6",
       "features": ["Magical Secrets"],
       "cantrips": 4,
       "spells": 22,
@@ -147,7 +147,7 @@
     },
     {
       "level": 19,
-      "pro_bonus": 6,
+      "pro_bonus": "+6",
       "features": ["Ability Score Improvement"],
       "cantrips": 4,
       "spells": 22,
@@ -155,11 +155,76 @@
     },
     {
       "level": 20,
-      "pro_bonus": 6,
+      "pro_bonus": "+6",
       "features": ["Superior Insperation"],
       "cantrips": 4,
       "spells": 22,
       "spell_slots": [4, 3, 3, 3, 3, 2, 2, 1, 1]
-    }
-  ]
+    },
+  ],
+  "features": {
+      "1": [
+        {
+          "feature": "Spellcasting",
+          "description": "<p>You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations.</p><h3>Cantrips</h3><p>You know two cantrips of your choice from the bard spell list. You learn additional bard cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Bard table.</p><h3>Spell Slots</h3<p>The Bard table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell’s level or higher. You regain all expended spell slots when you finish a long rest.<br><br><p>For example, if you know the 1st-level spell cure wounds and have a 1st-level and a 2nd-level spell slot available, you can cast cure wounds using either slot.</p><h3>Spells Known of 1st Level and Higher</h3><p>You know four 1st-level spells of your choice from the bard spell list.<br>The Spells Known column of the Bard table shows when you learn more bard spells of your choice. Each of these spells must be of a level for which you have spell slots, as shown on the table. For instance, when you reach 3rd level in this class, you can learn one new spell of 1st or 2nd level.<br>Additionally, when you gain a level in this class, you can choose one of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.</p><h3>Spellcasting Ability</h3><p>Charisma is your spellcasting ability for your bard spells. Your magic comes from the heart and soul you pour into the performance of your music or oration. You use your Charisma whenever a spell refers to your spellcasting ability. In addition, you use your Charisma modifier when setting the saving throw DC for a bard spell you cast and when making an attack roll with one.<br><b>Spell save DC</b> = 8 + your proficiency bonus + your Charisma modifier<br><b>Spell attack modifier</b> = your proficiency bonus + your Charisma modifier</p><h3>Ritual Casting</h3><p>You can cast any bard spell you know as a ritual if that spell has the ritual tag.</p><h3>Spellcasting Focus</h3><p>You can use a musical instrument as a spellcasting focus for your bard spells.</p>",
+          "option": 1
+        },
+        {
+          "feature": "Bardic Inspiration (d6)",
+          "description": "<p>You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.<br>Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the GM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. <br>You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.<br><br><i>Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.</i></p>",
+          "option": 2
+        }
+      ],
+      "2": [
+        {
+          "feature": "Jack of All Trades",
+          "description": "<p>You can add half your proficiency bonus, rounded down, to any ability check you make that doesn’t already include your proficiency bonus.</p>",
+          "option": 1
+        },
+        {
+          "feature": "Song of Rest (d6)",
+          "description": "<p>You can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.<br><br><i>The extra hit points increase when you reach certain levels in this class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th level.</i></p>",
+          "option": 2
+        }
+      ],
+      "3": [
+        {
+          "feature": "Bard College",
+          "description": "<p>You delve into the advanced techniques of a bard college of your choice: the College of Lore or the College of Valor, both detailed at the end of the class description.</p><h3>College of Lore</h3><p>Bards of the College of Lore know something about most things, collecting bits of knowledge from sources as diverse as scholarly tomes and peasant tales. Whether singing folk ballads in taverns or elaborate compositions in royal courts, these bards use their gifts to hold audiences spellbound. When the applause dies down, the audience members might find themselves questioning everything they held to be true, from their faith in the priesthood of the local temple to their loyalty to the king.<br>The loyalty of these bards lies in the pursuit of beauty and truth, not in fealty to a monarch or following the tenets of a deity. A noble who keeps such a bard as a herald or advisor knows that the bard would rather be honest than politic.<br>The college's members gather in libraries and sometimes in actual colleges, complete with classrooms and dormitories, to share their lore with one another. They also meet at festivals or affairs of state, where they can expose corruption, unravel lies, and poke fun at self-important figures of authority.</p>",
+          "option": 1
+        },
+        {
+          "fuature": "Cutting Words (Bard College)",
+          "description": "<p>You learn how to use your wit to distract, confuse, and otherwise sap the confidence and competence of others. When a creature that you can see within 60 feet of you makes an attack roll, an ability check, or a damage roll, you can use your reaction to expend one of your uses of Bardic Inspiration, rolling a Bardic Inspiration die and subtracting the number rolled from the creature's roll. You can choose to use this feature after the creature makes its roll, but before the GM determines whether the attack roll or ability check succeeds or fails, or before the creature deals its damage. The creature is immune if it can't hear you or if it's immune to being charmed.</p>",
+          "option": 2
+        },
+        {
+          "feature": "Expertise",
+          "description": "<p>Choose two of your skill proficiencies. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies. At 10th level, you can choose another two skill proficiencies to gain this benefit.</p>",
+          "option": 3
+        }
+      ],
+      "4": [
+        {
+          "feature": "Ability Score Improvement",
+          "description": "<p>You can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.</p>",
+          "option": 1
+        }
+      ],
+      "5": [
+        {
+          "feature": "Font of Inspiration",
+          "description": "<p>You regain all of your expended uses of Bardic Inspiration when you finish a short or long rest.</p>",
+          "option": 1
+        },
+        {
+          "feature": "Bardic Insperation (d8)",
+          "description": "<p>You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6.<br>Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the GM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. <br>You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.<br><br><i>Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th level.</i></p>",
+          "option": 2
+        }
+      ]
+  }
 }
+Help us celebrate National Lobster Day by joining us on Thursday, September 27 from 4PM-10PM at the famous Pechanga Buffet and you could win free Thursday Lobster Extravaganza at Pechanga for a year.
+
+The winner to score the year-long seafood smorgasbord will be chosen at random from those who have purchased the Pechanga Lobster Extravaganza Buffet for dinner on Thursday, September 27. Winner must be 21 or older, be a Pechanga Club member and must have purchased their Lobster Buffet between the hours of 4 p.m. and 10 p.m. on Thursday, September 27.

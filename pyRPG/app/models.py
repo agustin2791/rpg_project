@@ -19,19 +19,30 @@ class ItemCategory(models.Model):
 # Item Characteristics, can be equiped or stored in inventory
 class Item(models.Model):
     name = models.CharField(max_length=150)
+    # melee weapon, light armor etc.
     category = models.ForeignKey(ItemCategory,
                                  related_name='item_category')
-    lvl_req = models.IntegerField(default=1)
-    dextirity = models.IntegerField(null=True,
-                                     blank=True)
+    cost = models.CharField(max_length=100)
+    armor_class = models.CharField(max_length=120,
+                                      blank=True,
+                                      null=True)
+    strength = models.IntegerField(null=True,
+                                   blank=True)
+    stealth = models.CharField(max_length=50,
+                               blank=True,
+                               null=True)
+    speed = model.IntegerField(null=True,
+                               blank=True)
+    carry_cap = models.IntegerField(null=True,
+                                    blank=True)
     damage = models.IntegerField(null=True,
                                   blank=True)
-    defence = models.IntegerField(null=True,
-                                   blank=True)
     weight = models.FloatField(default=1.0)
+    description = model.TextField()
 
     def __unicode__(self):
         return self.name
+        
 class Spells(models.Model):
     level = models.IntegerField(default=0)
     spell_name = models.CharField(max_length=150)
@@ -117,16 +128,19 @@ class CharacterClassLevel(models.Model):
     spell_slots_8 = models.IntegerField(default=0)
     spell_slots_9 = models.IntegerField(default=0)
 
+    def get_level_features(self):
+        features = CharacterClassFeature.objects.filter(char_class=self.id)
+
     def __unicode__(self):
         return '{0} at Level {1}'.format(self.char_class.name, self.level)
 
 class CharacterClassFeature(models.Model):
     char_class = models.ForeignKey(CharacterClass,
-                                   related_name='char_class_feature')
+                                   related_name='char_class_feature',
+                                   on_delete=models.CASCADE)
     level = models.IntegerField(default=0)
     feature = models.CharField(max_length=150)
     description = models.TextField()
-    option = models.IntegerField()
 
 class CharacterRace(models.Model):
     name = models.CharField(max_length=50)
