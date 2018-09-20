@@ -1,0 +1,253 @@
+{
+  "mounts": [
+    {
+      "item": "Camel",
+      "cost": "50 gp",
+      "speed": 50,
+      "carry_cap": 480,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Donkey or Mule",
+      "cost": "8 gp",
+      "speed": 40,
+      "carry_cap": 420,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Elephant",
+      "cost": "200 gp",
+      "speed": 40,
+      "carry_cap": 1320,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Horse, Draft",
+      "cost": "50 gp",
+      "speed": 40,
+      "carry_cap": 540,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Horse, Riding",
+      "cost": "75 gp",
+      "speed": 60,
+      "carry_cap": 480,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Mastiff",
+      "cost": "25 gp",
+      "speed": 40,
+      "carry_cap": 195,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Pony",
+      "cost": "30 gp",
+      "speed": 40,
+      "carry_cap": 225,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    },
+    {
+      "item": "Warhorse",
+      "cost": "400 gp",
+      "speed": 60,
+      "carry_cap": 540,
+      "weight": null,
+      "category": "Mounts",
+      "description": null
+    }
+  ],
+  "track_harness_drawn_vehicles": [
+    {
+      "item": "Barding",
+      "cost": null,
+      "speed": null,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Carriage",
+      "cost": "100 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 600,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Cart",
+      "cost": "15 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 200,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Chariot",
+      "cost": "250 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 100,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Feed (per day)",
+      "cost": "5 cp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 10,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Saddlebags",
+      "cost": "4 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 8,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Sled",
+      "cost": "20 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 300,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Stabling (per day)",
+      "cost": "5 sp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    },
+    {
+      "item": "Wagon",
+      "cost": "35 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 400,
+      "category": "Track, Harness, and Drawn Vehicles",
+      "description": null
+    }
+  ],
+  "saddles": [
+    {
+      "item": "Exotic",
+      "cost": "60 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 40,
+      "category": "Saddles",
+      "description": null
+    },
+    {
+      "item": "Military",
+      "cost": "20 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 30,
+      "category": "Saddles",
+      "description": null
+    },
+    {
+      "item": "Pack",
+      "cost": "5 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 15,
+      "category": "Saddles",
+      "description": null
+    },
+    {
+      "item": "Riding",
+      "cost": "10 gp",
+      "speed": null,
+      "carry_cap": null,
+      "weight": 25,
+      "category": "Saddles",
+      "description": null
+    }
+  ],
+  "waterborne_vehicles": [
+    {
+      "item": "Galley",
+      "cost": "30000 gp",
+      "speed": 4,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Waterborne Vehicles",
+      "description": null
+    },
+    {
+      "item": "Keelboat",
+      "cost": "3000 gp",
+      "speed": 1,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Waterborne Vehicles",
+      "description": null
+    },
+    {
+      "item": "Longship",
+      "cost": "10000 gp",
+      "speed": 3,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Waterborne Vehicles",
+      "description": null
+    },
+    {
+      "item": "Rowboat",
+      "cost": "50 gp",
+      "speed": 1.5,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Waterborne Vehicles",
+      "description": null
+    },
+    {
+      "item": "Sailing Ship",
+      "cost": "10000 gp",
+      "speed": 2,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Waterborne Vehicles",
+      "description": null
+    },
+    {
+      "item": "Warship",
+      "cost": "25000 gp",
+      "speed": 2.5,
+      "carry_cap": null,
+      "weight": null,
+      "category": "Waterborne Vehicles",
+      "description": null
+    }
+  ]
+}
