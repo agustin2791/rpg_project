@@ -7,6 +7,7 @@ import glob
 import os
 import datetime as dt
 import pyRPG.settings as settings
+import numbers
 
 class Command(BaseCommand):
     help = ''
@@ -16,7 +17,7 @@ class Command(BaseCommand):
         '''
         This will get the spells and import them to the DB
         '''
-        spell_file = glob.glob(os.path.join(os.path.join(settings.BASE_DIR, '/file/CSV'), 'spells.csv'))
+        spell_file = glob.glob(os.path.join(os.path.join(settings.BASE_DIR, 'files/CSV'), 'spells.csv'))
         return (spell_file)
 
     @staticmethod
@@ -24,7 +25,7 @@ class Command(BaseCommand):
         # spell_level = row['Spell level']
         try:
             spell_level = row['Spell_level']
-            if isinstance(spell_level, basestring) or not isinstance(spell_level, numbers.Number):
+            if spell_level == 'Cantrip':
                 spell_level = 0
         except:
             spell_level = 0

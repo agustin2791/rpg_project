@@ -31,18 +31,19 @@ class Item(models.Model):
     stealth = models.CharField(max_length=50,
                                blank=True,
                                null=True)
-    speed = model.IntegerField(null=True,
+    speed = models.IntegerField(null=True,
                                blank=True)
     carry_cap = models.IntegerField(null=True,
                                     blank=True)
     damage = models.IntegerField(null=True,
                                   blank=True)
     weight = models.FloatField(default=1.0)
-    description = model.TextField()
+    description = models.TextField(null=True,
+                                   blank=True)
 
     def __unicode__(self):
         return self.name
-        
+
 class Spells(models.Model):
     level = models.IntegerField(default=0)
     spell_name = models.CharField(max_length=150)
@@ -59,7 +60,7 @@ class Spells(models.Model):
     classes = models.ManyToManyField('CharacterClass')
 
     def __unicode__(self):
-        return self.name
+        return self.spell_name
 
 # Character class e.g. Heavy, Archer, Scientist etc.
 class CharacterClass(models.Model):

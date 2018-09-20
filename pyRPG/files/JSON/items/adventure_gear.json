@@ -257,7 +257,7 @@
       "description": null
     },
     {
-      "item": "Caltrops (Bag of 20)	",
+      "item": "Caltrops (Bag of 20)",
       "cost": "1 gp",
       "wieght": 2,
       "capacity": null,
@@ -297,7 +297,7 @@
       "description": "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check."
     },
     {
-      "item": "Chalk (1 piece)	",
+      "item": "Chalk (1 piece)",
       "cost": "1 cp",
       "wieght": null,
       "capacity": null,
@@ -465,7 +465,7 @@
       "description": null
     },
     {
-      "item": "Ladder (10 foot)	",
+      "item": "Ladder (10 foot)",
       "cost": "1 sp",
       "wieght": 25,
       "capacity": null,
@@ -553,7 +553,7 @@
       "description": null
     },
     {
-      "item": "Parchment (One Sheet)	",
+      "item": "Parchment (One Sheet)",
       "cost": "1 sp",
       "wieght": null,
       "capacity": null,
@@ -561,7 +561,7 @@
       "description": null
     },
     {
-      "item": "Perfume (Vial)	",
+      "item": "Perfume (Vial)",
       "cost": "5 gp",
       "wieght": null,
       "capacity": null,
@@ -585,7 +585,7 @@
       "description": null
     },
     {
-      "item": "Poison, Basic (Vial)	",
+      "item": "Poison, Basic (Vial)",
       "cost": "100 gp",
       "wieght": null,
       "capacity": null,
@@ -657,7 +657,7 @@
       "description": null
     },
     {
-      "item": "Rope, Hempen (50 feet)	",
+      "item": "Rope, Hempen (50 feet)",
       "cost": "1 gp",
       "wieght": 10,
       "capacity": null,
