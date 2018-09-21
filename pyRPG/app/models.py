@@ -35,9 +35,15 @@ class Item(models.Model):
                                blank=True)
     carry_cap = models.IntegerField(null=True,
                                     blank=True)
-    damage = models.IntegerField(null=True,
+    container_cap = models.CharField(max_length=100,
+                                     null=True,
+                                     blank=True)
+    damage = models.CharField(max_length=100,
+                              null=True,
                                   blank=True)
-    weight = models.FloatField(default=1.0)
+    weight = models.FloatField(default=1.0,
+                               null=True,
+                               blank=True)
     description = models.TextField(null=True,
                                    blank=True)
 

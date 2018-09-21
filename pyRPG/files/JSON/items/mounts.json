@@ -76,7 +76,7 @@
   "track_harness_drawn_vehicles": [
     {
       "item": "Barding",
-      "cost": null,
+      "cost": "No Cost",
       "speed": null,
       "carry_cap": null,
       "weight": null,
