@@ -12,28 +12,34 @@
         <!-- New Character class -->
         <div class="form-group">
           <label for="char_class">Character Class:</label>
+          <p style="font-size: small"><i>Select class and the information will be displayed on the right</i></p>
           <select class="form-control" name="char_class">
-            <option value="fighter">Fighter</option>
+            <option value="none">----- Select -----</option>
+            {% for c in classes %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+            {% endfor %}
           </select>
         </div>
         <!-- New Character race -->
         <div class="form-group">
           <label for="char_race">Character Race:</label>
+          <p style="font-size: small"><i>Select race and the information will be displayed on the right</i></p>
           <select class="form-control" name="char_race">
-            <option value="human">Human</option>
+            <option value="none">----- Select -----</option>
+            {% for r in races %}
+            <option value="{{ r.id }}">{{ r.name }}</option>
+            {% endfor %}
           </select>
         </div>
         <!-- New Character Alignment -->
         <div class="form-group">
           <label for="char_alignment">Character Alignment:</label>
           <select class="form-control" name="char_alignment">
-            <option value="human">Human</option>
+            <option value="none">----- Select -----</option>
+            {% for a in alignments %}
+            <option value="{{ a.0 }}">{{ a.1 }}</option>
+            {% endfor %}
           </select>
-        </div>
-        <!-- New Character Armor Class -->
-        <div class="form-group">
-          <label for="char_armor">Armor Class</label>
-          <input type="number" class="form-control" name="char_armor">
         </div>
         <!-- New character Level -->
         <div class="row">

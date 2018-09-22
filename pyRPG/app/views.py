@@ -7,6 +7,18 @@ import json
 
 import models
 
+ALIGNMENTS = (
+    ('lg','Lawful Good'),
+    ('ng', 'Natural Good'),
+    ('cg', 'Chaotic good'),
+    ('ln', 'Lawful Neutral'),
+    ('tn', 'True Neutral'),
+    ('cn','Chaotic Neutral'),
+    ('le', 'Lawful Evil'),
+    ('ne', 'Neutral Evil'),
+    ('ce', 'Chaotic Evil')
+)
+
 def index(request):
     return render(request, 'index.html')
 
@@ -41,13 +53,23 @@ def user_profile(request, username):
 
 def character_creation(request, username):
     user = User.objects.get(username=username)
+    classes = models.CharacterClass.objects.all().order_by('name')
+    races = models.CharacterRace.objects.all().order_by('name')
+    alignments = ALIGNMENTS
 
     context = {
-        'user': user
+        'user': user,
+        'classes': classes,
+        'races': races,
+        'alignments': alignments
     }
     return render(request,
                   'profile/character/create.html',
                   context)
+
+# def get_character_class(request, class_id):
+#     char_class = models.CharacterClass.objects.get(id=class_id)
+#
 # CREATE, EDIT, AND START CAMPAIGN
 # Create campaign
 def create_campaign(request, username):

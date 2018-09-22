@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def load_characters():
-        home_dir = os.path.join(settings.BASE_DIR, 'file/JSON/character_race')
+        home_dir = os.path.join(settings.BASE_DIR, 'files/JSON/character_race')
         characters = glob.glob(os.path.join(home_dir, '*.json'))
 
         return characters
@@ -51,8 +51,9 @@ class Command(BaseCommand):
                 )
 
         if sub_class:
+            sub_index = int('{0}01'.format(index))
             sub_character = models.CharacterRace.objects.update_or_create(
-                id=index,
+                id=sub_index,
                 defaults={
                     'name': char['sub_class']['name'],
                     'desc': char['sub_class']['description'],
