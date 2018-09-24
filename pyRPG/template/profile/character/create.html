@@ -2,8 +2,9 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <form class="create_character">
-      <div class="col">
+
+    <div class="col-6">
+      <form class="create_character">
         <!-- New Character name -->
         <div class="form-group">
           <label for="char_name">Character Name:</label>
@@ -13,7 +14,7 @@
         <div class="form-group">
           <label for="char_class">Character Class:</label>
           <p style="font-size: small"><i>Select class and the information will be displayed on the right</i></p>
-          <select class="form-control" name="char_class">
+          <select class="form-control select-character-class" name="char_class">
             <option value="none">----- Select -----</option>
             {% for c in classes %}
             <option value="{{ c.id }}">{{ c.name }}</option>
@@ -24,7 +25,7 @@
         <div class="form-group">
           <label for="char_race">Character Race:</label>
           <p style="font-size: small"><i>Select race and the information will be displayed on the right</i></p>
-          <select class="form-control" name="char_race">
+          <select class="form-control select-character-race" name="char_race">
             <option value="none">----- Select -----</option>
             {% for r in races %}
             <option value="{{ r.id }}">{{ r.name }}</option>
@@ -162,14 +163,49 @@
             </div>
           </div>
         </div>
+        <button type="submit" class="btn btn-primary" name="button">Create Character</button>
+      </form>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <h3>Class Details</h3>
+          <hr>
+          <div class="class_details">
+            <i>Select class to view details</i>
+          </div>
+        </div>
+        <div class="col-12">
+          <h3>Race Details</h3>
+          <hr>
+          <div class="race_details">
+            <i>Select race to view details</i>
+          </div>
+        </div>
+        <div class="col-12">
+          <h3>Alignments</h3>
+          <hr>
+          <p>
+            <b>Lawful good (LG): </b>creatures can be counted on to do the right thing as expected by society. Gold dragons, paladins, and most dwarves are lawful good.<br>
+            <b>Neutral good (NG): </b>folk do the best they can to help others according to their needs. Many celestials, some cloud giants, and most gnomes are neutral good.<br>
+            <b>Chaotic good (CG): </b>creatures act as their conscience directs, with little regard for what others expect. Copper dragons, many elves, and unicorns are chaotic good.<br>
+            <b>Lawful neutral (LN): </b>individuals act in accordance with law, tradition, or personal codes. Many monks and some wizards are lawful neutral.<br>
+            <b>True Neutral (N): </b> is the alignment of those who prefer to steer clear of moral questions and don't take sides, doing what seems best at the time. Lizardfolk, most druids, and many humans are neutral.<br>
+            <b>Chaotic neutral (CN): </b>creatures follow their whims, holding their personal freedom above all else. Many barbarians and rogues, and some bards, are chaotic neutral.<br>
+            <b>Lawful evil (LE): </b>creatures methodically take what they want, within the limits of a code of tradition, loyalty, or order. Devils, blue dragons, and hobgoblins are lawful evil.<br>
+            <b>Neutral evil (NE): </b>is the alignment of those who do whatever they can get away with, without compassion or qualms. Many drow, some cloud giants, and goblins are neutral evil.<br>
+            <b>Chaotic evil (CE): </b>creatures act with arbitrary violence, spurred by their greed, hatred, or bloodlust. Demons, red dragons, and orcs are chaotic evil.
+          </p>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary" name="button">Create Character</button>
-    </form>
+
+    </div>
   </div>
 </div>
 {% endblock %}
 {% block bottomscript %}
 <script type="text/javascript" src="/static/js/character/character.js"></script>
+<script type="text/javascript" src="/static/js/character/character_creation.js"></script>
 <script type="text/javascript">
   const url = '/profile/{{ user.username }}/character_creation/';
   const csrf = '{{ csrf_token }}';
@@ -196,5 +232,21 @@
     $('#'+modify+'-mod').empty().html(html);
 
   })
+  // get character class details
+  $(document).on('change', '.select-character-class', function() {
+    // console.log($(this).val())
+    var value = $(this).val();
+    if (value != 'none'){
+      select_class(url, csrf, value);
+    }
+    return false;
+  });
+  // get character race details
+  $(document).on('change', '.select-character-race', function() {
+    var value = $(this).val();
+    if (value != 'none') {
+      select_race(url, csrf, value);
+    }
+  });
 </script>
 {% endblock %}

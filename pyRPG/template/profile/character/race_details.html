@@ -1,0 +1,19 @@
+
+  <h3>{{ cr.name }}</h3>
+  <div class="row">
+    <div class="col">
+      <p>
+        <b>Ability Score Increase:</b> {{ cr.ability_score_increase }}<br>
+        <b>Age:</b> {{ cr.age }}<br>
+        <b>Alignment:</b> {{ cr.size }}<br>
+        <b>Speed:</b> {{ cr.speed }}<br>
+        <b>Language:</b> {{ cr.language }}
+      </p>
+      {% for t in traits %}
+      <p>
+        <b>{{ t.trait }}</b><br>
+        {{ t.desc }}
+      </p>
+      {% endfor %}
+    </div>
+  </div>

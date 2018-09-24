@@ -78,15 +78,56 @@ class CharacterClass(models.Model):
                               related_name='armor_category')
     weapons = models.ManyToManyField(ItemCategory,
                                      related_name='weapons_category')
+    weapon_items = models.ManyToManyField(Item,
+                                          related_name='weapons_available')
     tools = models.ManyToManyField(ItemCategory,
                                    related_name='tools_category')
+    tools_item = models.ManyToManyField(Item,
+                                       related_name='tools_available')
     saving_throws = models.CharField(max_length=150)
     skills_limit = models.IntegerField(default=2)
     skills = models.CharField(max_length=150)
 
-
     def __unicode__(self):
         return self.name
+
+    def get_armor(self):
+        armor = self.armor.all()
+        armor_list = []
+        if armor:
+            for a in armor:
+                armor_list.append(a.name)
+            armor_text = ' | '.join(armor_list)
+        else:
+            armor_text = 'No Armor Proficiencies'
+        return armor_text
+
+    def get_weapons(self):
+        category = self.weapons.all()
+        item = self.weapon_items.all()
+        weapons_list = []
+        if category:
+            for c in category:
+                weapons_list.append(c.name)
+        if item:
+            for i in item:
+                weapons_list.append(i.name)
+        return ' | '.join(weapons_list)
+
+    def get_tools(self):
+        tools_item = self.tools_item.all()
+        tool_list = []
+        if tools_item:
+            for t in tools_item:
+                tool_list.append(t.name)
+            return ', '.join(tool_list)
+        elif self.name == 'Bard':
+            return 'Three musical instruments of your choice'
+        elif self.name == 'Monk':
+            return 'Choose one type of artisan\'s tools or one musical instrument'
+        else:
+            return 'None'
+
 
 class CharacterClassEquipment(models.Model):
     char_class = models.ForeignKey(CharacterClass)
@@ -164,7 +205,8 @@ class CharacterRace(models.Model):
         return self.name
 
 class CharacterRaceTraits(models.Model):
-    char_race = models.ForeignKey(CharacterRace)
+    char_race = models.ForeignKey(CharacterRace,
+                                  related_name='character_race_trait')
     trait = models.CharField(max_length=50)
     desc = models.TextField()
 
@@ -189,9 +231,9 @@ class Character(models.Model):
     level = models.IntegerField(default=1)
     hp = models.IntegerField(default=100)
     full_hp = models.IntegerField(default=100)
-    damage = models.IntegerField(default=5)
     speed = models.IntegerField(default=5)
-    defence = models.IntegerField(default=5)
+    strength = models.IntegerField(default=5)
+    armor_class = models.IntegerField(default=5)
     dexterity = models.IntegerField(default=5)
     constitution = models.IntegerField(default=5)
     intelligence = models.IntegerField(default=5)
@@ -202,18 +244,10 @@ class Character(models.Model):
     inventory_limit = models.FloatField(default=50.0)
     exp = models.IntegerField(default=0)
     initiation = models.IntegerField(default=0)
-    attack = models.IntegerField()
-    description = models.TextField()
+    description = models.TextField(null=True,
+                                   blank=True)
     user = models.ForeignKey(User,
                              related_name='user_character')
-    attack_type = models.ForeignKey(Attack,
-                                    related_name='attack_type',
-                                    blank=True,
-                                    null=True)
-    sub_attack_type = models.ForeignKey(Attack,
-                                        related_name='sub_attack_type',
-                                        blank=True,
-                                        null=True)
     enemy = models.BooleanField(default=False)
     enemy_type = models.CharField(max_length=150,
                                   blank=True,

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Prefetch
 import json
 
 import models
@@ -57,6 +58,25 @@ def character_creation(request, username):
     races = models.CharacterRace.objects.all().order_by('name')
     alignments = ALIGNMENTS
 
+    # Get Character Class Details
+    if request.is_ajax and 'character_class' in request.POST:
+        cc = models.CharacterClass.objects.get(id=request.POST.get('c_class'))
+        context = {'cc': cc}
+        return render(request,
+                      'profile/character/class_details.html',
+                      context)
+    # Get Character Race details
+    if request.is_ajax and 'character_race' in request.POST:
+        cr = models.CharacterRace.objects.get(id=request.POST.get('c_race'))
+        traits = models.CharacterRaceTraits.objects.filter(char_race__id=cr.id)
+        context = {'cr': cr, 'traits': traits}
+        return render(request,
+                      'profile/character/race_details.html',
+                      context)
+    # Create Character
+    if request.is_ajax and 'create_character' in request.POST:
+        pass
+
     context = {
         'user': user,
         'classes': classes,
@@ -67,9 +87,10 @@ def character_creation(request, username):
                   'profile/character/create.html',
                   context)
 
-# def get_character_class(request, class_id):
+# def get_character_class(class_id):
 #     char_class = models.CharacterClass.objects.get(id=class_id)
-#
+#     return char_class
+
 # CREATE, EDIT, AND START CAMPAIGN
 # Create campaign
 def create_campaign(request, username):

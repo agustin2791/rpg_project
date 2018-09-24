@@ -43,7 +43,63 @@ class Command(BaseCommand):
                 'skills_limit': row['SkillsLimit'],
                 'skills': row['Skills'],
             }
-        )
+        )[0]
+        armor = row['Armor']
+        character.armor.clear()
+        # if ', ' in armor: print 'Yes'
+        if armor != 'none':
+            if armor and ', ' in armor:
+                armor = armor.split(', ')
+                for a in armor:
+                    if a == 'Shields':
+                        ar = models.ItemCategory.objects.get(name='Shield')
+                        character.armor.add(ar)
+                    elif a == 'All armor':
+                        ar = models.ItemCategory.objects.filter(name__contains='Armor')
+                        for i in ar: character.armor.add(i)
+                    else:
+                        ar = models.ItemCategory.objects.get(name=a)
+                        character.armor.add(ar)
+                    character.save()
+            else:
+                if 'All armor' in armor:
+                    ar = models.ItemCategory.objects.filter(name__contains='Armor')
+                    character.armor.add(ar)
+                    for i in ar: character.armor.add(i)
+                else:
+                    ar = models.ItemCategory.objects.get(name=armor)
+                    character.armor.add(ar)
+
+        weapons = row['Weapons']
+        if ', ' in weapons:
+            weapons = weapons.split(', ')
+            for w in weapons:
+                w = w.title()
+                if w == 'Simple Weapons' or w == 'Martial Weapons':
+                    if w == 'Simple Weapons':
+                        weapons_category = models.ItemCategory.objects.filter(name__contains='Simple')
+                    if w == 'Martial Weapons':
+                        weapons_category = models.ItemCategory.objects.filter(name__contains=w)
+                    for c in weapons_category: character.weapons.add(c)
+                else:
+                    if 'Crossbow' in w:
+                        a, b = w.split(' ')
+                        cross = [b, a]
+                        w = ', '.join(cross)
+                    weapon_item = models.Item.objects.get(name=w)
+                    character.weapon_items.add(weapon_item)
+        else:
+            if weapons == 'Simple weapons':
+                weapons_category = models.ItemCategory.objects.filter(name__contains='Simple')
+            for c in weapons_category: character.weapons.add(c)
+
+        tools = row['Tools']
+        try:
+            tools = tools.title()
+            tool_item = models.Item.objects.get(name=tools)
+            character.tools_item.add(tool_item)
+        except:
+            pass
 
         if len(equipment) > 0:
             for ind, equip in enumerate(equipment):
@@ -51,7 +107,7 @@ class Command(BaseCommand):
                 eq = models.CharacterClassEquipment.objects.update_or_create(
                     id=new_id,
                     defaults={
-                        'char_class': character[0],
+                        'char_class': character,
                         'desc': equip
                     }
                 )

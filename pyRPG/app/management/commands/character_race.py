@@ -41,8 +41,9 @@ class Command(BaseCommand):
         )
         if char['additional_traits'] != None:
             for ind, trait in enumerate(char['additional_traits']):
+                trait_id = int('{0}{1}'.format(index, ind))
                 char_traits = models.CharacterRaceTraits.objects.update_or_create(
-                    id=ind,
+                    id=trait_id,
                     defaults={
                         'char_race': character[0],
                         'trait': trait['name'],
@@ -67,8 +68,9 @@ class Command(BaseCommand):
                 }
             )
             for ind, trait in enumerate(char['additional_traits']):
+                trait_id = int('{0}{1}'.format(sub_index, ind))
                 char_traits = models.CharacterRaceTraits.objects.update_or_create(
-                    id=ind,
+                    id=trait_id,
                     defaults={
                         'char_race': sub_character[0],
                         'trait': trait['name'],
