@@ -19,6 +19,47 @@ ALIGNMENTS = (
     ('ne', 'Neutral Evil'),
     ('ce', 'Chaotic Evil')
 )
+def get_alignment(alignment):
+    if alignment == 'lg':
+        name = 'Lawful Good'
+        description = 'Creatures can be counted on to do the right thing as expected by society. Gold dragons, paladins, and most dwarves are lawful good.'
+    elif alignment == 'ng':
+        name = 'Natural Good'
+        description = 'Folk do the best they can to help others according to their needs. Many celestials, some cloud giants, and most gnomes are neutral good.'
+    elif alignment == 'cg':
+        name = 'Chaotic good'
+        description = 'Creatures act as their conscience directs, with little regard for what others expect. Copper dragons, many elves, and unicorns are chaotic good.'
+    elif alignment == 'ln':
+        name = 'Lawful Neutral'
+        description = 'Individuals act in accordance with law, tradition, or personal codes. Many monks and some wizards are lawful neutral.'
+    elif alignment == 'tn':
+        name ='True Neutral'
+        description = 'Is the alignment of those who prefer to steer clear of moral questions and don\'t take sides, doing what seems best at the time. Lizardfolk, most druids, and many humans are neutral.'
+    elif alignment == 'cn':
+        name = 'Chaotic Neutral'
+        description = 'Creatures follow their whims, holding their personal freedom above all else. Many barbarians and rogues, and some bards, are chaotic neutral.'
+    elif alignment == 'le':
+        name = 'Lawful Evil'
+        description = 'Creatures methodically take what they want, within the limits of a code of tradition, loyalty, or order. Devils, blue dragons, and hobgoblins are lawful evil.'
+    elif alignment == 'ne':
+        name = 'Neutral Evil'
+        description = 'Is the alignment of those who do whatever they can get away with, without compassion or qualms. Many drow, some cloud giants, and goblins are neutral evil.'
+    elif alignment == 'ce':
+        name = 'Chaotic Evil'
+        description = 'Creatures act with arbitrary violence, spurred by their greed, hatred, or bloodlust. Demons, red dragons, and orcs are chaotic evil.'
+    return '{0}: {1}'.format(name, description)
+
+def get_modifier(score):
+    score = int(score)
+    if score == 1:
+        score_mod = -5
+    elif score >= 30:
+        score_mod = 10
+    else:
+        score_mod = (score/2) - 5
+
+    return score_mod
+
 
 def index(request):
     return render(request, 'index.html')
@@ -73,9 +114,33 @@ def character_creation(request, username):
         return render(request,
                       'profile/character/race_details.html',
                       context)
-    # Create Character
-    if request.is_ajax and 'create_character' in request.POST:
-        pass
+
+    if request.is_ajax and 'new_character' in request.POST:
+        char_class = models.CharacterClass.objects.get(id=request.POST.get('c_class'))
+        char_race = models.CharacterRace.objects.get(id=request.POST.get('c_race'))
+        alignment = get_alignment(request.POST.get('alignment'))
+        character = models.Character.objects.create(
+            name=request.POST.get('name'),
+            c_class=char_class,
+            c_race=char_race,
+            level=request.POST.get('level'),
+            hp=request.POST.get('hit_points'),
+            full_hp=request.POST.get('hit_points'),
+            speed=request.POST.get('speed'),
+            strength=request.POST.get('strength'),
+            armor_class=request.POST.get('ac'),
+            dexterity=request.POST.get('dex'),
+            constitution=request.POST.get('const'),
+            intelligence=request.POST.get('int'),
+            charisma=request.POST.get('charm'),
+            wisdom=request.POST.get('wisdom'),
+            alignment=alignment,
+            hit_dice=char_class.hit_dice,
+            saving_throws=char_class.saving_throws,
+            user=user
+        )
+        character.save()
+        return HttpResponse('/profile/{0}/character_edit/{1}/')
 
     context = {
         'user': user,
@@ -87,7 +152,7 @@ def character_creation(request, username):
                   'profile/character/create.html',
                   context)
 
-# def get_character_class(class_id):
+# def character_creation(class_id):
 #     char_class = models.CharacterClass.objects.get(id=class_id)
 #     return char_class
 

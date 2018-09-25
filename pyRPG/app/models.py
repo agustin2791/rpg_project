@@ -228,6 +228,8 @@ class Attack(models.Model):
 # User's Character and Characteristics
 class Character(models.Model):
     name = models.CharField(max_length=150)
+    c_class = models.ForeignKey(CharacterClass)
+    c_race = models.ForeignKey(CharacterRace)
     level = models.IntegerField(default=1)
     hp = models.IntegerField(default=100)
     full_hp = models.IntegerField(default=100)
@@ -262,6 +264,12 @@ class Character(models.Model):
     background = models.CharField(max_length=100,
                                   null=True,
                                   blank=True)
+    saving_throws = models.CharField(max_length=150,
+                                     null=True,
+                                     blank=True)
+    proficiency_bonus = models.IntegerField(default=2,
+                                            null=True,
+                                            blank=True)
 
 
     def __unicode__(self):
