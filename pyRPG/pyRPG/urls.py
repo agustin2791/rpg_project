@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^profile/(?P<username>\w{0,50})/character_creation/$',
         views.character_creation,
         name='character_creation'),
-    url(r'^profile/(?P<userneme>\w{0,50})/character_info/(\d+)/$',
+    url(r'^profile/(?P<username>\w{0,50})/character_info/(?P<char_id>\d+)/$',
         views.character_info,
         name='character_info'),
     # Campaign

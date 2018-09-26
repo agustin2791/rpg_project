@@ -85,7 +85,7 @@ def character_skills(char):
             'history':skills_list['intelligence'],
             'insight':skills_list['wisdom'],
             'intimidation':skills_list['charisma'],
-            'investigation'
+            'investigation':skills_list['intelligence'],
             'medicine':skills_list['wisdom'],
             'nature':skills_list['intelligence'],
             'perception':skills_list['wisdom'],
@@ -154,6 +154,7 @@ def character_creation(request, username):
                       context)
 
     if request.is_ajax and 'new_character' in request.POST:
+        print 'CHARACTER CREATION'
         char_class = models.CharacterClass.objects.get(id=request.POST.get('c_class'))
         char_race = models.CharacterRace.objects.get(id=request.POST.get('c_race'))
         alignment = get_alignment(request.POST.get('alignment'))
@@ -178,7 +179,8 @@ def character_creation(request, username):
         )
         character.save()
         character_skills(character.id)
-        return HttpResponse('/profile/{0}/character_info/{1}/')
+        redirect_to = '/profile/{0}/character_info/{1}/'.format(user.username, character.id)
+        return HttpResponse(redirect_to)
 
     context = {
         'user': user,
@@ -190,9 +192,21 @@ def character_creation(request, username):
                   'profile/character/create.html',
                   context)
 
-def character_info(class_id):
-    char_class = models.CharacterClass.objects.get(id=class_id)
-    return char_class
+def character_info(request, username, char_id):
+    user = User.objects.get(username=username)
+    character = models.Character.objects.get(pk=char_id)
+    char_class = models.CharacterClass.objects.get(id=character.c_class.id)
+    char_race = models.CharacterRace.objects.get(id=character.c_race.id)
+
+    context = {
+        'user': user,
+        'character': character,
+        'char_class': char_class,
+        'char_race': char_race
+    }
+    return render(request,
+                  'profile/character/edit.html',
+                  context)
 
 # CREATE, EDIT, AND START CAMPAIGN
 # Create campaign

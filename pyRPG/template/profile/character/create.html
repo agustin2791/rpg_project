@@ -83,7 +83,7 @@
             <div class="form-group">
               <label for="char_damage">Strength:</label>
               <div class="input-group">
-                <input id="dmg" type="number" class="form-control abilities" name="char_damage">
+                <input id="dmg" type="number" class="form-control abilities" name="char_strength">
                 <div class="input-group-append">
                   <div class="input-group-text" id="dmg-mod">
                     +/-#
@@ -252,20 +252,32 @@
     $(this).removeClass('is-invalid');
     $(this).addClass('is-valid');
   })
-  $(document).on('submit', '.create_character', function() {
+  $(document).on('submit', '.create_character', function(e) {
+    e.preventDefault()
     $('select').each(function(index) {
-      // console.log($(this).addClass('is-invalid'))
       if ($(this).val() == 'none') $(this).addClass('is-invalid')
     })
+
+    console.log('Approved')
     var c_class, c_race, alignment, name, level, hit_points, speed, strength, dex, cons, int, charm, wisdom;
     c_class = $('select[name="char_class"]').val();
     c_race = $('select[name="char_race"]').val();
-    alignment = $('select[name="char_alignment"]').val()
-    // if (c_class == 'none' || c_race == 'none' || alignment == ) {
-    //
-    // }
-    //
-    // submit_character(url, csrf, c_class, c_race, alignment, name, level, hit_points, speed, strength, dex, cons, int, charm, wisdom)
+    alignment = $('select[name="char_alignment"]').val();
+    name = $('input[name="char_name"]').val();
+    level = $('input[name="char_lvl"]').val();
+    hit_points = $('input[name="char_hp"]').val();
+    speed = $('input[name="char_speed"]').val();
+    strength = $('input[name="char_strength"]').val();
+    dex = $('input[name="char_dex"]').val();
+    cons = $('input[name="char_const"]').val();
+    int = $('input[name="char_int"]').val();
+    wisdom = $('input[name="char_wis"]').val();
+    charm = $('input[name="char_charisma"]').val();
+    if (c_class == 'none' || c_race == 'none' || alignment == 'none' || name == '' || level == '' || hit_points == '' || speed == '' || strength == '' || dex == '' || cons == '' || int == '' || wisdom == '' || charm == '') {
+      return 0;
+    }
+
+    submit_character(url, csrf, c_class, c_race, alignment, name, level, hit_points, speed, strength, dex, cons, int, charm, wisdom);
     return false;
   })
 </script>
