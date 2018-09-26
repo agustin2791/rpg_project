@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import views
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -264,6 +265,9 @@ class Character(models.Model):
     background = models.CharField(max_length=100,
                                   null=True,
                                   blank=True)
+    background_skills = models.CharField(max_length=100,
+                                         blank=True,
+                                         null=True)
     saving_throws = models.CharField(max_length=150,
                                      null=True,
                                      blank=True)
@@ -284,6 +288,20 @@ class Character(models.Model):
             return campaigns[0]
         except IndexError:
             return None
+    def get_alignment(self):
+        al = self.alignment.split(': ')
+        return al[0]
+
+    def get_abilities(self):
+        abilities = []
+        ability = ['strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom']
+        for a in ability:
+            ab = Character.objects.values_list(a, flat=True).get(id=self.id)
+            mod = views.get_modifier(ab)
+            if mod > 0:
+                mod = '+{0}'.format(mod)
+            abilities.append([a.title(), ab, mod])
+        return abilities
 
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
@@ -308,6 +326,28 @@ class CharacterSkills(models.Model):
     stealth = models.IntegerField(default=0)
     survival = models.IntegerField(default=0)
 
+    def get_skills(self):
+        skills = []
+        names = ['Acrobatics','Animal Handling','Arcana','Athletics','Deception','History','Insight','Intimidation','Investigation','Medicine','Nature','Perception','Performance','Persuasion','Religion','Slight of Hand','Stealth','Survival']
+        for n in names:
+            if n == 'Animal Handling':
+                if self.anima_hand > 0:
+                    mod = '+{0}'.format(self.anima_hand)
+                else:
+                    mod = self.anima_hand
+            elif n == 'Slight of Hand':
+                if self.soh > 0:
+                    mod = '+{0}'.format(self.soh)
+                else:
+                    mod = self.soh
+            else:
+                skill = n.lower()
+                mod = CharacterSkills.objects.values_list(skill, flat=True).get(pk=self.id)
+                if mod > 0:
+                    mod = '+{0}'.format(mod)
+            s = [n, mod]
+            skills.append(s)
+        return skills
 
 class CharacterFeature(models.Model):
     feature = models.CharField(max_length=150)

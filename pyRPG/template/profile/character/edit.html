@@ -1,6 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-  <h2>{{ character.name }}</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-9">
+      <h2>{{ character.name }}</h2>
+      <div class="row">
+        <div class="col-4">
+          <h3>{{ character.c_class }} {{ character.level }}</h3>
+          <p><i>Class</i></p>
+        </div>
+        <div class="col-4">
+          <h3>{% if character.background %}{{ character.background }}{% endif %}</h3>
+          <p><i>Background</i></p>
+        </div>
+        <div class="col-4">
+          <h3>{{ user.username }}</h3>
+          <p><i>User</i></p>
+        </div>
+        <div class="col-4">
+          <h3>{{ character.c_race }}</h3>
+          <p><i>Race</i></p>
+        </div>
+        <div class="col-4">
+          <h3>{{ character.get_alignment }}</h3>
+          <p><i>Alignment</i></p>
+        </div>
+        <div class="col-4">
+          <h3>{{ character.exp }}</h3>
+          <p><i>EXP.</i></p>
+        </div>
+      </div>
+      <div class="row" style="text-align: center">
+        {% for a in character.get_abilities %}
+        <div class="col-4">
+          <h3><strong>{{ a.2 }}</strong> <small>({{ a.1 }})</small></h3>
+          <p style="font-size: small"><i>{{ a.0 }}</i></p>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-6">
+          {% if character.background == None %}
+          <form class="form-inline" action="index.html" method="post">
+            <div class="form-group">
+              <input type="text" placeholder="Background" class="form-control" name="char_bg">
+            </div>
+            <button type="button" class="btn btn-primary" name="button">Submit</button>
+          </form>
+          {% endif %}
+          {% if features %}
+          {% for f in feature %}
+          <p><b>{{ f.feature }}</b><br>{{ f.description }}</p>
+          {% endfor %}
+          {% else %}
+          No features
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <h3>Skills</h3>
+      <table class="table table-hover">
+        <tbody>
+          {% for s in skills.get_skills %}
+            <tr>
+              <td><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.1 }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
 </div>
 {% endblock %}

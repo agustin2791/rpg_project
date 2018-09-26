@@ -195,14 +195,18 @@ def character_creation(request, username):
 def character_info(request, username, char_id):
     user = User.objects.get(username=username)
     character = models.Character.objects.get(pk=char_id)
+    skills = models.CharacterSkills.objects.get(character=character)
     char_class = models.CharacterClass.objects.get(id=character.c_class.id)
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
+    char_features = models.CharacterFeature.objects.filter(character=character)
 
     context = {
         'user': user,
         'character': character,
+        'skills': skills,
         'char_class': char_class,
-        'char_race': char_race
+        'char_race': char_race,
+        'features': char_features
     }
     return render(request,
                   'profile/character/edit.html',
