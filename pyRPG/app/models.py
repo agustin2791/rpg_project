@@ -270,6 +270,9 @@ class Character(models.Model):
     proficiency_bonus = models.IntegerField(default=2,
                                             null=True,
                                             blank=True)
+    skill_set = models.CharField(max_length=100,
+                                 blank=True,
+                                 null=True)
 
 
     def __unicode__(self):
@@ -283,7 +286,7 @@ class Character(models.Model):
             return None
 
 class CharacterSkills(models.Model):
-    character = models.ForeignKey(Character,
+    character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,
                                   related_name='character_skills')
     acrobatics = models.IntegerField(default=0)

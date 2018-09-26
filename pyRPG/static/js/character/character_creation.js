@@ -37,3 +37,32 @@ var select_race = function (url, csrf, value) {
         }
     });
 };
+// Submit character
+var submit_character = function (url, csrf, c_class, c_race, alignment, name, level, hit_points, speed, strength, dex, cons, int, charm, wisdom) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        async: true,
+        cache: false,
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'new_character': true,
+            'c_class': c_class,
+            'c_race': c_race,
+            'alignment': alignment,
+            'name': name,
+            'level': level,
+            'hit_points': hit_points,
+            'speed': speed,
+            'strength': strength,
+            'dex': dex,
+            'cons': cons,
+            'int': int,
+            'charm': charm,
+            'wisdom': wisdom
+        },
+        success: function (data) {
+            window.location.href = data;
+        }
+    });
+};

@@ -248,5 +248,25 @@
       select_race(url, csrf, value);
     }
   });
+  $(document).on('change', 'select', function() {
+    $(this).removeClass('is-invalid');
+    $(this).addClass('is-valid');
+  })
+  $(document).on('submit', '.create_character', function() {
+    $('select').each(function(index) {
+      // console.log($(this).addClass('is-invalid'))
+      if ($(this).val() == 'none') $(this).addClass('is-invalid')
+    })
+    var c_class, c_race, alignment, name, level, hit_points, speed, strength, dex, cons, int, charm, wisdom;
+    c_class = $('select[name="char_class"]').val();
+    c_race = $('select[name="char_race"]').val();
+    alignment = $('select[name="char_alignment"]').val()
+    // if (c_class == 'none' || c_race == 'none' || alignment == ) {
+    //
+    // }
+    //
+    // submit_character(url, csrf, c_class, c_race, alignment, name, level, hit_points, speed, strength, dex, cons, int, charm, wisdom)
+    return false;
+  })
 </script>
 {% endblock %}

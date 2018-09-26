@@ -60,6 +60,44 @@ def get_modifier(score):
 
     return score_mod
 
+def character_skills(char):
+    character = models.Character.objects.get(id=char)
+    skills_list = {
+        'strength': get_modifier(character.strength),
+        'dexterity': get_modifier(character.dexterity),
+        'intelligence': get_modifier(character.intelligence),
+        'charisma': get_modifier(character.charisma),
+        'wisdom': get_modifier(character.wisdom)
+    }
+    if character.skill_set:
+        skill = character.skill_set.lower().split(', ')
+        for s in skill:
+            skills_list[s] += character.proficiency_bonus
+
+    skills = models.CharacterSkills.objects.update_or_create(
+        character=character,
+        defaults={
+            'acrobatics':skills_list['dexterity'],
+            'anima_hand':skills_list['wisdom'],
+            'arcana':skills_list['intelligence'],
+            'athletics':skills_list['strength'],
+            'deception':skills_list['charisma'],
+            'history':skills_list['intelligence'],
+            'insight':skills_list['wisdom'],
+            'intimidation':skills_list['charisma'],
+            'investigation'
+            'medicine':skills_list['wisdom'],
+            'nature':skills_list['intelligence'],
+            'perception':skills_list['wisdom'],
+            'performance':skills_list['charisma'],
+            'persuasion':skills_list['charisma'],
+            'religion':skills_list['intelligence'],
+            'soh':skills_list['dexterity'],
+            'stealth':skills_list['dexterity'],
+            'survival':skills_list['wisdom']
+        }
+    )[0]
+    skills.save()
 
 def index(request):
     return render(request, 'index.html')
@@ -128,9 +166,8 @@ def character_creation(request, username):
             full_hp=request.POST.get('hit_points'),
             speed=request.POST.get('speed'),
             strength=request.POST.get('strength'),
-            armor_class=request.POST.get('ac'),
             dexterity=request.POST.get('dex'),
-            constitution=request.POST.get('const'),
+            constitution=request.POST.get('cons'),
             intelligence=request.POST.get('int'),
             charisma=request.POST.get('charm'),
             wisdom=request.POST.get('wisdom'),
@@ -140,7 +177,8 @@ def character_creation(request, username):
             user=user
         )
         character.save()
-        return HttpResponse('/profile/{0}/character_edit/{1}/')
+        character_skills(character.id)
+        return HttpResponse('/profile/{0}/character_info/{1}/')
 
     context = {
         'user': user,
@@ -152,9 +190,9 @@ def character_creation(request, username):
                   'profile/character/create.html',
                   context)
 
-# def character_creation(class_id):
-#     char_class = models.CharacterClass.objects.get(id=class_id)
-#     return char_class
+def character_info(class_id):
+    char_class = models.CharacterClass.objects.get(id=class_id)
+    return char_class
 
 # CREATE, EDIT, AND START CAMPAIGN
 # Create campaign
