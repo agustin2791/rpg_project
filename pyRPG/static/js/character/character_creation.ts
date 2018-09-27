@@ -1,3 +1,4 @@
+// import $ = require('jquery');
 
 var select_class = (url, csrf, value) => {
   $.ajax({
@@ -65,24 +66,6 @@ var submit_character = (url, csrf, c_class, c_race, alignment, name, level, hit_
     },
     success: function(data) {
       window.location.href = data;
-    }
-  })
-}
-
-var submit_trait = (url, csrf, trait, description) => {
-  $.ajax({
-    type: 'POST',
-    url: url,
-    async: true,
-    cache: false,
-    data: {
-      'csrfmiddlewaretoken': csrf,
-      'add_feature': true,
-      'trait': trait,
-      'description': description
-    },
-    success: function(data) {
-      $('.character_traits').empty().html(data)
     }
   })
 }

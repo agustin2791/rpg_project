@@ -13,6 +13,7 @@
         <div class="character col">
           <h3>{{ char.name }}</h3>
           <p>{{ char.get_campaign }}</p>
+          <a class="btn btn-primary" href="/profile/{{ char.user.username }}/character_info/{{ char.id }}">Character Info</a>
         </div>
         {% endfor %}
       </div>

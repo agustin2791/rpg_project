@@ -82,7 +82,7 @@
 {% endblock %}
 {% block bottomscript %}
 <script type="text/javascript" src="/static/js/character/character.js"></script>
-<script type="text/javascript" src="/static/js/character/character_creation.js"></script>
+<script type="text/javascript" src="/static/js/character/character_info.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
@@ -93,6 +93,15 @@
       var description = $('textarea[name="'+trait+'"]').val();
       submit_trait(url, csrf, trait, description);
       return false;
+    })
+    
+    getInfo();
+    $(document).on('click', '.edit', function(e) {
+      e.preventDefault();
+      var update = $(this).attr('data-update');
+      var text = $('.info-text-' + update).text()
+      openEdit(update, text);
+      getInfo();
     })
   })
 </script>

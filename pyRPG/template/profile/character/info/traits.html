@@ -1,11 +1,15 @@
 <div class="row">
   {% for i in character.get_character_info %}
-  <div class="col-6">
+
   {% if i.2 != None %}
-    <p>{{ i.2 }}</p>
+  <div class="col-6 info-div" data-update="{{ i.0 }}">
+    <p class="info-text-{{ i.0 }}" style="white-space: pre-line">{{ i.2 }}</p>
+    <span class="edit_{{ i.0 }}" style="float: right; visibility: hidden"><a href class="edit" data-update="{{ i.0 }}"><i class="fa fa-edit"></i></a></span>
     <hr>
-    <p style="font-size: small"><i>{{ i.1 }}</i></p>
+    <p style="font-size: small"><i>{{ i.1 }}</i> </p>
+
   {% else %}
+  <div class="col-6">
     <form class="{{ i.0 }}_form" data-update="{{ i.0 }}">
       <div class="form-group">
         <label for="{{ i.0 }}_label">{{ i.1 }}</label>
