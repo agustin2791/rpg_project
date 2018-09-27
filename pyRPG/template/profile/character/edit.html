@@ -31,6 +31,7 @@
         </div>
       </div>
       <div class="row" style="text-align: center">
+
         {% for a in character.get_abilities %}
         <div class="col-4">
           <h3><strong>{{ a.2 }}</strong> <small>({{ a.1 }})</small></h3>
@@ -39,21 +40,26 @@
         {% endfor %}
       </div>
       <div class="row">
-        <div class="col-6">
+        <div class="col-4">
+          <p>+{{ character.proficiency_bonus }} <b>Proficiency Bonus</b></p>
           {% if character.background == None %}
-          <form class="form-inline" action="index.html" method="post">
+          <form class="form-inline">
             <div class="form-group">
               <input type="text" placeholder="Background" class="form-control" name="char_bg">
             </div>
-            <button type="button" class="btn btn-primary" name="button">Submit</button>
+            <button type="submit" class="btn btn-primary" name="button">Submit</button>
           </form>
           {% endif %}
+        </div>
+        <div class="col-8">
+          <div class="character_traits">
+            {% include 'profile/character/info/traits.html' %}
+          </div>
           {% if features %}
           {% for f in feature %}
           <p><b>{{ f.feature }}</b><br>{{ f.description }}</p>
           {% endfor %}
           {% else %}
-          No features
           {% endif %}
         </div>
       </div>
@@ -70,8 +76,24 @@
         </tbody>
       </table>
     </div>
-
   </div>
 
 </div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript" src="/static/js/character/character.js"></script>
+<script type="text/javascript" src="/static/js/character/character_creation.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
+    const csrf = '{{ csrf_token }}';
+    $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form', function(e) {
+      e.preventDefault();
+      var trait = $(this).attr('data-update');
+      var description = $('textarea[name="'+trait+'"]').val();
+      submit_trait(url, csrf, trait, description);
+      return false;
+    })
+  })
+</script>
 {% endblock %}

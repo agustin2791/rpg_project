@@ -200,6 +200,30 @@ def character_info(request, username, char_id):
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
     char_features = models.CharacterFeature.objects.filter(character=character)
 
+    if request.is_ajax and 'add_feature' in request.POST:
+        trait = request.POST.get('trait')
+        description = request.POST.get('description')
+        if trait == 'personality_traits':
+            character.personality_traits = description
+        elif trait == 'ideals':
+            character.ideals = description
+        elif trait == 'bonds':
+            character.bonds = description
+        elif trait == 'flaws':
+            character.flaws = description
+        elif trait == 'equipment':
+            character.equipment = description
+        else:
+            new_trait = models.CharacterFeature.objects.create(
+                feature=trait,
+                description=description,
+                character=character
+            )
+        character.save()
+        return render(request,
+                      'profile/character/info/traits.html',
+                      {'character': character})
+
     context = {
         'user': user,
         'character': character,

@@ -312,6 +312,18 @@ class Character(models.Model):
             abilities.append([a.title(), ab, mod])
         return abilities
 
+    def get_character_info(self):
+        info = []
+        traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws', 'Equipment']
+        for t in traits:
+            search = t.lower()
+            search = '_'.join(search.split(' '))
+            i = Character.objects.values_list(search, flat=True).get(id=self.id)
+            info.append([search, t, i])
+
+        print info
+        return info
+
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,

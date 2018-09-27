@@ -1,0 +1,19 @@
+<div class="row">
+  {% for i in character.get_character_info %}
+  <div class="col-6">
+  {% if i.2 != None %}
+    <p>{{ i.2 }}</p>
+    <hr>
+    <p style="font-size: small"><i>{{ i.1 }}</i></p>
+  {% else %}
+    <form class="{{ i.0 }}_form" data-update="{{ i.0 }}">
+      <div class="form-group">
+        <label for="{{ i.0 }}_label">{{ i.1 }}</label>
+        <textarea name="{{ i.0 }}" class="form-control" rows="8" cols="80"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" name="button">Submit</button>
+    </form>
+  {% endif %}
+  </div>
+  {% endfor %}
+</div>
