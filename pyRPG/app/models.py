@@ -265,8 +265,7 @@ class Character(models.Model):
     background = models.CharField(max_length=100,
                                   null=True,
                                   blank=True)
-    background_skills = models.CharField(max_length=100,
-                                         blank=True,
+    background_skills = models.TextField(blank=True,
                                          null=True)
     saving_throws = models.CharField(max_length=150,
                                      null=True,
@@ -277,6 +276,16 @@ class Character(models.Model):
     skill_set = models.CharField(max_length=100,
                                  blank=True,
                                  null=True)
+    personality_traits = models.TextField(null=True,
+                                          blank=True)
+    ideals = models.TextField(null=True,
+                              blank=True)
+    bonds = models.TextField(null=True,
+                             blank=True)
+    flaws = models.TextField(null=True,
+                             blank=True)
+    equipment = models.TextField(null=True,
+                                 blank=True)
 
 
     def __unicode__(self):
