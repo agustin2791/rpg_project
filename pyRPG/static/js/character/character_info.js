@@ -58,7 +58,8 @@ var addNewFeature = function (url, csrf, name, desc) {
         },
         success: function (data) {
             $('.character_feature').empty().html(data);
-            $('.modal').hide();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
         }
     });
 };

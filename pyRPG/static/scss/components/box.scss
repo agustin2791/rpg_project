@@ -1,3 +1,23 @@
-.col {
-  border: solid thin #ddd;
+.card {
+  border-radius: 0px;
+  margin: 10px 0px;
+  .card-body {
+    padding: 10px;
+  }
+  .card-footer, .card-header {
+    padding: 10px;
+    color: #273c75;
+    background-color: #f5f6fa;
+    border-radius: 0px;
+    text-align: center;
+    font-size: x-small;
+    letter-spacing: 5px;
+  }
+}
+.no-margin {
+  margin: 0px;
+  padding: 0px
+}
+body {
+  background-color: darken(#c23616, 5%);
 }

@@ -64,7 +64,8 @@ var addNewFeature = (url: string, csrf: string, name: string, desc: string): voi
     },
     success: function(data) {
       $('.character_feature').empty().html(data);
-      $('.modal').hide()
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
     }
   })
 }

@@ -1,11 +1,17 @@
-<div class="col-12">
-{% if features %}
-{% for f in features %}
-<h4>{{ f.feature }}</h4>
-<p class="feature-text">{{ f.description }}</p>
-{% endfor %}
-{% endif %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
+<div class="card">
+
+  <div class="card-body">
+    {% if features %}
+    {% for f in features %}
+    <h4>{{ f.feature }}</h4>
+    <p class="feature-text">{{ f.description }}</p>
+    {% endfor %}
+    {% endif %}
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
+  </div>
+  <div class="card-footer">
+    Features &amp; Traits
+  </div>
 </div>
 <div class="modal fade" id="add_feature_modal" tabindex="-1">
   <div class="modal-dialog">

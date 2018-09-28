@@ -3,88 +3,57 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-9">
-      <h2>{{ character.name }}</h2>
+      <!-- information box  -->
       <div class="row">
-        <div class="col-4">
-          <h3>{{ character.c_class }} {{ character.level }}</h3>
-          <p><i>Class</i></p>
-        </div>
-        <div class="col-4">
-          <h3>{% if character.background %}{{ character.background }}{% endif %}</h3>
-          <p><i>Background</i></p>
-        </div>
-        <div class="col-4">
-          <h3>{{ user.username }}</h3>
-          <p><i>User</i></p>
-        </div>
-        <div class="col-4">
-          <h3>{{ character.c_race }}</h3>
-          <p><i>Race</i></p>
-        </div>
-        <div class="col-4">
-          <h3>{{ character.get_alignment }}</h3>
-          <p><i>Alignment</i></p>
-        </div>
-        <div class="col-4">
-          <h3>{{ character.exp }}</h3>
-          <p><i>EXP.</i></p>
-        </div>
-      </div>
-      <div class="row" style="text-align: center">
-
-        {% for a in character.get_abilities %}
-        <div class="col-4">
-          <h3><strong>{{ a.2 }}</strong> <small>({{ a.1 }})</small></h3>
-          <p style="font-size: small"><i>{{ a.0 }}</i></p>
-        </div>
-        {% endfor %}
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <p>+{{ character.proficiency_bonus }} <b>Proficiency Bonus</b></p>
-          {% if character.background == None %}
-          <form class="form-inline">
-            <div class="form-group">
-              <input type="text" placeholder="Background" class="form-control" name="char_bg">
-            </div>
-            <button type="submit" class="btn btn-primary" name="button">Submit</button>
-          </form>
-          {% endif %}
-        </div>
-        <div class="col-8">
-          <div class="row">
-            <div class="col-6">
-              <div class="character_feature">
-                {% include 'profile/character/info/features.html' %}
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="character_traits">
-                {% include 'profile/character/info/traits.html' %}
-              </div>
-            </div>
+        <div class="col-12">
+          <div class="card">
+            {% include 'profile/character/info/information.html' %}
           </div>
-
-          {% if features %}
-          {% for f in feature %}
-          <p><b>{{ f.feature }}</b><br>{{ f.description }}</p>
-          {% endfor %}
-          {% else %}
-          {% endif %}
+        </div>
+      <!-- end information box -->
+      <!-- ability box -->
+        <div class="col-12">
+          <div class="card">
+            {% include 'profile/character/info/abilities.html' %}
+          </div>
+        </div>
+      </div>
+      <!-- end ability box -->
+      <div class="row">
+        <div class="col-4">
+          <div class="character-actions">
+            {% include 'profile/character/info/actions.html' %}
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="character_feature">
+            {% include 'profile/character/info/features.html' %}
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="character_traits">
+            {% include 'profile/character/info/traits.html' %}
+          </div>
         </div>
       </div>
     </div>
     <div class="col-3">
-      <h3>Skills</h3>
-      <table class="table table-hover">
-        <tbody>
-          {% for s in skills.get_skills %}
-            <tr>
-              <td><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.1 }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="card">
+        <div class="card-header">
+          Skills
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <tbody>
+              {% for s in skills.get_skills %}
+                <tr>
+                  <td><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.1 }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 

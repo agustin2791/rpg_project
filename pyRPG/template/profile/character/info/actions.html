@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-body">
+    <p>+{{ character.proficiency_bonus }} <b>Proficiency Bonus</b></p>
+    {% if character.background == None %}
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" placeholder="Background" class="form-control" name="char_bg">
+      </div>
+      <button type="submit" class="btn btn-primary" name="button">Submit</button>
+    </form>
+    {% endif %}
+  </div>
+</div>

@@ -1,20 +1,36 @@
 #camp_modal {
+  border-radius: 0px; }
+  #camp_modal .modal-dialog {
+    width: 90%; }
+    #camp_modal .modal-dialog .modal-content {
+      border-radius: 0px;
+      border: solid #fdcb6e 2px;
+      background-color: #ffeaa7; }
+      #camp_modal .modal-dialog .modal-content .modal-header {
+        text-align: center; }
+      #camp_modal .modal-dialog .modal-content .modal-body .form-control {
+        border-radius: 0px;
+        background-color: #fdcb6e; }
+
+.card {
   border-radius: 0px;
-}
-#camp_modal .modal-dialog {
-  width: 90%;
-}
-#camp_modal .modal-dialog .modal-content {
-  border-radius: 0px;
-  border: solid #fdcb6e 2px;
-  background-color: #ffeaa7;
-}
-#camp_modal .modal-dialog .modal-content .modal-header {
-  text-align: center;
-}
-#camp_modal .modal-dialog .modal-content .modal-body .form-control {
-  border-radius: 0px;
-  background-color: #fdcb6e;
-}
+  margin: 10px 0px; }
+  .card .card-body {
+    padding: 10px; }
+  .card .card-footer, .card .card-header {
+    padding: 10px;
+    color: #273c75;
+    background-color: #f5f6fa;
+    border-radius: 0px;
+    text-align: center;
+    font-size: x-small;
+    letter-spacing: 5px; }
+
+.no-margin {
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  background-color: #ab3013; }
 
 /*# sourceMappingURL=main.css.map */
