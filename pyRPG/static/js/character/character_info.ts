@@ -49,7 +49,22 @@ var openEdit = (update: string, text: string): boolean => {
   getInfo();
   return false;
 }
-// infoText.mousemove(() => {
-//   console.log($(this).find('.edit-conteiner'));
-//   $(this).find('.edit-conteiner').css('visibility', 'visible');
-// })
+
+var addNewFeature = (url: string, csrf: string, name: string, desc: string): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    async: true,
+    cache: false,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'new_feature': true,
+      'name': name,
+      'desc':desc
+    },
+    success: function(data) {
+      $('.character_feature').empty().html(data);
+      $('.modal').hide()
+    }
+  })
+}

@@ -52,9 +52,19 @@
           {% endif %}
         </div>
         <div class="col-8">
-          <div class="character_traits">
-            {% include 'profile/character/info/traits.html' %}
+          <div class="row">
+            <div class="col-6">
+              <div class="character_feature">
+                {% include 'profile/character/info/features.html' %}
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="character_traits">
+                {% include 'profile/character/info/traits.html' %}
+              </div>
+            </div>
           </div>
+
           {% if features %}
           {% for f in feature %}
           <p><b>{{ f.feature }}</b><br>{{ f.description }}</p>
@@ -94,7 +104,7 @@
       submit_trait(url, csrf, trait, description);
       return false;
     })
-    
+
     getInfo();
     $(document).on('click', '.edit', function(e) {
       e.preventDefault();
@@ -102,6 +112,13 @@
       var text = $('.info-text-' + update).text()
       openEdit(update, text);
       getInfo();
+    })
+    $(document).on('submit', '.new_feature_form', function() {
+      console.log('submit')
+      var name = $('input[name="feature_name"]').val(),
+          desc = $('textarea[name="feature_desc"]').val();
+      addNewFeature(url, csrf, name, desc);
+      return false;
     })
   })
 </script>

@@ -224,6 +224,20 @@ def character_info(request, username, char_id):
                       'profile/character/info/traits.html',
                       {'character': character})
 
+    if request.is_ajax and 'new_feature' in request.POST:
+        feature_name = request.POST.get('name')
+        feature_description = request.POST.get('desc')
+        new_feature = models.CharacterFeature.objects.create(
+            feature=feature_name,
+            description=feature_description,
+            character=character
+        )
+        new_feature.save()
+        char_features = models.CharacterFeature.objects.filter(character=character)
+        return render(request,
+                      'profile/character/info/features.html',
+                      {'features': char_features})
+
     context = {
         'user': user,
         'character': character,
