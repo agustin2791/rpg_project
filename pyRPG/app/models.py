@@ -327,6 +327,35 @@ class Character(models.Model):
         spells = Spells.objects.filter(classes__id__in=[self.c_class.id])
         return spells
 
+    def choose_class_skills(self):
+        all_skills = views.SKILLS
+        seclected_skills = []
+        char_skills = self.skill_set.split(', ')
+        if self.c_class.skills == 'Any':
+            return all_skills
+        else:
+            class_skill = self.c_class.skills.split(', ')
+            for s in all_skills:
+                if s[1] in class_skill and s[1] not in char_skills:
+                    seclected_skills.append([s[0], s[1]])
+
+            return seclected_skills
+
+    def choose_bg_skills(self):
+        all_skills = views.SKILLS
+        seclected_skills = []
+        if self.skill_set not None:
+            char_skills = self.skill_set.split(', ')
+            for s in all_skills:
+                if s[1] not in char_skills:
+                    seclected_skills.append(s[0], s[1])
+
+            return seclected_skills
+        else:
+            return all_skills
+
+
+
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,

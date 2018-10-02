@@ -19,6 +19,26 @@ ALIGNMENTS = (
     ('ne', 'Neutral Evil'),
     ('ce', 'Chaotic Evil')
 )
+SKILLS = {
+    ('acrobatics', 'Acrobatics'),
+    ('anima_hand', 'Animal Handling'),
+    ('arcana', 'Arcana'),
+    ('athletics', 'Athletics'),
+    ('deception', 'Deception'),
+    ('history', 'History'),
+    ('insight', 'Insight'),
+    ('intimidation', 'Intimidation'),
+    ('investigation', 'Investigation'),
+    ('medicine', 'Medicine'),
+    ('nature', 'Nature'),
+    ('perception', 'Perception'),
+    ('performance', 'Performance'),
+    ('persuasion', 'Persuasion'),
+    ('religion', 'Religion'),
+    ('soh', 'Slight if Hand'),
+    ('stealth', 'Stealth'),
+    ('survival', 'Survival')
+}
 def get_alignment(alignment):
     if alignment == 'lg':
         name = 'Lawful Good'
@@ -237,6 +257,9 @@ def character_info(request, username, char_id):
         return render(request,
                       'profile/character/info/features.html',
                       {'features': char_features})
+
+    if request.is_ajax and 'background_skills' in request.POST:
+        all_skills = ['acrobatics', 'anima_hand', 'arcana', 'athletics', 'deception', 'history', 'insight', 'intimidation', 'investigation', 'medicine', 'nature', 'perception', 'performance', 'persuasion', 'religion', 'soh', 'stealth', 'survival']
 
     context = {
         'user': user,
