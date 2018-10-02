@@ -321,8 +321,11 @@ class Character(models.Model):
             i = Character.objects.values_list(search, flat=True).get(id=self.id)
             info.append([search, t, i])
 
-        print info
         return info
+
+    def get_spell_list(self):
+        spells = Spells.objects.filter(classes__id__in=[self.c_class.id])
+        return spells
 
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,

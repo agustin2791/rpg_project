@@ -9,5 +9,27 @@
       <button type="submit" class="btn btn-primary" name="button">Submit</button>
     </form>
     {% endif %}
+    <div class="armor_class">
+      <h4>Armor Class</h4>
+      <p>{{ character.armor_class }}</p>
+    </div>
+    <div class="speed-details">
+      <h4>Speed</h4>
+      <p>{{ character.speed }}ft.</p>
+    </div>
+    <div class="hit-points">
+      <h4>HP</h4>
+      <p>{{ character.hp }}/{{ character.full_hp }}</p>
+    </div>
+    <div class="hit-dice">
+      <h4>Hit Dice</h4>
+      <p>{{ character.hit_dice }}</p>
+    </div>
+    <div class="attack">
+      <h4>Attack Type &amp; Spellcasting</h4>
+      {% for s in character.get_spell_list.all %}
+      {{ s.spell_name }} - LVL: {{ s.level }}<br>
+      {% endfor %}
+    </div>
   </div>
 </div>

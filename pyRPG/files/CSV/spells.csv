@@ -1,12 +1,4 @@
-ID,Spell_Name,Spell_level,Ritual,School,Casting_Time,Range,Components,Material_Component,Duration,"Class
-Bard","Class
-Cleric","Class
-Druid","Class
-Paladin","Class
-Ranger","Class
-Sorcerer","Class
-Warlock","Class
-Wizard",Description,Number of Classes that know spell
+ID,Spell_Name,Spell_level,Ritual,School,Casting_Time,Range,Components,Material_Component,Duration,Bard,Cleric,Druid,Paladin,Ranger,Sorcerer,Warlock,Wizard,Description,Number of Classes that know spell
 1,Acid Splash,Cantrip,,Conjuration,1 action,60 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
 2,Aid,2,,Abjuration,1 action,30 ft,"V, S, M",a tiny strip of white cloth,8 hours,,Cleric,,Paladin,,,,,,2
 3,Alarm,1,Ritual,Abjuration,1 minute,30 ft,"V, S, M","a tiny bell and a piece of
