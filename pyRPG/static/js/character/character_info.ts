@@ -49,7 +49,7 @@ var openEdit = (update: string, text: string): boolean => {
   getInfo();
   return false;
 }
-
+// add New Feature
 var addNewFeature = (url: string, csrf: string, name: string, desc: string): void => {
   $.ajax({
     type: 'POST',
