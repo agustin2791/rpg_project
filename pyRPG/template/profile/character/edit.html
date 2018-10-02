@@ -78,7 +78,8 @@
     $(document).on('click', '.edit', function(e) {
       e.preventDefault();
       var update = $(this).attr('data-update');
-      var text = $('.info-text-' + update).text()
+      var text = $('.info-text-' + update).text();
+      $('.info-text-' + update).hide();
       openEdit(update, text);
       getInfo();
     })
@@ -88,6 +89,11 @@
           desc = $('textarea[name="feature_desc"]').val();
       addNewFeature(url, csrf, name, desc);
       return false;
+    })
+    $(document).on('click', '.cancel', function() {
+      var update = $(this).attr('data-update');
+      $('.info-text-edit-' + update).empty();
+      $('.info-text-' + update).show();
     })
   })
 </script>

@@ -42,9 +42,9 @@ var openEdit = (update: string, text: string): boolean => {
     <div class="form-group">
       <textarea name="${update}" class="form-control" rows="5" cols="80">${text}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary" name="button">Submit</button> <button type="button" class="btn">Cancel</button>
+    <button type="submit" class="btn btn-primary" name="button">Submit</button> <button type="button" class="btn cancel" data-update="${update}">Cancel</button>
   </form>`
-  $('.info-text-' + update).empty().html(html);
+  $('.info-text-edit-' + update).empty().html(html);
   document.getElementsByClassName('edit_' + update)[0].style.visibility = 'hidden';
   getInfo();
   return false;

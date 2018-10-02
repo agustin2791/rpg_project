@@ -35,7 +35,7 @@ class Command(BaseCommand):
         else:
             spell_ritual = False
 
-        models.Spells.objects.update_or_create(
+        spell = models.Spells.objects.update_or_create(
                 id=row['ID'],
                 defaults={
                         'level': spell_level,
@@ -51,6 +51,24 @@ class Command(BaseCommand):
 
                     }
             )[0]
+
+        if row['Bard'] == 'Bard':
+            spell.classes.add(models.CharacterClass.objects.get(name='Bard'))
+        if row['Cleric'] == 'Cleric':
+            spell.classes.add(models.CharacterClass.objects.get(name='Cleric'))
+        if row['Druid'] == 'Druid':
+            spell.classes.add(models.CharacterClass.objects.get(name='Druid'))
+        if row['Paladin'] == 'Paladin':
+            spell.classes.add(models.CharacterClass.objects.get(name='Paladin'))
+        if row['Ranger'] == 'Ranger':
+            spell.classes.add(models.CharacterClass.objects.get(name='Ranger'))
+        if row['Sorcerer'] == 'Sorcerer':
+            spell.classes.add(models.CharacterClass.objects.get(name='Sorcerer'))
+        if row['Warlock'] == 'Warlock':
+            spell.classes.add(models.CharacterClass.objects.get(name='Warlock'))
+        if row['Wizard'] == 'Wizard':
+            spell.classes.add(models.CharacterClass.objects.get(name='Wizard'))
+        spell.save()
 
     def handle(self, *args, **options):
         starttime = dt.datetime.now()
