@@ -197,6 +197,7 @@ def character_creation(request, username):
             user=user
         )
         character_level = models.CharacterClassLevel.objects.get(char_class=char_class, level=character.level)
+        character.proficiency_bonus = character_level.pro_bonus
         character.save()
         character_skills(character.id)
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user.username, character.id)
