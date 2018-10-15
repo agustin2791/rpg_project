@@ -174,7 +174,6 @@ def character_creation(request, username):
                       context)
 
     if request.is_ajax and 'new_character' in request.POST:
-        print 'CHARACTER CREATION'
         char_class = models.CharacterClass.objects.get(id=request.POST.get('c_class'))
         char_race = models.CharacterRace.objects.get(id=request.POST.get('c_race'))
         alignment = get_alignment(request.POST.get('alignment'))
@@ -197,6 +196,7 @@ def character_creation(request, username):
             saving_throws=char_class.saving_throws,
             user=user
         )
+        character_level = models.CharacterClassLevel.objects.get(char_class=char_class, level=character.level)
         character.save()
         character_skills(character.id)
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user.username, character.id)

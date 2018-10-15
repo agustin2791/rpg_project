@@ -159,11 +159,17 @@ class CharacterClassLevel(models.Model):
     unarmored_mvm = models.IntegerField(null=True,
                                         blank=True)
     # Rogue
-    sneak = models.CharField(max_length=10)
+    sneak = models.CharField(max_length=10,
+                             null=True,
+                             blank=True)
     # Sorcerer
     sorcery_points = models.IntegerField(blank=True,
                                          null=True)
     # Warlock
+    spell_slot = models.IntegerField(blank=True,
+                                     null=True)
+    slot_level = models.IntegerField(blank=True,
+                                     null=True)
     invocations = models.IntegerField(blank=True,
                                       null=True)
     # Spell Slots
@@ -256,6 +262,9 @@ class Character(models.Model):
                                   blank=True,
                                   null=True)
     gold = models.IntegerField(default=0)
+    spells = models.ManyToManyField(Spells,
+                                    blank=True,
+                                    null=True)
     alignment = models.CharField(max_length=150,
                                  null=True,
                                  blank=True)
@@ -324,8 +333,18 @@ class Character(models.Model):
         return info
 
     def get_spell_list(self):
-        spells = Spells.objects.filter(classes__id__in=[self.c_class.id])
-        return spells
+        spells = Spells.objects.filter(classes__id__in=[self.c_class.id]).order_by('level')
+        levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        spell_levels = []
+
+        for l in levels:
+            spell_level = []
+            for s in spells:
+                if s.level == l:
+                    spell_level.append(s)
+            spell_levels.append(spell_level)
+
+        return spell_levels
 
     def choose_class_skills(self):
         all_skills = views.SKILLS
@@ -344,7 +363,7 @@ class Character(models.Model):
     def choose_bg_skills(self):
         all_skills = views.SKILLS
         seclected_skills = []
-        if self.skill_set not None:
+        if self.skill_set is not None:
             char_skills = self.skill_set.split(', ')
             for s in all_skills:
                 if s[1] not in char_skills:
