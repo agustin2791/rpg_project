@@ -26,6 +26,9 @@
           </div>
         </div>
         <div class="col-4">
+          <div class="character_background">
+            {% include 'profile/character/info/background.html' %}
+          </div>
           <div class="character_feature">
             {% include 'profile/character/info/features.html' %}
           </div>
@@ -52,6 +55,21 @@
               {% endfor %}
             </tbody>
           </table>
+        </div>
+
+      </div>
+      <div class="card">
+        <div class="card-body">
+          {{ character.choose_skills_limit }}
+          {% if character.class_skills < character.c_class.skills_limit %}
+          <h3>Class Skills</h3>
+          <form class="select_class_skill">
+            {% for s in character.choose_class_skills %}
+            <input type="checkbox" name="" value="{{ s.0 }}"> {{ s.1 }}<br>
+            {% endfor %}
+          </form>
+          {% endif %}
+          <!-- {{ character.choose_class_skills }} -->
         </div>
       </div>
     </div>
@@ -82,12 +100,19 @@
       $('.info-text-' + update).hide();
       openEdit(update, text);
       getInfo();
-    })
+    });
+    // Add new feature
     $(document).on('submit', '.new_feature_form', function() {
-      console.log('submit')
       var name = $('input[name="feature_name"]').val(),
           desc = $('textarea[name="feature_desc"]').val();
-      addNewFeature(url, csrf, name, desc);
+      addNewFeature(url, csrf, name, desc, 'feature');
+      return false;
+    });
+    // Add new Background
+    $(document).on('submit', '.new_background_form', function() {
+      var name = $('input[name="background_name"]').val(),
+          desc = $('textarea[name="background_desc"]').val();
+      addNewFeature(url, csrf, name, desc, 'background');
       return false;
     })
     $(document).on('click', '.cancel', function() {

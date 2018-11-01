@@ -220,6 +220,7 @@ def character_info(request, username, char_id):
     char_class = models.CharacterClass.objects.get(id=character.c_class.id)
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
     char_features = models.CharacterFeature.objects.filter(character=character)
+    background = models.CharacterBackground.objects.filter(character=character)
 
     if request.is_ajax and 'add_feature' in request.POST:
         trait = request.POST.get('trait')
@@ -248,16 +249,30 @@ def character_info(request, username, char_id):
     if request.is_ajax and 'new_feature' in request.POST:
         feature_name = request.POST.get('name')
         feature_description = request.POST.get('desc')
-        new_feature = models.CharacterFeature.objects.create(
-            feature=feature_name,
-            description=feature_description,
-            character=character
-        )
-        new_feature.save()
-        char_features = models.CharacterFeature.objects.filter(character=character)
-        return render(request,
-                      'profile/character/info/features.html',
-                      {'features': char_features})
+        object = request.POST.get('object')
+        if object == 'feature':
+            new_feature = models.CharacterFeature.objects.create(
+                feature=feature_name,
+                description=feature_description,
+                character=character
+            )
+            new_feature.save()
+            char_features = models.CharacterFeature.objects.filter(character=character)
+            return render(request,
+                          'profile/character/info/features.html',
+                          {'features': char_features})
+        if object == 'background':
+            new_feature = models.CharacterBackground.objects.create(
+                background=feature_name,
+                description=feature_description,
+                character=character
+            )
+            new_feature.save()
+            char_background = models.CharacterBackground.objects.filter(character=character)
+            return render(request,
+                          'profile/character/info/background.html',
+                          {'background': char_background})
+
 
     if request.is_ajax and 'background_skills' in request.POST:
         all_skills = ['acrobatics', 'anima_hand', 'arcana', 'athletics', 'deception', 'history', 'insight', 'intimidation', 'investigation', 'medicine', 'nature', 'perception', 'performance', 'persuasion', 'religion', 'soh', 'stealth', 'survival']
@@ -268,7 +283,8 @@ def character_info(request, username, char_id):
         'skills': skills,
         'char_class': char_class,
         'char_race': char_race,
-        'features': char_features
+        'features': char_features,
+        'background': background
     }
     return render(request,
                   'profile/character/edit.html',

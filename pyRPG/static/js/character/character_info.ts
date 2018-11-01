@@ -50,7 +50,7 @@ var openEdit = (update: string, text: string): boolean => {
   return false;
 }
 // add New Feature
-var addNewFeature = (url: string, csrf: string, name: string, desc: string): void => {
+var addNewFeature = (url: string, csrf: string, name: string, desc: string, object: string): void => {
   $.ajax({
     type: 'POST',
     url: url,
@@ -59,11 +59,16 @@ var addNewFeature = (url: string, csrf: string, name: string, desc: string): voi
     data: {
       'csrfmiddlewaretoken': csrf,
       'new_feature': true,
+      'object': object,
       'name': name,
       'desc':desc
     },
     success: function(data) {
-      $('.character_feature').empty().html(data);
+      if (object === 'feature') {
+        $('.character_feature').empty().html(data);
+      } else if (object === 'background') {
+        $('.character_background').empty().html(data);
+      }
       $('body').removeClass('modal-open');
       $('.modal-backdrop').remove();
     }

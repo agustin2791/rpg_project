@@ -285,6 +285,8 @@ class Character(models.Model):
     skill_set = models.CharField(max_length=100,
                                  blank=True,
                                  null=True)
+    bg_skills = models.IntegerField(default=0)
+    class_skills = models.IntegerField(default=0)
     personality_traits = models.TextField(null=True,
                                           blank=True)
     ideals = models.TextField(null=True,
@@ -333,31 +335,44 @@ class Character(models.Model):
         return info
 
     def get_spell_list(self):
-        spells = Spells.objects.filter(classes__id__in=[self.c_class.id]).order_by('level')
+        spells = Spells.objects.filter(level__lte=self.level, classes__id__in=[self.c_class.id]).order_by('level')
         levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         spell_levels = []
 
         for l in levels:
-            spell_level = []
-            for s in spells:
-                if s.level == l:
-                    spell_level.append(s)
-            spell_levels.append(spell_level)
+            if l <= self.level:
+                spell_level = []
+                for s in spells:
+                    if s.level == l and s not in self.spells.all():
+                        spell_level.append(s)
+                spell_levels.append(spell_level)
 
         return spell_levels
+
+    def choose_skills_limit(self):
+        class_limit_default = self.c_class.skills_limit
+        bg_limit = self.bg_skills
+        class_limit = self.class_skills
+        limit = class_limit_default + 2
+        total = bg_limit + class_limit
+        return '{0} / {1}'.format(total, limit)
 
     def choose_class_skills(self):
         all_skills = views.SKILLS
         seclected_skills = []
-        char_skills = self.skill_set.split(', ')
+
         if self.c_class.skills == 'Any':
             return all_skills
         else:
             class_skill = self.c_class.skills.split(', ')
             for s in all_skills:
-                if s[1] in class_skill and s[1] not in char_skills:
-                    seclected_skills.append([s[0], s[1]])
-
+                if self.skill_set:
+                    char_skills = self.skill_set.split(', ')
+                    if s[1] in class_skill and s[1] not in char_skills:
+                        seclected_skills.append([s[0], s[1]])
+                else:
+                    if s[1] in class_skill:
+                        seclected_skills.append([s[0], s[1]])
             return seclected_skills
 
     def choose_bg_skills(self):
@@ -420,6 +435,17 @@ class CharacterSkills(models.Model):
             s = [n, mod]
             skills.append(s)
         return skills
+
+class CharacterBackground(models.Model):
+    background = models.CharField(max_length=100)
+    description = models.TextField(null=True,
+                                   blank=True)
+    character = models.ForeignKey(Character,
+                                  on_delete=models.CASCADE,
+                                  related_name='character_background')
+
+    def __unicode__(self):
+        return self.background
 
 class CharacterFeature(models.Model):
     feature = models.CharField(max_length=150)

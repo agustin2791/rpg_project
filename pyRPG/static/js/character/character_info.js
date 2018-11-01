@@ -44,7 +44,8 @@ var openEdit = function (update, text) {
     getInfo();
     return false;
 };
-var addNewFeature = function (url, csrf, name, desc) {
+// add New Feature
+var addNewFeature = function (url, csrf, name, desc, object) {
     $.ajax({
         type: 'POST',
         url: url,
@@ -53,11 +54,17 @@ var addNewFeature = function (url, csrf, name, desc) {
         data: {
             'csrfmiddlewaretoken': csrf,
             'new_feature': true,
+            'object': object,
             'name': name,
             'desc': desc
         },
         success: function (data) {
-            $('.character_feature').empty().html(data);
+            if (object === 'feature') {
+                $('.character_feature').empty().html(data);
+            }
+            else if (object === 'background') {
+                $('.character_background').empty().html(data);
+            }
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
         }
