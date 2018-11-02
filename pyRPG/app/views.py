@@ -262,20 +262,21 @@ def character_info(request, username, char_id):
                           'profile/character/info/features.html',
                           {'features': char_features})
         if object == 'background':
-            new_feature = models.CharacterBackground.objects.create(
-                background=feature_name,
-                description=feature_description,
-                character=character
-            )
-            new_feature.save()
-            char_background = models.CharacterBackground.objects.filter(character=character)
+            skills = request.POST.get('skills')
+            character.background = feature_name
+            character.background_skills = feature_description
+            if character.skill_set:
+                skill_set = character.skill_set
+                skill_set = skill_set.split(', ')
+                new_skills = skills.split(', ')
+                all_skills = skill_set + new_skills
+                character.skill_set = all_skills.join(', ')
+            else:
+                character.skill_set = skills
+            character.save()
             return render(request,
                           'profile/character/info/background.html',
-                          {'background': char_background})
-
-
-    if request.is_ajax and 'background_skills' in request.POST:
-        all_skills = ['acrobatics', 'anima_hand', 'arcana', 'athletics', 'deception', 'history', 'insight', 'intimidation', 'investigation', 'medicine', 'nature', 'perception', 'performance', 'persuasion', 'religion', 'soh', 'stealth', 'survival']
+                          {'character': character})
 
     context = {
         'user': user,

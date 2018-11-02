@@ -105,14 +105,26 @@
     $(document).on('submit', '.new_feature_form', function() {
       var name = $('input[name="feature_name"]').val(),
           desc = $('textarea[name="feature_desc"]').val();
-      addNewFeature(url, csrf, name, desc, 'feature');
+      addNewFeature(url, csrf, name, desc, 'none', 'feature');
       return false;
     });
     // Add new Background
-    $(document).on('submit', '.new_background_form', function() {
+    $(document).on('click', '.submit-background', function() {
       var name = $('input[name="background_name"]').val(),
           desc = $('textarea[name="background_desc"]').val();
-      addNewFeature(url, csrf, name, desc, 'background');
+      var get_skills = $('input[name="bg_skills');
+      var checked_skills = []
+      for (let i = 0; i < get_skills.length; i++){
+        if (get_skills[i].checked) { 
+          checked_skills.push(get_skills[i]); 
+          console.log(get_skills[i]);
+        }
+      }
+      if (checked_skills.length != 2) {
+        return false;
+      }
+      var skills = checked_skills[0].value + ', ' + checked_skills[1].value;
+      addNewFeature(url, csrf, name, desc, skills, 'background');
       return false;
     })
     $(document).on('click', '.cancel', function() {

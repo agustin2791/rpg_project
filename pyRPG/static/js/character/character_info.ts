@@ -50,7 +50,7 @@ var openEdit = (update: string, text: string): boolean => {
   return false;
 }
 // add New Feature
-var addNewFeature = (url: string, csrf: string, name: string, desc: string, object: string): void => {
+var addNewFeature = (url: string, csrf: string, name: string, desc: string, skills: string, object: string): void => {
   $.ajax({
     type: 'POST',
     url: url,
@@ -61,13 +61,15 @@ var addNewFeature = (url: string, csrf: string, name: string, desc: string, obje
       'new_feature': true,
       'object': object,
       'name': name,
-      'desc':desc
+      'desc':desc,
+      'skills': skills
     },
     success: function(data) {
       if (object === 'feature') {
         $('.character_feature').empty().html(data);
       } else if (object === 'background') {
         $('.character_background').empty().html(data);
+        $('.character-bg-name').empty().html(name);
       }
       $('body').removeClass('modal-open');
       $('.modal-backdrop').remove();

@@ -45,7 +45,7 @@ var openEdit = function (update, text) {
     return false;
 };
 // add New Feature
-var addNewFeature = function (url, csrf, name, desc, object) {
+var addNewFeature = function (url, csrf, name, desc, skills, object) {
     $.ajax({
         type: 'POST',
         url: url,
@@ -56,7 +56,8 @@ var addNewFeature = function (url, csrf, name, desc, object) {
             'new_feature': true,
             'object': object,
             'name': name,
-            'desc': desc
+            'desc': desc,
+            'skills': skills
         },
         success: function (data) {
             if (object === 'feature') {
@@ -64,6 +65,7 @@ var addNewFeature = function (url, csrf, name, desc, object) {
             }
             else if (object === 'background') {
                 $('.character_background').empty().html(data);
+                $('.character-bg-name').empty().html(name);
             }
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();

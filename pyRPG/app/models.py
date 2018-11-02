@@ -282,9 +282,11 @@ class Character(models.Model):
     proficiency_bonus = models.IntegerField(default=2,
                                             null=True,
                                             blank=True)
+    # Skill sets related to background
     skill_set = models.CharField(max_length=100,
                                  blank=True,
                                  null=True)
+    # Skill set limit related to class max 2
     bg_skills = models.IntegerField(default=0)
     class_skills = models.IntegerField(default=0)
     personality_traits = models.TextField(null=True,
@@ -357,6 +359,9 @@ class Character(models.Model):
         total = bg_limit + class_limit
         return '{0} / {1}'.format(total, limit)
 
+    # def skill_list(self):
+    #     char_skills = self.
+
     def choose_class_skills(self):
         all_skills = views.SKILLS
         seclected_skills = []
@@ -368,7 +373,7 @@ class Character(models.Model):
             for s in all_skills:
                 if self.skill_set:
                     char_skills = self.skill_set.split(', ')
-                    if s[1] in class_skill and s[1] not in char_skills:
+                    if s[1] in class_skill and s[0] not in char_skills:
                         seclected_skills.append([s[0], s[1]])
                 else:
                     if s[1] in class_skill:
@@ -381,8 +386,8 @@ class Character(models.Model):
         if self.skill_set is not None:
             char_skills = self.skill_set.split(', ')
             for s in all_skills:
-                if s[1] not in char_skills:
-                    seclected_skills.append(s[0], s[1])
+                if s[0] not in char_skills:
+                    seclected_skills.append({s[0], s[1]})
 
             return seclected_skills
         else:
@@ -415,24 +420,18 @@ class CharacterSkills(models.Model):
 
     def get_skills(self):
         skills = []
-        names = ['Acrobatics','Animal Handling','Arcana','Athletics','Deception','History','Insight','Intimidation','Investigation','Medicine','Nature','Perception','Performance','Persuasion','Religion','Slight of Hand','Stealth','Survival']
+        names = views.SKILLS
+        char_skills = self.character.skill_set
+        print char_skills
         for n in names:
-            if n == 'Animal Handling':
-                if self.anima_hand > 0:
-                    mod = '+{0}'.format(self.anima_hand)
-                else:
-                    mod = self.anima_hand
-            elif n == 'Slight of Hand':
-                if self.soh > 0:
-                    mod = '+{0}'.format(self.soh)
-                else:
-                    mod = self.soh
-            else:
-                skill = n.lower()
-                mod = CharacterSkills.objects.values_list(skill, flat=True).get(pk=self.id)
-                if mod > 0:
-                    mod = '+{0}'.format(mod)
-            s = [n, mod]
+            mod = CharacterSkills.objects.values_list(n[0], flat=True).get(pk=self.id)
+            if char_skills:
+                pro_skills = char_skills.split(', ')
+                if n[0] in pro_skills:
+                    mod += self.character.proficiency_bonus
+            if mod > 0:
+                mod = '+{0}'.format(mod)
+            s = [n[1], mod]
             skills.append(s)
         return skills
 

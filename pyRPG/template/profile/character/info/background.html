@@ -1,17 +1,18 @@
 <div class="card">
   <div class="card-body">
+    {% if character.background %}
+    <h3>Background</h3>
+    <p>{{ character.background_skills }}</p>
+    {% else %}
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_background_modal" name="button">Add Background</button>
-    {% for b in background %}
-    <h4>{{ b.background }}</h4>
-    <p>{{ b.description }}</p>
-    {% endfor %}
+    {% endif %}
   </div>
   <div class="card-footer">
     Background
   </div>
 </div>
 <div class="modal fade" id="add_background_modal" tabindex="-1">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title">Add New Background</h3>
@@ -22,13 +23,23 @@
       <div class="modal-body">
         <form class="new_background_form">
           <div class="form-group">
-            <label for="background_name">Name:</label>
+            <label for="background_name">Title:</label>
             <input type="text" class="form-control" name="background_name">
           </div>
+          <p>Choose 2:</p>
+          <div class="alert alert-danger skills-alert">You must choose 2 skills.</div>
+          <div class="row">
+            {% for s in character.choose_bg_skills %}
+            <div class="col-3">
+              <input type="checkbox" class="char_skills" name="bg_skills" value="{{ s.0 }}"> {{ s.1 }}
+            </div>
+            {% endfor %}
+          </div>
           <div class="form-group">
+            <label for="background_desc">Description:</label>
             <textarea name="background_desc" class="form-control" rows="8" cols="80"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" name="button">Submit</button>
+          <button type="button" class="btn btn-primary submit-background" name="button">Submit</button>
         </form>
       </div>
     </div>
