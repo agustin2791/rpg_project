@@ -1,13 +1,22 @@
 <div class="card">
-
   <div class="card-body">
+      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
+      <hr>
     {% if features %}
     {% for f in features %}
-    <h4>{{ f.feature }}</h4>
-    <p class="feature-text">{{ f.description }}</p>
+    <div class="info-div" data-update="feature_{{ f.id }}">
+      
+      <h4>{{ f.feature }}</h4>
+      <div class="info-text-edit-feature_{{ f.id }}"></div>
+      <div class="info-text-feature_{{ f.id }}">
+          <p style="white-space: pre-line" class="feature-text">{{ f.description }}</p>
+      </div>
+      <span class="edit_feature_{{ f.id }}" style="visibility: hidden"><a href class="edit" data-update="feature_{{ f.id }}"><i class="fa fa-edit"></i></a></span>
+    </div>
+    
     {% endfor %}
     {% endif %}
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
+    
   </div>
   <div class="card-footer">
     Features &amp; Traits

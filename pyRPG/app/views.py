@@ -225,32 +225,33 @@ def character_info(request, username, char_id):
     if request.is_ajax and 'add_feature' in request.POST:
         trait = request.POST.get('trait')
         description = request.POST.get('description')
-        if trait == 'personality_traits':
-            character.personality_traits = description
-        elif trait == 'ideals':
-            character.ideals = description
-        elif trait == 'bonds':
-            character.bonds = description
-        elif trait == 'flaws':
-            character.flaws = description
-        elif trait == 'equipment':
-            character.equipment = description
-        else:
-            new_trait = models.CharacterFeature.objects.create(
-                feature=trait,
-                description=description,
-                character=character
-            )
-        character.save()
-        return render(request,
-                      'profile/character/info/traits.html',
+        if trait == 'background':
+            character.background_skills = description
+            character.save()
+            return render(request,
+                      'profile/character/info/background.html',
                       {'character': character})
+        elif trait.startswith('feature'):
+            feat_id = trait.split('_')[1]
+            feature = models.CharacterFeature.objects.get(id=feat_id)
+            feature.description = description
+            feature.save()
+            char_features = models.CharacterFeature.objects.filter(character=character)
+            return render(request,
+                          'profile/character/info/features.html',
+                          {'features': char_features})
+        else:
+            setattr(character, trait, description)
+            character.save()
+            return render(request,
+                        'profile/character/info/traits.html',
+                        {'character': character})
 
     if request.is_ajax and 'new_feature' in request.POST:
         feature_name = request.POST.get('name')
         feature_description = request.POST.get('desc')
-        object = request.POST.get('object')
-        if object == 'feature':
+        object_edit = request.POST.get('object')
+        if object_edit == 'feature':
             new_feature = models.CharacterFeature.objects.create(
                 feature=feature_name,
                 description=feature_description,
@@ -261,7 +262,7 @@ def character_info(request, username, char_id):
             return render(request,
                           'profile/character/info/features.html',
                           {'features': char_features})
-        if object == 'background':
+        if object_edit == 'background':
             skills = request.POST.get('skills')
             character.background = feature_name
             character.background_skills = feature_description

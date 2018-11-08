@@ -84,15 +84,15 @@
   $(document).ready(function() {
     const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
     const csrf = '{{ csrf_token }}';
-    $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form', function(e) {
+    $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form, .background_form, .feature_form', function(e) {
       e.preventDefault();
       var trait = $(this).attr('data-update');
       var description = $('textarea[name="'+trait+'"]').val();
       submit_trait(url, csrf, trait, description);
       return false;
     })
-
     getInfo();
+    // Edit Feature
     $(document).on('click', '.edit', function(e) {
       e.preventDefault();
       var update = $(this).attr('data-update');
@@ -127,11 +127,12 @@
       addNewFeature(url, csrf, name, desc, skills, 'background');
       return false;
     })
+    // cancel update
     $(document).on('click', '.cancel', function() {
       var update = $(this).attr('data-update');
       $('.info-text-edit-' + update).empty();
       $('.info-text-' + update).show();
-    })
+    });
   })
 </script>
 {% endblock %}
