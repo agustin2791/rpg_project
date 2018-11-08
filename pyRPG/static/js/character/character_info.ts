@@ -87,3 +87,21 @@ var addNewFeature = (url: string, csrf: string, name: string, desc: string, skil
     }
   })
 }
+
+// Choose ability
+let add_skill_set = (url: string, csrf: string, skills: string): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    async: true,
+    cache: false,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'add_skills': true,
+      'skills': skills
+    },
+    success: function(data) {
+      $('.character_skills').empty().html(data);
+    }
+  })
+}

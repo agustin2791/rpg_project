@@ -282,11 +282,11 @@ class Character(models.Model):
     proficiency_bonus = models.IntegerField(default=2,
                                             null=True,
                                             blank=True)
-    # Skill sets related to background
+    # Skill sets related to Class
     skill_set = models.CharField(max_length=100,
                                  blank=True,
                                  null=True)
-    # Skill set limit related to class max 2
+    # Skill set limit related to background max 2
     bg_skills = models.IntegerField(default=0)
     class_skills = models.IntegerField(default=0)
     personality_traits = models.TextField(null=True,
@@ -351,16 +351,22 @@ class Character(models.Model):
 
         return spell_levels
 
-    def choose_skills_limit(self):
-        class_limit_default = self.c_class.skills_limit
-        bg_limit = self.bg_skills
-        class_limit = self.class_skills
-        limit = class_limit_default + 2
-        total = bg_limit + class_limit
-        return '{0} / {1}'.format(total, limit)
+    def skills_limit(self):
+        if self.skill_set:
+            skills = self.skill_set.split(', ')
+            set_length = len(skills)
+            limit = self.c_class.skills_limit + 2
+            if set_length == limit:
+                return False
+            else:
+                return True
+        else:
+            return True
 
-    # def skill_list(self):
-    #     char_skills = self.
+    def skill_list(self):
+        if self.skill_set:
+            print self.skill_set.split(', ')
+            return self.skill_set.split(', ')
 
     def choose_class_skills(self):
         all_skills = views.SKILLS
@@ -422,7 +428,6 @@ class CharacterSkills(models.Model):
         skills = []
         names = views.SKILLS
         char_skills = self.character.skill_set
-        print char_skills
         for n in names:
             mod = CharacterSkills.objects.values_list(n[0], flat=True).get(pk=self.id)
             if char_skills:
@@ -431,7 +436,7 @@ class CharacterSkills(models.Model):
                     mod += self.character.proficiency_bonus
             if mod > 0:
                 mod = '+{0}'.format(mod)
-            s = [n[1], mod]
+            s = [n[1], mod, n[0]]
             skills.append(s)
         return skills
 

@@ -221,7 +221,9 @@ def character_info(request, username, char_id):
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
     char_features = models.CharacterFeature.objects.filter(character=character)
     background = models.CharacterBackground.objects.filter(character=character)
+    print character.bg_skills
 
+    # Edit background, features, etc...
     if request.is_ajax and 'add_feature' in request.POST:
         trait = request.POST.get('trait')
         description = request.POST.get('description')
@@ -246,7 +248,7 @@ def character_info(request, username, char_id):
             return render(request,
                         'profile/character/info/traits.html',
                         {'character': character})
-
+    # Add Feature or Background
     if request.is_ajax and 'new_feature' in request.POST:
         feature_name = request.POST.get('name')
         feature_description = request.POST.get('desc')
@@ -279,6 +281,22 @@ def character_info(request, username, char_id):
                           'profile/character/info/background.html',
                           {'character': character})
 
+    if request.is_ajax and 'add_skills' in request.POST:
+        skills = request.POST.get('skills')
+        if character.skill_set:
+            char_skills = character.skill_set
+            char_skills = char_skills.split(', ')
+            new_skills = skills.split(', ')
+            all_skills = char_skills + new_skills
+            character.skill_set = ', '.join(all_skills)
+        else:
+            character.skill_set = skills
+        character.save()
+        skills = models.CharacterSkills.objects.get(character=character)
+        return render(request,
+                      'profile/character/info/skills.html',
+                      {'character': character,
+                      'skills': skills})
     context = {
         'user': user,
         'character': character,

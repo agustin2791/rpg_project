@@ -85,3 +85,20 @@ var addNewFeature = function (url, csrf, name, desc, skills, object) {
         }
     });
 };
+// Choose ability
+var add_skill_set = function (url, csrf, skills) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        async: true,
+        cache: false,
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'add_skills': true,
+            'skills': skills
+        },
+        success: function (data) {
+            $('.character_skills').empty().html(data);
+        }
+    });
+};

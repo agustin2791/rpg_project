@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    Skills
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tbody>
+        {% for s in skills.get_skills %}
+          <tr {% if s.2 in character.skill_list %} style="border: solid 2px #16a085;" {% endif %}>
+            <td ><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.1 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% if character.skills_limit %}
+<div class="card">
+  <div class="card-body">
+    <div class="skill_count"><span id="skills_chosen">0</span> / {{ character.c_class.skills_limit }}</div>
+    <h3>Class Skills</h3>
+    <div class="alert alert-danger skills_alert" style="display: none">You must choose {{ character.c_class.skills_limit }} skills.</div>
+    <form class="select_class_skill">
+      {% for s in character.choose_class_skills %}
+      <input type="checkbox" class="skill_checkbox" name="choose_skill" value="{{ s.0 }}"> {{ s.1 }}<br>
+      {% endfor %}
+      <button type="button" class="btn btn-sm btn-primary submit_skills">Submit</button>
+    </form>
+    <!-- {{ character.choose_class_skills }} -->
+  </div>
+</div>
+{% endif %}

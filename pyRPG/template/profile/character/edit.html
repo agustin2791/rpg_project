@@ -41,36 +41,8 @@
       </div>
     </div>
     <div class="col-3">
-      <div class="card">
-        <div class="card-header">
-          Skills
-        </div>
-        <div class="card-body">
-          <table class="table table-hover">
-            <tbody>
-              {% for s in skills.get_skills %}
-                <tr>
-                  <td><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.1 }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-      <div class="card">
-        <div class="card-body">
-          {{ character.choose_skills_limit }}
-          {% if character.class_skills < character.c_class.skills_limit %}
-          <h3>Class Skills</h3>
-          <form class="select_class_skill">
-            {% for s in character.choose_class_skills %}
-            <input type="checkbox" name="" value="{{ s.0 }}"> {{ s.1 }}<br>
-            {% endfor %}
-          </form>
-          {% endif %}
-          <!-- {{ character.choose_class_skills }} -->
-        </div>
+      <div class="character_skills">
+        {% include 'profile/character/info/skills.html' %}
       </div>
     </div>
   </div>
@@ -84,6 +56,7 @@
   $(document).ready(function() {
     const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
     const csrf = '{{ csrf_token }}';
+    const class_skill_limit = parseInt('{{ character.c_class.skills_limit }}');
     $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form, .background_form, .feature_form', function(e) {
       e.preventDefault();
       var trait = $(this).attr('data-update');
@@ -133,6 +106,42 @@
       $('.info-text-edit-' + update).empty();
       $('.info-text-' + update).show();
     });
+    // count checked
+    $(document).on('click', '.skill_checkbox', function() {
+      let checkbox = $('input[name="choose_skill"]');
+      let chosen = 0;
+      for (let i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+          chosen += 1;
+        }
+      }
+      if (chosen === class_skill_limit) {
+        document.getElementsByClassName('skill_count')[0].style.color = '#16a085';
+      } else if (chosen > class_skill_limit) {
+        document.getElementsByClassName('skill_count')[0].style.color = '#ff0000';
+      }
+      document.getElementById('skills_chosen').innerHTML = chosen;
+    })
+    // apply checked
+    $(document).on('click', '.submit_skills', function() {
+      let checkbox = $('input[name="choose_skill"]');
+      let chosen = 0;
+      let skills = [];
+      for (let i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+          chosen += 1;
+          skills.push(checkbox[i].value);
+        }
+      }
+      if (skills.length != class_skill_limit) {
+        document.getElementsByClassName('skills_alert')[0].style.display = 'block';
+        return false;
+      }
+      let add_skill = skills.join(', ');
+      add_skill_set(url, csrf, add_skill);
+
+      return false;
+    })
   })
 </script>
 {% endblock %}
