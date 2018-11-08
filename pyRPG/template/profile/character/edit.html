@@ -5,14 +5,21 @@
     <div class="col-9">
       <!-- information box  -->
       <div class="row">
-        <div class="col-12">
+        <div class="col-7">
           <div class="card">
             {% include 'profile/character/info/information.html' %}
+            {% for e in character.choose_starting_equipment %}
+            {% for c in e %}
+            {% for i in c %}
+            {{ i.name }}
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
           </div>
         </div>
       <!-- end information box -->
       <!-- ability box -->
-        <div class="col-12">
+        <div class="col-5">
           <div class="card">
             {% include 'profile/character/info/abilities.html' %}
           </div>
@@ -20,12 +27,12 @@
       </div>
       <!-- end ability box -->
       <div class="row">
-        <div class="col-4">
+        <div class="col-12">
           <div class="character-actions">
             {% include 'profile/character/info/actions.html' %}
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-6">
           <div class="character_background">
             {% include 'profile/character/info/background.html' %}
           </div>
@@ -33,7 +40,7 @@
             {% include 'profile/character/info/features.html' %}
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-6">
           <div class="character_traits">
             {% include 'profile/character/info/traits.html' %}
           </div>

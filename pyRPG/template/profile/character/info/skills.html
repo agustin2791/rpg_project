@@ -1,5 +1,21 @@
 <div class="card">
   <div class="card-header">
+    Saving Throws
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tbody>
+        {% for s in character.get_saving_throws %}
+          <tr style="{{ s.3 }}">
+            <td ><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.2 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
     Skills
   </div>
   <div class="card-body">

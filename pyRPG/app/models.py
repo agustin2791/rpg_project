@@ -128,6 +128,15 @@ class CharacterClass(models.Model):
             return 'Choose one type of artisan\'s tools or one musical instrument'
         else:
             return 'None'
+    
+    def get_equipment(self):
+        eq = CharacterClassEquipment.objects.filter(char_class=self.id).exclude(desc='nan')
+        to_choose = []
+        for e in eq:
+            equipment = e.desc
+            equipment = equipment.split(', ')
+            to_choose.append(equipment)
+        return to_choose
 
 
 class CharacterClassEquipment(models.Model):
@@ -365,7 +374,6 @@ class Character(models.Model):
 
     def skill_list(self):
         if self.skill_set:
-            print self.skill_set.split(', ')
             return self.skill_set.split(', ')
 
     def choose_class_skills(self):
@@ -398,6 +406,60 @@ class Character(models.Model):
             return seclected_skills
         else:
             return all_skills
+    
+    def saving_throws_list(self):
+        c_class = self.c_class
+        st = c_class.saving_throws.lower().split(', ')
+        print st
+        return st
+
+    def get_saving_throws(self):
+        abilities = []
+        ability = ['strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom']
+        st = self.saving_throws_list()
+        for a in ability:
+            ab = Character.objects.values_list(a, flat=True).get(id=self.id)
+            if a in st:
+                mod = views.get_modifier(ab) + self.proficiency_bonus
+                style = 'border: solid 2px #16a085;'
+            else:
+                mod = views.get_modifier(ab)
+                style = ''
+            if mod > 0:
+                mod = '+{0}'.format(mod)
+            abilities.append([a.title(), ab, mod, style])
+        return abilities
+
+    def choose_starting_equipment(self):
+        eq = CharacterClassEquipment.objects.filter(char_class=self.c_class).exclude(desc='nan')
+        equipment = []
+        for e in eq:
+            try:
+                equip = e.desc.split(', ')
+            except:
+                equip = e.desc
+            choice = []
+            if equip == 'any simple weapon':
+                weapons = Item.objects.filter(category__name='Simple Ranged Weapons')
+                weapons2 = Item.objects.filter(category__name='Simple Melee Weapons')
+                all_weapons = weapons + weapons2
+                for w in all_weapons: choice.append(w)
+            else:
+                for q in equip:
+                    print q
+                    if q.startswith('a '):
+                        name = q.replace('a ', '')
+                    elif q.startswith('an '):
+                        name = q.replace('an ', '')
+                    else:
+                        name = q
+                    if '(if proficient)' in name:
+                        name = name.replace(' (if proficient)', '')
+                    # if name = 
+                    weapon = Item.objects.filter(name=name.title())
+                    choice.append(weapon)
+            equipment.append(choice)
+        return equipment
 
 
 
