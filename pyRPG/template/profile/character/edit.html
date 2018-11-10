@@ -8,13 +8,7 @@
         <div class="col-7">
           <div class="card">
             {% include 'profile/character/info/information.html' %}
-            {% for e in character.choose_starting_equipment %}
-            {% for c in e %}
-            {% for i in c %}
-            {{ i.name }}
-            {% endfor %}
-            {% endfor %}
-            {% endfor %}
+            
           </div>
         </div>
       <!-- end information box -->
@@ -30,6 +24,9 @@
         <div class="col-12">
           <div class="character-actions">
             {% include 'profile/character/info/actions.html' %}
+          </div>
+          <div class="character-inventory">
+            {% include 'profile/character/info/equipment.html' %}
           </div>
         </div>
         <div class="col-6">

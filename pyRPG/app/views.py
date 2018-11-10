@@ -119,6 +119,32 @@ def character_skills(char):
     )[0]
     skills.save()
 
+def get_all_items(character):
+    inventory = []
+    if character.inventory.count() > 0:
+        for c in character.inventory.all():
+            inventory.append(c.id)
+    ag1 = models.Item.objects.filter(category__name='Adventure Grear').exclude(id__in=inventory)
+    ag2 = models.Item.objects.filter(category__name='Ammunition').exclude(id__in=inventory)
+    ag3 = models.Item.objects.filter(category__name='Arcane Focus').exclude(id__in=inventory)
+    ag4 = models.Item.objects.filter(category__name='Druid Focus').exclude(id__in=inventory)
+    ag5 = models.Item.objects.filter(category__name='Holy Symbol').exclude(id__in=inventory)
+    armor1 = models.Item.objects.filter(category__name__contains='Armor').exclude(id__in=inventory)
+    armor2 = models.Item.objects.filter(category__name='Shield').exclude(id__in=inventory)
+    mounts1 = models.Item.objects.filter(category__name='Mounts').exclude(id__in=inventory)
+    mounts2 = models.Item.objects.filter(category__name__contains='Vehicle').exclude(id__in=inventory)
+    mounts3 = models.Item.objects.filter(category__name='Saddles').exclude(id__in=inventory)
+    tools1 = models.Item.objects.filter(category__name__contains='Tools').exclude(id__in=inventory)
+    tools2 = models.Item.objects.filter(category__name='Gaming Set').exclude(id__in=inventory)
+    tools3 = models.Item.objects.filter(category__name='Musical Instrument').exclude(id__in=inventory)
+    weapons = models.Item.objects.filter(category__name__contains='Weapons').exclude(id__in=inventory).order_by('name')
+    ag = ag1 | ag2 | ag3 | ag4 | ag5
+    armor = armor1 | armor2
+    mounts = mounts1 | mounts2 | mounts3
+    tools = tools1 | tools2 | tools3
+
+    return [ag.order_by('name'), armor, mounts, tools, weapons]
+
 def index(request):
     return render(request, 'index.html')
 
@@ -221,7 +247,7 @@ def character_info(request, username, char_id):
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
     char_features = models.CharacterFeature.objects.filter(character=character)
     background = models.CharacterBackground.objects.filter(character=character)
-    print character.bg_skills
+    ag, armor, mounts, tools, weapons = get_all_items(character) 
 
     # Edit background, features, etc...
     if request.is_ajax and 'add_feature' in request.POST:
@@ -304,6 +330,7 @@ def character_info(request, username, char_id):
         'char_class': char_class,
         'char_race': char_race,
         'features': char_features,
+        'items': [ag, armor, mounts, tools, weapons],
         'background': background
     }
     return render(request,

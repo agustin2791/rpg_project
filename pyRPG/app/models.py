@@ -430,38 +430,21 @@ class Character(models.Model):
             abilities.append([a.title(), ab, mod, style])
         return abilities
 
+    def get_all_weapons(self):
+        if self.inventory.count() > 0:
+            inventory = self.inventory
+            inv = []
+            for i in inventory.all():
+                inv.append(i.id)
+            weapons = Item.objects.filter(category__name__contains='Weapons').exlcude(id__in=inv).order_by('name')
+        else:
+            weapons = Item.objects.filter(category__name__contains='Weapons').order_by('name')
+        return weapons
+
     def choose_starting_equipment(self):
         eq = CharacterClassEquipment.objects.filter(char_class=self.c_class).exclude(desc='nan')
         equipment = []
-        for e in eq:
-            try:
-                equip = e.desc.split(', ')
-            except:
-                equip = e.desc
-            choice = []
-            if equip == 'any simple weapon':
-                weapons = Item.objects.filter(category__name='Simple Ranged Weapons')
-                weapons2 = Item.objects.filter(category__name='Simple Melee Weapons')
-                all_weapons = weapons + weapons2
-                for w in all_weapons: choice.append(w)
-            else:
-                for q in equip:
-                    print q
-                    if q.startswith('a '):
-                        name = q.replace('a ', '')
-                    elif q.startswith('an '):
-                        name = q.replace('an ', '')
-                    else:
-                        name = q
-                    if '(if proficient)' in name:
-                        name = name.replace(' (if proficient)', '')
-                    # if name = 
-                    weapon = Item.objects.filter(name=name.title())
-                    choice.append(weapon)
-            equipment.append(choice)
         return equipment
-
-
 
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
