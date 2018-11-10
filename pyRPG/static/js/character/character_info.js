@@ -102,3 +102,46 @@ var add_skill_set = function (url, csrf, skills) {
         }
     });
 };
+var add_equipment = [];
+var skill_add_to_list = function (id, name, category) {
+    var div = document.createElement('div');
+    var parent = document.getElementsByClassName('chosen-equipment')[0];
+    div.setAttribute('class', 'equip');
+    div.setAttribute('data-skill', id);
+    div.innerHTML = "<button type=\"button\" class=\"btn btn-danger btn-sm remove-equip\" style=\"float: left; margin-right: 2px;\" data-equip-id=\"" + id + "\"><span class=\"fa fa-minus\"></span></button><p><b>" + name + "</b><br><span style=\"font-size: 10px\"><i>" + category + "</i></span></p>";
+    parent.appendChild(div);
+};
+var check_equipped = function () {
+    if (add_equipment.length == 0) {
+        $('.submit-equipment').attr('disabled', 'disabled');
+    }
+    else {
+        $('.submit-equipment').removeAttr('disabled');
+    }
+};
+check_equipped();
+var refresh_equipment = function (url, csrf) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        async: false,
+        success: function (data) {
+        }
+    });
+};
+var submit_equipment = function (url, csrf) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        async: true,
+        cache: false,
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'add_equipment': true,
+            'equip': add_equipment
+        },
+        success: function (data) {
+            window.location.href = data;
+        }
+    });
+};

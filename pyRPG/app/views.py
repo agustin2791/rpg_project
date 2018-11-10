@@ -143,7 +143,7 @@ def get_all_items(character):
     mounts = mounts1 | mounts2 | mounts3
     tools = tools1 | tools2 | tools3
 
-    return [ag.order_by('name'), armor, mounts, tools, weapons]
+    return [ag.order_by('name'), armor.order_by('name'), mounts.order_by('name'), tools.order_by('name'), weapons.order_by('name')]
 
 def index(request):
     return render(request, 'index.html')
@@ -323,6 +323,15 @@ def character_info(request, username, char_id):
                       'profile/character/info/skills.html',
                       {'character': character,
                       'skills': skills})
+
+    if request.is_ajax and 'add_equipment' in request.POST:
+        equipment = request.POST.getlist('equip[]')
+        for e in equipment:
+            equip = models.Item.objects.get(id=e)
+            character.inventory.add(equip)
+        redirect_to = '/profile/{0}/character_info/{1}/'.format(user, character.id)
+        return HttpResponse(redirect_to)
+
     context = {
         'user': user,
         'character': character,

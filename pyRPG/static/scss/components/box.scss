@@ -14,6 +14,46 @@
     letter-spacing: 5px;
   }
 }
+.modal {
+  width: 100%;
+  padding: 0px;
+  .fullscreen {
+    display: block;
+    width: 100%;
+    max-width: 100vw;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    margin: 0px;
+    left: 0;
+    top: 0;
+    border-radius: 0px;
+    .modal-body {
+      overflow-y: auto;
+    }
+    .modal-content {
+      margin: 0px;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: initial;
+      .equipment-tables {
+        height: 80vh;
+        display: block;
+        overflow-y: auto;
+      }
+      .chosen-equipment {
+        height: 76vh;
+        display: block;
+        overflow-y: auto;
+      }
+    }
+  }
+}
+.equip {
+  width: 100%;
+}
 .no-margin {
   margin: 0px;
   padding: 0px

@@ -52,6 +52,7 @@
   </div>
 
 </div>
+<div class="character-modals">{% include 'profile/character/info/modals.html' %}</div>
 {% endblock %}
 {% block bottomscript %}
 <script type="text/javascript" src="/static/js/character/character.js"></script>
@@ -144,6 +145,36 @@
       let add_skill = skills.join(', ');
       add_skill_set(url, csrf, add_skill);
 
+      return false;
+    })
+    $(document).on('click', '.add-equipment', function() {
+      let equip_id = $(this).attr('data-equip-id');
+      let equip_name = $(this).attr('data-equip-name');
+      let equip_cat = $(this).attr('data-equip-cat');
+      add_equipment.push(parseInt(equip_id));
+      console.log(add_equipment);
+      skill_add_to_list(equip_id, equip_name, equip_cat);
+      $(this).attr('disabled', 'disabled')
+      check_equipped();
+      return false;
+    })
+    $(document).on('click', '.remove-equip', function() {
+      let equip_id = $(this).attr('data-equip-id');
+      for (let i = 0; i < add_equipment.length; i++) {
+        if (add_equipment[i] == parseInt(equip_id)) {
+          add_equipment.splice(i, 1);
+        }
+      }
+      console.log(add_equipment);
+      let div = document.querySelectorAll('div[data-skill="' + equip_id + '"]')[0];
+      let parent = document.getElementsByClassName('chosen-equipment')[0];
+      parent.removeChild(div);
+      $('.add-equipment[data-equip-id="'+ equip_id +'"]').removeAttr('disabled');
+      check_equipped();
+      return false;
+    })
+    $(document).on('click', '.submit-equipment', function() {
+      submit_equipment(url, csrf);
       return false;
     })
   })
