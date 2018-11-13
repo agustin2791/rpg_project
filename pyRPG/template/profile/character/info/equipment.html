@@ -10,6 +10,7 @@
                     <th>Name</th>
                     <th>Category</th>
                     <th>Properties</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +19,12 @@
                     <td>{{ i.name }}</td>
                     <td>{{ i.category.name }}</td>
                     <td>{{ i.description }} </td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-sm equip-info" data-equip="{{ i.id }}"><i class="fa fa-info"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm equip-remove" data-equip="{{ i.id }}"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>

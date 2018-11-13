@@ -444,6 +444,12 @@ class Character(models.Model):
     def choose_starting_equipment(self):
         eq = CharacterClassEquipment.objects.filter(char_class=self.c_class).exclude(desc='nan')
         equipment = []
+        for e in eq:
+            if ', ' in e.desc:
+                opt = e.desc.split(', ')
+                equipment.append(opt)
+            else:
+                equipment.append([e.desc])
         return equipment
 
 class CharacterSkills(models.Model):

@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-7">
                         <ul class="nav nav-tabs" id="TabItems" role="tablist">
                             <li class="nav-item"><a href="#tab-weapons" class="nav-link active" data-toggle="tab" role="tab" aria-controls="tab-weapons" aria-selected="true">Weapons</a></li>
                             <li class="nav-item"><a href="#tab-ag" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-ag" aria-selected="true">Adventuring Gear</a></li>
@@ -148,13 +148,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2" >
-                            <div class="tab-pane fade show ">
+                    <div class="col-4">
+                            <div class="initial-equipment-info">
+                                    <p>Here are what you can start with:</p>
+                                    <ol>
+                                        {% for e in character.choose_starting_equipment %}
+                                        <li>{{ e | join:' or ' }}<br></li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
                         <button type="button" class="btn btn-success submit-equipment">Submit</button><hr>
                         <div class="chosen-equipment"></div>
-                    </div>
-                    <div class="col-2">
-                        <div class="initial-equipment-info"></div>
                     </div>
                 </div>
             </div>
