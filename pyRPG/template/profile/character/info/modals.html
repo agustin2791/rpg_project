@@ -1,0 +1,168 @@
+<!-- Equipment Modal -->
+<div class="modal fade" id="items-list" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 0px">
+    <div class="modal-dialog fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Get Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-7">
+                        <ul class="nav nav-tabs" id="TabItems" role="tablist">
+                            <li class="nav-item"><a href="#tab-weapons" class="nav-link active" data-toggle="tab" role="tab" aria-controls="tab-weapons" aria-selected="true">Weapons</a></li>
+                            <li class="nav-item"><a href="#tab-ag" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-ag" aria-selected="true">Adventuring Gear</a></li>
+                            <li class="nav-item"><a href="#tab-armor" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-armor" aria-selected="true">Armor</a></li>
+                            <li class="nav-item"><a href="#tab-mounts" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-mounts" aria-selected="true">Mounts</a></li>
+                            <li class="nav-item"><a href="#tab-tools" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-tools" aria-selected="true">Tools</a></li>
+                        </ul>
+                        <div class="tab-content equipment-tables" id="tab-items">
+                            <div class="tab-pane fade show active" id="tab-weapons" role="tabpane">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Damage</th>
+                                            <th>Properties</th>
+                                            <th>Category</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for w in items.4 %}
+                                        <tr>
+                                            <td>{{ w.name }}</td>
+                                            <td>{{ w.damage }}</td>
+                                            <td>{{ w.description | default:'' }}</td>
+                                            <td>{{ w.category.name }}</td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm add-equipment" data-equip-id="{{ w.id }}" data-equip-name="{{ w.name }}" data-equip-cat="{{ w.category.name }}"><span class="fa fa-plus"></span></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="tab-ag" role="tabpane">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Category</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for w in items.1 %}
+                                        <tr>
+                                            <td>{{ w.name }}</td>
+                                            <td>{{ w.description | default:'' }}</td>
+                                            <td>{{ w.category.name }}</td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm add-equipment" data-equip-id="{{ w.id }}" data-equip-name="{{ w.name }}" data-equip-cat="{{ w.category.name }}"><span class="fa fa-plus"></span></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="tab-armor" role="tabpane">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Armor Class (AC)</th>
+                                            <th>Strength</th>
+                                            <th>Stealth</th>
+                                            <th>Description</th>
+                                            <th>Category</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for w in items.1 %}
+                                        <tr>
+                                            <td>{{ w.name }}</td>
+                                            <td>{{ w.armor_class }}</td>
+                                            <td>{{ w.stealth |default:'' }}</td>
+                                            <td>{{ w.description | default:'' }}</td>
+                                            <td>{{ w.category.name }}</td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm add-equipment" data-equip-id="{{ w.id }}" data-equip-name="{{ w.name }}" data-equip-cat="{{ w.category.name }}"><span class="fa fa-plus"></span></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="tab-mounts" role="tabpane">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Speed</th>
+                                            <th>Carrying Cap.</th>
+                                            <th>Category</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for w in items.2 %}
+                                        <tr>
+                                            <td>{{ w.name }}</td>
+                                            <td>{{ w.speed | default:'' }} {% if w.speed %}ft.{% endif %}</td>
+                                            <td>{{ w.carry_cap | default:''}}</td>
+                                            <td>{{ w.category.name }}</td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm add-equipment" data-equip-id="{{ w.id }}" data-equip-name="{{ w.name }}" data-equip-cat="{{ w.category.name }}"><span class="fa fa-plus"></span></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="tab-tools" role="tabpane">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for w in items.3 %}
+                                        <tr>
+                                            <td>{{ w.name }}</td>
+                                            <td>{{ w.category.name }}</td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm add-equipment" data-equip-id="{{ w.id }}" data-equip-name="{{ w.name }}" data-equip-cat="{{ w.category.name }}"><span class="fa fa-plus"></span></button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                            <div class="initial-equipment-info">
+                                    <p>Here are what you can start with:</p>
+                                    <ol>
+                                        {% for e in character.choose_starting_equipment %}
+                                        <li>{{ e | join:' or ' }}<br></li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                        <button type="button" class="btn btn-success submit-equipment">Submit</button><hr>
+                        <div class="chosen-equipment"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Equipment Modal Ends -->

@@ -1,0 +1,343 @@
+{
+  "simple_melee_weapons": [
+    {
+      "item": "Club",
+      "cost": "1 sp",
+      "damage": "1d4 bludgeoning",
+      "weight": 2,
+      "properties": "Light",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Dagger",
+      "cost": "2 gp",
+      "damage": "1d4 piercing",
+      "weight": 1,
+      "properties": "Finesse, Light, Thrown (Range 20/60)",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Greatclub",
+      "cost": "2 sp",
+      "damage": "1d8 bludgeoning",
+      "weight": 10,
+      "properties": "Two-handed",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Handaxe",
+      "cost": "5 gp",
+      "damage": "1d6 slashing",
+      "weight": 2,
+      "properties": "Light, Thrown (Range 20/60)",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Javelin",
+      "cost": "5 sp",
+      "damage": "1d6 piercing",
+      "weight": 2,
+      "properties": "Thrown (Range 30/120)",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Light hammer",
+      "cost": "2 gp",
+      "damage": "1d4 bludgeoning",
+      "weight": 2,
+      "properties": "Light, Thrown (Range 20/60)",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Mace",
+      "cost": "5 gp",
+      "damage": "1d6 bludgeoning",
+      "weight": 4,
+      "properties": null,
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Quarterstaff",
+      "cost": "2 sp",
+      "damage": "1d6 bludgeoning",
+      "weight": 4,
+      "properties": "Versatile (1d8)",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Sickle",
+      "cost": "1 gp",
+      "damage": "1d4 slashing",
+      "weight": 2,
+      "properties": "Light",
+      "category": "Simple Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Spear",
+      "cost": "1 gp",
+      "damage": "1d6 piercing",
+      "weight": 3,
+      "properties": "Thrown (Range 20/60), Versatile (1d8)",
+      "category": "Simple Melee Weapons",
+      "description": null
+    }
+  ],
+  "simple_ranged_weapons": [
+    {
+      "item": "Crossbow, Light",
+      "cost": "25 gp",
+      "damage": "1d8 piercing",
+      "weight": 5,
+      "properties": "Ammunition (Range 80/320), Loading, Two-handed",
+      "category": "Simple Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Dart",
+      "cost": "5 cp",
+      "damage": "1d4 piercing",
+      "weight": 0.25,
+      "properties": "Finesse, Thrown (Range 20/60)",
+      "category": "Simple Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Shortbow",
+      "cost": "25 gp",
+      "damage": "1d6 piercing",
+      "weight": 2,
+      "properties": "Ammunition (Range 80/320), Two-handed",
+      "category": "Simple Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Sling",
+      "cost": "1 sp",
+      "damage": "1d4 bludgeoning",
+      "weight": null,
+      "properties": "Ammunition (range 30/120)",
+      "category": "Simple Ranged Weapons",
+      "description": null
+    }
+  ],
+  "martial_melee_weapons": [
+    {
+      "item": "Battleaxe",
+      "cost": "10 gp",
+      "damage": "1d8 slashing",
+      "weight": 4,
+      "properties": "Versatile (1d10)",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Flail",
+      "cost": "10 gp",
+      "damage": "1d8 bludgeoning",
+      "weight": 2,
+      "properties": null,
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Glaive",
+      "cost": "20 gp",
+      "damage": "1d10 slashing",
+      "weight": 6,
+      "properties": "Heavy, reach, two-handed",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Greataxe",
+      "cost": "30 gp",
+      "damage": "1d12 slashing",
+      "weight": 7,
+      "properties": "Heavy, Two-handed",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Greatsword",
+      "cost": "50 gp",
+      "damage": "2d6 slashing",
+      "weight": 6,
+      "properties": "Heavy, two-handed",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Halberd",
+      "cost": "20 gp",
+      "damage": "1d10 slashing",
+      "weight": 6,
+      "properties": "Heavy, Reach, Two-handed",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Lance",
+      "cost": "10 gp",
+      "damage": "1d12 piercing",
+      "weight": 6,
+      "properties": "Reach, Special",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Longsword",
+      "cost": "15 gp",
+      "damage": "1d8 slashing",
+      "weight": 3,
+      "properties": "Versatile (1d10)",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Maul",
+      "cost": "10 gp",
+      "damage": "2d6 bludgeoning",
+      "weight": 10,
+      "properties": "Heavy, Two-handed",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Morningstar",
+      "cost": "15 gp",
+      "damage": "1d8 piercing",
+      "weight": 4,
+      "properties": null,
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Pike",
+      "cost": "5 gp",
+      "damage": "1d10 piercing",
+      "weight": 18,
+      "properties": "Heavy, Reach, Two-handed",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Rapier",
+      "cost": "25 gp",
+      "damage": "1d8 piercing",
+      "weight": 2,
+      "properties": "Finesse",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Scimitar",
+      "cost": "25 gp",
+      "damage": "1d6 slashing",
+      "weight": 3,
+      "properties": "Finesse, Light",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Shortsword",
+      "cost": "10 gp",
+      "damage": "1d6 piercing",
+      "weight": 2,
+      "properties": "Finesse, Light",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Trident",
+      "cost": "5 gp",
+      "damage": "1d6 piercing",
+      "weight": 4,
+      "properties": "Thrown (range 20/60), versatile (1d8)",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "War Pick",
+      "cost": "5 gp",
+      "damage": "1d8 piercing",
+      "weight": 2,
+      "properties": null,
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Warhammer",
+      "cost": "15 gp",
+      "damage": "1d8 bludgeoning",
+      "weight": 2,
+      "properties": "Versatile (1d10)",
+      "category": "Martial Melee Weapons",
+      "description": null
+    },
+    {
+      "item": "Whip",
+      "cost": "2 gp",
+      "damage": "1d4 slashing",
+      "weight": 3,
+      "properties": "Finesse, Reach",
+      "category": "Martial Melee Weapons",
+      "description": null
+    }
+  ],
+  "martial_ranged_weapons": [
+    {
+      "item": "Blowgun",
+      "cost": "10 gp",
+      "damage": "1 piercing",
+      "weight": 1,
+      "properties": "Ammunition (range 25/100), Loading",
+      "category": "Martial Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Crossbow, Hand",
+      "cost": "75 gp",
+      "damage": "1d6 piercing",
+      "weight": 3,
+      "properties": "Ammunition (range 30/120), Light, Loading",
+      "category": "Martial Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Crossbow, Heavy",
+      "cost": "50 gp",
+      "damage": "1d10 piercing",
+      "weight": 18,
+      "properties": "Ammunition (range 100/400), Heavy, Loading, Two-handed",
+      "category": "Martial Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Longbow",
+      "cost": "50 gp",
+      "damage": "1d8 piercing",
+      "weight": 2,
+      "properties": "Ammunition (range 150/600), Heavy, Two-handed",
+      "category": "Martial Ranged Weapons",
+      "description": null
+    },
+    {
+      "item": "Net",
+      "cost": "1 gp",
+      "damage": null,
+      "weight": 3,
+      "properties": "Special, Thrown (range 5/15)",
+      "category": "Martial Ranged Weapons",
+      "description": null
+    }
+  ]
+}

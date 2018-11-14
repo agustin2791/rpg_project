@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header">
+        Equipment
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#items-list">Add Equipment</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Properties</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in character.inventory.all %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.category.name }}</td>
+                    <td>{{ i.description }} </td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-sm equip-info" data-equip="{{ i.id }}"><i class="fa fa-info"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm equip-remove" data-equip="{{ i.id }}"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Sorry, you don't have any Items</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

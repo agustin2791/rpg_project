@@ -1,0 +1,13 @@
+<div class="battles_top">
+  <h2>Battles</h2>
+  <button type="button" class="btn btn-primary create_campaign_component" data-component="new_battle" name="button">Create New Battle</button>
+</div>
+{% if battles %}
+  {% for b in battles %}
+  <div class="enemy-container">
+    <h3>{{ b.name }}</h3>
+    <p>{% for e in b.enemies.all %}{{ e.name }} | {% endfor %}Minions: {{ b.number_of_commoner }}</p>
+    <button type="button" class="btn btn-default" name="button">Edit Battle</button>
+  </div>
+  {% endfor %}
+{% endif %}

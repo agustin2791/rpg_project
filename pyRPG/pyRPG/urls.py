@@ -22,5 +22,42 @@ from app import views
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
+    url(r'^profile/(?P<username>\w{0,50})/$',
+        views.user_profile,
+        name='profile'),
+
+    # Character creation
+    url(r'^profile/(?P<username>\w{0,50})/character_creation/$',
+        views.character_creation,
+        name='character_creation'),
+    url(r'^profile/(?P<username>\w{0,50})/character_info/(?P<char_id>\d+)/$',
+        views.character_info,
+        name='character_info'),
+    # Campaign
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/play/$',
+        views.campaign,
+        name="campaign"),
+    url(r'^campaign/(?P<username>\w{0,50})/create/$',
+        views.create_campaign,
+        name='create_campaign'),
+    # Submit the campaign
+    url(r'^campaign/(?P<username>\w{0,50})/create/submit/$',
+        views.create_campaign_submit,
+        name='create_campaign_submit'),
+    # Edit campaign
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/edit/$',
+        views.campaign_edit,
+        name='campaign_edit'),
+    # create new campaign chapter
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/chapter/new/$',
+        views.new_campaign_chapter,
+        name='new_campaign_chapter'),
+    # submit new campaign chapter
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/chapter/submit/$',
+        views.submit_campaign_chapter,
+        name='submit_campaign_chapter'),
+    url(r'^campaign/(?P<username>\w{0,50})/(?P<campaign_slug>[\w-]+)/chapter/(?P<chapter_slug>[\w-]+)/(?P<chapter_id>\d+)/edit/$',
+        views.edit_campaign_chapter,
+        name='edit_campaign_chapter'),
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,0 +1,383 @@
+ID,Spell_Name,Spell_level,Ritual,School,Casting_Time,Range,Components,Material_Component,Duration,Bard,Cleric,Druid,Paladin,Ranger,Sorcerer,Warlock,Wizard,Description,Number of Classes that know spell
+1,Acid Splash,Cantrip,,Conjuration,1 action,60 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+2,Aid,2,,Abjuration,1 action,30 ft,"V, S, M",a tiny strip of white cloth,8 hours,,Cleric,,Paladin,,,,,,2
+3,Alarm,1,Ritual,Abjuration,1 minute,30 ft,"V, S, M","a tiny bell and a piece of
+fine silver wire",8 hours,,,,,Ranger,,,Wizard,,2
+4,Alter Self,2,,Transmutation,1 action,Self,"V, S",,"Concentration, up to 1 hour",,,,,,Sorcerer,,Wizard,,2
+5,Animal Friendship,1,,Enchantment,1 action,30 ft,"V, S, M",a morsel of food,24 hours,Bard,,Druid,,Ranger,,,,,3
+6,Animal Messenger,2,Ritual,Enchantment,1 action,30 ft,"V, S, M",a morsel of food,24 hours,Bard,,Druid,,Ranger,,,,,3
+7,Animal Shapes,8,,Transmutation,1 action,30 ft,"V, S",,"Concentration, up to 24 hour",,,Druid,,,,,,,1
+8,Animate Dead,3,,Necromancy,1 minute,10 ft,"V, S, M","a drop of blood, a piece of flesh, and a pinch of bone dust",Instantaneous,,Cleric,,,,,,Wizard,,2
+9,Animate Object,5,,Transmutation,1 action,120 ft,"V, S",,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,,Wizard,,3
+10,Antilife Shell,5,,Abjuration,1 action,Self (10ft radius),"V, S",,"Concentration, up to 1 hour",,,Druid,,,,,,,1
+11,Antimagic Field,8,,Abjuration,1 action,Self (10ft radius),"V, S, M",a pinch of powdered iron or iron filings,"Concentration, up to 1 hour",,Cleric,,,,,,Wizard,,2
+12,Antipathy/Sympathy,8,,Enchantment,1 hour,60 ft,"V, S, M",either a lump of alum soaked in vinegar for the antipathy effect or a drop of honey for the sympathy effect,10 days,,,Druid,,,,,Wizard,,2
+13,Arcane Eye,4,,Divination,1 action,30 ft,"V, S, M",a bit of bat fur,"Concentration, up to 1 hour",,,,,,,,Wizard,,1
+14,Arcane Gate,6,,Conjuration,1 action,500 ft,"V, S",,"Concentration, up to 10 minutes",,,,,,Sorcerer,Warlock,Wizard,,3
+15,Arcane Lock,2,,Abjuration,1 action,Touch,"V, S, M","gold dust worth at least 25 gp, which the spell consumes",Until dispelled,,,,,,,,Wizard,,1
+16,Armor of Agathys,1,,Abjuration,1 action,Self,"V, S, M",a cup of water,1 hour,,,,,,,Warlock,,,1
+17,Arms of Hadar,1,,Conjuration,1 action,Self (10ft radius),"V, S",,Instantaneous,,,,,,,Warlock,,,1
+18,Astral Projection,9,,Necromancy,1 hour,10 ft,"V, S, M","for each creature you affect with this spell, you must provide one jacinth worth at least 1,000 gp and one ornately carved bar of silver worth at least 100 gp, all of which the spell consumes",Special,,Cleric,,,,,Warlock,Wizard,,3
+19,Augury,2,Ritual,Divination,1 minute,Self,"V, S, M","specially marked sticks, bones, or similar tokens worth at least 25 gp",Instantaneous,,Cleric,,,,,,,,1
+20,Aura of Life,4,,Abjuration,1 action,Self (30ft radius),V,,"Concentration, up to 10 minutes",,,,Paladin,,,,,,1
+21,Aura of Purity,4,,Abjuration,1 action,Self (30ft radius),V,,"Concentration, up to 10 minutes",,,,Paladin,,,,,,1
+22,Aura of Vitality,3,,Evocation,1 action,Self (30ft radius),V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+23,Awaken,5,,Transmutation,8 hours,Touch,"V, S, M","an agate worth at least 1,000 gp, which the spell consumes",Instantaneous,Bard,,Druid,,,,,,,2
+24,Bane,1,,Enchantment,1 action,30 ft,"V, S, M",a drop of blood,"Concentration, up to 1 minute",Bard,Cleric,,,,,,,,2
+25,Banishing Smite,5,,Abjuration,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+26,Banishment,4,,Abjuration,1 action,60 ft,"V, S, M",an item distasteful to the target,"Concentration, up to 1 minute",,Cleric,,Paladin,,Sorcerer,Warlock,Wizard,,5
+27,Barkskin,2,,Transmutation,1 action,Touch,"V, S, M",a handful of oak bark,"Concentration, up to 1 hour",,,Druid,,Ranger,,,,,2
+28,Beacon of Hope,3,,Abjuration,1 action,30 ft,"V, S",,"Concentration, up to 1 minute",,Cleric,,,,,,,,1
+29,Beast Sense,2,Ritual,Divination,1 action,Touch,S,,"Concentration, up to 1 hour",,,Druid,,Ranger,,,,,2
+30,Bestow Curse,3,,Necromancy,1 action,Touch,"V, S",,"Concentration, up to 1 minute",Bard,Cleric,,,,,,Wizard,,3
+31,Bigby's Hand,5,,Evocation,1 action,120 ft,"V, S, M",an eggshell and a snakeskin glove,"Concentration, up to 1 minute",,,,,,,,Wizard,,1
+32,Blade Barrier,6,,Evocation,1 action,90 ft,"V, S",,"Concentration, up to 10 minutes",,Cleric,,,,,,,,1
+33,Blade Ward,Cantrip,,Abjuration,1 action,Self,"V, S",,1 round,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+34,Bless,1,,Enchantment,1 action,30 ft,"V, S, M",a sprinkling of holy water,"Concentration, up to 1 minute",,Cleric,,Paladin,,,,,,2
+35,Blight,4,,Necromancy,1 action,30 ft,"V, S",,Instantaneous,,,Druid,,,Sorcerer,Warlock,Wizard,,4
+36,Blinding Smite,3,,Evocation,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+37,Blindness/Deafness,2,,Necromancy,1 action,30 ft,V,,1 minute,Bard,Cleric,,,,Sorcerer,,Wizard,,4
+38,Blink,3,,Transmutation,1 action,Self,"V, S",,1 minute,,,,,,Sorcerer,,Wizard,,2
+39,Blur,2,,Illusion,1 action,Self,V,,"Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+40,Branding Smite,2,,Evocation,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+41,Burning Hands,1,,Evocation,1 action,Self (15ft cone),"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+42,Call Lightning,3,,Conjuration,1 action,120 ft,"V, S",,"Concentration, up to 10 minutes",,,Druid,,,,,,,1
+43,Calm Emotions,2,,Enchantment,1 action,60 ft,"V, S",,"Concentration, up to 1 minute",Bard,Cleric,,,,,,,,2
+44,Chain Lightning,6,,Evocation,1 action,150 ft,"V, S, M","a bit of fur; a piece of amber, glass, or a crystal rod; and three silver pins",Instantaneous,,,,,,Sorcerer,,Wizard,,2
+45,Charm Person,1,,Enchantment,1 action,30 ft,"V, S",,1 hour,Bard,,Druid,,,Sorcerer,Warlock,Wizard,,5
+46,Chill Touch,Cantrip,,Necromancy,1 action,120 ft,"V, S",,1 round,,,,,,Sorcerer,Warlock,Wizard,,3
+47,Chromatic Orb,1,,Evocation,1 action,90 ft,"V, S, M",a diamond worth at least 50 gp,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+48,Circle of Death,6,,Necromancy,1 action,150 ft,"V, S, M",the powder of a crushed black pearl worth at least 500 gp,Instantaneous,,,,,,Sorcerer,Warlock,Wizard,,3
+49,Circle of Power,5,,Abjuration,1 action,Self (30ft radius),V,,"Concentration, up to 10 minutes",,,,Paladin,,,,,,1
+50,Clairvoyance,3,,Divination,10 minutes,1 mile,"V, S, M","(a focus worth at least 100
+gp, either a jeweled horn for hearing or a glass eye for seeing","Concentration, up to 10 minutes",Bard,Cleric,,,,Sorcerer,,Wizard,,4
+51,Clone,8,,Necromancy,1 hour,Touch,"V, S, M","a diamond worth at least 1,000 gp and at least 1 cubic inch of flesh of the creature that is to be cloned, which the spell consumes, and a vessel worth at least 2,000 gp that has a sealable lid and is large enough to hold a Medium creature, such as a huge urn, coffin, mud-filled cyst in the ground, or crystal container filled with salt water",Instantaneous,,,,,,,,Wizard,,1
+52,Cloud of Daggers,2,,Conjuration,1 action,60 ft,"V, S, M",a sliver o f glass,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+53,Cloudkill,5,,Conjuration,1 action,120 ft,"V, S",,"Concentration, up to 10 minutes",,,,,,Sorcerer,,Wizard,,2
+54,Color Spray,1,,Illusion,1 action,Self (15ft cone),"V, S, M","a pinch of powder or sand that is colored red, yellow, and blue",1 round,,,,,,Sorcerer,,Wizard,,2
+55,Command,1,,Enchantment,1 action,60 ft,V,,1 round,,Cleric,,Paladin,,,,,,2
+56,Commune,5,Ritual,Divination,1 minute,Self,"V, S, M",incense and a vial of holy or unholy water,1 minute,,Cleric,,,,,,,,1
+57,Commune with Nature,5,Ritual,Divination,1 minute,Self,"V, S",,Instantaneous,,,Druid,,Ranger,,,,,2
+58,Compeled Duel,1,,Enchantment,1 bonus action,30 ft,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+59,Comprehend Languages,1,Ritual,Divination,1 action,Self,"V, S, M",a pinch of soot and salt,1 hour,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+60,Compulsion,4,,Enchantment,1 action,30 ft,"V, S",,"Concentration, up to 1 minute",Bard,,,,,,,,,1
+61,Cone of Cold,5,,Evocation,1 action,Self (60ft cone),"V, S, M",a small crystal or glass cone,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+62,Confusion,4,,Enchantment,1 action,90 ft,"V, S, M",three nut shells,"Concentration, up to 1 minute",Bard,,Druid,,,Sorcerer,,Wizard,,4
+63,Conjure Animals,3,,Conjuration,1 action,60 ft,"V, S",,"Concentration, up to 1 hour",,,Druid,,Ranger,,,,,2
+64,Conjure Barrage,3,,Conjuration,1 action,Self (60ft cone),"V, S, M",one piece of ammunition or a thrown weapon,Instantaneous,,,,,Ranger,,,,,1
+65,Conjure Celestial,7,,Conjuration,1 minute,90 ft,"V, S",,"Concentration, up to 1 hour",,Cleric,,,,,,,,1
+66,Conjure Elemental,5,,Conjuration,1 minute,90 ft,"V, S, M","burning incense for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water","Concentration, up to 1 hour",,,,,,,,Wizard,,1
+67,Conjure Fey,6,,Conjuration,1 minute,90 ft,"V, S",,"Concentration, up to 1 hour",,,Druid,,,,Warlock,,,2
+68,Conjure Minor Elementals,4,,Conjuration,1 minute,90 ft,"V, S",,"Concentration, up to 1 hour",,,Druid,,,,,Wizard,,2
+69,Conjure Volley,5,,Conjuration,1 action,150 ft,"V, S, M",one piece of ammunition or a thrown weapon,Instantaneous,,,,,Ranger,,,,,1
+70,Conjure Woodland Beings,4,,Conjuration,1 action,60 ft,"V, S, M","one holly berry per
+creature summoned","Concentration, up to 1 hour",,,Druid,,Ranger,,,,,2
+71,Contact Other Plane,5,Ritual,Divination,1 minute,Self,V,,1 minute,,,,,,,Warlock,Wizard,,2
+72,Contagion,5,,Necromancy,1 action,Touch,"V, S",,7 days,,Cleric,,,,,,,,1
+73,Contingency,6,,Evocation,10 minutes,Self,"V, S, M","a statuette of yourself carved from ivory and decorated with gems worth at least 1,500 gp",10 days,,,,,,,,Wizard,,1
+74,Continual Flame,2,,Evocation,1 action,Touch,"V, S, M","ruby dust worth 50 gp, which the spell consumes",Until dispelled,,Cleric,,,,,,Wizard,,2
+75,Control Water,4,,Transmutation,1 action,300 ft,"V, S, M",a drop of water and a pinch of dust,"Concentration, up to 10 minutes",,Cleric,Druid,,,,,Wizard,,3
+76,Control Weather,8,,Transmutation,10 minutes,Self (5miles radius),"V, S, M",burning incense and bits of earth and wood mixed in water,"Concentration, up to 8 hours",,Cleric,Druid,,,,,Wizard,,3
+77,Cordon of Arrows,2,,Transmutation,1 action,5 ft,"V, S, M",four or more arrows or bolts,8 hours,,,,,Ranger,,,,,1
+78,Counterspell,3,,Abjuration,"1 reaction, which you take when you see a creature within 60 feet of you casting a spell",60 ft,S,,Instantaneous,,,,,,Sorcerer,Warlock,Wizard,,3
+79,Create Food and Water,3,,Conjuration,1 action,30 ft,"V, S",,Instantaneous,,Cleric,,Paladin,,,,,,2
+80,Create or Destroy Water,1,,Transmutation,1 action,30 ft,"V, S, M",a drop of water if creating water or a few grains of sand if destroying it,Instantaneous,,Cleric,Druid,,,,,,,2
+81,Create Undead,6,,Necromancy,1 minute,10 ft,"V, S, M","one clay pot filled with grave dirt, one clay pot filled with brackish water, and one 150 gp black onyx stone for each corpse",Instantaneous,,Cleric,,,,,Warlock,Wizard,,3
+82,Creation,5,,Illusion,1 minute,30 ft,"V, S, M",a tiny piece of matter of the same type of the item you plan to create,Special,,,,,,Sorcerer,,Wizard,,2
+83,Crown of Madness,2,,Enchantment,1 action,120 ft,"V, S",,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+84,Crusader's Mantle,3,,Evocation,1 action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+85,Cure Wounds,1,,Evocation,1 action,Touch,"V, S",,Instantaneous,Bard,Cleric,Druid,Paladin,Ranger,,,,,5
+86,Dancing Lights,Cantrip,,Evocation,1 action,120 ft,"V, S, M","a bit of phosphorus or wychwood, or a  glowworm","Concentration, up to 1 minute",Bard,,,,,Sorcerer,,Wizard,,3
+87,Darkness,2,,Evocation,1 action,60 ft,"V, M",,"Concentration, up to 10 minutes",,,,,,Sorcerer,Warlock,Wizard,,3
+88,Darkvision,2,,Transmutation,1 action,Touch,"V, S, M","either a pinch of dried
+carrot or an agate",8 hours,,,Druid,,Ranger,Sorcerer,,Wizard,,4
+89,Daylight,3,,Evocation,1 action,60 ft,"V, S",,1 hour,,Cleric,Druid,Paladin,Ranger,Sorcerer,,,,5
+90,Death Ward,4,,Abjuration,1 action,Touch,"V, S",,8 hours,,Cleric,,Paladin,,,,,,2
+91,Delayed Blast Fireball,7,,Evocation,1 action,150 ft,"V, S, M","a tiny ball of bat
+guano and sulfur","Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+92,Demiplane,8,,Conjuration,1 action,60 ft,V,,1 hour,,,,,,,Warlock,Wizard,,2
+93,Destructive Wave (Smite?),5,,Evocation,1 action,Self (30ft radius),V,,Instantaneous,,,,Paladin,,,,,,1
+94,Detect Evil and Good,1,,Divination,1 action,Self,"V, S",,"Concentration, up to 10 minutes",,Cleric,,Paladin,,,,,,2
+95,Detect Magic,1,Ritual,Divination,1 action,Self,"V, S",,"Concentration, up to 10 minutes",Bard,Cleric,Druid,Paladin,Ranger,Sorcerer,,Wizard,,7
+96,Detect Poison and Disease,1,Ritual,Divination,1 action,Self,"V, S, M",a yew leaf,"Concentration, up to 10 minutes",,Cleric,Druid,Paladin,Ranger,,,,,4
+97,Detect Thoughts,2,,Divination,1 action,Self,"V, S, M",a copper piece,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,,Wizard,,3
+98,Dimension Door,4,,Conjuration,1 action,500 ft,V,,Instantaneous,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+99,Disguise Self,1,,Illusion,1 action,Self,"V, S",,1 hour,Bard,,,,,Sorcerer,,Wizard,,3
+100,Disintegrate,6,,Transmutation,1 action,60 ft,"V, S, M",a lodestone and a pinch of dust,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+101,Dispel Evil and Good,5,,Abjuration,1 action,Self,"V, S, M","holy water or powdered
+silver and iron","Concentration, up to 1 minute",,Cleric,,,,,,,,1
+102,Dispel Magic,3,,Abjuration,1 action,120 ft,"V, S",,Instantaneous,Bard,Cleric,Druid,Paladin,,Sorcerer,Warlock,Wizard,,7
+103,Dissonant Whispers,1,,Enchantment,1 action,60 ft,V,,Instantaneous,Bard,,,,,,,,,1
+104,Divination,4,Ritual,Divination,1 action,Self,"V, S, M","incense and a sacrificial offering appropriate to your religion, together worth at least 25 gp, which the spell consumes",Instantaneous,,Cleric,,,,,,,,1
+105,Divine Favor,1,,Evocation,1 bonus action,Self,"V, S",,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+106,Divine Word,7,,Evocation,1 bonus action,Self,V,,Instantaneous,,Cleric,,,,,,,,1
+107,Dominate Beast,4,,Enchantment,1 action,30 ft,"V, S",,"Concentration, up to 1 minute",,,Druid,,,Sorcerer,,,,2
+108,Dominate Monster,8,,Enchantment,1 action,60 ft,"V, S",,"Concentration, up to 1 hour",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+109,Dominate Person,5,,Enchantment,1 action,60 ft,"V, S",,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,,Wizard,,3
+110,Drawmij's Instant Summon,6,Ritual,Conjuration,1 minute,Touch,"V, S, M","a sapphire worth 1,000 gp",Until Dispelled,,,,,,,,Wizard,,1
+111,Dream,5,,Illusion,1 minute,Special,"V, S, M","a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird",8 hours,Bard,,,,,,Warlock,Wizard,,3
+112,Druidcraft,Cantrip,,Transmutation,1 action,30 ft,"V, S",,Instantaneous,,,Druid,,,,,,,1
+113,Earthquake,8,,Evocation,1 action,500 ft,"V, S, M","a pinch of dirt, a piece of rock, and a lump of clay","Concentration, up to 1 minute",,Cleric,Druid,,,Sorcerer,,,,3
+114,Eldritch Blast,Cantrip,,Evocation,1 action,120 ft,"V, S",,Instantaneous,,,,,,,Warlock,,,1
+115,Elemental Weapon,3,,Transmutation,1 action,Touch,"V, S",,"Concentration, up to 1 hour",,,,Paladin,,,,,,1
+116,Enhance Ability,2,,Transmutation,1 action,Touch,"V, S, M",fur or a feather from a beast,"Concentration, up to 1 hour",Bard,Cleric,Druid,,,Sorcerer,,,,4
+117,Enlarge/Reduce,2,,Transmutation,1 action,30 ft,"V, S, M",a pinch of powdered iron,"Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+118,Ensnaring Strike,1,,Conjuration,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,,Ranger,,,,,1
+119,Entangle,1,,Conjuration,1 action,90 ft,"V, S",,"Concentration, up to 1 minute",,,Druid,,,,,,,1
+120,Enthrall,2,,Enchantment,1 action,60 ft,"V, S",,1 minute,Bard,,,,,,Warlock,,,2
+121,Etherealness,7,,Transmutation,1 action,Self,"V, S",,Up to 8 hours,Bard,Cleric,,,,Sorcerer,Warlock,Wizard,,5
+122,Evard's Black Tentacles,4,,Conjuration,1 action,90 ft,"V, S, M",a piece o f tentacle from a giant octopus or a giant squid,"Concentration, up to 1 minute",,,,,,,,Wizard,,1
+123,Expeditious Retreat,1,,Transmutation,1 bonus action,Self,"V, S",,"Concentration, up to 10 minutes",,,,,,Sorcerer,Warlock,Wizard,,3
+124,Eyebite,6,,Necromancy,1 action,Self,"V, S",,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+125,Fabricate,4,,Transmutation,10 minutes,120 ft,"V, S",,Instantaneous,,,,,,,,Wizard,,1
+126,Faerire Fire,1,,Evocation,1 action,60 ft,V,,"Concentration, up to 1 minute",Bard,,Druid,,,,,,,2
+127,False Life,1,,Necromancy,1 action,Self,"V, S, M",a small amount of alcohol or distilled spirits,1 hour,,,,,,Sorcerer,,Wizard,,2
+128,Fear,3,,Illusion,1 action,Self (30ft cone),"V, S, M","a white feather or the
+heart of a hen","Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+129,Feather Fall,1,,Transmutation,"1 reaction, which you take when you or a creature within 60 feet of you falls",60 ft,"V, M",a small feather or piece of down,1 minute,Bard,,,,,Sorcerer,,Wizard,,3
+130,Feeblemind,8,,Enchantment,1 action,150 ft,"V, S, M","a handful of clay, crystal, glass, or mineral spheres",Instantaneous,Bard,,Druid,,,,Warlock,Wizard,,4
+131,Feign Death,3,Ritual,Necromancy,1 action,Touch,"V, S, M",a pinch of graveyard dirt,1 hour,Bard,Cleric,Druid,,,,,Wizard,,4
+132,Find Familiar,1,Ritual,Conjuration,1 hour,10 ft,"V, S, M","10 gp worth of charcoal,
+incense, and herbs that must be consumed by fire in a brass brazier",Instantaneous,,,,,,,,Wizard,,1
+133,Find Steed,2,,Conjuration,10 minutes,30 ft,"V, S",,Instantaneous,,,,Paladin,,,,,,1
+134,Find the Path,6,,Divination,1 minute,Self,"V, S, M","a set o f divinatory tools?such as bones, ivory sticks, cards, teeth, or carved runes?worth 100 gp and an object from the location you wish to find","Concentration, up to 1 day",Bard,Cleric,Druid,,,,,,,3
+135,Find Traps,2,,Divination,1 action,120 ft,"V, S",,Instantaneous,,Cleric,Druid,,Ranger,,,,,3
+136,Finger of Death,7,,Necromancy,1 action,60 ft,"V, S",,Instantaneous,,,,,,Sorcerer,Warlock,Wizard,,3
+137,Fireball,3,,Evocation,1 action,150 ft,"V, S, M","a tiny ball of bat
+guano and sulfur",Instantaneous,,,,,,Sorcerer,,Wizard,,2
+138,Fire Bolt,Cantrip,,Evocation,1 action,120 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+139,Fire Shield,4,,Evocation,1 action,Self,"V, S, M",a bit of phosphorus or a firefly,10 minutes,,,,,,,,Wizard,,1
+140,Fire Storm,7,,Evocation,1 action,150 ft,"V, S",,Instantaneous,,Cleric,Druid,,,Sorcerer,,,,3
+141,Flame Blade,2,,Evocation,1 bonus action,Self,"V, S, M",leaf of sumac,"Concentration, up to 10 minutes",,,Druid,,,,,,,1
+142,Flame Strike,5,,Evocation,1 action,60 ft,"V, S, M",pinch of sulfur,Instantaneous,,,,,,,,,,0
+143,Flaming Sphere,2,,Conjuration,1 action,60 ft,"V, S, M","a bit of tallow, a pinch of brimstone, and a dusting of powdered iron","Concentration, up to 1 minute",,,,,,,,Wizard,,1
+144,Flesh to Stone,6,,Transmutation,1 action,60 ft,"V, S, M","a pinch of lime, water, and earth","Concentration, up to 1 minute",,,,,,,Warlock,Wizard,,2
+145,Fly,3,,Transmutation,1 action,Touch,"V, S, M",a wing feather from any bird,"Concentration, up to 10 minutes",,,,,,Sorcerer,Warlock,Wizard,,3
+146,Fog Cloud,1,,Conjuration,1 action,120 ft,"V, S",,"Concentration, up to 1 hour",,,Druid,,Ranger,Sorcerer,,Wizard,,4
+147,Forbiddance,6,Ritual,Abjuration,10 minutes,Touch,"V, S, M","a sprinkling of holy water, rare incense, and powdered ruby worth at least 1,000 gp",1 day,,Cleric,,,,,,,,1
+148,Forcecage,7,,Evocation,1 action,100 ft,"V, S, M","ruby dust worth 1,500 gp",1 hour,Bard,,,,,,Warlock,Wizard,,3
+149,Foresight,9,,Divination,1 minute,Touch,"V, S, M",a hummingbird feather,8 hours,Bard,,Druid,,,,Warlock,Wizard,,4
+150,Freedom of Movement,4,,Abjuration,Touch,Touch,"V, S, M","a leather strap, bound around the arm or a similar appendage",1 hour,Bard,Cleric,Druid,,Ranger,,,,,4
+151,Friends,Cantrip,,Enchantment,1 action,Self,"S, M",a small amount of makeup applied to the face as this spell is cast,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+152,Gaseous Form,3,,Transmutation,1 action,Touch,"V, S, M","a bit o f gauze and a
+wisp of smoke","Concentration, up to 1 hour",,,,,,Sorcerer,Warlock,Wizard,,3
+153,Gate,9,,Conjuration,1 action,60 ft,"V, S, M","a diamond worth at least 5,000 gp","Concentration, up to 1 minute",,Cleric,,,,Sorcerer,,Wizard,,3
+154,Geas,5,,Enchantment,1 minute,60 ft,V,,30 days,Bard,,Druid,Paladin,,,,Wizard,,4
+155,Gentle Repose,2,Ritual,Necromancy,1 action,Touch,"V, S, M","a pinch of salt and one copper piece placed on each o f the corpse?s eyes, which must remain there for the duration",10 days,,Cleric,,,,,,Wizard,,2
+156,Giant Insect,4,,Transmutation,1 action,30 ft,"V, S",,"Concentration, up to 10 minutes",,,Druid,,,,,,,1
+157,Glibness,8,,Transmutation,1 action,Self,V,,1 hour,Bard,,,,,,Warlock,,,2
+158,Globe of Invulnerability,6,,Abjuration,1 action,Self (10ft radius),"V, S, M",glass or crystal bead that shatters when the spell ends,"Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+159,Glyph of Warding,3,,Abjuration,1 hour,Touch,"V, S, M","incense and powdered diamond worth at least 200 gp, which the spell consumes",Until dispelled or triggered,Bard,Cleric,,,,,,Wizard,,3
+160,Goodberry,1,,Transmutation,1 action,Touch,"V, S, M",a sprig of mistletoe,Instantaneous,,,Druid,,Ranger,,,,,2
+161,Grasping Wine,4,,Conjuration,1 bonus action,30 ft,"V, S",,"Concentration, up to 1 minute",,,Druid,,Ranger,,,Wizard,,3
+162,Grease,1,,Conjuration,1 action,60 ft,"V, S, M",a bit of pork rind or butter,1 minute,,,,,,,,Wizard,,1
+163,Greater Invisibility,4,,Illusion,1 action,Touch,"V, S",,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,,,,2
+164,Greater Restoration,5,,Abjuration,1 action,Touch,"V, S, M","diamond dust worth at least 100 gp, which the spell consumes",Instantaneous,Bard,Cleric,Druid,,,,,,,3
+165,Guardian of Faith,4,,Conjuration,1 action,30 ft,V,,8 hours,,Cleric,,,,,,,,1
+166,Guards and Wards,6,,Abjuration,10 minutes,Touch,"V, S, M","burning incense, a small measure o f brimstone and oil, a knotted string, a small amount of umber hulk blood, and a small silver rod worth at least 10 gp",24 hours,Bard,,,,,,,Wizard,,2
+167,Guidance,Cantrip,,Divination,1 action,Touch,"V, S",,"Concentration, up to 1 minute",,Cleric,Druid,,,,,,,2
+168,Guiding Bolt,1,,Evocation,1 action,120 ft,"V, S",,1 round,,Cleric,,,,,,,,1
+169,Gust of Wind,2,,Evocation,1 action,Self (60ft line),"V, S, M",a legume seed,"Concentration, up to 1 minute",,,Druid,,,Sorcerer,,Wizard,,3
+170,Hail of Thorns,1,,Conjuration,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,,Ranger,,,,,1
+171,Hallow,5,,Evocation,24 hours,Touch,"V, S, M","herbs, oils, and incense worth at least 1,000 gp, which the spell consumes",Until Dispelled,,Cleric,,,,,,,,1
+172,Hallucinatory Terrain,4,,Illusion,10 minutes,300 ft,"V, S, M","a stone, a twig, and a bit of green plant",24 hours,Bard,,Druid,,,,Warlock,Wizard,,4
+173,Harm,6,,Necromancy,1 action,60 ft,"V, S",,Instantaneous,,Cleric,,,,,,,,1
+174,Haste,3,,Transmutation,1 action,30 ft,"V, S, M",a shaving of licorice root,"Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+175,Heal,6,,Evocation,1 action,60 ft,"V, S",,Instantaneous,,Cleric,Druid,,,,,,,2
+176,Healing Word,1,,Evocation,1 bonus action,60 ft,V,,Instantaneous,Bard,Cleric,Druid,,,,,,,3
+177,Heat Metal,2,,Transmutation,1 action,60 ft,"V, S, M",a piece of iron and a flame,"Concentration, up to 1 minute",Bard,,Druid,,,,,,,2
+178,Hellish Rebuke,1,,Evocation,"1 reaction, which you take in response to being damaged by a creature within 60 feet of you that you can see",60 ft,"V, S",,Instantaneous,,,,,,,Warlock,,,1
+179,Heroes's Feast,6,,Conjuration,10 minutes,30 ft,"V, S, M","a gem-encrusted bowl worth at least 1,000 gp, which the spell consumes",Instantaneous,,Cleric,Druid,,,,,,,2
+180,Heroism,1,,Enchantment,1 action,Touch,"V, S",,"Concentration, up to 1 minute",Bard,,,Paladin,,,,,,2
+181,Hex,1,,Enchantment,1 bonus action,90 ft,"V, S, M",the petrified eye of a newt,"Concentration, up to 1 hour",,,,,,,Warlock,,,1
+182,Hold Monster,5,,Enchantment,1 action,90 ft,"V, S, M","a small, straight piece of iron","Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+183,Hold Person,2,,Enchantment,1 action,60 ft,"V, S, M","a small, straight piece of iron","Concentration, up to 1 minute",Bard,Cleric,Druid,,,Sorcerer,Warlock,Wizard,,6
+184,Holy Aura,8,,Abjuration,1 action,Self,"V, S, M","a tiny reliquary worth at least 1,000 gp containing a sacred relic, such as a scrap of cloth from a saint?s robe or a piece of parchment from a religious text","Concentration, up to 1 minute",,Cleric,,,,,,,,1
+185,Hunger of Hadar,3,,Conjuration,1 action,150 ft,"V, S, M",a pickled octopus tentacle,"Concentration, up to 1 minute",,,,,,,Warlock,,,1
+186,Hunter's Mask,1,,Divination,1 bonus action,90 ft,V,,"Concentration, up to 1 hour",,,,,Ranger,,,,,1
+187,Hypnotic Pattern,3,,Illusion,1 action,120 ft,"S, M",a glowing stick of incense or a crystal vial filled with phosphorescent material,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+188,Ice Storm,4,,Evocation,1 action,300 ft,"V, S, M",a pinch of dust and a few drops of water,Instantaneous,,,Druid,,,Sorcerer,,Wizard,,3
+189,Identify,1,,Divination,1 minute,Touch,"V, S, M",a pearl worth at least 100 gp and an owl feather,Instantaneous,Bard,,,,,,,Wizard,,2
+190,Illusory Script,1,Ritual,Illusion,1 minute,Touch,"S, M","a lead-based ink worth at least 10 gp, which the spell consumes",10 days,Bard,,,,,,Warlock,Wizard,,3
+191,Imprisonment,9,,Abjuration,1 minute,30 ft,"V, S, M","a vellum depiction or a carved statuette in the likeness o f the target, and a special component that varies according to the version of the spell you choose, worth at least 500 gp per Hit Die of the target",Until Dispelled,,,,,,,Warlock,Wizard,,2
+192,Incendiary Cloud,8,,Conjuration,1 action,150 ft,"V, S",,"Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+193,Inflict Wounds,1,,Necromancy,1 action,Touch,"V, S",,Instantaneous,,Cleric,,,,,,,,1
+194,Insect Plague,5,,Conjuration,1 action,300 ft,"V, S, M","a few grains of sugar, some kernels of grain, and a smear of fat","Concentration, up to 1 minute",,Cleric,Druid,,,Sorcerer,,,,3
+195,Invisibility,2,,Illusion,1 action,Touch,"V, S, M",an eyelash encased in gum arabic,"Concentration, up to 1 hour",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+196,Jump,1,,Transmutation,1 action,Touch,"V, S, M",a grasshopper?s hind leg,1 minute,,,Druid,,Ranger,Sorcerer,,Wizard,,4
+197,Knock,2,,Transmutation,1 action,60 ft,V,,Instantaneous,Bard,,,,,Sorcerer,,Wizard,,3
+198,Legend Lore,5,,Divination,10 minutes,Self,"V, S, M","incense worth at least 250 gp, which the spell consumes, and four ivory strips worth at least 50 gp each",Instantaneous,Bard,Cleric,,,,,,Wizard,,3
+199,Leomund's Secret Chest,4,,Conjuration,1 action,Touch,"V, S, M","an exquisite chest, 3 feet by 2 feet by 2 feet, constructed from rare materials worth at least 5,000 gp, and a Tiny replica made from the same materials worth at least 50 gp",Instantaneous,,,,,,,,Wizard,,1
+200,Leomund's Tiny Hut,3,Ritual,Evocation,1 minute,Self (10ft radius hemisphere),"V, S, M",a small crystal bead,8 hours,Bard,,,,,,,Wizard,,2
+201,Lesser Restoration,2,Ritual,Abjuration,1 action,Touch,"V, S",,Instantaneous,Bard,Cleric,Druid,Paladin,Ranger,,,,,5
+202,Levitate,2,,Transmutation,1 action,60 ft,"V, S, M",either a small leather loop or a piece of golden  wire bent into a cup shape with a long shank on one end,"Concentration, up to 10 minutes",,,,,,Sorcerer,,Wizard,,2
+203,Light,Cantrip,,Evocation,1 action,Touch,"V, M",a firefly or  phosphorescent moss,1 hour,Bard,Cleric,,,,Sorcerer,,Wizard,,4
+204,Lightning Arrow,3,,Transmutation,1 bonus action,Self,"V, S",,"Concentration, up to 1 minute",,,,,Ranger,,,,,1
+205,Lightning Bolt,3,,Evocation,1 action,Self (100ft Line),"V, S, M","a bit of fur and a rod of amber, crystal, or glass",Instantaneous,,,,,,Sorcerer,,Wizard,,2
+206,Locate Animals or Plants,2,Ritual,Divination,1 action,Self,"V, S, M",a bit of fur from a bloodhound,Instantaneous,Bard,,Druid,,Ranger,,,,,3
+207,Locate Creature,4,,Divination,1 action,Self,"V, S, M",a bit of fur from a bloodhound,"Concentration, up to 1 hour",Bard,Cleric,Druid,Paladin,Ranger,,,Wizard,,6
+208,Locate Object,2,,Divination,1 action,Self,"V, S, M",a forked twig,"Concentration, up to 10 minutes",Bard,Cleric,,Paladin,Ranger,,,,,4
+209,Longstrider,1,,Transmutation,1 action,Touch,"V, S, M",a pinch of dirt,1 hour,Bard,,Druid,,Ranger,,,Wizard,,4
+210,Mage Armor,1,,Abjuration,1 action,Touch,"V, S, M",a piece of cured leather,8 hours,,,,,,Sorcerer,,Wizard,,2
+211,Mage Hand,Cantrip,,Conjuration,1 action,30 ft,"V, S",,1 minute,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+212,Magic Circle,3,,Abjuration,1 minute,10 ft,"V, S, M","holy water or powdered
+silver and iron worth at least 100 gp, which the
+spell consumes",1 hour,,Cleric,,Paladin,,,Warlock,Wizard,,4
+213,Magic Jar,6,,Necromancy,1 minute,Self,"V, S, M","a gem, crystal, reliquary, or some other  ornamental container worth at least 500 gp",Until Dispelled,,,,,,,,Wizard,,1
+214,Magic Missile,1,,Evocation,1 action,120 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+215,Magic Mouth,2,Ritual,Illusion,1 minute,30 ft,"V, S, M","a small bit of honeycomb and jade dust worth at least 10 gp, which the spell consumes",Until Dispelled,Bard,,,,,,,Wizard,,2
+216,Magic Weapon,2,,Transmutation,1 bonus action,Touch,"V, S",,"Concentration, up to 1 hour",,,,Paladin,,,,Wizard,,2
+217,Major Image,3,,Illusion,1 action,120 ft,"V, S, M",a bit of fleece,"Concentration, up to 10 minutes",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+218,Mass Cure Wounds,5,,Conjuration,1 action,60 ft,"V, S",,Instantaneous,Bard,,Druid,,,,,,,2
+219,Mass Heal,9,,Conjuration,1 action,60 ft,"V, S",,Instantaneous,,Cleric,,,,,,,,1
+220,Mass Healing Word,3,,Evocation,1 bonus action,60 ft,V,,Instantaneous,,Cleric,,,,,,,,1
+221,Mass Suggestion,6,,Enchantment,1 action,60 ft,"V, M",a snake?s tongue and either a bit of honeycomb or a drop of sweet oil,24 hours,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+222,Maze,8,,Conjuration,1 action,60 ft,"V, S",,"Concentration, up to 10 minutes",,,,,,,,Wizard,,1
+223,Meld Into Stone,3,Ritual,Transmutation,1 action,Touch,"V, S",,8 hours,,Cleric,Druid,,,,,,,2
+224,Melf's Acid Arrow,2,,Evocation,1 action,90 ft,"V, S, M",powdered rhubarb leaf and an adder?s stomach,Instantaneous,,,,,,,,Wizard,,1
+225,Mending,Cantrip,,Transmutation,1 minute,Touch,"V, S, M",two lodestones,Instantaneous,Bard,Cleric,Druid,,,Sorcerer,,Wizard,,5
+226,Message,Cantrip,,Transmutation,1 action,120 ft,"V, S, M",a short piece of copper wire,1 round,Bard,,,,,Sorcerer,,Wizard,,3
+227,Meteor Swarm,9,,Evocation,1 action,1 mile,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+228,Mind Blank,8,,Abjuration,1 action,Touch,"V, S",,24 hours,Bard,,,,,,,Wizard,,2
+229,Minor Illusion,Cantrip,,Illusion,1 action,30 ft,"S, M",a bit of fleece,1 minute,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+230,Mirage Arcane,7,,Illusion,10 minutes,Sight,"V, S",,10 days,Bard,,Druid,,,,,Wizard,,3
+231,Mirror Image,2,,Illusion,1 action,Self,"V, S",,1 minute,,,,,,Sorcerer,Warlock,Wizard,,3
+232,Mislead,5,,Illusion,1 action,Self,S,,"Concentration, up to 1 hour",Bard,,,,,,,Wizard,,2
+233,Misty Step,2,,Conjuration,1 bonus action,Self,V,,Instantaneous,,,,,,Sorcerer,Warlock,Wizard,,3
+234,Modify Memory,5,,Enchantment,1 action,30 ft,"V, S",,"Concentration, up to 1 minute",Bard,,,,,,,Wizard,,2
+235,Moonbeam,2,,Evocation,1 action,120 ft,"V, S, M",several seeds o f any m oonseed plant and a piece of opalescent feldspar,"Concentration, up to 1 minute",,,Druid,,,,,,,1
+236,Mordekainen's Faithful Hound,4,,Conjuration,1 action,30 ft,"V, S, M","a tiny silver whistle, a piece of bone, and a thread",8 hours,,,,,,,,Wizard,,1
+237,Mordekainen's Magnificent Mansion,7,,Conjuration,1 minute,300 ft,"V, S, M","a miniature portal carved from ivory, a small piece of polished marble, and a tiny silver spoon, each item  worth at least 5 gp",24 hours,Bard,,,,,,,Wizard,,2
+238,Mordekainen's Private Sanctum,4,,Abjuration,10 minutes,120 ft,"V, S, M","a thin sheet o f lead, a piece of opaque glass, a wad of cotton or cloth, and powdered chrysolite",24 hours,,,,,,,,Wizard,,1
+239,Mordekainen's Sword,7,,Evocation,1 action,60 ft,"V, S, M","a miniature platinum sword with a grip and pommel o f copper and zinc, worth 250 gp","Concentration, up to 1 minute",Bard,,,,,,,Wizard,,2
+240,Move Earth,6,,Transmutation,1 action,120 ft,"V, S, M","an iron blade and a small bag containing a mixture of  oils?clay, loam, and sand","Concentration, up to 2 hours",,,Druid,,,Sorcerer,,Wizard,,3
+241,Nondetection,3,,Abjuration,1 action,Touch,"V, S, M","a pinch of diamond dust
+worth 25 gp sprinkled over the target, which the spell consumes",8 hours,Bard,,,,Ranger,,,Wizard,,3
+242,Nystul's Magic Aura,2,,Illusion,1 action,Touch,"V, S, M",a small square of silk,24 hours,,,,,,,,Wizard,,1
+243,Otiluke Freezing Sphere,6,,Evocation,1 action,300 ft,"V, S, M",a small crystal sphere,Instantaneous,,,,,,,,Wizard,,1
+244,Otiluke resilient Sphere,4,,Evocation,1 action,30 ft,"V, S, M","a hemispherical piece of
+clear crystal and a matching hemispherical piece of gum arabic","Concentration, up to 1 minute",,,,,,,,Wizard,,1
+245,Otto's Irresistible Dance,6,,Enchantment,1 action,30 ft,V,,"Concentration, up to 1 minute",Bard,,,,,,,Wizard,,2
+246,Pass Without Trace,2,,Abjuration,1 action,Self,"V, S, M","ashes from a burned leaf of
+mistletoe and a sprig of spruce","Concentration, up to 1 hour",,,Druid,,Ranger,,,,,2
+247,Passwall,5,,Transmutation,1 action,30 ft,"V, S, M",a pinch of sesame seeds,1 hour,,,,,,,,Wizard,,1
+248,Phantasmal Force,2,,Illusion,1 action,60 ft,"V, S, M",a bit of fleece,"Concentration, up to 1 minute",Bard,,,,,Sorcerer,,Wizard,,3
+249,Phantasmal Killer,4,,Illusion,1 action,120 ft,"V, S",,"Concentration, up to 1 minute",,,,,,,,Wizard,,1
+250,Phantom Seed,3,Ritual,Illusion,1 minute,30 ft,"V, S",,1 hour,,,,,,,,Wizard,,1
+251,Planar Ally,6,,Conjuration,10 minutes,60 ft,"V, S",,Instantaneous,,Cleric,,,,,,,,1
+252,Planar Binding,5,,Abjuration,1 hour,60 ft,"V, S, M","a jewel worth at least 1,000 gp, which the spell consumes",24 hours,Bard,Cleric,Druid,,,,,Wizard,,4
+253,Plane Shift,7,,Conjuration,1 action,Touch,"V, S, M","a forked, metal rod worth at least 250 gp, attuned to a particular plane of existence",Instantaneous,,Cleric,Druid,,,Sorcerer,Warlock,Wizard,,5
+254,Plant Growth,3,,Transmutation,1 action or 8 hours,150 ft,"V, S",,Instantaneous,Bard,,Druid,,Ranger,,,,,3
+255,Poison Spray,Cantrip,,Conjuration,1 action,10 ft,"V, S",,Instantaneous,,,Druid,,,Sorcerer,Warlock,Wizard,,4
+256,Polymorph,4,,Transmutation,1 action,60 ft,"V, S, M",a caterpillar cocoon,"Concentration, up to 1 hour",Bard,,Druid,,,Sorcerer,,Wizard,,4
+257,Power Word Heal,9,,Evocation,1 action,Touch,"V, S",,Instantaneous,Bard,,,,,,,,,1
+258,Power Word Kill,9,,Enchantment,1 action,60 ft,V,,Instantaneous,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+259,Power Word Stun,8,,Enchantment,1 action,60 ft,V,,Instantaneous,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+260,Prayer of Healing,2,,Evocation,10 minutes,30 ft,V,,Instantaneous,,Cleric,,,,,,,,1
+261,Prestidigitation,Cantrip,,Transmutation,1 action,10 ft,"V, S",,Up to 1 hour,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+262,Prismatic Spray,7,,Evocation,1 action,Sel f (60-foot cone),"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+263,Prismatic Wall,9,,Abjuration,1 action,60 ft,"V, S",,10 minutes,,,,,,,,Wizard,,1
+264,Produce Flame,Cantrip,,Conjuration,1 action,Self,"V, S",,10 minutes,,,Druid,,,,,,,1
+265,Programmed Illusion,6,,Illusion,1 action,120 ft,"V, S, M",a bit of fleece and jade dust worth at least 25 gp,Until Dispelled,Bard,,,,,,,Wizard,,2
+266,Project Image,7,,Illusion,1 action,500 miles,"V, S, M",a small replica of you made from materials worth at least 5 gp,"Concentration, up to 1 day",Bard,,,,,,,Wizard,,2
+267,Protection From Energy,3,,Abjuration,1 action,Touch,"V, S",,"Concentration, up to 1 hour",,Cleric,Druid,,Ranger,Sorcerer,,Wizard,,5
+268,Protection From Evil and Good,1,,Abjuration,1 action,Touch,"V, S, M","holy water or powdered silver and iron, which the spell consumes","Concentration, up to 10 minutes",,Cleric,,Paladin,,,Warlock,Wizard,,4
+269,Protection From Poison,2,,Abjuration,1 action,Touch,"V, S",,1 hour,,Cleric,Druid,Paladin,Ranger,,,,,4
+270,Purify Food and Drink,1,Ritual,Transmutation,1 action,10 ft,"V, S",,Instantaneous,,Cleric,Druid,Paladin,,,,,,3
+271,Raise Dead,5,,Necromancy,1 hour,Touch,"V, S, M","a diamond worth at least 500 gp, which the spell consumes",Instantaneous,Bard,Cleric,,Paladin,,,,,,3
+272,Rary's Telepathic Bond,5,Ritual,Divination,1 action,30 ft,"V, S, M",pieces o f eggshell from two different kinds of creatures,1 hour,,,,,,,,Wizard,,1
+273,Ray of Enfeeblement,2,,Necromancy,1 action,60 ft,"V, S",,"Concentration, up to 1 minute",,,,,,,Warlock,Wizard,,2
+274,Ray of Frost,Cantrip,,Evocation,1 action,60 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+275,Ray of Sickness,1,,Necromancy,1 action,60 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+276,Regenerate,7,,Transmutation,1 minute,Touch,"V, S, M",a prayer wheel and holy water,1 hour,Bard,Cleric,Druid,,,,,,,3
+277,Reincarnate,5,,Transmutation,1 hour,Touch,"V, S, M","rare oils and unguents worth at least 1,000 gp, which the spell consumes",Instantaneous,,,Druid,,,,,,,1
+278,Remove Curse,3,,Abjuration,1 action,Touch,"V, S",,Instantaneous,,Cleric,,Paladin,,,Warlock,Wizard,,4
+279,Resistance,Cantrip,,Abjuration,1 action,Touch,"V, S, M",a miniature cloak,"Concentration, up to 1 minute",,Cleric,Druid,,,,,,,2
+280,Resurrection,7,,Necromancy,1 hour,Touch,"V, S, M","a diamond worth at least 1,000 gp, which the spell consumes",Instantaneous,Bard,Cleric,,,,,,,,2
+281,Reverse Gravity,7,,Transmutation,1 action,100 ft,"V, S, M",a lodestone and iron filings,"Concentration, up to 1 minute",,,Druid,,,Sorcerer,,Wizard,,3
+282,Revivify,3,,Conjuration,1 action,Touch,"V, S, M","diamonds worth 300 gp, which the spell consumes",Instantaneous,,Cleric,,Paladin,,,,,,2
+283,Rope Trick,2,,Transmutation,1 action,Touch,"V, S, M",powdered corn extract and a twisted loop of  archment,1 hour,,,,,,,,Wizard,,1
+284,Sacred Flame,Cantrip,,Evocation,1 action,60 ft,"V, S",,Instantaneous,,Cleric,,,,,,,,1
+285,Sanctuary,1,,Abjuration,1 bonus action,30 ft,"V, S, M",a small silver mirror,1 minute,,Cleric,,,,,,,,1
+286,Scorching Ray,2,,Evocation,1 action,120 ft,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+287,Scrying,5,,Divination,10 minutes,Self,"V, S, M","a focus worth at least 1,000 gp, such as a crystal ball, a silver mirror, or a font filled with holy water","Concentration, up to 10 minutes",Bard,Cleric,Druid,,,,Warlock,Wizard,,5
+288,Searing Smite,1,,Evocation,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+289,See Invisibility,2,,Divination,1 action,Self,"V, S, M",a pinch o f talc and a small sprinkling of powdered silver,1 hour,Bard,,,,,Sorcerer,,Wizard,,3
+290,Seeming,5,,Illusion,1 action,30 ft,"V, S",,8 hours,Bard,,,,,Sorcerer,,Wizard,,3
+291,Sending,3,,Evocation,1 action,Unlimited,"V, S, M",a short piece of fine copper wire,1 round,Bard,Cleric,,,,,,Wizard,,3
+292,Sequester,7,,Transmutation,1 action,Touch,"V, S, M","a powder composed of diamond, emerald, ruby, and sapphire dust worth at least 5,000 gp, which the spell consumes",Until Dispelled,,,,,,,,Wizard,,1
+293,Shapechange,9,,Transmutation,1 action,Self,"V, S, M","a jade circlet worth at least 1,500 gp, which you must place on your head before you cast the spell","Concentration, up to 1 hour",,,Druid,,,,,Wizard,,2
+294,Shatter,2,,Evocation,1 action,60 ft,"V, S, M",a chip of mica,Instantaneous,Bard,,,,,Sorcerer,Warlock,Wizard,,4
+295,Shield,1,,Abjuration,"1 reaction, which you take when you are hit by an attack or targeted by the magic missile spel",Self,"V, S",,1 round,,,,,,Sorcerer,,Wizard,,2
+296,Shield of Faith,1,,Abjuration,1 bonus action,60 ft,"V, S",,"Concentration, up to 10 minutes",,Cleric,,Paladin,,,,,,2
+297,Shillelagh,Cantrip,,Transmutation,1 bonus action,Touch,"V, S, M","mistletoe, a shamrock leaf, and a club or quarterstaff",1 minute,,,Druid,,,,,,,1
+298,Shocking Grasp,Cantrip,,Evocation,1 action,Touch,"V, S",,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+299,Silence,2,Ritual,Illusion,1 action,120 ft,"V, S",,"Concentration, up to 10 minutes",Bard,Cleric,,,Ranger,,,,,3
+300,Silent Image,1,,Illusion,1 action,60 ft,"V, S, M",a bit of fleece,"Concentration, up to 10 minutes",Bard,,,,,Sorcerer,,Wizard,,3
+301,Simulacrum,7,,Illusion,12 hours,Touch,"V, S, M","snow or ice in quantities sufficient to made a life-size  opy of the duplicated creature; some hair, fingernail clippings, or other piece o f that creature?s body placed inside the snow or ice; and powdered ruby worth 1,500 gp, sprinkled over the duplicate and consumed by the spell",Until Dispelled,,,,,,,,Wizard,,1
+302,Sleep,1,,Enchantment,1 action,90 ft,"V, S, M","a pinch of fine sand, rose petals, or a cricket",1 minute,Bard,,,,,Sorcerer,,Wizard,,3
+303,Sleet Storm,3,,Conjuration,1 action,150 ft,"V, S, M","a pinch of dust and a few
+drops o f water","Concentration, up to 1 minute",,,Druid,,,Sorcerer,,Wizard,,3
+304,Slow,3,,Transmutation,1 action,120 ft,"V, S, M",a drop of molasses,"Concentration, up to 1 minute",,,,,,Sorcerer,,Wizard,,2
+305,Spare the Dying,Cantrip,,Necromancy,1 action,Touch,"V, S",,Instantaneous,,Cleric,,,,,,,,1
+306,Speak with Animals,1,Ritual,Divination,1 action,Self,"V, S",,10 minutes,Bard,,Druid,,Ranger,,,,,3
+307,Speak with Dead,3,,Necromancy,1 action,10 ft,"V, S, M",burning incense,10 minutes,Bard,Cleric,,,,,,,,2
+308,Speak with Plants,3,,Transmutation,1 action,Self (30-foot radius),"V, S",,10 minutes,Bard,,Druid,,Ranger,,,,,3
+309,Spider Climb,2,,Transmutation,1 action,Touch,"V, S, M",a drop of bitumen and a spider,"Concentration, up to 1 hour",,,,,,Sorcerer,Warlock,Wizard,,3
+310,Spike Growth,2,,Transmutation,1 action,150 ft,"V, S, M","seven sharp thorns or seven small twigs, each sharpened to a point","Concentration, up to 10 minutes",,,Druid,,Ranger,,,,,2
+311,Spirit Guardians,3,,Conjuration,1 action,Self (15-foot radius),"V, S, M",a holy symbol,"Concentration, up to 10 minutes",,Cleric,,,,,,,,1
+312,Spiritual Weapon,2,,Evocation,1 bonus action,60 ft,"V, S",,1 minute,,Cleric,,,,,,,,1
+313,Staggering Smite,4,,Evocation,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+314,Stinking Cloud,3,,Conjuration,1 action,90 ft,"V, S, M","a rotten egg or several skunk
+cabbage leaves","Concentration, up to 1 minute",Bard,,,,,Sorcerer,,Wizard,,3
+315,Stone Shape,4,,Transmutation,1 action,Touch,"V, S, M","soft clay, which must be worked
+into roughly the desired shape o f the stone object",Instantaneous,,Cleric,Druid,,,,,Wizard,,3
+316,Stoneskin,4,,Abjuration,1 action,Touch,"V, S, M","diamond dust worth 100 gp, which the spell consumes","Concentration, up to 1 hour",,,Druid,,Ranger,Sorcerer,,Wizard,,4
+317,Storm of Vengeance,9,,Conjuration,1 action,Sight,"V, S",,"Concentration, up to 1 minute",,,Druid,,,,,,,1
+318,Suggestion,2,,Enchantment,1 action,30 ft,"V, M",a snake?s tongue and either a bit of honeycomb or a drop of  sweet oil,"Concentration, up to 8 hours",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+319,Sunbeam,6,,Evocation,1 action,Self (60-foot line),"V, S, M",a magnifying glass,"Concentration, up to 1 minute",,,Druid,,,Sorcerer,,Wizard,,3
+320,Sunburst,8,,Evocation,1 action,150 ft,"V, S, M",fire and a piece of sunstone,Instantaneous,,,Druid,,,Sorcerer,,Wizard,,3
+321,Swift Quiver,5,,Transmutation,1 bonus action,Touch,"V, S, M","a quiver containing at least one
+piece of ammunition","Concentration, up to 1 minute",,,,,Ranger,,,,,1
+322,Symbol,7,,Abjuration,1 minute,Touch,"V, S, M","mercury, phosphorus, and powdered diamond and opal with a total value of at least 1,000 gp, which the spell consumes",Until dispelled or triggered,Bard,Cleric,,,,,,Wizard,,3
+323,Tasha's Hideous Laughter,1,,Enchantment,1 action,30 ft,"V, S, M","tiny tarts and a feather that is
+waved in the air","Concentration, up to 1 minute",,,,,,,,Wizard,,1
+324,Telekinesis,5,,Transmutation,1 action,60 ft,"V, S",,"Concentration, up to 10 minutes",,,,,,Sorcerer,,Wizard,,2
+325,Telepathy,8,,Evocation,1 action,Unlimited,"V, S, M",a pair of linked silver rings,24 hours,,,,,,,,Wizard,,1
+326,Teleport,7,,Conjuration,1 action,10 ft,V,,Instantaneous,Bard,,,,,Sorcerer,,Wizard,,3
+327,Teleportation Circle,5,,Conjuration,1 minute,10 ft,"V, M","rare chalks and inks infused with precious gems with 50 gp, which the spell consumes",1 round,Bard,,,,,Sorcerer,,Wizard,,3
+328,Tenser's Floating Disk,1,Ritual,Conjuration,1 action,30 ft,"V, S, M",a drop of mercury,1 hour,,,,,,,,Wizard,,1
+329,Thaumaturgy,Cantrip,,Transmutation,1 action,30 ft,V,,Up to 1 minute,,Cleric,,,,,,,,1
+330,Thorn Whip,Cantrip,,Transmutation,1 action,30 ft,"V, S, M",the stem of a plant with thorns,Instantaneous,,,Druid,,,,,,,1
+331,Thunderous Smite,1,,Evocation,1 bonus action,Self,V,,"Concentration, up to 1 minute",,,,Paladin,,,,,,1
+332,Thunderwave,1,,Evocation,1 action,Self (15-foot cube),"V, S",,Instantaneous,Bard,,Druid,,,Sorcerer,,Wizard,,4
+333,Time Stop,9,,Transmutation,1 action,Self,V,,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+334,Tongues,3,,Divination,1 action,Touch,"V, M",a small clay model of a ziggurat,1 hour,Bard,Cleric,,,,Sorcerer,Warlock,Wizard,,5
+335,Transport Via Plants,6,,Conjuration,1 action,10 ft,"V, S",,1 round,,,Druid,,,,,,,1
+337,Tree Stride,5,,Conjuration,1 action,Self,"V, S",,"Concentration, up to 1 minute",,,Druid,,Ranger,,,,,2
+338,True Polymorph,9,,Transmutation,1 action,30 ft,"V, S, M","a drop of mercury, a dollop of
+gum arabic, and a wisp of smoke","Concentration, up to 1 hour",Bard,,,,,,Warlock,Wizard,,3
+339,True Resurrection,9,,Necromancy,1 hour,Touch,"V, S, M","a sprinkle o f holy water and diamonds worth at least 25,000 gp, which the spell consumes",Instantaneous,,Cleric,Druid,,,,,,,2
+340,True Seeing,6,,Divination,1 action,Touch,"V, S, M","an ointment for the eyes that costs 25 gp; is made from mushroom powder, saffron, and fat; and is consumed by the spell",1 hour,Bard,Cleric,,,,Sorcerer,Warlock,Wizard,,5
+341,True Strike,Cantrip,,Divination,1 action,30 ft,S,,"Concentration, up to 1 round",Bard,,,,,Sorcerer,Warlock,Wizard,,4
+342,Tsunami,8,,Conjuration,1 minute,Sight,"V, S",,"Concentration, up to 6 rounds",,,Druid,,,,,,,1
+343,Unseen Servant,1,Ritual,Conjuration,1 action,60 ft,"V, S, M","a piece of string and
+a bit of wood",1 hour,Bard,,,,,,Warlock,Wizard,,3
+344,Vampiric Touch,3,,Necromancy,1 action,Self,"V, S",,"Concentration, up to 1 minute",,,,,,,Warlock,Wizard,,2
+345,Vicious Mockery,Cantrip,,Enchantment,1 action,60 ft,V,,Instantaneous,Bard,,,,,,,,,1
+346,Wall of Fire,4,,Evocation,1 action,120 ft,"V, S, M",a small piece of phosphorus,"Concentration, up to 1 minute",,,Druid,,,Sorcerer,,Wizard,,3
+347,Wall of Force,5,,Evocation,1 action,120 ft,"V, S, M","a pinch of powder made by
+crushing a clear gemstone","Concentration, up to 10 minutes",,,,,,,,Wizard,,1
+348,Wall of Ice,6,,Evocation,1 action,120 ft,"V, S, M",a small piece of quartz,"Concentration, up to 10 minutes",,,,,,,,Wizard,,1
+349,Wall of Stone,5,,Evocation,1 action,120 ft,"V, S, M",a small block of granite,"Concentration, up to 10 minutes",,,Druid,,,Sorcerer,,Wizard,,3
+350,Wall of Thorns,6,,Conjuration,1 action,120 ft,"V, S, M",a handful of thorns,"Concentration, up to 10 minutes",,,Druid,,,,,,,1
+351,Warding Bond,2,,Abjuration,1 action,Touch,"V, S, M","a pair of platinum rings worth at least 50 gp each, which you and the target  must wear for the duration",1 hour,,Cleric,,,,,,,,1
+352,Water Breathing,3,Ritual,Transmutation,1 action,30 ft,"V, S, M",a short reed or piece of straw,24 hours,,,Druid,,Ranger,Sorcerer,,Wizard,,4
+353,Water Walk,3,Ritual,Transmutation,1 action,30 ft,"V, S, M",a piece of cork,1 hour,,,Druid,,Ranger,Sorcerer,,,,3
+354,Web,2,,Conjuration,1 action,60 ft,"V, S, M",a bit of spiderweb,"Concentration, up to 1 hour",,,,,,Sorcerer,,Wizard,,2
+355,Weird,9,,Illusion,1 action,120 ft,"V, S",,"Concentration, up to 1 minute",,,,,,,,Wizard,,1
+356,Wind Walk,6,,Transmutation,1 minute,30 ft,"V, S, M",fire and holy water,8 hours,,,Druid,,,,,,,1
+357,Wind Wall,3,,Evocation,1 action,120 ft,"V, S, M",a tiny fan and a feather of exotic origin,"Concentration, up to 1 minute",,,Druid,,Ranger,,,,,2
+358,Wish,9,,Conjuration,1 action,Self,V,,Instantaneous,,,,,,Sorcerer,,Wizard,,2
+359,Witch Bolt,1,,Evocation,1 action,30 ft,"V, S, M",a twig from a tree that has been struck by lightning,"Concentration, up to 1 minute",,,,,,Sorcerer,Warlock,Wizard,,3
+360,Word of Recall,6,,Conjuration,1 action,5 ft,V,,Instantaneous,,Cleric,,,,,,,,1

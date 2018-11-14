@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+  <h1>{{ campaign.name }}</h1>
+  
+  <div class="modal fade" id="camp_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <!-- Add Modal by pressing button -->
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
+<script type="text/javascript">
+  $(function() {
+
+  })
+</script>
+{% endblock %}

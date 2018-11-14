@@ -1,0 +1,13 @@
+<div class="camp_enemies">
+  <h2>Enemies</h2>
+  <button type="button" class="btn btn-primary" name="button">Use Pre-existing List</button> <button type="button" class="btn btn-primary create_campaign_component" data-component="new_enemy" name="button">Add Enemy</button>
+</div>
+<div class="enemy_container">
+  <ul>
+    {% if enemies %}
+    {% for e in enemies %}
+    <li>Name: {{ e.name }} | HP: {{ e.hp }} | Damage: {{ e.damage }} | Defence: {{ e.defence }} | Attack Type: {{ e.attack }} | Enemy Type: {{ e.enemy_type }}</li>
+    {% endfor %}
+    {% endif %}
+  </ul>
+</div>

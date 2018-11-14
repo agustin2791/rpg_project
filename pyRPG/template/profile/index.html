@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ user.username }}</h1>
+<h2>{{ user.email }}</h2>
+<a href="/campaign/{{user.username}}/create">Create Campaign</a><br>
+<div class="container">
+  <div class="row">
+    <div class="characters col-12">
+      <h2>My Characters</h2>
+      <a href="/profile/{{ user.username }}/character_creation" class="create_char btn btn-primary" name="button">Create Character</a>
+      <div class="row">
+        {% for char in characters %}
+        <div class="character col">
+          <h3>{{ char.name }}</h3>
+          <p>{{ char.get_campaign }}</p>
+          <a class="btn btn-primary" href="/profile/{{ char.user.username }}/character_info/{{ char.id }}">Character Info</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <h2>My Characters</h2>
+      <a class="btn btn-primary" href="/profile/{{ user.username }}/create_character/">Create Character</a>
+      {% if characters %}
+      {% for char in characters %}
+      <div class="characters">
+        <h4>{{ char.name }}</h4>
+        <p>Campaign: {{ char.campaign.name }}</p>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% if campaigns %}
+{% for camp in campaigns.all %}
+<a href="/campaign/{{user.username}}/{{camp.slug}}/edit">{{ camp.name }}</a>
+<a href="/campaign/{{ user.username }}/{{ camp.slug }}/{{ camp.id }}/play/" class="btn btn-primary">PLAY CAMPAIGN</a>
+{% endfor %}
+{% endif %}
+{% endblock %}

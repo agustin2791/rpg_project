@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-body">
+      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
+      <hr>
+    {% if features %}
+    {% for f in features %}
+    <div class="info-div" data-update="feature_{{ f.id }}">
+      
+      <h4>{{ f.feature }}</h4>
+      <div class="info-text-edit-feature_{{ f.id }}"></div>
+      <div class="info-text-feature_{{ f.id }}"><p style="white-space: pre-line" class="feature-text">{{ f.description }}</p></div>
+      <span class="edit_feature_{{ f.id }}" style="visibility: hidden"><a href class="edit" data-update="feature_{{ f.id }}"><i class="fa fa-edit"></i></a></span>
+    </div>
+    
+    {% endfor %}
+    {% endif %}
+    
+  </div>
+  <div class="card-footer">
+    Features &amp; Traits
+  </div>
+</div>
+<div class="modal fade" id="add_feature_modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Feature</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="new_feature_form">
+          <div class="form-group">
+            <label for="feature_name">Name:</label>
+            <input type="text" class="form-control" name="feature_name">
+          </div>
+          <div class="form-group">
+            <textarea name="feature_desc" class="form-control" rows="8" cols="80"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" name="button">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

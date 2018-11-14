@@ -1,0 +1,69 @@
+{
+  "trade_goods": [
+    {
+      "item": "1 lb of wheat",
+      "cost": "1 cp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of flour or one chicken",
+      "cost": "2 cp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of salt",
+      "cost": "5 cp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of iron or 1 sq. yd. of canvas",
+      "cost": "1 sp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of copper of 1 sq. yd. of cotton cloth",
+      "cost": "5 sp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of ginger or one goat",
+      "cost": "1 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of cinnamon or pepper, or one sheep",
+      "cost": "2 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of cloves or one pig",
+      "cost": "3 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of silver or 1 sq. yd. of linen",
+      "cost": "5 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 sq. yd. of silk or one cow",
+      "cost": "10 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of saffron or one ox",
+      "cost": "15 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of gold",
+      "cost": "50 gp",
+      "category": "Trade Goods"
+    },
+    {
+      "item": "1 lb. of platinum",
+      "cost": "500 gp",
+      "category": "Trade Goods"
+    }
+  ]
+}

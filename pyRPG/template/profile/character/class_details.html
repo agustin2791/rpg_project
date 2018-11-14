@@ -1,0 +1,23 @@
+
+  <h3>{{ cc.name }}</h3>
+  <div class="row">
+    <div class="col">
+      <p>
+        <b>Hit Dice:</b> {{ cc.hit_dice }}<br>
+        <b>Hit Points at 1st Level:</b> {{ cc.hp }}<br>
+        <b>Hit Points at Higher Levels:</b> {{ cc.hp_2 }}
+      </p>
+      <h4>Proficiencies:</h4>
+      <p>
+        <b>Armor:</b> {{ cc.get_armor }}<br>
+        <b>Weapons:</b> {{ cc.get_weapons }}<br>
+        <b>Tools:</b> {{ cc.get_tools }}<br>
+        <b>Saving Throws:</b> {{ cc.saving_throws}}
+      </p>
+      <h4>Equipment:</h4>
+      <p>
+        You start with the following equipment, in addition to the equipment granted by your background:<br>
+
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Campaign</h2>
+<div class="container-fluid">
+  <h3>Campaign: {{ campaign.name }}</h3>
+  <div class="row">
+
+    <div class="col">
+      <p>
+        <b>Player Limit: </b>{{ campaign.player_limit }}<br>
+        {% include 'campaign/components/camp_characters.html' %}
+      </p>
+    </div>
+    <div class="col">
+      <a class="btn btn-primary" href="/campaign/{{ user.username }}/{{ campaign.slug }}/{{ campaign.id }}/chapter/new">Add Chapter</a>
+      {% if chapters %}
+      {% for chap in chapters %}
+      <div class="chapter-container">
+        <p>{{ chap.name }}</p>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-4" id="camp_enemies">
+      {% include 'campaign/components/camp_enemies.html' %}
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-4" id="camp_battles">
+      {% include 'campaign/components/camp_battles.html' %}
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-4" id="camp_npc">
+      {% include 'campaign/components/camp_npc.html' %}
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="camp_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <!-- Add Modal by pressing button -->
+    <div class="modal-content"></div>
+  </div>
+</div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript" src="/static/js/campaign/campaign.js"></script>
+<script type="text/javascript">
+  $(function() {
+    let url = '/campaign/{{ user.username }}/{{ campaign.slug }}/edit/',
+        csrf = '{{ csrf_token }}';
+
+    // Gets form for the modal
+    $(document).on('click', '.create_campaign_component', function() {
+      var form = $(this).attr('data-component');
+      console.log(form);
+      getForm(csrf, url, form);
+
+      return false;
+    })
+
+    // adds more information about the enemy
+    $(document).on('click', '.add-enemy-info', function() {
+      var info = $('.enemy-info');
+      var index = 1;
+      if (!(info.length == 0 || info == undefined || info == null)) {
+        for (var i = 0; i < info.length; i++) {
+          index++;
+        }
+      }
+      var html = `<div class="enemy-info col-6">
+                    <div class="form-group">
+                      <label for="enemy-info">Name:</label>
+                      <input class="form-control" type="text" name="additional-info-name-${index}">
+                    </div>
+                    <div class="form-group">
+                      <label for="enemy-info-desc">Description:</label>
+                      <textarea class="form-control" name="additional-info-desc-${index}" rows="5"></textarea>
+                    </div>
+                  </div>`;
+      $('.additional-enemy-info').append(html)
+
+      return false;
+    })
+    // Create new enemy
+    $(document).on('submit', '.new_campaign_enemy', function() {
+      console.log('new enemy');
+      var name = $('input[name="enemy_name"]').val(),
+          type = $('input[name="enemy_type"]').val(),
+          level = $('input[name="enemy_level"]').val(),
+          health = $('input[name="enemy_health"]').val(),
+          damage = $('input[name="enemy_damage"]').val(),
+          speed = $('input[name="enemy_speed"]').val(),
+          defence = $('input[name="enemy_defence"]').val(),
+          dex = $('input[name="enemy_dex"]').val(),
+          cons = $('input[name="enemy_cons"]').val(),
+          int = $('input[name="enemy_int"]').val(),
+          charisma = $('input[name="enemy_charisma"]').val(),
+          wisdom = $('input[name="enemy_wisdom"]').val(),
+          actions = $('textarea[name="enemy_actions"]').val(),
+          infos = [];
+      var enemy_info = $('.enemy-info');
+      if (enemy_info.length > 0 || enemy_info == undefined) {
+        for (var i = 1; i <= enemy_info.length; i++) {
+          var info = {
+            'name': $('input[name="additional-info-name-' + i +'"]').val(),
+            'description': $('textarea[name="additional-info-desc-' + i + '"]').val()
+          };
+          infos.push(info);
+        }
+      }
+      var additional_info = JSON.stringify(infos);
+      console.log(additional_info);
+      newEnemy(csrf, url, name, type, level, health, damage, speed, defence, dex, cons, int, charisma, wisdom, actions, additional_info);
+      return false;
+    });
+    // Submit new campaign battle
+    $(document).on('submit', '.new_campaign_battle', function() {
+      var name = $('input[name="battle_name"]').val(),
+          desc = $('textarea[name="battle_desc"]').val(),
+          commoner = $('input[name="battle_minions"]').val(),
+          enemy = $('.selected-enemies'),
+          enemies = [];
+      enemy.each(function() {
+        var ischecked = $(this).is(':checked');
+        if ($(this).is(':checked')) {
+          enemies.push($(this).val());
+        }
+      });
+      console.log(enemies);
+      newBattle(csrf, url, name, enemies, commoner, desc);
+      return false;
+    })
+    // submit new npc
+    $(document).on('submit', '.new_npc_form', function() {
+      var name = $('input[name="npc_name"]').val(),
+          dialog = $('textarea[name="npc_dialog"]').val();
+      newNPC(csrf, url, name, dialog);
+      return false;
+    })
+  })
+</script>
+{% endblock %}
