@@ -145,3 +145,19 @@ var submit_equipment = function (url, csrf) {
         }
     });
 };
+var remove_equipment = function (url, csrf, equip) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        async: true,
+        cache: false,
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'remove_equipment': true,
+            'equip': equip
+        },
+        success: function (data) {
+            $('.character-inventory').empty().html(data);
+        }
+    });
+};

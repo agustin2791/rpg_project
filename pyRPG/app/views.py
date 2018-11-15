@@ -306,7 +306,7 @@ def character_info(request, username, char_id):
             return render(request,
                           'profile/character/info/background.html',
                           {'character': character})
-
+    # Add Skills
     if request.is_ajax and 'add_skills' in request.POST:
         skills = request.POST.get('skills')
         if character.skill_set:
@@ -324,6 +324,7 @@ def character_info(request, username, char_id):
                       {'character': character,
                       'skills': skills})
 
+    # Add Equipment
     if request.is_ajax and 'add_equipment' in request.POST:
         equipment = request.POST.getlist('equip[]')
         for e in equipment:
@@ -331,6 +332,15 @@ def character_info(request, username, char_id):
             character.inventory.add(equip)
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user, character.id)
         return HttpResponse(redirect_to)
+
+    if request.is_ajax and 'remove_equipment' in request.POST:
+        equip = request.POST.get('equip')
+        e = models.Item.objects.get(id=equip)
+        character.inventory.remove(e)
+        character.save()
+        return render(request,
+                      'profile/character/info/equipment.html',
+                      {'character': character})
 
     context = {
         'user': user,

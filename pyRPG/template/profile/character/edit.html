@@ -177,6 +177,14 @@
       submit_equipment(url, csrf);
       return false;
     })
+    $(document).on('click', '.equip-remove', function() {
+      let equip = $(this).attr('data-equip');
+      let conf = confirm('Are you sure you want to remove this?');
+      if (conf) {
+        remove_equipment(url, csrf, equip);
+      }
+      return false;
+    })
   })
 </script>
 {% endblock %}

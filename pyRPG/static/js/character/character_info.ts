@@ -148,3 +148,20 @@ let submit_equipment = (url: string, csrf: string): void => {
     }
   })
 }
+
+let remove_equipment = (url: string, csrf: string, equip: number): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    async: true,
+    cache: false,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'remove_equipment': true,
+      'equip': equip
+    },
+    success: function(data) {
+      $('.character-inventory').empty().html(data);
+    }
+  })
+}
