@@ -145,7 +145,7 @@ var submit_equipment = function (url, csrf) {
         }
     });
 };
-var remove_equipment = function (url, csrf, equip) {
+var add_spell = function (url, csrf, spell) {
     $.ajax({
         type: 'POST',
         url: url,
@@ -153,11 +153,34 @@ var remove_equipment = function (url, csrf, equip) {
         cache: false,
         data: {
             'csrfmiddlewaretoken': csrf,
-            'remove_equipment': true,
-            'equip': equip
+            'add_spell': true,
+            'spell': spell
         },
         success: function (data) {
-            $('.character-inventory').empty().html(data);
+            $('.character-spells').empty().html(data);
+        }
+    });
+};
+var remove = function (url, csrf, subject, item) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        async: true,
+        cache: false,
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'remove': true,
+            'subject': subject,
+            'item': item
+        },
+        success: function (data) {
+            if (subject == 'equip') {
+                $('.character-inventory').empty().html(data);
+            }
+            if (subject == 'feat') {
+                $('.character_feature').empty().html(data);
+                getInfo();
+            }
         }
     });
 };

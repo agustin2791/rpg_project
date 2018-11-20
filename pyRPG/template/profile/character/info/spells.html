@@ -1,0 +1,65 @@
+<div class="card">
+	<div class="card-header">
+		Spells
+	</div>
+	<div class="card-body">
+		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#spell-list">Add Spell</button>
+		<hr>
+		<h4>Spell Slots</h4>
+		
+		<table class="table">
+			<thead>
+				<th>Catrips</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+			</thead>
+			<tbody>
+				<tr>
+					{% for ss in character.character_class_spells %}
+					<td>{{ ss }}</td>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+		<h4>Spell List</h4>
+		<table class="table">
+			<thead>
+                <th>Level</th>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Range</th>
+                <th>Components</th>
+                <th>Duration</th>
+                <th>School</th>
+                <th>Has Ritual</th>
+                <th>Material</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for s in character.spells.all %}
+                <tr>
+                    <td>{% if s.level == 0 %}Cantrip{% else %}{{ s.level }}{% endif %}</td>
+                    <td>{{ s.spell_name }}</td>
+                    <td>{{ s.time }}</td>
+                    <td>{{ s.rang }}</td>
+                    <td>{{ s.comp }}</td>
+                    <td>{{ s.duration }}</td>
+                    <td>{{ s.schoool }}</td>
+                    <td>{{ s.ritual |yesno:'Yes, ' }}</td>
+                    <td>{{ s.material|default:'' }}</td>
+                    <td><button class="btn btn-success btn-sm add-spell" data-spell="{{ s.id }}"><i class="fa fa-plus"></i></button></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="10"><i>You Have no Spells</i></td></tr>
+                {% endfor %}
+                            </tbody>
+		</table>
+	</div>
+</div>

@@ -149,7 +149,7 @@ let submit_equipment = (url: string, csrf: string): void => {
   })
 }
 
-let remove_equipment = (url: string, csrf: string, equip: number): void => {
+let add_spell = (url: string, csrf: string, spell: number): void => {
   $.ajax({
     type: 'POST',
     url: url,
@@ -157,11 +157,36 @@ let remove_equipment = (url: string, csrf: string, equip: number): void => {
     cache: false,
     data: {
       'csrfmiddlewaretoken': csrf,
-      'remove_equipment': true,
-      'equip': equip
+      'add_spell': true,
+      'spell': spell
     },
     success: function(data) {
-      $('.character-inventory').empty().html(data);
+      $('.character-spells').empty().html(data);
+    }
+  })
+}
+
+let remove = (url: string, csrf: string, subject: string, item: number): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    async: true,
+    cache: false,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'remove': true,
+      'subject': subject,
+      'item': item
+    },
+    success: function(data) {
+      if (subject == 'equip') {
+        $('.character-inventory').empty().html(data);
+      }
+      if (subject == 'feat') {
+        $('.character_feature').empty().html(data);
+        getInfo();
+      }
+      
     }
   })
 }
