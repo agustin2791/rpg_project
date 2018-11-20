@@ -452,6 +452,11 @@ class Character(models.Model):
                 equipment.append([e.desc])
         return equipment
 
+    def character_class_spells(self):
+        cl = CharacterClassLevel.objects.get(char_class=self.c_class, level=self.level)
+        spell_slots = [cl.cantrips, cl.spell_slots_1, cl.spell_slots_2, cl.spell_slots_3, cl.spell_slots_4, cl.spell_slots_5, cl.spell_slots_6, cl.spell_slots_7, cl.spell_slots_8, cl.spell_slots_9]
+        return spell_slots
+
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,

@@ -25,18 +25,6 @@
       <h4>Hit Dice</h4>
       <p>{{ character.hit_dice }}</p>
     </div>
-    <div class="attack">
-      <h4>Attack Type &amp; Spellcasting</h4>
-      {% for s in character.get_spell_list %}
-      {% if forloop.counter0 == 0 %}
-      <h5>Catrips:</h5><br>
-      {{ s }}
-      {% else %}
-      <h5>{{ forloop.counter0 }}</h5><br>
-      {{ s }}
-      {% endif %}
-      {% endfor %}
-    </div>
   </div>
 </div>
 <div class="modal">

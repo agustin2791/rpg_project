@@ -306,6 +306,15 @@ def character_info(request, username, char_id):
             return render(request,
                           'profile/character/info/background.html',
                           {'character': character})
+    # Remove feature
+    if request.is_ajax and 'remove_feat' in request.POST:
+        feat = models.CharacterFeature.objects.get(id=request.POST.get('feat'))
+        feat.delete()
+        features = models.CharacterFeature.objects.filter(character=character)
+        return render(request,
+                      'profile/character/info/features.html',
+                      {'features': features})
+
     # Add Skills
     if request.is_ajax and 'add_skills' in request.POST:
         skills = request.POST.get('skills')
@@ -333,14 +342,32 @@ def character_info(request, username, char_id):
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user, character.id)
         return HttpResponse(redirect_to)
 
-    if request.is_ajax and 'remove_equipment' in request.POST:
-        equip = request.POST.get('equip')
-        e = models.Item.objects.get(id=equip)
-        character.inventory.remove(e)
+    # Add Spell
+    if request.is_ajax and 'add_spell' in request.POST:
+        spell = models.Spells.objects.get(id=request.POST.get('spell'))
+        character.spells.add(spell)
         character.save()
         return render(request,
-                      'profile/character/info/equipment.html',
+                      'profile/character/info/spells.html',
                       {'character': character})
+
+
+    if request.is_ajax and 'remove' in request.POST:
+        subject = request.POST.get('subject')
+        item = request.POST.get('item')
+        if subject == 'equip':
+            e = models.Item.objects.get(id=item)
+            character.inventory.remove(e)
+            character.save()
+            return render(request,
+                          'profile/character/info/equipment.html',
+                          {'character': character})
+        if subject == 'feat':
+            feat = models.CharacterFeature.objects.get(id=item).delete()
+            features = models.CharacterFeature.objects.filter(character=character)
+            return render(request,
+                          'profile/character/info/features.html',
+                          {'features': features})
 
     context = {
         'user': user,

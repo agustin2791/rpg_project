@@ -28,6 +28,9 @@
           <div class="character-inventory">
             {% include 'profile/character/info/equipment.html' %}
           </div>
+          <div class="character-spells">
+            {% include 'profile/character/info/spells.html' %}
+          </div>
         </div>
         <div class="col-6">
           <div class="character_background">
@@ -157,7 +160,7 @@
       $(this).attr('disabled', 'disabled')
       check_equipped();
       return false;
-    })
+    });
     $(document).on('click', '.remove-equip', function() {
       let equip_id = $(this).attr('data-equip-id');
       for (let i = 0; i < add_equipment.length; i++) {
@@ -172,16 +175,30 @@
       $('.add-equipment[data-equip-id="'+ equip_id +'"]').removeAttr('disabled');
       check_equipped();
       return false;
-    })
+    });
     $(document).on('click', '.submit-equipment', function() {
       submit_equipment(url, csrf);
       return false;
-    })
+    });
     $(document).on('click', '.equip-remove', function() {
       let equip = $(this).attr('data-equip');
       let conf = confirm('Are you sure you want to remove this?');
       if (conf) {
-        remove_equipment(url, csrf, equip);
+        remove(url, csrf, 'equip', equip);
+      }
+      return false;
+    });
+    $(document).on('click', '.add-spell', function() {
+      let spell_id = $(this).attr('data-spell');
+      add_spell(url, csrf, spell_id);
+      $(this).attr('disabled', 'disabled');
+      return false;
+    })
+    $(document).on('click', '.delete_feat', function() {
+      let feat = $(this).attr('data-delete');
+      let conf = confirm('Are you sure you want to remove this Feature?');
+      if (conf) {
+        remove(url, csrf, 'feat', feat);
       }
       return false;
     })
