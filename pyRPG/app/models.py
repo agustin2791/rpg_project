@@ -458,16 +458,26 @@ class Character(models.Model):
         return spell_slots
 
     def get_armor_class(self):
-        armor = self.inventory.all()
-        print armor
+        inventory = self.inventory.filter()
+        armor = []
+        if inventory:
+            for i in inventory:
+                if 'Armor' in i.category.name:
+                    armor.append(i)
         ac = 0
-        try:
+        if armor:
             for a in armor:
-                print a.category.name
-                if 'Armor' in a.category.name:
+                if ' + ' in a.armor_class:
+                    ac = int(a.armor_class.split(' + ')[0])
+                    if 'max ' in a.armor_class:
+                        max_mod = int(a.armor_class.split(' ')[-1].replace(')', ''))
+                        dex = views.get_modifier(self.dexterity)
+                        if dex <= max_mod:
+                            ac += dex
+                        else:
+                            ac += max_mod
+                else:
                     ac += int(a.armor_class)
-        except:
-            ac = 'Add armor'
         if ac == 0:
             ac = 'Add armor'
         return ac

@@ -1,30 +1,39 @@
 <div class="card">
-  <div class="card-body">
-    <p>+{{ character.proficiency_bonus }} <b>Proficiency Bonus</b></p>
-    {% if character.background == None %}
-    <form class="form-inline">
-      <div class="form-group">
-        <input type="text" placeholder="Background" class="form-control" name="char_bg">
+  <div class="card-body" style="text-align: center">
+    <div class="row">
+      <div class="col-3">
+          <p>+{{ character.proficiency_bonus }}<br><small>Proficiency Bonus</small></p>
       </div>
-      <button type="submit" class="btn btn-primary" name="button">Submit</button>
-    </form>
-    {% endif %}
-    <div class="armor_class">
-      <h4>Armor Class</h4>
-      <p>{{ character.get_armor_class }}</p>
+      <div class="col-2">
+          <div class="armor_class">
+              <p>{{ character.get_armor_class }}<br><small>Armor Class (AC)</small></p>
+            </div>
+      </div>
+      <div class="col-2">
+        <div class="speed_details">
+          <p>{{ character.speed }}ft.<br><small>Speed</small></p>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="hit_points">
+          <p>{{ character.hp }}/{{ character.full_hp }} HP</p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="hit_dice">
+          <p>{{ character.hit_dice }}<br><small>Hit Dice</small></p>
+        </div>
+      </div>
     </div>
-    <div class="speed-details">
-      <h4>Speed</h4>
-      <p>{{ character.speed }}ft.</p>
-    </div>
-    <div class="hit-points">
-      <h4>HP</h4>
-      <p>{{ character.hp }}/{{ character.full_hp }}</p>
-    </div>
-    <div class="hit-dice">
-      <h4>Hit Dice</h4>
-      <p>{{ character.hit_dice }}</p>
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
   </div>
 </div>
 <div class="modal">
