@@ -1,7 +1,6 @@
+<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
 <div class="card">
   <div class="card-body">
-      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
-      <hr>
     {% if features %}
     {% for f in features %}
     <div class="info-div" data-update="feature_{{ f.id }}">
@@ -15,9 +14,6 @@
     {% endfor %}
     {% endif %}
     
-  </div>
-  <div class="card-footer">
-    Features &amp; Traits
   </div>
 </div>
 <div class="modal fade" id="add_feature_modal" tabindex="-1">

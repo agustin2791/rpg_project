@@ -457,6 +457,21 @@ class Character(models.Model):
         spell_slots = [cl.cantrips, cl.spell_slots_1, cl.spell_slots_2, cl.spell_slots_3, cl.spell_slots_4, cl.spell_slots_5, cl.spell_slots_6, cl.spell_slots_7, cl.spell_slots_8, cl.spell_slots_9]
         return spell_slots
 
+    def get_armor_class(self):
+        armor = self.inventory.all()
+        print armor
+        ac = 0
+        try:
+            for a in armor:
+                print a.category.name
+                if 'Armor' in a.category.name:
+                    ac += int(a.armor_class)
+        except:
+            ac = 'Add armor'
+        if ac == 0:
+            ac = 'Add armor'
+        return ac
+
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,

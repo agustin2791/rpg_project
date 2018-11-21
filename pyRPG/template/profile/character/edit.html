@@ -5,60 +5,65 @@
     <div class="col-9">
       <!-- information box  -->
       <div class="row">
-        <div class="col-7">
-          <div class="card">
+        <div class="col-9">
+          <div class="character_info">
             {% include 'profile/character/info/information.html' %}
-            
+          </div>
+          <div class="character_abilities">
+            {% include 'profile/character/info/abilities.html' %}
+          </div>
+          <div class="character_actions">
+            {% include 'profile/character/info/actions.html' %}
+          </div>
+          <div class="character_inventory">
+            {% include 'profile/character/info/equipment.html' %}
+          </div>
+          <div class="character_spells">
+            {% include 'profile/character/info/spells.html' %}
           </div>
         </div>
-      <!-- end information box -->
-      <!-- ability box -->
-        <div class="col-5">
-          <div class="card">
-            {% include 'profile/character/info/abilities.html' %}
+
+        <div class="col-3">
+          <div class="character_skills">
+            {% include 'profile/character/info/skills.html' %}
           </div>
         </div>
       </div>
-      <!-- end ability box -->
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-12">
-                <div class="character-actions">
-                  {% include 'profile/character/info/actions.html' %}
-                </div>
-            </div>
-            <div class="col-6">
-              <div class="character-inventory">
-                {% include 'profile/character/info/equipment.html' %}
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="character-spells">
-                {% include 'profile/character/info/spells.html' %}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="character_background">
-            {% include 'profile/character/info/background.html' %}
-          </div>
-          <div class="character_feature">
-            {% include 'profile/character/info/features.html' %}
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="character_traits">
-            {% include 'profile/character/info/traits.html' %}
-          </div>
-        </div>
+
+      <div class="col-12">
+        
       </div>
     </div>
     <div class="col-3">
-      <div class="character_skills">
-        {% include 'profile/character/info/skills.html' %}
-      </div>
+      <div class="card">
+          <div class="card-body">
+            <ul class="nav nav-tabs" id="TabItems" role="tablist">
+              <li class="nav-item"><a href="#tab-background" class="nav-link active" data-toggle="tab" role="tab" aria-controls="tab-background" aria-selected="true">Background</a></li>
+              <li class="nav-item"><a href="#tab-feat" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-feat" aria-selected="true">Features</a></li>
+              <li class="nav-item"><a href="#tab-traits" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-traits" aria-selected="true">Traits</a></li>
+              <!-- Extend Traits -->
+              <li class="nav-item"><a href="#tab-class" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-class" aria-selected="true">About {{ character.c_class }}</a></li>
+              <li class="nav-item"><a href="#tab-race" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-race" aria-selected="true">About {{ character.c_race }}</a></li>
+            </ul>
+            <div class="tab-content" id="tab-items">
+              <div class="tab-pane fade show active" id="tab-background" role="tabpane">
+                {% include 'profile/character/info/background.html' %}
+              </div>
+              <div class="tab-pane fade show" id="tab-feat" role="tabpane">
+                {% include 'profile/character/info/features.html' %}
+              </div>
+              <div class="tab-pane fade show" id="tab-traits" role="tabpane">
+                {% include 'profile/character/info/traits.html' %}
+              </div>
+              <div class="tab-pane fade show" id="tab-class" role="tabpane">
+                CLASS
+              </div>
+              <div class="tab-pane fade show" id="tab-race" role="tabpane">
+                RACE
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 
@@ -66,175 +71,12 @@
 <div class="character-modals">{% include 'profile/character/info/modals.html' %}</div>
 {% endblock %}
 {% block bottomscript %}
+<script type="text/javascript">
+  const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
+  const csrf = '{{ csrf_token }}';
+  const class_skill_limit = parseInt('{{ character.c_class.skills_limit }}');
+</script>
 <script type="text/javascript" src="/static/js/character/character.js"></script>
 <script type="text/javascript" src="/static/js/character/character_info.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
-    const csrf = '{{ csrf_token }}';
-    const class_skill_limit = parseInt('{{ character.c_class.skills_limit }}');
-    $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form, .background_form, .feature_form', function(e) {
-      e.preventDefault();
-      var trait = $(this).attr('data-update');
-      var description = $('textarea[name="'+trait+'"]').val();
-      submit_trait(url, csrf, trait, description);
-      return false;
-    })
-    getInfo();
-    // Edit Feature
-    $(document).on('click', '.edit', function(e) {
-      e.preventDefault();
-      var update = $(this).attr('data-update');
-      var text = $('.info-text-' + update).text();
-      $('.info-text-' + update).hide();
-      openEdit(update, text);
-      getInfo();
-    });
-    // Add new feature
-    $(document).on('submit', '.new_feature_form', function() {
-      var name = $('input[name="feature_name"]').val(),
-          desc = $('textarea[name="feature_desc"]').val();
-      addNewFeature(url, csrf, name, desc, 'none', 'feature');
-      return false;
-    });
-    // Add new Background
-    $(document).on('click', '.submit-background', function() {
-      var name = $('input[name="background_name"]').val(),
-          desc = $('textarea[name="background_desc"]').val();
-      var get_skills = $('input[name="bg_skills');
-      var checked_skills = []
-      for (let i = 0; i < get_skills.length; i++){
-        if (get_skills[i].checked) { 
-          checked_skills.push(get_skills[i]); 
-          console.log(get_skills[i]);
-        }
-      }
-      if (checked_skills.length != 2) {
-        return false;
-      }
-      var skills = checked_skills[0].value + ', ' + checked_skills[1].value;
-      addNewFeature(url, csrf, name, desc, skills, 'background');
-      return false;
-    })
-    // cancel update
-    $(document).on('click', '.cancel', function() {
-      var update = $(this).attr('data-update');
-      $('.info-text-edit-' + update).empty();
-      $('.info-text-' + update).show();
-    });
-    // count checked
-    $(document).on('click', '.skill_checkbox', function() {
-      let checkbox = $('input[name="choose_skill"]');
-      let chosen = 0;
-      for (let i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-          chosen += 1;
-        }
-      }
-      if (chosen === class_skill_limit) {
-        document.getElementsByClassName('skill_count')[0].style.color = '#16a085';
-      } else if (chosen > class_skill_limit) {
-        document.getElementsByClassName('skill_count')[0].style.color = '#ff0000';
-      }
-      document.getElementById('skills_chosen').innerHTML = chosen;
-    })
-    // apply checked
-    $(document).on('click', '.submit_skills', function() {
-      let checkbox = $('input[name="choose_skill"]');
-      let chosen = 0;
-      let skills = [];
-      for (let i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-          chosen += 1;
-          skills.push(checkbox[i].value);
-        }
-      }
-      if (skills.length != class_skill_limit) {
-        document.getElementsByClassName('skills_alert')[0].style.display = 'block';
-        return false;
-      }
-      let add_skill = skills.join(', ');
-      add_skill_set(url, csrf, add_skill);
-
-      return false;
-    })
-    $(document).on('click', '.add-equipment', function() {
-      let equip_id = $(this).attr('data-equip-id');
-      let equip_name = $(this).attr('data-equip-name');
-      let equip_cat = $(this).attr('data-equip-cat');
-      add_equipment.push(parseInt(equip_id));
-      console.log(add_equipment);
-      skill_add_to_list(equip_id, equip_name, equip_cat);
-      $(this).attr('disabled', 'disabled')
-      check_equipped();
-      return false;
-    });
-    $(document).on('click', '.remove-equip', function() {
-      let equip_id = $(this).attr('data-equip-id');
-      for (let i = 0; i < add_equipment.length; i++) {
-        if (add_equipment[i] == parseInt(equip_id)) {
-          add_equipment.splice(i, 1);
-        }
-      }
-      console.log(add_equipment);
-      let div = document.querySelectorAll('div[data-skill="' + equip_id + '"]')[0];
-      let parent = document.getElementsByClassName('chosen-equipment')[0];
-      parent.removeChild(div);
-      $('.add-equipment[data-equip-id="'+ equip_id +'"]').removeAttr('disabled');
-      check_equipped();
-      return false;
-    });
-    $(document).on('click', '.submit-equipment', function() {
-      submit_equipment(url, csrf);
-      return false;
-    });
-    $(document).on('click', '.equip-remove', function() {
-      let equip = $(this).attr('data-equip');
-      let conf = confirm('Are you sure you want to remove this?');
-      if (conf) {
-        remove(url, csrf, 'equip', equip);
-      }
-      return false;
-    });
-    $(document).on('click', '.add-spell', function() {
-      let spell_id = $(this).attr('data-spell');
-      add_spell(url, csrf, spell_id);
-      $(this).attr('disabled', 'disabled');
-      return false;
-    })
-    $(document).on('click', '.delete_feat', function() {
-      let feat = $(this).attr('data-delete');
-      let conf = confirm('Are you sure you want to remove this Feature?');
-      if (conf) {
-        remove(url, csrf, 'feat', feat);
-      }
-      return false;
-    })
-    var active_spell_info = NaN;
-    $(document).on('click', '.get_spell_info', function() {
-      let spell_id = $(this).attr('data-spell');
-      let info = $('.spell-info[data-spell="' + spell_id + '"]');
-      if (active_spell_info !== spell_id && active_spell_info === NaN) {
-        active_spell_info = spell_id;
-        } else if (active_spell_info !== spell_id) {
-        $('.spell-info[data-spell="' + active_spell_info + '"]').css('opacity', 0);
-        $('.spell-info[data-spell="' + active_spell_info + '"]').css('display', 'none')
-        active_spell_info = spell_id;
-      }
-      if (info.css('display') == 'none') {
-        info.css('display', 'block');
-        setTimeout(function() {
-          info.css('opacity', 1);
-        }, 1)
-        info.css('top', -info.outerHeight() + 5 + 'px')
-      } else {
-        info.css('opacity', 0);
-        setTimeout(function() {
-          info.css('display', 'none')
-        }, 500);
-        active_spell_info = NaN
-      }
-    });
-  })
-</script>
+<script type="text/javascript" src="/static/js/character/edit.js"></script>
 {% endblock %}

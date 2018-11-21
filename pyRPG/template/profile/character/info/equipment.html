@@ -17,7 +17,24 @@
                 <tr>
                     <td>{{ i.name }}</td>
                     <td>{{ i.category.name }}</td>
-                    <td>
+                    <td style="position: relative;">
+                        <div class="equip-details" data-equip="{{ i.id }}">
+                            {{ i.name }}
+                            <hr>
+                            <p>
+                                <b>Category:</b> {{ i.category }}<br>
+                                <b>Cost:</b> {{ i.cost }}<br>
+                                <b>AC:</b> {{ i.armor_class|default:'---' }}<br>
+                                <b>Strength:</b> {{ i.strength|default:'---' }}<br>
+                                <b>Stealth:</b> {{ i.stealth|default:'---' }}<br>
+                                <b>Speed:</b> {{ i.speed|default:'---' }}<br>
+                                <b>Carry Cap:</b> {{ i.carry_cap|default:'---' }}<br>
+                                <b>Container Cap:</b> {{ i.container_cap|default:'---' }}<br>
+                                <b>Damage:</b> {{ i.damage|default:'---' }}<br>
+                                <b>Weight:</b> {{ i.weight|default:'---' }}<br>
+                                {{ i.description }}
+                            </p>
+                        </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary btn-sm equip-info" data-equip="{{ i.id }}"><i class="fa fa-info"></i></button>
                             <button type="button" class="btn btn-danger btn-sm equip-remove" data-equip="{{ i.id }}"><i class="fa fa-trash"></i></button>

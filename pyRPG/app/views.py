@@ -339,6 +339,7 @@ def character_info(request, username, char_id):
         for e in equipment:
             equip = models.Item.objects.get(id=e)
             character.inventory.add(equip)
+            character.save()
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user, character.id)
         return HttpResponse(redirect_to)
 
@@ -368,6 +369,13 @@ def character_info(request, username, char_id):
             return render(request,
                           'profile/character/info/features.html',
                           {'features': features})
+        if subject == 'spell':
+            spell = models.Spells.objects.get(id=item)
+            character.spells.remove(spell)
+            character.save()
+            return render(request,
+                          'profile/character/info/spells.html',
+                          {'character': character})
 
     context = {
         'user': user,

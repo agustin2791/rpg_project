@@ -1,15 +1,15 @@
-
-<div class="card-header">
-    Abilities
-  </div>
-<div class="card-body">
-  <div class="row">
-    {% for a in character.get_abilities %}
-    <div class="col-4">
-      <h3><strong>{{ a.2 }}</strong> <small>({{ a.1 }})</small></h3>
-      <p style="font-size: small"><i>{{ a.0 }}</i></p>
+<div class="card">
+  <div class="card-header">
+      Abilities
     </div>
-    {% endfor %}
+  <div class="card-body">
+    <div class="row">
+      {% for a in character.get_abilities %}
+      <div class="col-4">
+        <h3><strong>{{ a.2 }}</strong> <small>({{ a.1 }})</small></h3>
+        <p style="font-size: small"><i>{{ a.0 }}</i></p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
-

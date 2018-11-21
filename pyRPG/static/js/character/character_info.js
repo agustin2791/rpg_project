@@ -75,6 +75,7 @@ var addNewFeature = function (url, csrf, name, desc, skills, object) {
         success: function (data) {
             if (object === 'feature') {
                 $('.character_feature').empty().html(data);
+                getInfo();
             }
             else if (object === 'background') {
                 $('.character_background').empty().html(data);
@@ -157,7 +158,7 @@ var add_spell = function (url, csrf, spell) {
             'spell': spell
         },
         success: function (data) {
-            $('.character-spells').empty().html(data);
+            $('.character_spells').empty().html(data);
         }
     });
 };
@@ -175,11 +176,14 @@ var remove = function (url, csrf, subject, item) {
         },
         success: function (data) {
             if (subject == 'equip') {
-                $('.character-inventory').empty().html(data);
+                $('.character_inventory').empty().html(data);
             }
             if (subject == 'feat') {
                 $('.character_feature').empty().html(data);
                 getInfo();
+            }
+            if (subject == 'spell') {
+                $('.character_spells').empty().html(data);
             }
         }
     });
