@@ -4,32 +4,7 @@
 	</div>
 	<div class="card-body">
 		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#spell-list">Add Spell</button>
-		<hr>
-		<h4>Spell Slots</h4>
-		
-		<table class="table">
-			<thead>
-				<th>Catrips</th>
-				<th>1</th>
-				<th>2</th>
-				<th>3</th>
-				<th>4</th>
-				<th>5</th>
-				<th>6</th>
-				<th>7</th>
-				<th>8</th>
-				<th>9</th>
-			</thead>
-			<tbody>
-				<tr>
-					{% for ss in character.character_class_spells %}
-					<td>{{ ss }}</td>
-					{% endfor %}
-				</tr>
-			</tbody>
-		</table>
-		<h4>Spell List</h4>
-		<table class="table">
+		<table class="table dataTable">
 			<thead>
                 <th>Level</th>
                 <th>Name</th>
@@ -54,8 +29,11 @@
 								<b>Material:</b> {% if s.material == 'nan' %}No Material needed{% else %}{{ s.material }}{% endif %}
 							</p>
 						</div>
-						<button class="btn btn-primary btn-sm get_spell_info" data-spell="{{ s.id }}"><i class="fa fa-info"></i></button>
-						<button class="btn btn-danger btn-sm remove-spell" data-spell="{{ s.id }}"><i class="fa fa-minus"></i></button>
+						<div class="btn-group">
+							<button class="btn btn-primary btn-sm get_spell_info" data-spell="{{ s.id }}"><i class="fa fa-info"></i></button>
+							<button class="btn btn-danger btn-sm remove-spell" data-spell="{{ s.id }}"><i class="fa fa-minus"></i></button>
+						</div>
+						
 					</td>
                 </tr>
                 {% empty %}

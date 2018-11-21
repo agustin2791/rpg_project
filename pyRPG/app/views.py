@@ -352,7 +352,7 @@ def character_info(request, username, char_id):
                       'profile/character/info/spells.html',
                       {'character': character})
 
-
+    # Remove equipment, feature, spells
     if request.is_ajax and 'remove' in request.POST:
         subject = request.POST.get('subject')
         item = request.POST.get('item')

@@ -24,6 +24,30 @@
           <p>{{ character.hit_dice }}<br><small>Hit Dice</small></p>
         </div>
       </div>
+      <div class="col-12">
+        <h4>Spell Slots</h4>
+        <table class="table">
+          <thead>
+            <th>Catrips</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+          </thead>
+          <tbody>
+            <tr>
+              {% for ss in character.character_class_spells %}
+              <td>{{ ss }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     
 

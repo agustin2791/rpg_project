@@ -15,12 +15,20 @@
           <div class="character_actions">
             {% include 'profile/character/info/actions.html' %}
           </div>
-          <div class="character_inventory">
-            {% include 'profile/character/info/equipment.html' %}
+          <div class="row">
+            <div class="col-6">
+              <div class="character_inventory">
+                {% include 'profile/character/info/equipment.html' %}
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="character_spells">
+                {% include 'profile/character/info/spells.html' %}
+              </div>
+            </div>
           </div>
-          <div class="character_spells">
-            {% include 'profile/character/info/spells.html' %}
-          </div>
+          
+          
         </div>
 
         <div class="col-3">
@@ -75,6 +83,9 @@
   const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
   const csrf = '{{ csrf_token }}';
   const class_skill_limit = parseInt('{{ character.c_class.skills_limit }}');
+  $('.dataTable').DataTable({
+    paging: false
+  });
 </script>
 <script type="text/javascript" src="/static/js/character/character.js"></script>
 <script type="text/javascript" src="/static/js/character/character_info.js"></script>
