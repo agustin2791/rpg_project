@@ -22,14 +22,22 @@
       <!-- end ability box -->
       <div class="row">
         <div class="col-12">
-          <div class="character-actions">
-            {% include 'profile/character/info/actions.html' %}
-          </div>
-          <div class="character-inventory">
-            {% include 'profile/character/info/equipment.html' %}
-          </div>
-          <div class="character-spells">
-            {% include 'profile/character/info/spells.html' %}
+          <div class="row">
+            <div class="col-12">
+                <div class="character-actions">
+                  {% include 'profile/character/info/actions.html' %}
+                </div>
+            </div>
+            <div class="col-6">
+              <div class="character-inventory">
+                {% include 'profile/character/info/equipment.html' %}
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="character-spells">
+                {% include 'profile/character/info/spells.html' %}
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-6">
@@ -202,6 +210,31 @@
       }
       return false;
     })
+    var active_spell_info = NaN;
+    $(document).on('click', '.get_spell_info', function() {
+      let spell_id = $(this).attr('data-spell');
+      let info = $('.spell-info[data-spell="' + spell_id + '"]');
+      if (active_spell_info !== spell_id && active_spell_info === NaN) {
+        active_spell_info = spell_id;
+        } else if (active_spell_info !== spell_id) {
+        $('.spell-info[data-spell="' + active_spell_info + '"]').css('opacity', 0);
+        $('.spell-info[data-spell="' + active_spell_info + '"]').css('display', 'none')
+        active_spell_info = spell_id;
+      }
+      if (info.css('display') == 'none') {
+        info.css('display', 'block');
+        setTimeout(function() {
+          info.css('opacity', 1);
+        }, 1)
+        info.css('top', -info.outerHeight() + 5 + 'px')
+      } else {
+        info.css('opacity', 0);
+        setTimeout(function() {
+          info.css('display', 'none')
+        }, 500);
+        active_spell_info = NaN
+      }
+    });
   })
 </script>
 {% endblock %}

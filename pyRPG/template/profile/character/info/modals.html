@@ -178,7 +178,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-9">
                         <table class="table">
                             <thead>
                                 <th>Level</th>
@@ -204,13 +204,16 @@
                                     <td>{{ s.duration }}</td>
                                     <td>{{ s.schoool }}</td>
                                     <td>{{ s.ritual |yesno:'Yes, ' }}</td>
-                                    <td>{{ s.material|default:'' }}</td>
+                                    <td>{% if s.material == 'nan' %}{% else %}{{ s.material }}{% endif %}</td>
                                     <td><button class="btn btn-success btn-sm add-spell" data-spell="{{ s.id }}" {% if s.id in character.spells.all %}disabled{% endif %} ><i class="fa fa-plus"></i></button></td>
                                 </tr>
                                 {% endfor %}
                                 {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-3">
+                        
                     </div>
                 </div>
             </div>

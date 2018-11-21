@@ -33,13 +33,6 @@
 			<thead>
                 <th>Level</th>
                 <th>Name</th>
-                <th>Time</th>
-                <th>Range</th>
-                <th>Components</th>
-                <th>Duration</th>
-                <th>School</th>
-                <th>Has Ritual</th>
-                <th>Material</th>
                 <th></th>
             </thead>
             <tbody>
@@ -47,19 +40,28 @@
                 <tr>
                     <td>{% if s.level == 0 %}Cantrip{% else %}{{ s.level }}{% endif %}</td>
                     <td>{{ s.spell_name }}</td>
-                    <td>{{ s.time }}</td>
-                    <td>{{ s.rang }}</td>
-                    <td>{{ s.comp }}</td>
-                    <td>{{ s.duration }}</td>
-                    <td>{{ s.schoool }}</td>
-                    <td>{{ s.ritual |yesno:'Yes, ' }}</td>
-                    <td>{{ s.material|default:'' }}</td>
-                    <td><button class="btn btn-success btn-sm add-spell" data-spell="{{ s.id }}"><i class="fa fa-plus"></i></button></td>
+                    <td style="position: relative">
+						<div class="spell-info" data-spell="{{ s.id }}">
+							{{ s.spell_name }}
+							<hr>
+							<p>
+								<b>Time:</b> {{ s.time }}<br>
+								<b>Range:</b> {{ s.rang }}<br>
+								<b>Composition:</b> {{ s.comp }}<br>
+								<b>Duration:</b> {{ s.duration }}<br>
+								<b>School:</b> {{ s.duration }}<br>
+								<b>Ritual:</b> {{ s.ritual }}<br>
+								<b>Material:</b> {% if s.material == 'nan' %}No Material needed{% else %}{{ s.material }}{% endif %}
+							</p>
+						</div>
+						<button class="btn btn-primary btn-sm get_spell_info" data-spell="{{ s.id }}"><i class="fa fa-info"></i></button>
+						<button class="btn btn-danger btn-sm remove-spell" data-spell="{{ s.id }}"><i class="fa fa-minus"></i></button>
+					</td>
                 </tr>
                 {% empty %}
                 <tr><td colspan="10"><i>You Have no Spells</i></td></tr>
                 {% endfor %}
-                            </tbody>
+            </tbody>
 		</table>
 	</div>
 </div>

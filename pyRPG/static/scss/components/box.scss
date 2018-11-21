@@ -61,3 +61,16 @@
 body {
   background-color: darken(#c23616, 5%);
 }
+.spell-info {
+  width: 300px;
+  height: auto;
+  position: absolute;
+  background: #fff;
+  border: #aaaaaa thin solid;
+  padding: 10px;
+  left: -200px;
+  z-index: 100;
+  display: none;
+  opacity: 0;
+  transition: .5s ease;
+}
