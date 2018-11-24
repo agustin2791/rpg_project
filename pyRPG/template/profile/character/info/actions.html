@@ -2,29 +2,35 @@
   <div class="card-body" style="text-align: center">
     <div class="row">
       <div class="col-3">
-          <p>+{{ character.proficiency_bonus }}<br><small>Proficiency Bonus</small></p>
+        <div class="pro_bonus">
+          <div class="number">+{{ character.proficiency_bonus }}</div>
+          <div class="text">Proficiency Bonus</div>
+        </div>
+        <br>
+        <div class="hit_points">
+          <h4>{{ character.hp }}/{{ character.full_hp }} HP</h4>
+        </div>
+        <div class="hit_dice">
+          <h4>{{ character.hit_dice }}<br><small>Hit Dice</small></h4>
+        </div>
+      
       </div>
       <div class="col-2">
-          <div class="armor_class">
-              <p>{{ character.get_armor_class }}<br><small>Armor Class (AC)</small></p>
-            </div>
+        <div class="armor_class">
+            <div class="base-left"></div>
+            <div class="top-center"></div>
+            <div class="top-left"></div>
+            <div class="top-right"></div>
+            <div class="bottom"></div>
+            <p class="armor_text">{{ character.get_armor_class }}<br>AC</p>
+          </div>
       </div>
       <div class="col-2">
         <div class="speed_details">
           <p>{{ character.speed }}ft.<br><small>Speed</small></p>
         </div>
       </div>
-      <div class="col-2">
-        <div class="hit_points">
-          <p>{{ character.hp }}/{{ character.full_hp }} HP</p>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="hit_dice">
-          <p>{{ character.hit_dice }}<br><small>Hit Dice</small></p>
-        </div>
-      </div>
-      <div class="col-12">
+      <div class="col-5">
         <h4>Spell Slots</h4>
         <table class="table">
           <thead>

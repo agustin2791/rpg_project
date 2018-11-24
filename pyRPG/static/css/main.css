@@ -99,4 +99,119 @@ body {
   transition: 0.5s ease;
 }
 
+.pro_bonus {
+  position: relative;
+  color: #fff;
+  margin: 0px auto;
+}
+.pro_bonus .number {
+  width: 45px;
+  height: 45px;
+  border: solid 2px #333;
+  border-radius: 50%;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  font-weight: 600;
+  font-size: large;
+  transform: translateY(-50%);
+  display: block;
+  vertical-align: middle;
+  background: #fff;
+  line-height: 40px;
+}
+.pro_bonus .text {
+  background: #333;
+  padding: 5px 5px 5px 5px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
+
+.armor_class {
+  width: 200px;
+  height: 105px;
+  position: relative;
+  z-index: 50;
+  margin: 0px auto;
+}
+.armor_class .base-left {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background: #333;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+.armor_class .top-center {
+  background: #333;
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 78px;
+  height: 78px;
+  border-top-right-radius: 75%;
+  border-bottom-left-radius: 75%;
+}
+.armor_class .top-left {
+  background: #fff;
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  top: -3px;
+  left: 47px;
+  border-bottom-right-radius: 97%;
+  transform: rotate(33deg);
+}
+.armor_class .top-right {
+  background: #fff;
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  top: -3px;
+  left: 120px;
+  border-bottom-left-radius: 97%;
+  transform: rotate(-33deg);
+}
+.armor_class .bottom {
+  background: #333;
+  position: absolute;
+  top: 47px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 70px;
+  height: 70px;
+  border-top-right-radius: 33%;
+  border-bottom-left-radius: 33%;
+}
+.armor_class .armor_text {
+  width: 60px;
+  height: 60px;
+  z-index: 51;
+  color: #fff;
+  font-weight: 600;
+  font-size: x-large;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.speed_details {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  border: #333 solid 7px;
+  font-weight: 600;
+  font-size: x-large;
+  padding-top: 22px;
+  line-height: 20px;
+  vertical-align: middle;
+  margin: 0px auto;
+}
+
 /*# sourceMappingURL=main.css.map */
