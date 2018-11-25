@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="email" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="username">Username: </label>
+          <input type="username" name="new_username" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="password">Password: </label>
+          <input type="password" name="new_password" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="conf_password">Confirm Password: </label>
+          <input type="password" name="conf_password" class="form-control">
+        </div>
+        <button type="button" class="btn btn-primary submit_user_form" name="button">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block bottomscript %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    function user_registration(email, username, password) {
+      $.ajax({
+        type: 'POST',
+        url: '/authenticate/register',
+        async: true,
+        cache: false,
+        data: {
+          'csrfmiddlewaretoken': '{{ csrf_token }}',
+          'new_user': true,
+          'email': email,
+          'username': username,
+          'password': password
+        },
+        success: function(data) {
+          window.location.href = data;
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      })
+    }
+
+    $(document).on('click', '.submit_user_form', function() {
+      let email = $('input[name="email"]').val();
+      let username = $('input[name="new_username"]').val();
+      let password = $('input[name="new_password"]').val();
+      let conf_password = $('input[name="conf_password"]').val();
+      console.log(email);
+      console.log(username);
+      console.log(password);
+      console.log(conf_password);
+      if (password === conf_password) {
+        user_registration(email, username, password);
+      }
+      return false;
+    })
+  })
+</script>
+{% endblock %}

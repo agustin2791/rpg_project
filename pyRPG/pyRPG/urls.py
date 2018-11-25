@@ -22,6 +22,16 @@ from app import views
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
+    # Authentication
+    url(r'^authenticate/register$',
+        views.registration,
+        name="register"),
+    url(r'^authenticate/login$',
+        views.user_login,
+        name='login'),
+    url(r'^authenticate/logout$',
+        views.user_logout,
+        name='logout'),
     url(r'^profile/(?P<username>\w{0,50})/$',
         views.user_profile,
         name='profile'),

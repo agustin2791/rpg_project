@@ -3,10 +3,76 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Prefetch
+# from django.views.generic import Views
 import json
 
 import models
+import forms
+
+# Authentication
+# class UserFormView(View):
+#     form_class = forms.UserForm
+#     template_name = 'authentication/registration_form.html'
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {'form', form})
+#
+#     def post(self, request):
+#         form = self.form_class(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=false)
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             user.set_password(password)
+#             user.save()
+#
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 if user.is_active:
+#                     login(request, user)
+#                     return redirect()
+
+def registration(request):
+    if request.is_ajax and 'new_user' in request.POST:
+        print request.POST
+        new_username = request.POST.get('username')
+        new_password = request.POST.get('password')
+        new_email = request.POST.get('email')
+        user = User.objects.create_user(
+            email=new_email,
+            username=new_username,
+            password=new_password
+        )
+        user.save()
+        print user
+        user_profile = models.UserProfile.objects.create(
+            user=user
+        )
+        user_profile.save()
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                redirect_url = '/profile/{0}/'.format(user.username)
+                return HttpResponse(redirect_url)
+
+    return render(request, 'authentication/register.html')
+
+def user_login(request):
+    login_form = forms.UserLogin(request.POST)
+    if login_form.is_valid():
+        username = login_form.cleaned_data['username']
+        password = login_form.cleaned_data['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/profile/{0}/'.format(user.username))
+
+def user_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('/')
 
 ALIGNMENTS = (
     ('lg','Lawful Good'),
@@ -247,7 +313,7 @@ def character_info(request, username, char_id):
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
     char_features = models.CharacterFeature.objects.filter(character=character)
     background = models.CharacterBackground.objects.filter(character=character)
-    ag, armor, mounts, tools, weapons = get_all_items(character) 
+    ag, armor, mounts, tools, weapons = get_all_items(character)
 
     # Edit background, features, etc...
     if request.is_ajax and 'add_feature' in request.POST:
@@ -629,12 +695,14 @@ def campaign(request, username, slug, campaign_id):
 
 # global values
 def global_context(request):
+    login_form = forms.UserLogin
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user.username)
     else:
         user = None
 
     context = {
-        'user': user
+        'user': user,
+        'user_login': login_form
     }
     return context
