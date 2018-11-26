@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body" style="text-align: center">
     <div class="row">
-      <div class="col-3">
+      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
         <div class="pro_bonus">
           <div class="number">+{{ character.proficiency_bonus }}</div>
           <div class="text">Proficiency Bonus</div>
@@ -15,7 +15,7 @@
         </div>
       
       </div>
-      <div class="col-2">
+      <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
         <div class="armor_class">
             <div class="base-left"></div>
             <div class="top-center"></div>
@@ -25,14 +25,14 @@
             <p class="armor_text">{{ character.get_armor_class }}<br>AC</p>
           </div>
       </div>
-      <div class="col-2">
+      <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
         <div class="speed_details">
           <p>{{ character.speed }}ft.<br><small>Speed</small></p>
         </div>
       </div>
-      <div class="col-5">
+      <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
         <h4>Spell Slots</h4>
-        <table class="table">
+        <table class="table table-responsive">
           <thead>
             <th>Catrips</th>
             <th>1</th>

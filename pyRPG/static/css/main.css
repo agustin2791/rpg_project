@@ -1,79 +1,98 @@
 .top-bar {
   width: 100%;
   padding: 0px;
-  margin: 0px; }
-  .top-bar .nav-link {
-    font-size: small; }
+  margin: 0px;
+}
+.top-bar .nav-link {
+  font-size: small;
+}
 
 #camp_modal {
-  border-radius: 0px; }
-  #camp_modal .modal-dialog {
-    width: 90%; }
-    #camp_modal .modal-dialog .modal-content {
-      border-radius: 0px;
-      border: solid #fdcb6e 2px;
-      background-color: #ffeaa7; }
-      #camp_modal .modal-dialog .modal-content .modal-header {
-        text-align: center; }
-      #camp_modal .modal-dialog .modal-content .modal-body .form-control {
-        border-radius: 0px;
-        background-color: #fdcb6e; }
+  border-radius: 0px;
+}
+#camp_modal .modal-dialog {
+  width: 90%;
+}
+#camp_modal .modal-dialog .modal-content {
+  border-radius: 0px;
+  border: solid #fdcb6e 2px;
+  background-color: #ffeaa7;
+}
+#camp_modal .modal-dialog .modal-content .modal-header {
+  text-align: center;
+}
+#camp_modal .modal-dialog .modal-content .modal-body .form-control {
+  border-radius: 0px;
+  background-color: #fdcb6e;
+}
 
 .card {
   border-radius: 0px;
-  margin: 10px 0px; }
-  .card .card-body {
-    padding: 10px; }
-  .card .card-footer, .card .card-header {
-    padding: 10px;
-    color: #273c75;
-    background-color: #f5f6fa;
-    border-radius: 0px;
-    text-align: center;
-    font-size: x-small;
-    letter-spacing: 5px; }
+  margin: 10px 0px;
+}
+.card .card-body {
+  padding: 10px;
+}
+.card .card-footer, .card .card-header {
+  padding: 10px;
+  color: #273c75;
+  background-color: #f5f6fa;
+  border-radius: 0px;
+  text-align: center;
+  font-size: x-small;
+  letter-spacing: 5px;
+}
 
 .modal {
   width: 100%;
-  padding: 0px; }
-  .modal .fullscreen {
-    display: block;
-    width: 100%;
-    max-width: 100vw;
-    height: 100vh;
-    border: none;
-    position: fixed;
-    margin: 0px;
-    left: 0;
-    top: 0;
-    border-radius: 0px; }
-    .modal .fullscreen .modal-body {
-      overflow-y: auto; }
-    .modal .fullscreen .modal-content {
-      margin: 0px;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      overflow: initial; }
-      .modal .fullscreen .modal-content .equipment-tables {
-        height: 80vh;
-        display: block;
-        overflow-y: auto; }
-      .modal .fullscreen .modal-content .chosen-equipment {
-        height: 76vh;
-        display: block;
-        overflow-y: auto; }
+  padding: 0px;
+}
+.modal .fullscreen {
+  display: block;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+  border: none;
+  position: fixed;
+  margin: 0px;
+  left: 0;
+  top: 0;
+  border-radius: 0px;
+}
+.modal .fullscreen .modal-body {
+  overflow-y: auto;
+}
+.modal .fullscreen .modal-content {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: initial;
+}
+.modal .fullscreen .modal-content .equipment-tables {
+  height: 80vh;
+  display: block;
+  overflow-y: auto;
+}
+.modal .fullscreen .modal-content .chosen-equipment {
+  height: 76vh;
+  display: block;
+  overflow-y: auto;
+}
 
 .equip {
-  width: 100%; }
+  width: 100%;
+}
 
 .no-margin {
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+}
 
 body {
-  background-color: #ab3013; }
+  background-color: #ab3013;
+}
 
 .spell-info, .equip-details {
   width: 300px;
@@ -86,99 +105,110 @@ body {
   z-index: 100;
   display: none;
   opacity: 0;
-  transition: .5s ease; }
+  transition: 0.5s ease;
+}
 
 .pro_bonus {
   position: relative;
   color: #fff;
-  margin: 0px auto; }
-  .pro_bonus .number {
-    width: 45px;
-    height: 45px;
-    border: solid 2px #333;
-    border-radius: 50%;
-    color: #333;
-    position: absolute;
-    top: 50%;
-    left: -10px;
-    font-weight: 600;
-    font-size: large;
-    transform: translateY(-50%);
-    display: block;
-    vertical-align: middle;
-    background: #fff;
-    line-height: 40px; }
-  .pro_bonus .text {
-    background: #333;
-    padding: 5px 5px 5px 5px;
-    border-radius: 3px;
-    letter-spacing: 1px; }
+  margin: 0px auto;
+}
+.pro_bonus .number {
+  width: 45px;
+  height: 45px;
+  border: solid 2px #333;
+  border-radius: 50%;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  font-weight: 600;
+  font-size: large;
+  transform: translateY(-50%);
+  display: block;
+  vertical-align: middle;
+  background: #fff;
+  line-height: 40px;
+}
+.pro_bonus .text {
+  background: #333;
+  padding: 5px 5px 5px 5px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
 
 .armor_class {
   width: 200px;
   height: 105px;
   position: relative;
   z-index: 50;
-  margin: 0px auto; }
-  .armor_class .base-left {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
-    background: #333;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%; }
-  .armor_class .top-center {
-    background: #333;
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 78px;
-    height: 78px;
-    border-top-right-radius: 75%;
-    border-bottom-left-radius: 75%; }
-  .armor_class .top-left {
-    background: #fff;
-    width: 33px;
-    height: 33px;
-    position: absolute;
-    top: -3px;
-    left: 47px;
-    border-bottom-right-radius: 97%;
-    transform: rotate(33deg); }
-  .armor_class .top-right {
-    background: #fff;
-    width: 33px;
-    height: 33px;
-    position: absolute;
-    top: -3px;
-    left: 120px;
-    border-bottom-left-radius: 97%;
-    transform: rotate(-33deg); }
-  .armor_class .bottom {
-    background: #333;
-    position: absolute;
-    top: 47px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 70px;
-    height: 70px;
-    border-top-right-radius: 33%;
-    border-bottom-left-radius: 33%; }
-  .armor_class .armor_text {
-    width: 60px;
-    height: 60px;
-    z-index: 51;
-    color: #fff;
-    font-weight: 600;
-    font-size: x-large;
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%); }
+  margin: 0px auto;
+}
+.armor_class .base-left {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background: #333;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+.armor_class .top-center {
+  background: #333;
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 78px;
+  height: 78px;
+  border-top-right-radius: 75%;
+  border-bottom-left-radius: 75%;
+}
+.armor_class .top-left {
+  background: #fff;
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  top: -3px;
+  left: 47px;
+  border-bottom-right-radius: 97%;
+  transform: rotate(33deg);
+}
+.armor_class .top-right {
+  background: #fff;
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  top: -3px;
+  left: 120px;
+  border-bottom-left-radius: 97%;
+  transform: rotate(-33deg);
+}
+.armor_class .bottom {
+  background: #333;
+  position: absolute;
+  top: 47px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 70px;
+  height: 70px;
+  border-top-right-radius: 33%;
+  border-bottom-left-radius: 33%;
+}
+.armor_class .armor_text {
+  width: 60px;
+  height: 60px;
+  z-index: 51;
+  color: #fff;
+  font-weight: 600;
+  font-size: x-large;
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .speed_details {
   width: 100px;
@@ -190,6 +220,11 @@ body {
   padding-top: 22px;
   line-height: 20px;
   vertical-align: middle;
-  margin: 0px auto; }
+  margin: 0px auto;
+}
+
+.abilities, .information {
+  text-align: center;
+}
 
 /*# sourceMappingURL=main.css.map */

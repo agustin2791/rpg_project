@@ -2,10 +2,10 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-9 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <!-- information box  -->
       <div class="row">
-        <div class="col-9 col-sm-12">
+        <div class="col-xl-9 col-md-12 col-sm-12">
           <div class="character_info">
             {% include 'profile/character/info/information.html' %}
           </div>
@@ -16,12 +16,12 @@
             {% include 'profile/character/info/actions.html' %}
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="character_inventory">
                 {% include 'profile/character/info/equipment.html' %}
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="character_spells">
                 {% include 'profile/character/info/spells.html' %}
               </div>
@@ -31,14 +31,14 @@
 
         </div>
 
-        <div class="col-3">
+        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="character_skills">
             {% include 'profile/character/info/skills.html' %}
           </div>
         </div>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-12">
       <div class="card">
           <div class="card-body">
             <ul class="nav nav-tabs" id="TabItems" role="tablist">
