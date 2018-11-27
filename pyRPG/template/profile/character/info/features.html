@@ -1,11 +1,23 @@
-<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
 <div class="card">
+  <div class="card-header">Features &amp; Traits</div>
   <div class="card-body">
+    
+    <h4>Traits</h4>
+    {% for t in character.c_race.character_traits %}
+    <p>
+      <b>{{ t.trait }}</b><br>
+      {{ t.desc }}
+    </p>
+    {% endfor %}
+    <hr>
+    <h4>Features</h4>
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_feature_modal" name="button">Add Feature</button>
     {% if features %}
+
     {% for f in features %}
     <div class="info-div" data-update="feature_{{ f.id }}">
-      
-      <h4>{{ f.feature }}</h4>
+  
+      <b>{{ f.feature }}</b>
       <div class="info-text-edit-feature_{{ f.id }}"></div>
       <div class="info-text-feature_{{ f.id }}"><p style="white-space: pre-line" class="feature-text">{{ f.description }}</p></div>
       <div class="edit_feature_{{ f.id }}" style="visibility: hidden"><a href class="edit" data-update="feature_{{ f.id }}"><i class="fa fa-edit"></i></a> <a style="color: #f50000" class="delete_feat" href data-delete="{{ f.id }}"><i class="fa fa-trash"></i></a></div>

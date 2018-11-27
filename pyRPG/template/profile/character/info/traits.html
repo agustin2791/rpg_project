@@ -2,9 +2,9 @@
   {% for i in character.get_character_info %}
   {% if i.2 != None %}
   <div class="col-12 info-div" data-update="{{ i.0 }}">
-    <h3>{{ i.1 }}</h3>
+    
     <div class="card">
-      
+      <div class="card-header">{{ i.1 }}</div>
       <div class="card-body">
         <div class="info-text-edit-{{ i.0 }}"></div>
         <div class="info-text-{{ i.0 }}"><p style="white-space: pre-line">{{ i.2 }}</p></div>

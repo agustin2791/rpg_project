@@ -1,0 +1,23 @@
+<div class="card">
+	<div class="card-header">Class Info</div>
+	<div class="card-body">
+		
+	  <h3>{{ character.c_class.name }}</h3>
+	  <div class="row">
+	    <div class="col">
+	      <p>
+	        <b>Hit Dice:</b> {{ character.c_class.hit_dice }}<br>
+	        <b>Hit Points at 1st Level:</b> {{ character.c_class.hp }}<br>
+	        <b>Hit Points at Higher Levels:</b> {{ character.c_class.hp_2 }}
+	      </p>
+	      <h4>Proficiencies:</h4>
+	      <p>
+	        <b>Armor:</b> {{ character.c_class.get_armor }}<br>
+	        <b>Weapons:</b> {{ character.c_class.get_weapons }}<br>
+	        <b>Tools:</b> {{ character.c_class.get_tools }}<br>
+	        <b>Saving Throws:</b> {{ character.c_class.saving_throws}}
+	      </p>
+	    </div>
+	  </div>
+	</div>
+</div>

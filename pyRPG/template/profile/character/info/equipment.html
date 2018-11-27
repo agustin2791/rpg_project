@@ -3,8 +3,22 @@
         Equipment
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#items-list">Add Equipment</button>
-        <table class="table dataTable">
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-9 col-md-6 info-div" data-update="equipment">
+                <p><b>Equipment Notes</b></p>
+                <div class="info-text-edit-equipment"></div>
+                <div class="info-text-equipment"><p style="white-space: pre-line">{{ character.equipment }}</p><span class="edit_equipment" style="visibility: hidden"><a href class="edit" data-update="equipment"><i class="fa fa-edit"></i></a></span>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-6 currency">
+                Currency:<br>
+                
+            </div>
+        </div>
+        <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#items-list">Add Equipment</button>
+        <br>
+        <table class="table dataTable equipment-table">
             <thead>
                 <tr>
                     <th>Name</th>

@@ -18,6 +18,12 @@ var submit_trait = (url, csrf, trait, description) => {
         $('.character_background').empty().html(data);
       } else if (trait.startsWith('feature')) {
         $('.character_feature').empty().html(data)
+      } else if (trait === 'equipment') {
+        $('.character_inventory').empty().html(data);
+        getInfo();
+        $('.equipment-table').DataTable({
+          paging: false
+        });
       } else {
         $('.character_traits').empty().html(data)
       }

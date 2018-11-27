@@ -11,30 +11,9 @@ import json
 import models
 import forms
 
-# Authentication
-# class UserFormView(View):
-#     form_class = forms.UserForm
-#     template_name = 'authentication/registration_form.html'
-#     def get(self, request):
-#         form = self.form_class(None)
-#         return render(request, self.template_name, {'form', form})
-#
-#     def post(self, request):
-#         form = self.form_class(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=false)
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user.set_password(password)
-#             user.save()
-#
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 if user.is_active:
-#                     login(request, user)
-#                     return redirect()
-
 def registration(request):
+    if request.user.is_authenticated:
+        return redirect('/profile/{0}'.format(request.user.username))
     if request.is_ajax and 'new_user' in request.POST:
         print request.POST
         new_username = request.POST.get('username')
@@ -61,6 +40,9 @@ def registration(request):
 
 def user_login(request):
     login_form = forms.UserLogin(request.POST)
+    if request.user.is_authenticated:
+        return redirect('/profile/{0}'.format(request.user.username))
+
     if login_form.is_valid():
         username = login_form.cleaned_data['username']
         password = login_form.cleaned_data['password']
@@ -68,6 +50,10 @@ def user_login(request):
         if user is not None:
             login(request, user)
             return redirect('/profile/{0}/'.format(user.username))
+    return render(request,
+                  'authentication/login.html',
+                  {'form': login_form})
+
 
 def user_logout(request):
     if request.user.is_authenticated:
@@ -334,6 +320,12 @@ def character_info(request, username, char_id):
             return render(request,
                           'profile/character/info/features.html',
                           {'features': char_features})
+        elif trait == 'equipment':
+            setattr(character, 'equipment', description)
+            character.save()
+            return render(request,
+                          'profile/character/info/equipment.html',
+                          {'character': character})
         else:
             setattr(character, trait, description)
             character.save()

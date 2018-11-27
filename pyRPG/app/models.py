@@ -220,6 +220,9 @@ class CharacterRace(models.Model):
     def __unicode__(self):
         return self.name
 
+    def character_traits(self):
+        return CharacterRaceTraits.objects.filter(char_race=self.id)
+
 class CharacterRaceTraits(models.Model):
     char_race = models.ForeignKey(CharacterRace,
                                   related_name='character_race_trait')
@@ -336,7 +339,7 @@ class Character(models.Model):
 
     def get_character_info(self):
         info = []
-        traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws', 'Equipment']
+        traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws']
         for t in traits:
             search = t.lower()
             search = '_'.join(search.split(' '))
@@ -481,6 +484,10 @@ class Character(models.Model):
         if ac == 0:
             ac = 'Add armor'
         return ac
+
+    # def get_class_features(self):
+    #     feats = CharacterClassFeature.objects.filter(char_class=self.c_class, level=self.level)
+    #     return feats
 
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
