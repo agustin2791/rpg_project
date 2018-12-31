@@ -82,6 +82,75 @@
 		}
 	}
 }
+.character_abilities {
+	width: 100%;
+	display: block;
+	.details {
+		display: block;
+		text-align: center;
+		.abilities {
+			display: inline-block;
+			vertical-align: top;
+			width: 110px;
+			padding: 5px;
+			.ability {
+				width: 100px;
+				border: $main-color solid thick;
+				border-radius: 5px;
+				padding-top: 15px;
+				margin: 15px 0px;
+			}
+		}
+		.saving_throws, .skill-list {
+			width: 250px;
+			display: inline-block;
+			vertical-align: top;
+			padding: 5px;
+			margin: 15px 0px;
+			text-align: left;
+			h3 {
+				font-size: 1.5rem;
+				display: block;
+				text-align: center;
+				background: #333;
+				color: #fff;
+				padding: 5px;
+			}
+		}
+		.skill_box {
+			width: 100%;
+			display: block;
+			font-size: 1.25rem;
+			margin-bottom: 15px;
+			.left {
+				width: 15%;
+				text-align: right;
+				font-weight: 300;
+				border-bottom: solid thin #333;
+				padding-bottom: 2px;
+				display: inline-block;
+				vertical-align: top;
+			}
+			.right {
+				display: inline-block;
+				vertical-align: top;
+				width: auto;
+				text-align: left;
+				padding-bottom: 2px;
+				text-indent: 20px;
+			}
+		}
+		.skill-list {
+			width: 500px;
+			.skill_box {
+				width: 45%;
+				display: inline-block;
+				vertical-align: top;
+				margin-right: 4px;
+			}
+		}
+	}
+}
 .information {
 	display: block;
 	width: 100%;

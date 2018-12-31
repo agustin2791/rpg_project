@@ -516,10 +516,13 @@ class CharacterSkills(models.Model):
         skills = []
         names = views.SKILLS
         char_skills = self.character.skill_set
-        for n in names:
+        if char_skills:
+            pro_skills = char_skills.split(', ')
+        else:
+            pro_skills = False
+        for n in sorted(names):
             mod = CharacterSkills.objects.values_list(n[0], flat=True).get(pk=self.id)
-            if char_skills:
-                pro_skills = char_skills.split(', ')
+            if pro_skills:
                 if n[0] in pro_skills:
                     mod += self.character.proficiency_bonus
             if mod > 0:

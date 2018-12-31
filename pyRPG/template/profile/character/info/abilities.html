@@ -1,35 +1,41 @@
 <div class="details">
   <div class="abilities">
     {% for a in character.get_abilities %}
-    <div class="abilities"><h3>{{ a.2 }}<small>({{ a.1 }})</small></h3><p>{{ a.0 }}</p>
+    <div class="ability">
+      <h3>{{ a.2 }}<small>({{ a.1 }})</small></h3>
+      <p>{{ a.0 }}</p>
     </div>
     {% endfor %}
   </div>
   <div class="saving_throws">
-    <table class="table table-hover">
-      <tbody>
-        {% for s in character.get_saving_throws %}
-          <tr style="{{ s.3 }}">
-            <td ><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.2 }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <h3>Saving Throws</h3>
+    {% for s in character.get_saving_throws %}
+    <div class="skill_box" style="{{ s.3 }}">
+      <div class="left">
+        {{ s.2 }}
+      </div>
+      <div class="right">
+        {{s.0}}
+      </div>
+    </div>
+    {% endfor %}
     <div class="pro_bonus">
         <div class="number">+{{ character.proficiency_bonus }}</div>
         <div class="text">Proficiency Bonus</div>
       </div>
   </div>
   <div class="skill-list">
-    <table class="table table-hover">
-      <tbody>
-        {% for s in skills.get_skills %}
-          <tr {% if s.2 in character.skill_list %} style="border: solid 2px #16a085;" {% endif %}>
-            <td ><b>{{ s.0 }}</b>: </td> <td style="text-align: right">{{ s.1 }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <h3>Skills</h3>
+    {% for s in skills.get_skills %}
+    <div class="skill_box" {% if s.2 in character.skill_list %} style="border: solid 2px #16a085;" {% endif %}>
+      <div class="left">
+        {{ s.1 }}
+      </div>
+      <div class="right">
+        {{ s.0 }}
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 
