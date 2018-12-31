@@ -1,7 +1,167 @@
+.character_sheet {
+	display: block;
+	.display_selector {
+		display: inline-block;
+		width: 15%;
+		position: relative;
+		vertical-align: top;
+		.selector {
+			width: 100%;
+			font-size: 0.85rem;
+			background: #fff;
+			margin: 20px 0px;
+			color: $main-color;
+			cursor: pointer;
+			transition: ease-in .5s;
+			&.active {
+				background: $main-color;
+				color: #fff;
+				border-radius: 25px;
+			}
+			.selector_icon {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-color: $secondary-color;
+				color: #fff;
+				border: $main-color thin solid;
+				text-align: center;
+				line-height: 60px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.selector_title {
+				display: inline-block;
+				width: auto;
+				vertical-align: middle;
+				font-size: 1.25rem;
+				font-weight: thick;
+			}
+		}
+	}
+	.display_container {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		height: 95vh;
+		width: 80%;
+		overflow: auto;
+		margin-left: 5px;
+		.display {
+			display: none;
+			&.show {
+				display: block;
+			}
+		}
+	}
+}
+.character_info {
+	text-align: center;
+	.details {
+		display: block;
+		.char-img {
+			max-width: 500px;
+			width: 49%;
+			display: inline-block;
+			position: relative;
+			vertical-align: top;
+			img {
+				width: 100%;
+			}
+		}
+		.char-details {
+			width: 48%;
+			vertical-align: top;
+			display: inline-block;
+			padding: 10px;
+			font-size: 1.5rem;
+			text-align: center;
+			b {
+				font-size: 1rem;
+			}
+		}
+	}
+}
+.information {
+	display: block;
+	width: 100%;
+	.character_info {
+		display: inline-block;
+		width: 30%;
+		vertical-align: top;
+		.details {
+			display: block;
+			position: relative;
+			.char-img {
+				height: 300px;
+				width: 49%;
+				display: inline-block;
+				background: #333;
+			}
+			.char-details {
+				width: 49%;
+				display: inline-block;
+				vertical-align: top;
+				text-align: left;
+				font-size: 1rem;
+				p > b {
+					color: $secondary-color;
+				}
+				.char-name {
+					font-size: 1.25rem;
+					font-weight: 400;
+					color: $main-color;
+				}
+			}
+		}
+	}
+	.character_abilities {
+		width: 35%;
+		display: inline-block;
+		vertical-align: middle;
+		.details {
+			display: block;
+			.abilities {
+				display: inline-block;
+				width: 16%;
+				font-size: 0.75rem;
+				border: solid $secondary-color thick;
+				padding: 10px;
+				p {
+					padding: 0;
+					margin: 0;
+				}
+				h3 {
+					font-size: 1.25rem;
+					small {
+						font-size: 1rem;
+					}
+				}
+			}
+		}
+	}
+	.character_skills {
+		width: 35%;
+		display: inline-block;
+		vertical-align: middle;
+		.saving_throws, .skill-list {
+			vertical-align: top;
+			width: 50%;
+			font-size: 0.75rem;
+			display: inline-block;
+			padding: 15px;
+			text-align: left;
+		}
+	}
+	.character_actions {
+
+	}
+}
 .pro_bonus {
 	position: relative;
 	color: #fff;
 	margin: 0px auto;
+	text-align: center;
 	.number {
 		width: 45px;
 		height: 45px;
@@ -15,7 +175,6 @@
 		font-size: large;
 		transform: translateY(-50%);
 		display: block;
-		vertical-align: middle;
 		background: #fff;
 		line-height: 40px;
 	}

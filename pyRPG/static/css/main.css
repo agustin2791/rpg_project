@@ -103,10 +103,6 @@ h1, h2, h3, h4, h5, h6, p, a, span, ul, li, div {
   padding: 0px;
 }
 
-body {
-  background-color: #ab3013;
-}
-
 .spell-info, .equip-details {
   width: 300px;
   height: auto;
@@ -121,10 +117,169 @@ body {
   transition: 0.5s ease;
 }
 
+.character_sheet {
+  display: block;
+}
+.character_sheet .display_selector {
+  display: inline-block;
+  width: 15%;
+  position: relative;
+  vertical-align: top;
+}
+.character_sheet .display_selector .selector {
+  width: 100%;
+  font-size: 0.85rem;
+  background: #fff;
+  margin: 20px 0px;
+  color: #92140C;
+  cursor: pointer;
+  transition: ease-in 0.5s;
+}
+.character_sheet .display_selector .selector.active {
+  background: #92140C;
+  color: #fff;
+  border-radius: 25px;
+}
+.character_sheet .display_selector .selector .selector_icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #40798C;
+  color: #fff;
+  border: #92140C thin solid;
+  text-align: center;
+  line-height: 60px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.character_sheet .display_selector .selector .selector_title {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+  font-size: 1.25rem;
+  font-weight: thick;
+}
+.character_sheet .display_container {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 95vh;
+  width: 80%;
+  overflow: auto;
+  margin-left: 5px;
+}
+.character_sheet .display_container .display {
+  display: none;
+}
+.character_sheet .display_container .display.show {
+  display: block;
+}
+
+.character_info {
+  text-align: center;
+}
+.character_info .details {
+  display: block;
+}
+.character_info .details .char-img {
+  max-width: 500px;
+  width: 49%;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+.character_info .details .char-img img {
+  width: 100%;
+}
+.character_info .details .char-details {
+  width: 48%;
+  vertical-align: top;
+  display: inline-block;
+  padding: 10px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.character_info .details .char-details b {
+  font-size: 1rem;
+}
+
+.information {
+  display: block;
+  width: 100%;
+}
+.information .character_info {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+}
+.information .character_info .details {
+  display: block;
+  position: relative;
+}
+.information .character_info .details .char-img {
+  height: 300px;
+  width: 49%;
+  display: inline-block;
+  background: #333;
+}
+.information .character_info .details .char-details {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  font-size: 1rem;
+}
+.information .character_info .details .char-details p > b {
+  color: #40798C;
+}
+.information .character_info .details .char-details .char-name {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #92140C;
+}
+.information .character_abilities {
+  width: 35%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.information .character_abilities .details {
+  display: block;
+}
+.information .character_abilities .details .abilities {
+  display: inline-block;
+  width: 16%;
+  font-size: 0.75rem;
+  border: solid #40798C thick;
+  padding: 10px;
+}
+.information .character_abilities .details .abilities p {
+  padding: 0;
+  margin: 0;
+}
+.information .character_abilities .details .abilities h3 {
+  font-size: 1.25rem;
+}
+.information .character_abilities .details .abilities h3 small {
+  font-size: 1rem;
+}
+.information .character_skills {
+  width: 35%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.information .character_skills .saving_throws, .information .character_skills .skill-list {
+  vertical-align: top;
+  width: 50%;
+  font-size: 0.75rem;
+  display: inline-block;
+  padding: 15px;
+  text-align: left;
+}
 .pro_bonus {
   position: relative;
   color: #fff;
   margin: 0px auto;
+  text-align: center;
 }
 .pro_bonus .number {
   width: 45px;
@@ -139,7 +294,6 @@ body {
   font-size: large;
   transform: translateY(-50%);
   display: block;
-  vertical-align: middle;
   background: #fff;
   line-height: 40px;
 }

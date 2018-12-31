@@ -1,33 +1,20 @@
- <div class="card">
-  <div class="card-header">
-    {{ character.name }}
-  </div>
-  <div class="card-body">
-    <div class="row information">
-      <div class="col-md-4 col-sm-4">
-        <h3>{{ character.c_class }} {{ character.level }}</h3>
-        <p><i>Class</i></p>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <h3 class="character-bg-name">{% if character.background %}{{ character.background }}{% endif %}</h3>
-        <p><i>Background</i></p>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <h3>{{ user.username }}</h3>
-        <p><i>User</i></p>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <h3>{{ character.c_race }}</h3>
-        <p><i>Race</i></p>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <h3>{{ character.get_alignment }}</h3>
-        <p><i>Alignment</i></p>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <h3>{{ character.exp }}</h3>
-        <p><i>EXP.</i></p>
-      </div>
-    </div>
-  </div>
-</div>
+ <div class="details">
+   <div class="char-img">
+     <img src="/static/images/temp/character.png" alt="character">
+   </div>
+   <div class="char-details">
+      <h2 class="char-name">{{ character.name }}</h2>
+      <p>
+        <b>Class:</b><br>
+        {{ character.c_class }} {{ character.level }}<br>
+        <b>Race:</b><br>
+        {{ character.c_race }}<br>
+        <b>Background:</b><br>
+        {% if character.background %}{{ character.background }}{% endif %}<br>
+        <b>Alignment:</b><br>
+        {{ character.get_alignment }}<br>
+        <b>EXP.</b><br>
+        {{ character.exp }}
+      </p>
+   </div>
+ </div>

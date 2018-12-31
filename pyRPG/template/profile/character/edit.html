@@ -1,86 +1,99 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <!-- information box  -->
-      <div class="row">
-        <div class="col-xl-9 col-md-12 col-sm-12">
-          <div class="character_info">
-            {% include 'profile/character/info/information.html' %}
-          </div>
-          <div class="character_abilities">
-            {% include 'profile/character/info/abilities.html' %}
-          </div>
-          <div class="character_actions">
-            {% include 'profile/character/info/actions.html' %}
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="character_inventory">
-                {% include 'profile/character/info/equipment.html' %}
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="character_spells">
-                {% include 'profile/character/info/spells.html' %}
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-
-        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="character_skills">
-            {% include 'profile/character/info/skills.html' %}
-          </div>
-        </div>
+<div class="container-fluid character_sheet">
+  <!-- Selectors -->
+  <div class="display_selector">
+    <!-- Information -->
+    <div class="selector" data-to-display="info">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
       </div>
+      <div class="selector_title">Information</div>
     </div>
-    <!-- <div class="col-6">
-      <div class="card">
-          <div class="card-body">
-            <ul class="nav nav-tabs" id="TabItems" role="tablist">
-              <li class="nav-item"><a href="#tab-background" class="nav-link active" data-toggle="tab" role="tab" aria-controls="tab-background" aria-selected="true">Background</a></li>
-              <li class="nav-item"><a href="#tab-feat" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-feat" aria-selected="true">Features</a></li>
-              <li class="nav-item"><a href="#tab-traits" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-traits" aria-selected="true">Traits</a></li> -->
-              <!-- Extend Traits -->
-              <!-- <li class="nav-item"><a href="#tab-class" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-class" aria-selected="true">About {{ character.c_class }}</a></li>
-              <li class="nav-item"><a href="#tab-race" class="nav-link" data-toggle="tab" role="tab" aria-controls="tab-race" aria-selected="true">About {{ character.c_race }}</a></li>
-            </ul>
-            <div class="tab-content" id="tab-items">
-              <div class="tab-pane fade show active" id="tab-background" role="tabpane">
-
-              </div>
-              <div class="tab-pane fade show" id="tab-feat" role="tabpane">
-
-              </div>
-              <div class="tab-pane fade show" id="tab-traits" role="tabpane">
-
-              </div>
-              <div class="tab-pane fade show" id="tab-class" role="tabpane">
-
-              </div>
-              <div class="tab-pane fade show" id="tab-race" role="tabpane">
-
-              </div>
-            </div>
-          </div>
-        </div>
-    </div> -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <!-- Abilities -->
+    <div class="selector active" data-to-display="abilities">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Abilities</div>
+    </div>
+    <!-- Skills -->
+    <div class="selector" data-to-display="skills">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Skills</div>
+    </div>
+    <!-- Actions -->
+    <div class="selector" data-to-display="actions">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Actions</div>
+    </div>
+    <!-- Equipment -->
+    <div class="selector" data-to-display="inventory">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Equipment</div>
+    </div>
+    <!-- Spells -->
+    <div class="selector" data-to-display="spells">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Spells</div>
+    </div>
+    <!-- Background -->
+    <div class="selector" data-to-display="background">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Background</div>
+    </div>
+    <!-- Features -->
+    <div class="selector" data-to-display="feat">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Features</div>
+    </div>
+    <!-- Traits -->
+    <div class="selector" data-to-display="traits">
+      <div class="selector_icon">
+        <span class="fa fa-dragon fa-2x"></span>
+      </div>
+      <div class="selector_title">Traits</div>
+    </div>
+  </div>
+  <div class="display_container">
+    <div class="character_info display">
+      {% include 'profile/character/info/information.html' %}
+    </div>
+    <div class="character_abilities display show">
+      {% include 'profile/character/info/abilities.html' %}
+    </div>
+    <div class="character_skills display">
+      {% include 'profile/character/info/skills.html' %}
+    </div>
+    <div class="character_actions display">
+      {% include 'profile/character/info/actions.html' %}
+    </div>
+    <div class="character_inventory display">
+      {% include 'profile/character/info/equipment.html' %}
+    </div>
+    <div class="character_spells display">
+      {% include 'profile/character/info/spells.html' %}
+    </div>
+    <div class="character_background display">
       {% include 'profile/character/info/background.html' %}
-      <br>
+    </div>
+    <div class="character_feat display">
       {% include 'profile/character/info/features.html' %}
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="character_traits display">
       {% include 'profile/character/info/traits.html' %}
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-      {% include 'profile/character/info/character_class.html' %}
-      <br>
-      {% include 'profile/character/info/character_race.html' %}
     </div>
   </div>
 
@@ -99,4 +112,21 @@
 <script type="text/javascript" src="/static/js/character/character.js"></script>
 <script type="text/javascript" src="/static/js/character/character_info.js"></script>
 <script type="text/javascript" src="/static/js/character/edit.js"></script>
+<script>
+  $(function() {
+    $(document).on('click', '.selector', function() {
+      let selectors = document.getElementsByClassName('selector');
+      let displays = document.getElementsByClassName('display');
+      let toDisplay = $(this).attr('data-to-display');
+      for (let i = 0; i < selectors.length; i++) {
+        if (selectors[i].classList[1] == 'active') selectors[i].classList.remove('active');
+      }
+      for (let i = 0; i < displays.length; i++) {
+        if (displays[i].classList[2] == 'show') displays[i].classList.remove('show');
+      }
+      $(this).addClass('active');
+      $('.character_' + toDisplay).addClass('show');
+    })
+  })
+</script>
 {% endblock %}
