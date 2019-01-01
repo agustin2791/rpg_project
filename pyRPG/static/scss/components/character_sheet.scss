@@ -55,6 +55,11 @@
 		}
 	}
 }
+.pro_bonus, .hit_points, .hit_dice {
+	margin: 5px;
+	width: auto;
+	text-align: center;
+}
 .character_info {
 	text-align: center;
 	.details {
@@ -101,8 +106,9 @@
 				margin: 15px 0px;
 			}
 		}
-		.saving_throws, .skill-list {
-			width: 250px;
+		.saving_throws, .skill-list, .actions {
+			width: 100%;
+			max-width: 250px;
 			display: inline-block;
 			vertical-align: top;
 			padding: 5px;
@@ -141,13 +147,16 @@
 			}
 		}
 		.skill-list {
-			width: 500px;
+			max-width: 500px;
 			.skill_box {
 				width: 45%;
 				display: inline-block;
 				vertical-align: top;
 				margin-right: 4px;
 			}
+		}
+		.actions {
+			text-align: center;
 		}
 	}
 }
