@@ -7,6 +7,19 @@
     </div>
     {% endfor %}
   </div>
+  <div class="skill-list">
+    <h3>Skills</h3>
+    {% for s in skills.get_skills %}
+    <div class="skill_box" {% if s.2 in character.skill_list %} style="border: solid 2px #16a085;" {% endif %}>
+      <div class="left">
+        {{ s.1 }}
+      </div>
+      <div class="right">
+        {{ s.0 }}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
   <div class="saving_throws">
     <h3>Saving Throws</h3>
     {% for s in character.get_saving_throws %}
@@ -30,21 +43,9 @@
       <h4>{{ character.hit_dice }}<br><small>Hit Dice</small></h4>
     </div>
   </div>
-  <div class="skill-list">
-    <h3>Skills</h3>
-    {% for s in skills.get_skills %}
-    <div class="skill_box" {% if s.2 in character.skill_list %} style="border: solid 2px #16a085;" {% endif %}>
-      <div class="left">
-        {{ s.1 }}
-      </div>
-      <div class="right">
-        {{ s.0 }}
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+  
   <div class="actions">
-    <div class="armor_class">
+    <div class="armor_class action_sect">
       <div class="base-left"></div>
       <div class="top-center"></div>
       <div class="top-left"></div>
@@ -52,32 +53,33 @@
       <div class="bottom"></div>
       <p class="armor_text">{{ character.get_armor_class }}<br>AC</p>
     </div>
-    <br><br>
-    <div class="speed_details">
+    <div class="speed_details action_sect">
       <p>{{ character.speed }}ft.<br><small>Speed</small></p>
     </div>
-    <h4>Spell Slots</h4>
-    <table class="table table-responsive">
-      <thead>
-        <th>Catrips</th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
-        <th>6</th>
-        <th>7</th>
-        <th>8</th>
-        <th>9</th>
-      </thead>
-      <tbody>
-        <tr>
-          {% for ss in character.character_class_spells %}
-          <td>{{ ss }}</td>
-          {% endfor %}
-        </tr>
-      </tbody>
-    </table>
+    <div class="action_sect">
+      <h4>Spell Slots</h4>
+      <table class="table table-responsive">
+          <thead>
+            <th>Catrips</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+          </thead>
+          <tbody>
+            <tr>
+              {% for ss in character.character_class_spells %}
+              <td>{{ ss }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+    </div>
   </div>
 </div>
 

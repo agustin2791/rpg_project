@@ -96,14 +96,15 @@
 		.abilities {
 			display: inline-block;
 			vertical-align: top;
-			width: 110px;
+			width: 100%;
 			padding: 5px;
 			.ability {
 				width: 100px;
+				display: inline-block;
 				border: $main-color solid thick;
 				border-radius: 5px;
 				padding-top: 15px;
-				margin: 15px 0px;
+				margin: 15px 20px;
 			}
 		}
 		.saving_throws, .skill-list, .actions {
@@ -156,10 +157,18 @@
 			}
 		}
 		.actions {
+			width: 300px;
 			text-align: center;
+			.action_sect {
+				max-width: 300px;
+				display: inline-block;
+				vertical-align: top;
+				margin: 20px 0px;
+			}
 		}
 	}
 }
+
 .information {
 	display: block;
 	width: 100%;
@@ -231,10 +240,9 @@
 			text-align: left;
 		}
 	}
-	.character_actions {
-
-	}
+	
 }
+
 .pro_bonus {
 	position: relative;
 	color: #fff;

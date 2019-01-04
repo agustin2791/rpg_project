@@ -4,32 +4,18 @@
   <!-- Selectors -->
   <div class="display_selector">
     <!-- Information -->
-    <div class="selector" data-to-display="info">
+    <div class="selector active" data-to-display="info">
       <div class="selector_icon">
         <span class="fa fa-dragon fa-2x"></span>
       </div>
       <div class="selector_title">Information</div>
     </div>
     <!-- Abilities -->
-    <div class="selector active" data-to-display="abilities">
+    <div class="selector" data-to-display="abilities">
       <div class="selector_icon">
         <span class="fa fa-dragon fa-2x"></span>
       </div>
       <div class="selector_title">Abilities</div>
-    </div>
-    <!-- Skills -->
-    <div class="selector" data-to-display="skills">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
-      <div class="selector_title">Skills</div>
-    </div>
-    <!-- Actions -->
-    <div class="selector" data-to-display="actions">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
-      <div class="selector_title">Actions</div>
     </div>
     <!-- Equipment -->
     <div class="selector" data-to-display="inventory">
@@ -68,17 +54,11 @@
     </div>
   </div>
   <div class="display_container">
-    <div class="character_info display">
+    <div class="character_info display show">
       {% include 'profile/character/info/information.html' %}
     </div>
-    <div class="character_abilities display show">
+    <div class="character_abilities display">
       {% include 'profile/character/info/abilities.html' %}
-    </div>
-    <div class="character_skills display">
-      {% include 'profile/character/info/skills.html' %}
-    </div>
-    <div class="character_actions display">
-      {% include 'profile/character/info/actions.html' %}
     </div>
     <div class="character_inventory display">
       {% include 'profile/character/info/equipment.html' %}
