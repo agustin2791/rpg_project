@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container-fluid character_sheet">
   <!-- Selectors -->
   <div class="display_selector">
@@ -81,6 +82,7 @@
 <div class="character-modals">{% include 'profile/character/info/modals.html' %}</div>
 {% endblock %}
 {% block bottomscript %}
+<script type="text/javascript" src="/static/js/block_confirm.js"></script>
 <script type="text/javascript">
   const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
   const csrf = '{{ csrf_token }}';
@@ -89,6 +91,7 @@
     paging: false
   });
 </script>
+
 <script type="text/javascript" src="/static/js/character/character.js"></script>
 <script type="text/javascript" src="/static/js/character/character_info.js"></script>
 <script type="text/javascript" src="/static/js/character/edit.js"></script>

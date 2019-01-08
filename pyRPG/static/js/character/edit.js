@@ -11,7 +11,7 @@ $(document).ready(function() {
     $(document).on('click', '.edit', function(e) {
       e.preventDefault();
       var update = $(this).attr('data-update');
-      var text = $('.info-text-' + update).text();
+      var text = $('.info-text-' + update + ' > p').text();
       $('.info-text-' + update).hide();
       openEdit(update, text);
       getInfo();

@@ -1,4 +1,4 @@
-// import * as $ from 'jquery';
+// import $ from 'jquery';
 var submit_trait = function (url, csrf, trait, description) {
     $.ajax({
         type: 'POST',
@@ -58,7 +58,7 @@ var openEdit = function (update, text) {
     if (toUpdate.startsWith('feature')) {
         toUpdate = 'feature';
     }
-    var html = "\n  <form class=\"" + toUpdate + "_form\" data-update=\"" + update + "\">\n    <div class=\"form-group\">\n      <textarea name=\"" + update + "\" class=\"form-control\" rows=\"5\" cols=\"80\">" + text + "</textarea>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\" name=\"button\">Submit</button> <button type=\"button\" class=\"btn cancel\" data-update=\"" + update + "\">Cancel</button>\n  </form>";
+    var html = "<form class=\"" + toUpdate + "_form\" data-update=\"" + update + "\">\n    <div class=\"form-group\">\n      <textarea name=\"" + update + "\" class=\"form-control\" rows=\"5\" cols=\"80\">" + text + "</textarea>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\" name=\"button\">Submit</button> <button type=\"button\" class=\"btn cancel\" data-update=\"" + update + "\">Cancel</button>\n  </form>";
     $('.info-text-edit-' + update).empty().html(html);
     document.getElementsByClassName('edit_' + update)[0].style.visibility = 'hidden';
     getInfo();
@@ -166,6 +166,9 @@ var add_spell = function (url, csrf, spell) {
         },
         success: function (data) {
             $('.character_spells').empty().html(data);
+        },
+        complete: function () {
+            block_confirm();
         }
     });
 };

@@ -1,4 +1,4 @@
-// import * as $ from 'jquery';
+// import $ from 'jquery';
 
 
 var submit_trait = (url, csrf, trait, description) => {
@@ -54,8 +54,7 @@ var openEdit = (update: string, text: string): boolean => {
   if (toUpdate.startsWith('feature')) {
     toUpdate = 'feature';
   }
-  var html = `
-  <form class="${toUpdate}_form" data-update="${update}">
+  var html = `<form class="${toUpdate}_form" data-update="${update}">
     <div class="form-group">
       <textarea name="${update}" class="form-control" rows="5" cols="80">${text}</textarea>
     </div>
@@ -169,6 +168,9 @@ let add_spell = (url: string, csrf: string, spell: number): void => {
     },
     success: function(data) {
       $('.character_spells').empty().html(data);
+    },
+    complete: function() {
+      block_confirm();
     }
   })
 }
