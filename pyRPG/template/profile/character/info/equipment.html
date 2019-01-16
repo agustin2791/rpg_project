@@ -1,60 +1,69 @@
-
-        
-<div class="row">
-    <div class="col-xs-12 col-sm-9 col-md-6 info-div" data-update="equipment">
-        <p><b>Equipment Notes</b></p>
-        <div class="info-text-edit-equipment"></div>
-        <div class="info-text-equipment"><p style="white-space: pre-line">{{ character.equipment }}</p><span class="edit_equipment" style="visibility: hidden"><a href class="edit" data-update="equipment"><i class="fa fa-edit"></i></a></span>
+<div class="equipment">
+    <div class="info-div" data-update="equipment">
+        <div class="currency">
+            <b>Currency:</b><br>
+            <p>
+                Copper: {{ character.get_currency.copper }}cp<br>
+                Silver: {{ character.get_currency.silver }}sp<br>
+                Electrum: {{ character.get_currency.electrum }}ep<br>
+                Gold: {{ character.get_currency.gold }}gp<br>
+                Platinum: {{ character.get_currency.platinum }}pp<br>
+            </p>
+        </div>
+        <div class="equipment-notes">
+            <p><b>Equipment Notes</b></p>
+            <div class="info-text-edit-equipment"></div>
+            <div class="info-text-equipment"><p style="white-space: pre-line">{{ character.equipment }}</p><span class="edit_equipment" style="visibility: hidden"><a href class="edit" data-update="equipment"><i class="fa fa-edit"></i></a></span>
+        </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-3 col-md-6 currency">
-        Currency:<br>
-        
+    <div class="equipment-list">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#items-list">Add Equipment</button>
+        <table class="table dataTable equipment-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in character.inventory.all %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.category.name }}</td>
+                    <td style="position: relative;">
+                        <div class="equip-details" data-equip="{{ i.id }}">
+                            {{ i.name }}
+                            <hr>
+                            <p>
+                                <b>Category:</b> {{ i.category }}<br>
+                                <b>Cost:</b> {{ i.cost }}<br>
+                                <b>AC:</b> {{ i.armor_class|default:'---' }}<br>
+                                <b>Strength:</b> {{ i.strength|default:'---' }}<br>
+                                <b>Stealth:</b> {{ i.stealth|default:'---' }}<br>
+                                <b>Speed:</b> {{ i.speed|default:'---' }}<br>
+                                <b>Carry Cap:</b> {{ i.carry_cap|default:'---' }}<br>
+                                <b>Container Cap:</b> {{ i.container_cap|default:'---' }}<br>
+                                <b>Damage:</b> {{ i.damage|default:'---' }}<br>
+                                <b>Weight:</b> {{ i.weight|default:'---' }}<br>
+                                {{ i.description }}
+                            </p>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-sm equip-info" data-equip="{{ i.id }}"><i class="fa fa-info"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm equip-remove" data-equip="{{ i.id }}"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Sorry, you don't have any Items</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#items-list">Add Equipment</button>
-<br>
-<table class="table dataTable equipment-table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for i in character.inventory.all %}
-        <tr>
-            <td>{{ i.name }}</td>
-            <td>{{ i.category.name }}</td>
-            <td style="position: relative;">
-                <div class="equip-details" data-equip="{{ i.id }}">
-                    {{ i.name }}
-                    <hr>
-                    <p>
-                        <b>Category:</b> {{ i.category }}<br>
-                        <b>Cost:</b> {{ i.cost }}<br>
-                        <b>AC:</b> {{ i.armor_class|default:'---' }}<br>
-                        <b>Strength:</b> {{ i.strength|default:'---' }}<br>
-                        <b>Stealth:</b> {{ i.stealth|default:'---' }}<br>
-                        <b>Speed:</b> {{ i.speed|default:'---' }}<br>
-                        <b>Carry Cap:</b> {{ i.carry_cap|default:'---' }}<br>
-                        <b>Container Cap:</b> {{ i.container_cap|default:'---' }}<br>
-                        <b>Damage:</b> {{ i.damage|default:'---' }}<br>
-                        <b>Weight:</b> {{ i.weight|default:'---' }}<br>
-                        {{ i.description }}
-                    </p>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm equip-info" data-equip="{{ i.id }}"><i class="fa fa-info"></i></button>
-                    <button type="button" class="btn btn-danger btn-sm equip-remove" data-equip="{{ i.id }}"><i class="fa fa-trash"></i></button>
-                </div>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3">Sorry, you don't have any Items</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+

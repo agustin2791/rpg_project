@@ -1,45 +1,41 @@
-<div class="card">
-	<div class="card-header">
-		Spells
-	</div>
-	<div class="card-body">
-		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#spell-list">Add Spell</button>
-		<table class="table dataTable">
-			<thead>
-                <th>Level</th>
-                <th>Name</th>
-                <th></th>
-            </thead>
-            <tbody>
-                {% for s in character.spells.all %}
-                <tr>
-                    <td>{% if s.level == 0 %}Cantrip{% else %}{{ s.level }}{% endif %}</td>
-                    <td>{{ s.spell_name }}</td>
-                    <td style="position: relative">
-						<div class="spell-info" data-spell="{{ s.id }}">
-							{{ s.spell_name }}
-							<hr>
-							<p>
-								<b>Time:</b> {{ s.time }}<br>
-								<b>Range:</b> {{ s.rang }}<br>
-								<b>Composition:</b> {{ s.comp }}<br>
-								<b>Duration:</b> {{ s.duration }}<br>
-								<b>School:</b> {{ s.duration }}<br>
-								<b>Ritual:</b> {{ s.ritual }}<br>
-								<b>Material:</b> {% if s.material == 'nan' %}No Material needed{% else %}{{ s.material }}{% endif %}
-							</p>
-						</div>
-						<div class="btn-group">
-							<button class="btn btn-primary btn-sm get_spell_info" data-spell="{{ s.id }}"><i class="fa fa-info"></i></button>
-							<button class="btn btn-danger btn-sm remove-spell" data-spell="{{ s.id }}"><i class="fa fa-minus"></i></button>
-						</div>
-						
-					</td>
-                </tr>
-                {% empty %}
-                <tr><td colspan="10"><i>You Have no Spells</i></td></tr>
-                {% endfor %}
-            </tbody>
-		</table>
-	</div>
+<div class="spells">
+	<h3>Spells</h3>
+	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#spell-list">Add Spell</button>
+	<table class="table dataTable">
+		<thead>
+            <th>Level</th>
+            <th>Name</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for s in character.spells.all %}
+            <tr>
+                <td>{% if s.level == 0 %}Cantrip{% else %}{{ s.level }}{% endif %}</td>
+                <td>{{ s.spell_name }}</td>
+                <td style="position: relative">
+					<div class="spell-info" data-spell="{{ s.id }}">
+						{{ s.spell_name }}
+						<hr>
+						<p>
+							<b>Time:</b> {{ s.time }}<br>
+							<b>Range:</b> {{ s.rang }}<br>
+							<b>Composition:</b> {{ s.comp }}<br>
+							<b>Duration:</b> {{ s.duration }}<br>
+							<b>School:</b> {{ s.duration }}<br>
+							<b>Ritual:</b> {{ s.ritual }}<br>
+							<b>Material:</b> {% if s.material == 'nan' %}No Material needed{% else %}{{ s.material }}{% endif %}
+						</p>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-primary btn-sm get_spell_info" data-spell="{{ s.id }}"><i class="fa fa-info"></i></button>
+						<button class="btn btn-danger btn-sm remove-spell" data-spell="{{ s.id }}"><i class="fa fa-minus"></i></button>
+					</div>
+					
+				</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="10"><i>You Have no Spells</i></td></tr>
+            {% endfor %}
+        </tbody>
+	</table>
 </div>

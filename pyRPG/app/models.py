@@ -482,8 +482,12 @@ class Character(models.Model):
                 else:
                     ac += int(a.armor_class)
         if ac == 0:
-            ac = 'Add armor'
+            ac = 0
         return ac
+
+    def get_currency(self):
+        coin = CharacterCurrency.objects.get(character=self.id)
+        return coin
 
     # def get_class_features(self):
     #     feats = CharacterClassFeature.objects.filter(char_class=self.c_class, level=self.level)
@@ -530,6 +534,20 @@ class CharacterSkills(models.Model):
             s = [n[1], mod, n[0]]
             skills.append(s)
         return skills
+
+class CharacterCurrency(models.Model):
+    character = models.ForeignKey(Character,
+                                    related_name='character_currency',
+                                    on_delete=models.CASCADE)
+    copper = models.IntegerField(default=0)
+    silver = models.IntegerField(default=0)
+    electrum = models.IntegerField(default=0)
+    gold = models.IntegerField(default=0)
+    platinum = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.character.name
+
 
 class CharacterBackground(models.Model):
     background = models.CharField(max_length=100)
@@ -638,3 +656,10 @@ class Battle(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class CampaignNote(models.Model):
+    title = models.CharField(max_length=150)
+    note = models.TextField()
+
+    def __unicode__(self):
+        return self.title

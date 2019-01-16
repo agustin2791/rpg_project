@@ -16,7 +16,7 @@ var submit_trait = function (url, csrf, trait, description) {
                 $('.character_background').empty().html(data);
             }
             else if (trait.startsWith('feature')) {
-                $('.character_feature').empty().html(data);
+                $('.character_feat').empty().html(data);
             }
             else if (trait === 'equipment') {
                 $('.character_inventory').empty().html(data);
@@ -35,7 +35,6 @@ var submit_trait = function (url, csrf, trait, description) {
 // edit button
 var getInfo = function () {
     var info = document.getElementsByClassName('info-div');
-    console.log(info.length);
     for (var i = 0; i < info.length; i++) {
         info[i].addEventListener('mouseenter', function (i) {
             var update = i.path[0].dataset.update;
