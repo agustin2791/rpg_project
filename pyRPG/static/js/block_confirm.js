@@ -1,5 +1,7 @@
+let body = document.getElementsByTagName('body')[0];
+
 function block_confirm() {
-    let body = document.getElementsByTagName('body')[0];
+    
     let overlay = document.createElement('div');
     overlay.className = 'block-overlay';
     let container = document.createElement('div');

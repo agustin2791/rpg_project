@@ -168,7 +168,51 @@
 		}
 	}
 }
-
+.equipment {
+	width: 100%;
+	position: relative;
+	display: block;
+	.info-div {
+		width: 40%;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.equipment-list {
+		width: 55%;
+		display: inline-block;
+		vertical-align: top;
+		padding: 10px;
+	}
+}
+.features {
+	width: 100%;
+	position: relative;
+	display: block;
+	.class_features, .char_features {
+		width: 50%;
+		padding: 10px 3px;
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+.background, .spells {
+	width: 75%;
+	margin: 10px auto;
+	h3 {
+		text-align: center;
+	}
+}
+.traits {
+	width: 100%;
+	display: block;
+	.trait-card {
+		width: 49%;
+		display: inline-block;
+		vertical-align: top;
+		float: left;
+		margin: 2px;
+	}
+}
 .information {
 	display: block;
 	width: 100%;

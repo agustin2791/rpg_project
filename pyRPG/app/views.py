@@ -278,6 +278,7 @@ def character_creation(request, username):
         character.proficiency_bonus = character_level.pro_bonus
         character.save()
         character_skills(character.id)
+        currency = models.CharacterCurrency.objects.create(character=character)
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user.username, character.id)
         return HttpResponse(redirect_to)
 
@@ -319,7 +320,10 @@ def character_info(request, username, char_id):
             char_features = models.CharacterFeature.objects.filter(character=character)
             return render(request,
                           'profile/character/info/features.html',
-                          {'features': char_features})
+                          {
+                            'features': char_features,
+                            'character': character
+                          })
         elif trait == 'equipment':
             setattr(character, 'equipment', description)
             character.save()
