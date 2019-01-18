@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form, .background_form, .feature_form', function(e) {
       e.preventDefault();
       console.log("Submitted");

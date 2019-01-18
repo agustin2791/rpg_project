@@ -1,10 +1,11 @@
 import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Prefetch
+from django.template import RequestContext
 # from django.views.generic import Views
 import json
 
@@ -292,6 +293,15 @@ def character_creation(request, username):
                   'profile/character/create.html',
                   context)
 
+def character_upload_image(request, username, char_id):
+    form = forms.CharacterUploadImage(request.POST, request.FILES)
+    if form.is_valid():
+        character = models.Character.objects.get(pk=char_id)
+        character.image = request.FILES['image']
+        character.save()
+        return HttpResponseRedirect('/profile/{0}/character_info/{1}'.format(username, char_id))
+
+
 def character_info(request, username, char_id):
     user = User.objects.get(username=username)
     character = models.Character.objects.get(pk=char_id)
@@ -301,6 +311,16 @@ def character_info(request, username, char_id):
     char_features = models.CharacterFeature.objects.filter(character=character)
     background = models.CharacterBackground.objects.filter(character=character)
     ag, armor, mounts, tools, weapons = get_all_items(character)
+    image_upload_form = forms.CharacterUploadImage()
+
+    if request.is_ajax and 'file' in request.POST:
+        print 'File 1'
+        upload_type = request.POST.get('upload_type')
+        img_file = request.FILES['file']
+        print 'Image file'
+        character.image = img_file
+        character.save()
+        return HttpResponse('Success')
 
     # Edit background, features, etc...
     if request.is_ajax and 'add_feature' in request.POST:
@@ -447,7 +467,8 @@ def character_info(request, username, char_id):
         'char_race': char_race,
         'features': char_features,
         'items': [ag, armor, mounts, tools, weapons],
-        'background': background
+        'background': background,
+        'image_upload_form': image_upload_form
     }
     return render(request,
                   'profile/character/edit.html',

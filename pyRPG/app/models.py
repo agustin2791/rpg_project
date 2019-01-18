@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 import views
@@ -245,6 +246,12 @@ class Attack(models.Model):
         return self.name
 
 # User's Character and Characteristics
+def user_character_img(instance, filename):
+    return '{0}/chracter/{1}'.format(instance.user.id, filename)
+
+def user_character_thumb(instance, filename):
+    return '{0}/chracter/thumb/{1}'.format(instance.user.id, filename)
+
 class Character(models.Model):
     name = models.CharField(max_length=150)
     c_class = models.ForeignKey(CharacterClass)
@@ -311,6 +318,12 @@ class Character(models.Model):
                              blank=True)
     equipment = models.TextField(null=True,
                                  blank=True)
+    image = models.ImageField(upload_to=user_character_img,
+                              null=True,
+                              blank=True)
+    thumbnail = models.ImageField(upload_to=user_character_thumb,
+                                  null=True,
+                                  blank=True)
 
 
     def __unicode__(self):

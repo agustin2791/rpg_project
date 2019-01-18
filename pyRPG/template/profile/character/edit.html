@@ -83,6 +83,7 @@
 {% endblock %}
 {% block bottomscript %}
 <script type="text/javascript" src="/static/js/block_confirm.js"></script>
+<script type="text/javascript" src="/static/js/croppie.min.js"></script>
 <script type="text/javascript">
   const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
   const csrf = '{{ csrf_token }}';

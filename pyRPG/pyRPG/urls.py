@@ -17,7 +17,6 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-
 from app import views
 
 urlpatterns = [
@@ -43,6 +42,9 @@ urlpatterns = [
     url(r'^profile/(?P<username>\w{0,50})/character_info/(?P<char_id>\d+)/$',
         views.character_info,
         name='character_info'),
+    url(r'^profile/(?P<username>\w{0,50})/character_info/(?P<char_id>\d+)/image_upload/$',
+        views.character_upload_image,
+        name='upload_image'),
     # Campaign
     url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/play/$',
         views.campaign,
@@ -71,3 +73,6 @@ urlpatterns = [
         name='edit_campaign_chapter'),
     url(r'^admin/', admin.site.urls),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
