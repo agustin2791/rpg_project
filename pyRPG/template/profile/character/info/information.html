@@ -1,6 +1,13 @@
  <div class="details">
    <div class="char-img">
-     <img src="/static/images/temp/character.png" alt="character">
+    {% if character.image %}
+     <img src="{{ character.image.url }}" alt="character">
+     {% endif %}
+     <form method="post" action="/profile/{{ user.username }}/character_info/{{ character.id }}/image_upload/" class="upload_char_image" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ image_upload_form }}
+      <button type="submit">Submit</button>
+     </form>
    </div>
    <div class="char-details">
       <h2 class="char-name">{{ character.name }}</h2>
