@@ -20,6 +20,14 @@ h1, h2, h3, h4, h5, h6, p, a, span, ul, li, div {
   font-size: small;
 }
 
+@keyframes pageTransition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 #camp_modal {
   border-radius: 0px;
 }
@@ -119,26 +127,30 @@ h1, h2, h3, h4, h5, h6, p, a, span, ul, li, div {
 
 .character_sheet {
   display: block;
+  width: 100%;
+  padding: 0;
 }
 .character_sheet .display_selector {
   display: inline-block;
   width: 15%;
+  height: 100%;
+  padding: 0px;
   position: relative;
   vertical-align: top;
+  background: #92140C;
+  text-align: center;
 }
 .character_sheet .display_selector .selector {
   width: 100%;
   font-size: 0.85rem;
-  background: #fff;
-  margin: 20px 0px;
-  color: #92140C;
+  padding: 20px 0px;
+  color: #fff;
   cursor: pointer;
   transition: ease-in 0.5s;
 }
-.character_sheet .display_selector .selector.active {
-  background: #92140C;
+.character_sheet .display_selector .selector.active, .character_sheet .display_selector .selector:hover {
+  background: #40798C;
   color: #fff;
-  border-radius: 25px;
 }
 .character_sheet .display_selector .selector .selector_icon {
   width: 50px;
@@ -170,9 +182,21 @@ h1, h2, h3, h4, h5, h6, p, a, span, ul, li, div {
 }
 .character_sheet .display_container .display {
   display: none;
+  width: 0%;
+  height: 0%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
 }
 .character_sheet .display_container .display.show {
   display: block;
+  width: 100%;
+  border-radius: 0px;
+  height: auto;
+  position: relative;
+  opacity: 1;
+  animation: pageTransition 0.5s ease-in;
 }
 
 .pro_bonus, .hit_points, .hit_dice {
@@ -194,8 +218,8 @@ h1, h2, h3, h4, h5, h6, p, a, span, ul, li, div {
   position: relative;
   vertical-align: top;
 }
-.character_info .details .char-img img {
-  width: 100%;
+.character_info .details .char-img .character_thumb {
+  height: 150px;
 }
 .character_info .details .char-details {
   width: 48%;

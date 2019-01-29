@@ -6,51 +6,30 @@
   <div class="display_selector">
     <!-- Information -->
     <div class="selector active" data-to-display="info">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Information</div>
     </div>
     <!-- Abilities -->
     <div class="selector" data-to-display="abilities">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Abilities</div>
     </div>
     <!-- Equipment -->
     <div class="selector" data-to-display="inventory">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Equipment</div>
     </div>
     <!-- Spells -->
     <div class="selector" data-to-display="spells">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Spells</div>
     </div>
     <!-- Background -->
     <div class="selector" data-to-display="background">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Background</div>
     </div>
     <!-- Features -->
     <div class="selector" data-to-display="feat">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Features</div>
     </div>
     <!-- Traits -->
     <div class="selector" data-to-display="traits">
-      <div class="selector_icon">
-        <span class="fa fa-dragon fa-2x"></span>
-      </div>
       <div class="selector_title">Traits</div>
     </div>
   </div>
@@ -82,8 +61,8 @@
 <div class="character-modals">{% include 'profile/character/info/modals.html' %}</div>
 {% endblock %}
 {% block bottomscript %}
+{{ image_upload_form.media }}
 <script type="text/javascript" src="/static/js/block_confirm.js"></script>
-<script type="text/javascript" src="/static/js/croppie.min.js"></script>
 <script type="text/javascript">
   const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
   const csrf = '{{ csrf_token }}';

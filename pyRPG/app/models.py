@@ -619,6 +619,15 @@ class NonPlayableCharacters(models.Model):
     def __unicode__(self):
         return self.name
 
+class CampaignNotes(models.Model):
+    title = models.CharField(max_length=150)
+    note = models.TextField()
+    campaign = models.ForeignKey(Campaign,
+                                 on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return self.title
+
 class CampaignChapter(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=300)
