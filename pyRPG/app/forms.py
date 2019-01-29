@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from croppie.fields import CroppieField
 from django import forms
 
 # import models

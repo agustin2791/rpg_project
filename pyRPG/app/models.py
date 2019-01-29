@@ -685,3 +685,42 @@ class CampaignNote(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class Forum(models.Model):
+    title = models.CharField(max_length=200)
+    entry = models.TextField()
+    post_by = models.ForeignKey(UserProfile)
+    posted_on = models.DateField(auto_now=True)
+    last_edit = models.DateField(auto_now_add=True)
+    points = models.IntegerField(default=0)
+    
+    def __unicode__(self):
+        return self.title
+
+    def get_comments(self):
+        comments = ForumComment.objects.filter(forum=self.id)
+
+
+class ForumComment(models.Model):
+    forum = models.ForeignKey(Forum)
+    comment = models.TextField()
+    posted_on = models.DateField(auto_now=True)
+    last_edit = models.DateField(auto_now_add=True)
+    comment_by = models.ForeignKey(UserProfile)
+    reply_to = models.ForeignKey('ForumComment',
+                                blank=True,
+                                null=True)
+    
+    def __unicode__(self):
+        return self.forum.title
+    
+    def get_reply(self):
+        try:
+            comments = []
+            replies = ForumComment.objects.filter(reply_to=self.id)
+            for r in replies:
+                comments.append({'comment': r.comment, 'posted_on': r.posted_on, 'comment_by': r.comment_by, 'replies': r.get_reply})
+            
+            return comments
+        except:
+            return None
