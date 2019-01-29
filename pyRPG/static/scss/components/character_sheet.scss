@@ -1,22 +1,28 @@
 .character_sheet {
 	display: block;
+	width: 100%;
+	padding: 0;
 	.display_selector {
 		display: inline-block;
 		width: 15%;
+		height: 100%;
+		padding: 0px;
 		position: relative;
 		vertical-align: top;
+		background: $main-color;
+		text-align: center;
+		// -webkit-box-shadow: 2px 2px 5px 1px #DBDBDB;
+		// box-shadow: 2px 2px 5px 1px #DBDBDB;
 		.selector {
 			width: 100%;
 			font-size: 0.85rem;
-			background: #fff;
-			margin: 20px 0px;
-			color: $main-color;
+			padding: 20px 0px;
+			color: #fff;
 			cursor: pointer;
 			transition: ease-in .5s;
-			&.active {
-				background: $main-color;
+			&.active, &:hover {
+				background: $secondary-color;
 				color: #fff;
-				border-radius: 25px;
 			}
 			.selector_icon {
 				width: 50px;
@@ -49,12 +55,25 @@
 		margin-left: 5px;
 		.display {
 			display: none;
+			width: 0%;
+			height: 0%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			opacity: 0;
 			&.show {
 				display: block;
+				width: 100%;
+				border-radius: 0px;
+				height: auto;
+				position: relative;
+				opacity: 1;
+				animation: pageTransition .5s ease-in;
 			}
 		}
 	}
 }
+
 .pro_bonus, .hit_points, .hit_dice {
 	margin: 5px;
 	width: auto;
@@ -70,8 +89,11 @@
 			display: inline-block;
 			position: relative;
 			vertical-align: top;
-			img {
-				width: 100%;
+			.character_image {
+				// width: 300px;
+			}
+			.character_thumb {
+				height: 150px;
 			}
 		}
 		.char-details {

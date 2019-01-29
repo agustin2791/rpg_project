@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from croppie.fields import CroppieField
 from django import forms
 
 # import models
@@ -15,4 +16,6 @@ class UserLogin(forms.Form):
     password = forms.CharField(label='Password', max_length=150, widget=forms.PasswordInput)
 
 class CharacterUploadImage(forms.Form):
-	image = forms.FileField()
+	image = forms.ImageField()
+	# x = forms.IntegerFileld(label='X: ', default=0)
+	# y = forms.IntegerFileld(label='Y: ', defualt=0)

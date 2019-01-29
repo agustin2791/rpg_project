@@ -6,6 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Prefetch
 from django.template import RequestContext
+from django.core.files.base import ContentFile
+from PIL import Image
+from cStringIO import StringIO
+from django.core.files.uploadedfile import SimpleUploadedFile
 # from django.views.generic import Views
 import json
 
@@ -295,12 +299,50 @@ def character_creation(request, username):
 
 def character_upload_image(request, username, char_id):
     form = forms.CharacterUploadImage(request.POST, request.FILES)
+    thumb_size = (150, 150)
+    size = (300, 600)
     if form.is_valid():
         character = models.Character.objects.get(pk=char_id)
-        character.image = request.FILES['image']
+        new_img = request.FILES['image']
+
+        IMAGE_TYPE = new_img.content_type
+        
+        if IMAGE_TYPE == 'image/jpeg':
+            PIL_TYPE = 'jpeg'
+            FILE_EXT = 'jpg'
+        if IMAGE_TYPE == 'image/png':
+            PIL_TYPE = 'png'
+            FILE_EXT = 'png'
+
+        # character Image resize
+        image = Image.open(StringIO(request.FILES['image'].read()))
+        image = image.resize(size, Image.ANTIALIAS)
+
+        temp_handle = StringIO()
+        image.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile('character',
+                                temp_handle.read(),
+                                content_type=IMAGE_TYPE)
+        character.image.save('{0}.{1}'.format(character.name, FILE_EXT), suf, save=False)
+
+        # thumbnail resize
+        # thumb_image = image.thumbnail(thumb_size, Image.ANTIALIAS)
+        # thumb_image = Image.open(StringIO(request.FILES['image'].read()))
+        
+        # thumb_temp_handle = StringIO()
+        # thumb_image.save(thumb_temp_handle, PIL_TYPE, quality=60)
+        # thumb_temp_handle.seek(0)
+
+        # thumb_suf = SimpleUploadedFile('character_thumbnail',
+        #                         thumb_temp_handle.read(),
+        #                         content_type=IMAGE_TYPE)
+        # character.thumbnail.save('{0}.{1}'.format(character.name, FILE_EXT), thumb_suf, save=False)
+        
+
         character.save()
         return HttpResponseRedirect('/profile/{0}/character_info/{1}'.format(username, char_id))
-
 
 def character_info(request, username, char_id):
     user = User.objects.get(username=username)
