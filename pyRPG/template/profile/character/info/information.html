@@ -1,31 +1,45 @@
-<div class="card-header">
-  {{ character.name }}
-</div>
-<div class="card-body">
-  <div class="row">
-    <div class="col-4">
-      <h3>{{ character.c_class }} {{ character.level }}</h3>
-      <p><i>Class</i></p>
+ <div class="details">
+   <div class="char-img">
+    {% if character.image %}
+     <img src="{{ character.image.url }}" class="character_image" alt="character">
+     <img src="{{ character.thumbnail.url }}" class="character_thumb">
+     {% endif %}
+     
+
+   </div>
+   <div class="char-details">
+      <h2 class="char-name">{{ character.name }}</h2>
+      <p>
+        <b>Class:</b><br>
+        {{ character.c_class }} {{ character.level }}<br>
+        <b>Race:</b><br>
+        {{ character.c_race }}<br>
+        <b>Background:</b><br>
+        {% if character.background %}{{ character.background }}{% endif %}<br>
+        <b>Alignment:</b><br>
+        {{ character.get_alignment }}<br>
+        <b>EXP.</b><br>
+        {{ character.exp }}
+      </p>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#add-image">Upload Image</button>
+   </div>
+ </div>
+<div class="modal fade" id="add-image" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Character Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/profile/{{ user.username }}/character_info/{{ character.id }}/image_upload/" class="upload_char_image" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ image_upload_form }}
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="col-4">
-      <h3 class="character-bg-name">{% if character.background %}{{ character.background }}{% endif %}</h3>
-      <p><i>Background</i></p>
-    </div>
-    <div class="col-4">
-      <h3>{{ user.username }}</h3>
-      <p><i>User</i></p>
-    </div>
-    <div class="col-4">
-      <h3>{{ character.c_race }}</h3>
-      <p><i>Race</i></p>
-    </div>
-    <div class="col-4">
-      <h3>{{ character.get_alignment }}</h3>
-      <p><i>Alignment</i></p>
-    </div>
-    <div class="col-4">
-      <h3>{{ character.exp }}</h3>
-      <p><i>EXP.</i></p>
-    </div>
-  </div>
 </div>

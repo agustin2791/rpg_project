@@ -1,5 +1,69 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p>{{ user.username }}</p>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 characters">
+      <div class="card">
+        <div class="card-header">
+          My Characters
+        </div>
+        <div class="card-body">
+          <a href="/profile/{{ user.username }}/create_character/" class="btn btn-primary btn-sm btn-block">Create New Character</a><hr>
+          {% if characters %}
+          {% for c in characters %}
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{ c.name }}</h5>
+              <small>{{ c.campaign|default:'Not in Campaign' }}</small>
+            </div>
+            <p>{{ c.c_class }} - {{ c.c_race }} - {{ c.level }} <a href="/profile/{{ user.username }}/character_info/{{ c.id }}" class="btn btn-primary btn-sm justify-right" style="float: right">View</a></p><hr>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 campaign">
+      <div class="card">
+        <div class="card-header">
+          Campaigns
+        </div>
+        <div class="card-body">
+          <a href="/campaign/{{user.username}}/create" class="btn btn-primary btn-sm btn-block">Create New Campaign</a>
+          <br>
+          {% if campaigns %}
+          {% for camp in campaigns.all %}
+          <a href="/campaign/{{user.username}}/{{camp.slug}}/edit">{{ camp.name }}</a>
+          <a href="/campaign/{{ user.username }}/{{ camp.slug }}/{{ camp.id }}/play/" class="btn btn-primary">PLAY CAMPAIGN</a>
+          {% endfor %}
+          {% else %}
+          <p>You are not in a campaign</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sx-12 col-sm-12 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          Friends List
+        </div>
+        <div class="card-body">
+          <h4><em>Friend Request</em></h4>
+          <p><bold>USERNAME</bold>
+            <div class="btn-group">
+              <button type="button" class="btn btn-success btn-sm" name="button"><span class="fa fa-check"></span></button>
+              <button type="button" class="btn btn-danger btn-sm" name="button"><span class="fa fa-times"></span></button>
+            </div>
+          </p>
+          <h5>Fred</h5>
+          <p>Last login: <em>11/27/2018</em></p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <h1>{{ user.username }}</h1>
 <h2>{{ user.email }}</h2>
 <a href="/campaign/{{user.username}}/create">Create Campaign</a><br>

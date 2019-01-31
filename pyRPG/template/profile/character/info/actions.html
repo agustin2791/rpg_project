@@ -1,42 +1,69 @@
 <div class="card">
-  <div class="card-body">
-    <p>+{{ character.proficiency_bonus }} <b>Proficiency Bonus</b></p>
-    {% if character.background == None %}
-    <form class="form-inline">
-      <div class="form-group">
-        <input type="text" placeholder="Background" class="form-control" name="char_bg">
+  <div class="card-body" style="text-align: center">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+        <div class="pro_bonus">
+          <div class="number">+{{ character.proficiency_bonus }}</div>
+          <div class="text">Proficiency Bonus</div>
+        </div>
+        <br>
+        <div class="hit_points">
+          <h4>{{ character.hp }}/{{ character.full_hp }} HP</h4>
+        </div>
+        <div class="hit_dice">
+          <h4>{{ character.hit_dice }}<br><small>Hit Dice</small></h4>
+        </div>
+      
       </div>
-      <button type="submit" class="btn btn-primary" name="button">Submit</button>
-    </form>
-    {% endif %}
-    <div class="armor_class">
-      <h4>Armor Class</h4>
-      <p>{{ character.armor_class }}</p>
+      <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
+        <div class="armor_class">
+          <div class="base-left"></div>
+          <div class="top-center"></div>
+          <div class="top-left"></div>
+          <div class="top-right"></div>
+          <div class="bottom"></div>
+          <p class="armor_text">{{ character.get_armor_class }}<br>AC</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
+        <div class="speed_details">
+          <p>{{ character.speed }}ft.<br><small>Speed</small></p>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+        <h4>Spell Slots</h4>
+        <table class="table table-responsive">
+          <thead>
+            <th>Catrips</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+          </thead>
+          <tbody>
+            <tr>
+              {% for ss in character.character_class_spells %}
+              <td>{{ ss }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="speed-details">
-      <h4>Speed</h4>
-      <p>{{ character.speed }}ft.</p>
-    </div>
-    <div class="hit-points">
-      <h4>HP</h4>
-      <p>{{ character.hp }}/{{ character.full_hp }}</p>
-    </div>
-    <div class="hit-dice">
-      <h4>Hit Dice</h4>
-      <p>{{ character.hit_dice }}</p>
-    </div>
-    <div class="attack">
-      <h4>Attack Type &amp; Spellcasting</h4>
-      {% for s in character.get_spell_list %}
-      {% if forloop.counter0 == 0 %}
-      <h5>Catrips:</h5><br>
-      {{ s }}
-      {% else %}
-      <h5>{{ forloop.counter0 }}</h5><br>
-      {{ s }}
-      {% endif %}
-      {% endfor %}
-    </div>
+    
+
+    
+
+    
+
+    
+
+    
   </div>
 </div>
 <div class="modal">

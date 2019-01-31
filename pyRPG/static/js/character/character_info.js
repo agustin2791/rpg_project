@@ -1,4 +1,4 @@
-// import * as $ from 'jquery';
+// import $ from 'jquery';
 var submit_trait = function (url, csrf, trait, description) {
     $.ajax({
         type: 'POST',
@@ -16,7 +16,14 @@ var submit_trait = function (url, csrf, trait, description) {
                 $('.character_background').empty().html(data);
             }
             else if (trait.startsWith('feature')) {
-                $('.character_feature').empty().html(data);
+                $('.character_feat').empty().html(data);
+            }
+            else if (trait === 'equipment') {
+                $('.character_inventory').empty().html(data);
+                getInfo();
+                $('.equipment-table').DataTable({
+                    paging: false
+                });
             }
             else {
                 $('.character_traits').empty().html(data);
@@ -28,7 +35,6 @@ var submit_trait = function (url, csrf, trait, description) {
 // edit button
 var getInfo = function () {
     var info = document.getElementsByClassName('info-div');
-    console.log(info.length);
     for (var i = 0; i < info.length; i++) {
         info[i].addEventListener('mouseenter', function (i) {
             var update = i.path[0].dataset.update;
@@ -51,7 +57,7 @@ var openEdit = function (update, text) {
     if (toUpdate.startsWith('feature')) {
         toUpdate = 'feature';
     }
-    var html = "\n  <form class=\"" + toUpdate + "_form\" data-update=\"" + update + "\">\n    <div class=\"form-group\">\n      <textarea name=\"" + update + "\" class=\"form-control\" rows=\"5\" cols=\"80\">" + text + "</textarea>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\" name=\"button\">Submit</button> <button type=\"button\" class=\"btn cancel\" data-update=\"" + update + "\">Cancel</button>\n  </form>";
+    var html = "<form class=\"" + toUpdate + "_form\" data-update=\"" + update + "\">\n    <div class=\"form-group\">\n      <textarea name=\"" + update + "\" class=\"form-control\" rows=\"5\" cols=\"80\">" + text + "</textarea>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\" name=\"button\">Submit</button> <button type=\"button\" class=\"btn cancel\" data-update=\"" + update + "\">Cancel</button>\n  </form>";
     $('.info-text-edit-' + update).empty().html(html);
     document.getElementsByClassName('edit_' + update)[0].style.visibility = 'hidden';
     getInfo();
@@ -75,6 +81,7 @@ var addNewFeature = function (url, csrf, name, desc, skills, object) {
         success: function (data) {
             if (object === 'feature') {
                 $('.character_feature').empty().html(data);
+                getInfo();
             }
             else if (object === 'background') {
                 $('.character_background').empty().html(data);
@@ -145,7 +152,7 @@ var submit_equipment = function (url, csrf) {
         }
     });
 };
-var remove_equipment = function (url, csrf, equip) {
+var add_spell = function (url, csrf, spell) {
     $.ajax({
         type: 'POST',
         url: url,
@@ -153,11 +160,40 @@ var remove_equipment = function (url, csrf, equip) {
         cache: false,
         data: {
             'csrfmiddlewaretoken': csrf,
-            'remove_equipment': true,
-            'equip': equip
+            'add_spell': true,
+            'spell': spell
         },
         success: function (data) {
-            $('.character-inventory').empty().html(data);
+            $('.character_spells').empty().html(data);
+        },
+        complete: function () {
+            block_confirm();
+        }
+    });
+};
+var remove = function (url, csrf, subject, item) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        async: true,
+        cache: false,
+        data: {
+            'csrfmiddlewaretoken': csrf,
+            'remove': true,
+            'subject': subject,
+            'item': item
+        },
+        success: function (data) {
+            if (subject == 'equip') {
+                $('.character_inventory').empty().html(data);
+            }
+            if (subject == 'feat') {
+                $('.character_feature').empty().html(data);
+                getInfo();
+            }
+            if (subject == 'spell') {
+                $('.character_spells').empty().html(data);
+            }
         }
     });
 };

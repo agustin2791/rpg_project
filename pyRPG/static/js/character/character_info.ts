@@ -1,4 +1,4 @@
-// import * as $ from 'jquery';
+// import $ from 'jquery';
 
 
 var submit_trait = (url, csrf, trait, description) => {
@@ -17,7 +17,13 @@ var submit_trait = (url, csrf, trait, description) => {
       if (trait == 'background') {
         $('.character_background').empty().html(data);
       } else if (trait.startsWith('feature')) {
-        $('.character_feature').empty().html(data)
+        $('.character_feat').empty().html(data)
+      } else if (trait === 'equipment') {
+        $('.character_inventory').empty().html(data);
+        getInfo();
+        $('.equipment-table').DataTable({
+          paging: false
+        });
       } else {
         $('.character_traits').empty().html(data)
       }
@@ -29,7 +35,6 @@ var submit_trait = (url, csrf, trait, description) => {
 // edit button
 var getInfo = (): void => {
   var info = document.getElementsByClassName('info-div');
-  console.log(info.length);
   for (var i = 0; i < info.length; i++) {
     info[i].addEventListener('mouseenter', (i) => {
       var update = i.path[0].dataset.update;
@@ -48,8 +53,7 @@ var openEdit = (update: string, text: string): boolean => {
   if (toUpdate.startsWith('feature')) {
     toUpdate = 'feature';
   }
-  var html = `
-  <form class="${toUpdate}_form" data-update="${update}">
+  var html = `<form class="${toUpdate}_form" data-update="${update}">
     <div class="form-group">
       <textarea name="${update}" class="form-control" rows="5" cols="80">${text}</textarea>
     </div>
@@ -78,6 +82,7 @@ var addNewFeature = (url: string, csrf: string, name: string, desc: string, skil
     success: function(data) {
       if (object === 'feature') {
         $('.character_feature').empty().html(data);
+        getInfo();
       } else if (object === 'background') {
         $('.character_background').empty().html(data);
         $('.character-bg-name').empty().html(name);
@@ -149,7 +154,7 @@ let submit_equipment = (url: string, csrf: string): void => {
   })
 }
 
-let remove_equipment = (url: string, csrf: string, equip: number): void => {
+let add_spell = (url: string, csrf: string, spell: number): void => {
   $.ajax({
     type: 'POST',
     url: url,
@@ -157,11 +162,42 @@ let remove_equipment = (url: string, csrf: string, equip: number): void => {
     cache: false,
     data: {
       'csrfmiddlewaretoken': csrf,
-      'remove_equipment': true,
-      'equip': equip
+      'add_spell': true,
+      'spell': spell
     },
     success: function(data) {
-      $('.character-inventory').empty().html(data);
+      $('.character_spells').empty().html(data);
+    },
+    complete: function() {
+      block_confirm();
+    }
+  })
+}
+
+let remove = (url: string, csrf: string, subject: string, item: number): void => {
+  $.ajax({
+    type: 'POST',
+    url: url,
+    async: true,
+    cache: false,
+    data: {
+      'csrfmiddlewaretoken': csrf,
+      'remove': true,
+      'subject': subject,
+      'item': item
+    },
+    success: function(data) {
+      if (subject == 'equip') {
+        $('.character_inventory').empty().html(data);
+      }
+      if (subject == 'feat') {
+        $('.character_feature').empty().html(data);
+        getInfo();
+      }
+      if (subject == 'spell') {
+        $('.character_spells').empty().html(data);
+      }
+      
     }
   })
 }

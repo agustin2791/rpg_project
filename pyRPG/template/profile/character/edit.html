@@ -1,53 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-9">
-      <!-- information box  -->
-      <div class="row">
-        <div class="col-7">
-          <div class="card">
-            {% include 'profile/character/info/information.html' %}
-            
-          </div>
-        </div>
-      <!-- end information box -->
-      <!-- ability box -->
-        <div class="col-5">
-          <div class="card">
-            {% include 'profile/character/info/abilities.html' %}
-          </div>
-        </div>
-      </div>
-      <!-- end ability box -->
-      <div class="row">
-        <div class="col-12">
-          <div class="character-actions">
-            {% include 'profile/character/info/actions.html' %}
-          </div>
-          <div class="character-inventory">
-            {% include 'profile/character/info/equipment.html' %}
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="character_background">
-            {% include 'profile/character/info/background.html' %}
-          </div>
-          <div class="character_feature">
-            {% include 'profile/character/info/features.html' %}
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="character_traits">
-            {% include 'profile/character/info/traits.html' %}
-          </div>
-        </div>
-      </div>
+
+<div class="container-fluid character_sheet">
+  <!-- Selectors -->
+  <div class="display_selector">
+    <!-- Information -->
+    <div class="selector active" data-to-display="info">
+      <div class="selector_title">Information</div>
     </div>
-    <div class="col-3">
-      <div class="character_skills">
-        {% include 'profile/character/info/skills.html' %}
-      </div>
+    <!-- Abilities -->
+    <div class="selector" data-to-display="abilities">
+      <div class="selector_title">Abilities</div>
+    </div>
+    <!-- Equipment -->
+    <div class="selector" data-to-display="inventory">
+      <div class="selector_title">Equipment</div>
+    </div>
+    <!-- Spells -->
+    <div class="selector" data-to-display="spells">
+      <div class="selector_title">Spells</div>
+    </div>
+    <!-- Background -->
+    <div class="selector" data-to-display="background">
+      <div class="selector_title">Background</div>
+    </div>
+    <!-- Features -->
+    <div class="selector" data-to-display="feat">
+      <div class="selector_title">Features</div>
+    </div>
+    <!-- Traits -->
+    <div class="selector" data-to-display="traits">
+      <div class="selector_title">Traits</div>
+    </div>
+  </div>
+  <div class="display_container">
+    <div class="character_info display show">
+      {% include 'profile/character/info/information.html' %}
+    </div>
+    <div class="character_abilities display">
+      {% include 'profile/character/info/abilities.html' %}
+    </div>
+    <div class="character_inventory display">
+      {% include 'profile/character/info/equipment.html' %}
+    </div>
+    <div class="character_spells display">
+      {% include 'profile/character/info/spells.html' %}
+    </div>
+    <div class="character_background display">
+      {% include 'profile/character/info/background.html' %}
+    </div>
+    <div class="character_feat display">
+      {% include 'profile/character/info/features.html' %}
+    </div>
+    <div class="character_traits display">
+      {% include 'profile/character/info/traits.html' %}
     </div>
   </div>
 
@@ -55,135 +61,34 @@
 <div class="character-modals">{% include 'profile/character/info/modals.html' %}</div>
 {% endblock %}
 {% block bottomscript %}
+{{ image_upload_form.media }}
+<script type="text/javascript" src="/static/js/block_confirm.js"></script>
+<script type="text/javascript">
+  const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
+  const csrf = '{{ csrf_token }}';
+  const class_skill_limit = parseInt('{{ character.c_class.skills_limit }}');
+  $('.dataTable').DataTable({
+    paging: false
+  });
+</script>
+
 <script type="text/javascript" src="/static/js/character/character.js"></script>
 <script type="text/javascript" src="/static/js/character/character_info.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    const url = '/profile/{{ user.username }}/character_info/{{ character.id }}/';
-    const csrf = '{{ csrf_token }}';
-    const class_skill_limit = parseInt('{{ character.c_class.skills_limit }}');
-    $(document).on('submit', '.personality_traits_form, .ideals_form, .bonds_form, .flaws_form, .equipment_form, .background_form, .feature_form', function(e) {
-      e.preventDefault();
-      var trait = $(this).attr('data-update');
-      var description = $('textarea[name="'+trait+'"]').val();
-      submit_trait(url, csrf, trait, description);
-      return false;
-    })
-    getInfo();
-    // Edit Feature
-    $(document).on('click', '.edit', function(e) {
-      e.preventDefault();
-      var update = $(this).attr('data-update');
-      var text = $('.info-text-' + update).text();
-      $('.info-text-' + update).hide();
-      openEdit(update, text);
-      getInfo();
-    });
-    // Add new feature
-    $(document).on('submit', '.new_feature_form', function() {
-      var name = $('input[name="feature_name"]').val(),
-          desc = $('textarea[name="feature_desc"]').val();
-      addNewFeature(url, csrf, name, desc, 'none', 'feature');
-      return false;
-    });
-    // Add new Background
-    $(document).on('click', '.submit-background', function() {
-      var name = $('input[name="background_name"]').val(),
-          desc = $('textarea[name="background_desc"]').val();
-      var get_skills = $('input[name="bg_skills');
-      var checked_skills = []
-      for (let i = 0; i < get_skills.length; i++){
-        if (get_skills[i].checked) { 
-          checked_skills.push(get_skills[i]); 
-          console.log(get_skills[i]);
-        }
+<script type="text/javascript" src="/static/js/character/edit.js"></script>
+<script>
+  $(function() {
+    $(document).on('click', '.selector', function() {
+      let selectors = document.getElementsByClassName('selector');
+      let displays = document.getElementsByClassName('display');
+      let toDisplay = $(this).attr('data-to-display');
+      for (let i = 0; i < selectors.length; i++) {
+        if (selectors[i].classList[1] == 'active') selectors[i].classList.remove('active');
       }
-      if (checked_skills.length != 2) {
-        return false;
+      for (let i = 0; i < displays.length; i++) {
+        if (displays[i].classList[2] == 'show') displays[i].classList.remove('show');
       }
-      var skills = checked_skills[0].value + ', ' + checked_skills[1].value;
-      addNewFeature(url, csrf, name, desc, skills, 'background');
-      return false;
-    })
-    // cancel update
-    $(document).on('click', '.cancel', function() {
-      var update = $(this).attr('data-update');
-      $('.info-text-edit-' + update).empty();
-      $('.info-text-' + update).show();
-    });
-    // count checked
-    $(document).on('click', '.skill_checkbox', function() {
-      let checkbox = $('input[name="choose_skill"]');
-      let chosen = 0;
-      for (let i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-          chosen += 1;
-        }
-      }
-      if (chosen === class_skill_limit) {
-        document.getElementsByClassName('skill_count')[0].style.color = '#16a085';
-      } else if (chosen > class_skill_limit) {
-        document.getElementsByClassName('skill_count')[0].style.color = '#ff0000';
-      }
-      document.getElementById('skills_chosen').innerHTML = chosen;
-    })
-    // apply checked
-    $(document).on('click', '.submit_skills', function() {
-      let checkbox = $('input[name="choose_skill"]');
-      let chosen = 0;
-      let skills = [];
-      for (let i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-          chosen += 1;
-          skills.push(checkbox[i].value);
-        }
-      }
-      if (skills.length != class_skill_limit) {
-        document.getElementsByClassName('skills_alert')[0].style.display = 'block';
-        return false;
-      }
-      let add_skill = skills.join(', ');
-      add_skill_set(url, csrf, add_skill);
-
-      return false;
-    })
-    $(document).on('click', '.add-equipment', function() {
-      let equip_id = $(this).attr('data-equip-id');
-      let equip_name = $(this).attr('data-equip-name');
-      let equip_cat = $(this).attr('data-equip-cat');
-      add_equipment.push(parseInt(equip_id));
-      console.log(add_equipment);
-      skill_add_to_list(equip_id, equip_name, equip_cat);
-      $(this).attr('disabled', 'disabled')
-      check_equipped();
-      return false;
-    })
-    $(document).on('click', '.remove-equip', function() {
-      let equip_id = $(this).attr('data-equip-id');
-      for (let i = 0; i < add_equipment.length; i++) {
-        if (add_equipment[i] == parseInt(equip_id)) {
-          add_equipment.splice(i, 1);
-        }
-      }
-      console.log(add_equipment);
-      let div = document.querySelectorAll('div[data-skill="' + equip_id + '"]')[0];
-      let parent = document.getElementsByClassName('chosen-equipment')[0];
-      parent.removeChild(div);
-      $('.add-equipment[data-equip-id="'+ equip_id +'"]').removeAttr('disabled');
-      check_equipped();
-      return false;
-    })
-    $(document).on('click', '.submit-equipment', function() {
-      submit_equipment(url, csrf);
-      return false;
-    })
-    $(document).on('click', '.equip-remove', function() {
-      let equip = $(this).attr('data-equip');
-      let conf = confirm('Are you sure you want to remove this?');
-      if (conf) {
-        remove_equipment(url, csrf, equip);
-      }
-      return false;
+      $(this).addClass('active');
+      $('.character_' + toDisplay).addClass('show');
     })
   })
 </script>

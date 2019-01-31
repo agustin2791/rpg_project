@@ -1,12 +1,69 @@
 import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Prefetch
+from django.template import RequestContext
+from django.core.files.base import ContentFile
+from PIL import Image
+from cStringIO import StringIO
+from django.core.files.uploadedfile import SimpleUploadedFile
+# from django.views.generic import Views
 import json
 
 import models
+import forms
+
+def registration(request):
+    if request.user.is_authenticated:
+        return redirect('/profile/{0}'.format(request.user.username))
+    if request.is_ajax and 'new_user' in request.POST:
+        print request.POST
+        new_username = request.POST.get('username')
+        new_password = request.POST.get('password')
+        new_email = request.POST.get('email')
+        user = User.objects.create_user(
+            email=new_email,
+            username=new_username,
+            password=new_password
+        )
+        user.save()
+        print user
+        user_profile = models.UserProfile.objects.create(
+            user=user
+        )
+        user_profile.save()
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                redirect_url = '/profile/{0}/'.format(user.username)
+                return HttpResponse(redirect_url)
+
+    return render(request, 'authentication/register.html')
+
+def user_login(request):
+    login_form = forms.UserLogin(request.POST)
+    if request.user.is_authenticated:
+        return redirect('/profile/{0}'.format(request.user.username))
+
+    if login_form.is_valid():
+        username = login_form.cleaned_data['username']
+        password = login_form.cleaned_data['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/profile/{0}/'.format(user.username))
+    return render(request,
+                  'authentication/login.html',
+                  {'form': login_form})
+
+
+def user_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('/')
 
 ALIGNMENTS = (
     ('lg','Lawful Good'),
@@ -226,6 +283,7 @@ def character_creation(request, username):
         character.proficiency_bonus = character_level.pro_bonus
         character.save()
         character_skills(character.id)
+        currency = models.CharacterCurrency.objects.create(character=character)
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user.username, character.id)
         return HttpResponse(redirect_to)
 
@@ -239,6 +297,53 @@ def character_creation(request, username):
                   'profile/character/create.html',
                   context)
 
+def character_upload_image(request, username, char_id):
+    form = forms.CharacterUploadImage(request.POST, request.FILES)
+    thumb_size = (150, 150)
+    size = (300, 600)
+    if form.is_valid():
+        character = models.Character.objects.get(pk=char_id)
+        new_img = request.FILES['image']
+
+        IMAGE_TYPE = new_img.content_type
+        
+        if IMAGE_TYPE == 'image/jpeg':
+            PIL_TYPE = 'jpeg'
+            FILE_EXT = 'jpg'
+        if IMAGE_TYPE == 'image/png':
+            PIL_TYPE = 'png'
+            FILE_EXT = 'png'
+
+        # character Image resize
+        image = Image.open(StringIO(request.FILES['image'].read()))
+        image = image.resize(size, Image.ANTIALIAS)
+
+        temp_handle = StringIO()
+        image.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile('character',
+                                temp_handle.read(),
+                                content_type=IMAGE_TYPE)
+        character.image.save('{0}.{1}'.format(character.name, FILE_EXT), suf, save=False)
+
+        # thumbnail resize
+        # thumb_image = image.thumbnail(thumb_size, Image.ANTIALIAS)
+        # thumb_image = Image.open(StringIO(request.FILES['image'].read()))
+        
+        # thumb_temp_handle = StringIO()
+        # thumb_image.save(thumb_temp_handle, PIL_TYPE, quality=60)
+        # thumb_temp_handle.seek(0)
+
+        # thumb_suf = SimpleUploadedFile('character_thumbnail',
+        #                         thumb_temp_handle.read(),
+        #                         content_type=IMAGE_TYPE)
+        # character.thumbnail.save('{0}.{1}'.format(character.name, FILE_EXT), thumb_suf, save=False)
+        
+
+        character.save()
+        return HttpResponseRedirect('/profile/{0}/character_info/{1}'.format(username, char_id))
+
 def character_info(request, username, char_id):
     user = User.objects.get(username=username)
     character = models.Character.objects.get(pk=char_id)
@@ -247,7 +352,17 @@ def character_info(request, username, char_id):
     char_race = models.CharacterRace.objects.get(id=character.c_race.id)
     char_features = models.CharacterFeature.objects.filter(character=character)
     background = models.CharacterBackground.objects.filter(character=character)
-    ag, armor, mounts, tools, weapons = get_all_items(character) 
+    ag, armor, mounts, tools, weapons = get_all_items(character)
+    image_upload_form = forms.CharacterUploadImage()
+
+    if request.is_ajax and 'file' in request.POST:
+        print 'File 1'
+        upload_type = request.POST.get('upload_type')
+        img_file = request.FILES['file']
+        print 'Image file'
+        character.image = img_file
+        character.save()
+        return HttpResponse('Success')
 
     # Edit background, features, etc...
     if request.is_ajax and 'add_feature' in request.POST:
@@ -267,7 +382,16 @@ def character_info(request, username, char_id):
             char_features = models.CharacterFeature.objects.filter(character=character)
             return render(request,
                           'profile/character/info/features.html',
-                          {'features': char_features})
+                          {
+                            'features': char_features,
+                            'character': character
+                          })
+        elif trait == 'equipment':
+            setattr(character, 'equipment', description)
+            character.save()
+            return render(request,
+                          'profile/character/info/equipment.html',
+                          {'character': character})
         else:
             setattr(character, trait, description)
             character.save()
@@ -306,6 +430,15 @@ def character_info(request, username, char_id):
             return render(request,
                           'profile/character/info/background.html',
                           {'character': character})
+    # Remove feature
+    if request.is_ajax and 'remove_feat' in request.POST:
+        feat = models.CharacterFeature.objects.get(id=request.POST.get('feat'))
+        feat.delete()
+        features = models.CharacterFeature.objects.filter(character=character)
+        return render(request,
+                      'profile/character/info/features.html',
+                      {'features': features})
+
     # Add Skills
     if request.is_ajax and 'add_skills' in request.POST:
         skills = request.POST.get('skills')
@@ -330,17 +463,43 @@ def character_info(request, username, char_id):
         for e in equipment:
             equip = models.Item.objects.get(id=e)
             character.inventory.add(equip)
+            character.save()
         redirect_to = '/profile/{0}/character_info/{1}/'.format(user, character.id)
         return HttpResponse(redirect_to)
 
-    if request.is_ajax and 'remove_equipment' in request.POST:
-        equip = request.POST.get('equip')
-        e = models.Item.objects.get(id=equip)
-        character.inventory.remove(e)
+    # Add Spell
+    if request.is_ajax and 'add_spell' in request.POST:
+        spell = models.Spells.objects.get(id=request.POST.get('spell'))
+        character.spells.add(spell)
         character.save()
         return render(request,
-                      'profile/character/info/equipment.html',
+                      'profile/character/info/spells.html',
                       {'character': character})
+
+    # Remove equipment, feature, spells
+    if request.is_ajax and 'remove' in request.POST:
+        subject = request.POST.get('subject')
+        item = request.POST.get('item')
+        if subject == 'equip':
+            e = models.Item.objects.get(id=item)
+            character.inventory.remove(e)
+            character.save()
+            return render(request,
+                          'profile/character/info/equipment.html',
+                          {'character': character})
+        if subject == 'feat':
+            feat = models.CharacterFeature.objects.get(id=item).delete()
+            features = models.CharacterFeature.objects.filter(character=character)
+            return render(request,
+                          'profile/character/info/features.html',
+                          {'features': features})
+        if subject == 'spell':
+            spell = models.Spells.objects.get(id=item)
+            character.spells.remove(spell)
+            character.save()
+            return render(request,
+                          'profile/character/info/spells.html',
+                          {'character': character})
 
     context = {
         'user': user,
@@ -350,7 +509,8 @@ def character_info(request, username, char_id):
         'char_race': char_race,
         'features': char_features,
         'items': [ag, armor, mounts, tools, weapons],
-        'background': background
+        'background': background,
+        'image_upload_form': image_upload_form
     }
     return render(request,
                   'profile/character/edit.html',
@@ -594,12 +754,14 @@ def campaign(request, username, slug, campaign_id):
 
 # global values
 def global_context(request):
+    login_form = forms.UserLogin
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user.username)
     else:
         user = None
 
     context = {
-        'user': user
+        'user': user,
+        'user_login': login_form
     }
     return context

@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 import views
@@ -220,6 +221,9 @@ class CharacterRace(models.Model):
     def __unicode__(self):
         return self.name
 
+    def character_traits(self):
+        return CharacterRaceTraits.objects.filter(char_race=self.id)
+
 class CharacterRaceTraits(models.Model):
     char_race = models.ForeignKey(CharacterRace,
                                   related_name='character_race_trait')
@@ -242,6 +246,12 @@ class Attack(models.Model):
         return self.name
 
 # User's Character and Characteristics
+def user_character_img(instance, filename):
+    return '{0}/chracter/{1}'.format(instance.user.id, filename)
+
+def user_character_thumb(instance, filename):
+    return '{0}/chracter/thumb/{1}'.format(instance.user.id, filename)
+
 class Character(models.Model):
     name = models.CharField(max_length=150)
     c_class = models.ForeignKey(CharacterClass)
@@ -308,6 +318,12 @@ class Character(models.Model):
                              blank=True)
     equipment = models.TextField(null=True,
                                  blank=True)
+    image = models.ImageField(upload_to=user_character_img,
+                              null=True,
+                              blank=True)
+    thumbnail = models.ImageField(upload_to=user_character_thumb,
+                                  null=True,
+                                  blank=True)
 
 
     def __unicode__(self):
@@ -336,7 +352,7 @@ class Character(models.Model):
 
     def get_character_info(self):
         info = []
-        traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws', 'Equipment']
+        traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws']
         for t in traits:
             search = t.lower()
             search = '_'.join(search.split(' '))
@@ -452,6 +468,44 @@ class Character(models.Model):
                 equipment.append([e.desc])
         return equipment
 
+    def character_class_spells(self):
+        cl = CharacterClassLevel.objects.get(char_class=self.c_class, level=self.level)
+        spell_slots = [cl.cantrips, cl.spell_slots_1, cl.spell_slots_2, cl.spell_slots_3, cl.spell_slots_4, cl.spell_slots_5, cl.spell_slots_6, cl.spell_slots_7, cl.spell_slots_8, cl.spell_slots_9]
+        return spell_slots
+
+    def get_armor_class(self):
+        inventory = self.inventory.filter()
+        armor = []
+        if inventory:
+            for i in inventory:
+                if 'Armor' in i.category.name:
+                    armor.append(i)
+        ac = 0
+        if armor:
+            for a in armor:
+                if ' + ' in a.armor_class:
+                    ac = int(a.armor_class.split(' + ')[0])
+                    if 'max ' in a.armor_class:
+                        max_mod = int(a.armor_class.split(' ')[-1].replace(')', ''))
+                        dex = views.get_modifier(self.dexterity)
+                        if dex <= max_mod:
+                            ac += dex
+                        else:
+                            ac += max_mod
+                else:
+                    ac += int(a.armor_class)
+        if ac == 0:
+            ac = 0
+        return ac
+
+    def get_currency(self):
+        coin = CharacterCurrency.objects.get(character=self.id)
+        return coin
+
+    # def get_class_features(self):
+    #     feats = CharacterClassFeature.objects.filter(char_class=self.c_class, level=self.level)
+    #     return feats
+
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,
@@ -479,10 +533,13 @@ class CharacterSkills(models.Model):
         skills = []
         names = views.SKILLS
         char_skills = self.character.skill_set
-        for n in names:
+        if char_skills:
+            pro_skills = char_skills.split(', ')
+        else:
+            pro_skills = False
+        for n in sorted(names):
             mod = CharacterSkills.objects.values_list(n[0], flat=True).get(pk=self.id)
-            if char_skills:
-                pro_skills = char_skills.split(', ')
+            if pro_skills:
                 if n[0] in pro_skills:
                     mod += self.character.proficiency_bonus
             if mod > 0:
@@ -490,6 +547,20 @@ class CharacterSkills(models.Model):
             s = [n[1], mod, n[0]]
             skills.append(s)
         return skills
+
+class CharacterCurrency(models.Model):
+    character = models.ForeignKey(Character,
+                                    related_name='character_currency',
+                                    on_delete=models.CASCADE)
+    copper = models.IntegerField(default=0)
+    silver = models.IntegerField(default=0)
+    electrum = models.IntegerField(default=0)
+    gold = models.IntegerField(default=0)
+    platinum = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.character.name
+
 
 class CharacterBackground(models.Model):
     background = models.CharField(max_length=100)
@@ -548,6 +619,15 @@ class NonPlayableCharacters(models.Model):
     def __unicode__(self):
         return self.name
 
+class CampaignNotes(models.Model):
+    title = models.CharField(max_length=150)
+    note = models.TextField()
+    campaign = models.ForeignKey(Campaign,
+                                 on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return self.title
+
 class CampaignChapter(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=300)
@@ -598,3 +678,49 @@ class Battle(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class CampaignNote(models.Model):
+    title = models.CharField(max_length=150)
+    note = models.TextField()
+
+    def __unicode__(self):
+        return self.title
+
+class Forum(models.Model):
+    title = models.CharField(max_length=200)
+    entry = models.TextField()
+    post_by = models.ForeignKey(UserProfile)
+    posted_on = models.DateField(auto_now=True)
+    last_edit = models.DateField(auto_now_add=True)
+    points = models.IntegerField(default=0)
+    
+    def __unicode__(self):
+        return self.title
+
+    def get_comments(self):
+        comments = ForumComment.objects.filter(forum=self.id)
+
+
+class ForumComment(models.Model):
+    forum = models.ForeignKey(Forum)
+    comment = models.TextField()
+    posted_on = models.DateField(auto_now=True)
+    last_edit = models.DateField(auto_now_add=True)
+    comment_by = models.ForeignKey(UserProfile)
+    reply_to = models.ForeignKey('ForumComment',
+                                blank=True,
+                                null=True)
+    
+    def __unicode__(self):
+        return self.forum.title
+    
+    def get_reply(self):
+        try:
+            comments = []
+            replies = ForumComment.objects.filter(reply_to=self.id)
+            for r in replies:
+                comments.append({'comment': r.comment, 'posted_on': r.posted_on, 'comment_by': r.comment_by, 'replies': r.get_reply})
+            
+            return comments
+        except:
+            return None

@@ -1,8 +1,4 @@
-<div class="card">
-  <div class="card-header">
-    Saving Throws
-  </div>
-  <div class="card-body">
+<div class="saving_throws">
     <table class="table table-hover">
       <tbody>
         {% for s in character.get_saving_throws %}
@@ -12,13 +8,12 @@
         {% endfor %}
       </tbody>
     </table>
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">
-    Skills
-  </div>
-  <div class="card-body">
+    <div class="pro_bonus">
+        <div class="number">+{{ character.proficiency_bonus }}</div>
+        <div class="text">Proficiency Bonus</div>
+      </div>
+</div><!--
+--><div class="skill-list">
     <table class="table table-hover">
       <tbody>
         {% for s in skills.get_skills %}
@@ -28,8 +23,6 @@
         {% endfor %}
       </tbody>
     </table>
-  </div>
-
 </div>
 {% if character.skills_limit %}
 <div class="card">

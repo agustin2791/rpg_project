@@ -166,3 +166,57 @@
     </div>
 </div>
 <!-- Equipment Modal Ends -->
+<!-- Equipment Modal -->
+<div class="modal fade" id="spell-list" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 0px">
+    <div class="modal-dialog fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Spells</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-9">
+                        <table class="table">
+                            <thead>
+                                <th>Level</th>
+                                <th>Name</th>
+                                <th>Time</th>
+                                <th>Range</th>
+                                <th>Components</th>
+                                <th>Duration</th>
+                                <th>School</th>
+                                <th>Has Ritual</th>
+                                <th>Material</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                {% for sl in character.get_spell_list %}
+                                {% for s in sl %}
+                                <tr>
+                                    <td>{% if s.level == 0 %}Cantrip{% else %}{{ s.level }}{% endif %}</td>
+                                    <td>{{ s.spell_name }}</td>
+                                    <td>{{ s.time }}</td>
+                                    <td>{{ s.rang }}</td>
+                                    <td>{{ s.comp }}</td>
+                                    <td>{{ s.duration }}</td>
+                                    <td>{{ s.schoool }}</td>
+                                    <td>{{ s.ritual |yesno:'Yes, ' }}</td>
+                                    <td>{% if s.material == 'nan' %}{% else %}{{ s.material }}{% endif %}</td>
+                                    <td><button class="btn btn-success btn-sm add-spell" data-spell="{{ s.id }}" {% if s.id in character.spells.all %}disabled{% endif %} ><i class="fa fa-plus"></i></button></td>
+                                </tr>
+                                {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,426 @@
+.character_sheet {
+	display: block;
+	width: 100%;
+	padding: 0;
+	.display_selector {
+		display: inline-block;
+		width: 15%;
+		height: 100%;
+		padding: 0px;
+		position: relative;
+		vertical-align: top;
+		background: $main-color;
+		text-align: center;
+		// -webkit-box-shadow: 2px 2px 5px 1px #DBDBDB;
+		// box-shadow: 2px 2px 5px 1px #DBDBDB;
+		.selector {
+			width: 100%;
+			font-size: 0.85rem;
+			padding: 20px 0px;
+			color: #fff;
+			cursor: pointer;
+			transition: ease-in .5s;
+			&.active, &:hover {
+				background: $secondary-color;
+				color: #fff;
+			}
+			.selector_icon {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-color: $secondary-color;
+				color: #fff;
+				border: $main-color thin solid;
+				text-align: center;
+				line-height: 60px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.selector_title {
+				display: inline-block;
+				width: auto;
+				vertical-align: middle;
+				font-size: 1.25rem;
+				font-weight: thick;
+			}
+		}
+	}
+	.display_container {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		height: 95vh;
+		width: 80%;
+		overflow: auto;
+		margin-left: 5px;
+		.display {
+			display: none;
+			width: 0%;
+			height: 0%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			opacity: 0;
+			&.show {
+				display: block;
+				width: 100%;
+				border-radius: 0px;
+				height: auto;
+				position: relative;
+				opacity: 1;
+				animation: pageTransition .5s ease-in;
+			}
+		}
+	}
+}
+
+.pro_bonus, .hit_points, .hit_dice {
+	margin: 5px;
+	width: auto;
+	text-align: center;
+}
+.character_info {
+	text-align: center;
+	.details {
+		display: block;
+		.char-img {
+			max-width: 500px;
+			width: 49%;
+			display: inline-block;
+			position: relative;
+			vertical-align: top;
+			.character_image {
+				// width: 300px;
+			}
+			.character_thumb {
+				height: 150px;
+			}
+		}
+		.char-details {
+			width: 48%;
+			vertical-align: top;
+			display: inline-block;
+			padding: 10px;
+			font-size: 1.5rem;
+			text-align: center;
+			b {
+				font-size: 1rem;
+			}
+		}
+	}
+}
+.character_abilities {
+	width: 100%;
+	display: block;
+	.details {
+		display: block;
+		text-align: center;
+		.abilities {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			padding: 5px;
+			.ability {
+				width: 100px;
+				display: inline-block;
+				border: $main-color solid thick;
+				border-radius: 5px;
+				padding-top: 15px;
+				margin: 15px 20px;
+			}
+		}
+		.saving_throws, .skill-list, .actions {
+			width: 100%;
+			max-width: 250px;
+			display: inline-block;
+			vertical-align: top;
+			padding: 5px;
+			margin: 15px 0px;
+			text-align: left;
+			h3 {
+				font-size: 1.5rem;
+				display: block;
+				text-align: center;
+				background: #333;
+				color: #fff;
+				padding: 5px;
+			}
+		}
+		.skill_box {
+			width: 100%;
+			display: block;
+			font-size: 1.25rem;
+			margin-bottom: 15px;
+			.left {
+				width: 15%;
+				text-align: right;
+				font-weight: 300;
+				border-bottom: solid thin #333;
+				padding-bottom: 2px;
+				display: inline-block;
+				vertical-align: top;
+			}
+			.right {
+				display: inline-block;
+				vertical-align: top;
+				width: auto;
+				text-align: left;
+				padding-bottom: 2px;
+				text-indent: 20px;
+			}
+		}
+		.skill-list {
+			max-width: 500px;
+			.skill_box {
+				width: 45%;
+				display: inline-block;
+				vertical-align: top;
+				margin-right: 4px;
+			}
+		}
+		.actions {
+			width: 300px;
+			text-align: center;
+			.action_sect {
+				max-width: 300px;
+				display: inline-block;
+				vertical-align: top;
+				margin: 20px 0px;
+			}
+		}
+	}
+}
+.equipment {
+	width: 100%;
+	position: relative;
+	display: block;
+	.info-div {
+		width: 40%;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.equipment-list {
+		width: 55%;
+		display: inline-block;
+		vertical-align: top;
+		padding: 10px;
+	}
+}
+.features {
+	width: 100%;
+	position: relative;
+	display: block;
+	.class_features, .char_features {
+		width: 50%;
+		padding: 10px 3px;
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+.background, .spells {
+	width: 75%;
+	margin: 10px auto;
+	h3 {
+		text-align: center;
+	}
+}
+.traits {
+	width: 100%;
+	display: block;
+	.trait-card {
+		width: 49%;
+		display: inline-block;
+		vertical-align: top;
+		float: left;
+		margin: 2px;
+	}
+}
+.information {
+	display: block;
+	width: 100%;
+	.character_info {
+		display: inline-block;
+		width: 30%;
+		vertical-align: top;
+		.details {
+			display: block;
+			position: relative;
+			.char-img {
+				height: 300px;
+				width: 49%;
+				display: inline-block;
+				background: #333;
+			}
+			.char-details {
+				width: 49%;
+				display: inline-block;
+				vertical-align: top;
+				text-align: left;
+				font-size: 1rem;
+				p > b {
+					color: $secondary-color;
+				}
+				.char-name {
+					font-size: 1.25rem;
+					font-weight: 400;
+					color: $main-color;
+				}
+			}
+		}
+	}
+	.character_abilities {
+		width: 35%;
+		display: inline-block;
+		vertical-align: middle;
+		.details {
+			display: block;
+			.abilities {
+				display: inline-block;
+				width: 16%;
+				font-size: 0.75rem;
+				border: solid $secondary-color thick;
+				padding: 10px;
+				p {
+					padding: 0;
+					margin: 0;
+				}
+				h3 {
+					font-size: 1.25rem;
+					small {
+						font-size: 1rem;
+					}
+				}
+			}
+		}
+	}
+	.character_skills {
+		width: 35%;
+		display: inline-block;
+		vertical-align: middle;
+		.saving_throws, .skill-list {
+			vertical-align: top;
+			width: 50%;
+			font-size: 0.75rem;
+			display: inline-block;
+			padding: 15px;
+			text-align: left;
+		}
+	}
+	
+}
+
+.pro_bonus {
+	position: relative;
+	color: #fff;
+	margin: 0px auto;
+	text-align: center;
+	.number {
+		width: 45px;
+		height: 45px;
+		border: solid 2px #333;
+		border-radius: 50%;
+		color: #333;
+		position: absolute;
+		top: 50%;
+		left: -10px;
+		font-weight: 600;
+		font-size: large;
+		transform: translateY(-50%);
+		display: block;
+		background: #fff;
+		line-height: 40px;
+	}
+	.text {
+		background: #333;
+		padding: 5px 5px 5px 5px;
+		border-radius: 3px;
+		letter-spacing: 1px;
+	}
+}
+.armor_class {
+	width: 200px;
+	height: 105px;
+	position: relative;
+	z-index: 50;
+	margin: 0px auto;
+	.base-left {
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100px;
+		height: 100px;
+		background: #333;
+		border-bottom-left-radius: 50%;
+		border-bottom-right-radius: 50%;
+	}
+	.top-center {
+		background: #333;
+		position: absolute;
+		top: 12px;
+		left: 50%;
+		transform: translateX(-50%) rotate(45deg);
+		width: 78px;
+		height: 78px;
+		border-top-right-radius: 75%;
+		border-bottom-left-radius: 75%;
+	}
+	.top-left {
+		background: #fff;
+		width: 33px;
+		height: 33px;
+		position: absolute;
+		top: -3px;
+		left: 47px;
+		border-bottom-right-radius: 97%;
+		transform: rotate(33deg);
+	}
+	.top-right {
+		background: #fff;
+		width: 33px;
+		height: 33px;
+		position: absolute;
+		top: -3px;
+		left: 120px;
+		border-bottom-left-radius: 97%;
+		transform: rotate(-33deg);
+	}
+	.bottom {
+		background: #333;
+		position: absolute;
+		top: 47px;
+		left: 50%;
+		transform: translateX(-50%) rotate(45deg);
+		width: 70px;
+		height: 70px;
+		border-top-right-radius: 33%;
+		border-bottom-left-radius: 33%;
+	}
+	.armor_text {
+		width: 60px;
+		height: 60px;
+		z-index: 51;
+		color: #fff;
+		font-weight: 600;
+		font-size: x-large;
+		position: absolute;
+		top: 25px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+.speed_details {
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	border: #333 solid 7px;
+	font-weight: 600;
+	font-size: x-large;
+	padding-top: 22px;
+	line-height: 20px;
+	vertical-align: middle;
+	margin: 0px auto;
+}
+.abilities, .information {
+	text-align: center;
+}

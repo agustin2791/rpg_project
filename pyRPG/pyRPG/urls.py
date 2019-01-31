@@ -17,11 +17,20 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-
 from app import views
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
+    # Authentication
+    url(r'^authenticate/register$',
+        views.registration,
+        name="register"),
+    url(r'^authenticate/login$',
+        views.user_login,
+        name='login'),
+    url(r'^authenticate/logout$',
+        views.user_logout,
+        name='logout'),
     url(r'^profile/(?P<username>\w{0,50})/$',
         views.user_profile,
         name='profile'),
@@ -33,6 +42,9 @@ urlpatterns = [
     url(r'^profile/(?P<username>\w{0,50})/character_info/(?P<char_id>\d+)/$',
         views.character_info,
         name='character_info'),
+    url(r'^profile/(?P<username>\w{0,50})/character_info/(?P<char_id>\d+)/image_upload/$',
+        views.character_upload_image,
+        name='upload_image'),
     # Campaign
     url(r'^campaign/(?P<username>\w{0,50})/(?P<slug>[\w-]+)/(?P<campaign_id>\d+)/play/$',
         views.campaign,
@@ -61,3 +73,6 @@ urlpatterns = [
         name='edit_campaign_chapter'),
     url(r'^admin/', admin.site.urls),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
