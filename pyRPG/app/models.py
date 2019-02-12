@@ -329,18 +329,23 @@ class Character(models.Model):
     def __unicode__(self):
         return self.name
 
+    # Get the campagin in which the character belongs to
     def get_campaign(self):
         campaigns = Campaign.objects.filter(characters__id=self.id)
         try:
             return campaigns[0]
         except IndexError:
             return None
+    
+    # Get the character's alignment
     def get_alignment(self):
-        al = self.alignment.split(': ')
+        al = self.alignment.split(': ') # split alignment text and return the name of alignment
         return al[0]
 
+    # Get the character's abilities
     def get_abilities(self):
         abilities = []
+        # 
         ability = ['strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom']
         for a in ability:
             ab = Character.objects.values_list(a, flat=True).get(id=self.id)
@@ -350,17 +355,23 @@ class Character(models.Model):
             abilities.append([a.title(), ab, mod])
         return abilities
 
+    # Get the character's information Personality traits, ideals etc...
+    # The idea is more for templating ease
     def get_character_info(self):
         info = []
+        # declare traits
         traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws']
         for t in traits:
+            # get the character's traits from model
             search = t.lower()
             search = '_'.join(search.split(' '))
             i = Character.objects.values_list(search, flat=True).get(id=self.id)
+            # append the trait and their value
             info.append([search, t, i])
 
         return info
 
+    # get the list of spells that is available for the character's class
     def get_spell_list(self):
         spells = Spells.objects.filter(level__lte=self.level, classes__id__in=[self.c_class.id]).order_by('level')
         levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -375,6 +386,8 @@ class Character(models.Model):
                 spell_levels.append(spell_level)
 
         return spell_levels
+    
+    # def get_spell_slots():
 
     def skills_limit(self):
         if self.skill_set:
@@ -624,6 +637,7 @@ class CampaignNotes(models.Model):
     note = models.TextField()
     campaign = models.ForeignKey(Campaign,
                                  on_delete=models.CASCADE)
+    position = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title
@@ -639,6 +653,7 @@ class CampaignChapter(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class ChapterArea(models.Model):
     name = models.CharField(max_length=150)

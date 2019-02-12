@@ -148,7 +148,7 @@ $(document).ready(function() {
     })
     var active_spell_info = NaN;
     var active_equip_info = NaN;
-    $(document).on('click', '.get_spell_info', function() {
+    $(document).on('click', '.get_spell_info', function(event) {
       let spell_id = $(this).attr('data-spell');
       let info = $('.spell-info[data-spell="' + spell_id + '"]');
       if (active_spell_info !== spell_id && active_spell_info === NaN) {
@@ -162,6 +162,11 @@ $(document).ready(function() {
         info.css('display', 'block');
         setTimeout(function() {
           info.css('opacity', 1);
+          if (event.clientY < 300) {
+            info.css('top', 0);
+            info.css('left', -300)
+          }
+          console.log(event.clientY)
         }, 1)
         info.css('top', -info.outerHeight() + 5 + 'px')
       } else {

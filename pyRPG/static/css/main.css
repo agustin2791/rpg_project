@@ -315,6 +315,22 @@ h1, h2, h3, h4, h5, h6, p, a, span, ul, li, div {
   margin: 20px 0px;
 }
 
+.char_class_race {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+.char_class_race .char_class {
+  width: 30%;
+  display: inline-block;
+  vertical-align: top;
+}
+.char_class_race .char_race {
+  width: 60%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 .equipment {
   width: 100%;
   position: relative;
