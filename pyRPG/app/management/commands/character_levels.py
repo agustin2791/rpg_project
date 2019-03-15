@@ -158,10 +158,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         start_time = dt.datetime.now()
         file = self.get_file()[0]
-        print file
+        print(file)
         df = pd.read_csv(file, encoding='latin-1')
         print ('---------Start---------')
         for row in df.iterrows():
             self.character_level(row[1])
             print (dt.datetime.now() - start_time)
-        print '---------End------------'
+        print('---------End------------')

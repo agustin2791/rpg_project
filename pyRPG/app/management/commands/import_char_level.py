@@ -15,7 +15,7 @@ class Command(BaseCommand):
     def level_file():
         home_dir = os.path.join(settings.BASE_DIR, 'files/JSON/character_classes')
         level_class = glob.glob(os.path.join(home_dir, '*.json'))
-        print level_class
+        print(level_class)
         return level_class
 
     @staticmethod
@@ -76,16 +76,16 @@ class Command(BaseCommand):
                     spell_slots = feat['spell_slots']
             except:
                 spell_slots = None
-            print rage, rage_dmg, cantrips, spells, martial_art, ki_points, unarmored_mvm, sneak, sorcery_points, invocations, spell_slots
+            print(rage, rage_dmg, cantrips, spells, martial_art, ki_points, unarmored_mvm, sneak, sorcery_points, invocations, spell_slots)
 
     def handle(self, *args, **options):
         start_time = dt.datetime.now()
         class_lvl = self.level_file()
 
-        print '--------Start--------'
+        print('--------Start--------')
         for index, f in enumerate(class_lvl):
-            print f
+            print(f)
             df = json.load(open(f, 'r'))
             self.class_level(index, df)
             print(dt.datetime.now() - start_time)
-        print '--------End----------'
+        print('--------End----------')

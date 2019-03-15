@@ -128,29 +128,29 @@ class Command(BaseCommand):
         start_time = dt.datetime.now()
         json_files = self.get_json_files()
 
-        print '-------Start-------'
+        print('-------Start-------')
         for f in json_files:
             data = json.load(open(f, 'r'))
             if 'adventure_gear' in data:
-                print 'Adventure Gear >>>>'
+                print('Adventure Gear >>>>')
                 self.import_ag(self, data)
-                print (dt.datetime.now() - start_time)
+                print(dt.datetime.now() - start_time)
             elif 'light_armor' in data:
-                print 'Armor >>>>>>'
+                print('Armor >>>>>>')
                 self.import_armor(self, data)
-                print (dt.datetime.now() - start_time)
+                print(dt.datetime.now() - start_time)
             elif 'mounts' in data:
-                print 'Mounts >>>>>>>'
+                print('Mounts >>>>>>>')
                 self.import_mounts(self, data)
-                print (dt.datetime.now() - start_time)
+                print(dt.datetime.now() - start_time)
             elif 'trade_goods' in data:
-                print 'Trade Goods >>>>>>'
+                print('Trade Goods >>>>>>')
                 self.import_tg(self, data)
-                print (dt.datetime.now() - start_time)
+                print(dt.datetime.now() - start_time)
             elif 'simple_melee_weapons' in data:
-                print 'Weapons >>>>>>>'
+                print('Weapons >>>>>>>')
                 self.import_weapons(self, data)
                 print (dt.datetime.now() - start_time)
 
 
-        print '--------End--------'
+        print('--------End--------')

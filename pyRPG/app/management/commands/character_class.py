@@ -115,10 +115,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         start_time = dt.datetime.now()
         char_file = 'D:/software/rpg_one/pyRPG/files/CSV/character_class.csv'
-        print char_file
+        print(char_file)
         df = pd.read_csv(char_file, encoding='latin-1')
-        print '----------Start---------'
+        print('----------Start---------')
         for index, row in enumerate(df.iterrows()):
             self.character_class(index, row[1])
             print (dt.datetime.now() - start_time)
-        print '---------End------------'
+        print('---------End------------')

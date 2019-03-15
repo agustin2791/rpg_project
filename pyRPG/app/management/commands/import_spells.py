@@ -78,10 +78,10 @@ class Command(BaseCommand):
 
         for f in spell_file:
             if f:
-                print '--------START----------'
+                print('--------START----------')
                 df = pd.read_csv(f, encoding='latin-1')
                 for row in df.iterrows():
                     self.add_new_spell(row[1])
                     print(dt.datetime.now() - starttime)
 
-                print '--------END----------'
+                print('--------END----------')

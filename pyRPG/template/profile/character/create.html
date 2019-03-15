@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="col-4">
+    <div class="col-4 offset-4">
       <form class="create_character">
         <!-- New Character name -->
         <div class="form-group">
@@ -20,6 +20,7 @@
             <option value="{{ c.id }}">{{ c.name }}</option>
             {% endfor %}
           </select>
+          <a data-toggle="modal" data-target="#class_info" style="cursor: pointer"><span class="badge badge-pill badge-primary">Info</span></a>
         </div>
         <!-- New Character race -->
         <div class="form-group">
@@ -31,6 +32,7 @@
             <option value="{{ r.id }}">{{ r.name }}</option>
             {% endfor %}
           </select>
+          <a data-toggle="modal" data-target="#race_info" style="cursor: pointer"><span class="badge badge-pill badge-primary">Info</span></a>
         </div>
         <!-- New Character Alignment -->
         <div class="form-group">
@@ -41,6 +43,7 @@
             <option value="{{ a.0 }}">{{ a.1 }}</option>
             {% endfor %}
           </select>
+          <a data-toggle="modal" data-target="#alignment_info" style="cursor: pointer"><span class="badge badge-pill badge-primary">Info</span></a>
         </div>
         <!-- New character Level -->
         <div class="row">
@@ -48,25 +51,6 @@
             <div class="form-group">
               <label for="char_lvl">Level</label>
               <input type="number" class="form-control" name="char_lvl" value="1">
-            </div>
-          </div>
-          <!-- New Character Speed -->
-          <div class="col-4">
-            <div class="form-group">
-              <label for="char_speed">Speed:</label>
-              <div class="input-group">
-                <input type="number" class="form-control" name="char_speed">
-                <div class="input-group-append">
-                  <div class="input-group-text">ft.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- New Character Full HP -->
-          <div class="col-4">
-            <div class="form-group">
-              <label for="char_hp">Hit Points:</label>
-              <input type="number" class="form-control" name="char_hp">
             </div>
           </div>
         </div>
@@ -166,39 +150,66 @@
         <button type="submit" class="btn btn-primary" name="button">Create Character</button>
       </form>
     </div>
-    <div class="col-8">
-      <div class="row">
-        <div class="col-6">
-          <h3>Class Details</h3>
-          <hr>
-          <div class="class_details">
-            <i>Select class to view details</i>
-          </div>
-        </div>
-        <div class="col-6">
-          <h3>Race Details</h3>
-          <hr>
-          <div class="race_details">
-            <i>Select race to view details</i>
-          </div>
-        </div>
-        <div class="col-6">
-          <h3>Alignments</h3>
-          <hr>
-          <p>
-            <b>Lawful good (LG): </b>creatures can be counted on to do the right thing as expected by society. Gold dragons, paladins, and most dwarves are lawful good.<br>
-            <b>Neutral good (NG): </b>folk do the best they can to help others according to their needs. Many celestials, some cloud giants, and most gnomes are neutral good.<br>
-            <b>Chaotic good (CG): </b>creatures act as their conscience directs, with little regard for what others expect. Copper dragons, many elves, and unicorns are chaotic good.<br>
-            <b>Lawful neutral (LN): </b>individuals act in accordance with law, tradition, or personal codes. Many monks and some wizards are lawful neutral.<br>
-            <b>True Neutral (N): </b> is the alignment of those who prefer to steer clear of moral questions and don't take sides, doing what seems best at the time. Lizardfolk, most druids, and many humans are neutral.<br>
-            <b>Chaotic neutral (CN): </b>creatures follow their whims, holding their personal freedom above all else. Many barbarians and rogues, and some bards, are chaotic neutral.<br>
-            <b>Lawful evil (LE): </b>creatures methodically take what they want, within the limits of a code of tradition, loyalty, or order. Devils, blue dragons, and hobgoblins are lawful evil.<br>
-            <b>Neutral evil (NE): </b>is the alignment of those who do whatever they can get away with, without compassion or qualms. Many drow, some cloud giants, and goblins are neutral evil.<br>
-            <b>Chaotic evil (CE): </b>creatures act with arbitrary violence, spurred by their greed, hatred, or bloodlust. Demons, red dragons, and orcs are chaotic evil.
-          </p>
+  </div>
+</div>
+<!-- Class Info modal -->
+<div class="modal fade" id="class_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Class Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="class_details">
+          <i>Select class to view details</i>
         </div>
       </div>
-
+    </div>
+  </div>
+</div>
+<!-- Race Info modal -->
+<div class="modal fade" id="race_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Race Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="race_details">
+          <i>Select race to view details</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="alignment_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alignment Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <b>Lawful good (LG): </b>creatures can be counted on to do the right thing as expected by society. Gold dragons, paladins, and most dwarves are lawful good.<br>
+          <b>Neutral good (NG): </b>folk do the best they can to help others according to their needs. Many celestials, some cloud giants, and most gnomes are neutral good.<br>
+          <b>Chaotic good (CG): </b>creatures act as their conscience directs, with little regard for what others expect. Copper dragons, many elves, and unicorns are chaotic good.<br>
+          <b>Lawful neutral (LN): </b>individuals act in accordance with law, tradition, or personal codes. Many monks and some wizards are lawful neutral.<br>
+          <b>True Neutral (N): </b> is the alignment of those who prefer to steer clear of moral questions and don't take sides, doing what seems best at the time. Lizardfolk, most druids, and many humans are neutral.<br>
+          <b>Chaotic neutral (CN): </b>creatures follow their whims, holding their personal freedom above all else. Many barbarians and rogues, and some bards, are chaotic neutral.<br>
+          <b>Lawful evil (LE): </b>creatures methodically take what they want, within the limits of a code of tradition, loyalty, or order. Devils, blue dragons, and hobgoblins are lawful evil.<br>
+          <b>Neutral evil (NE): </b>is the alignment of those who do whatever they can get away with, without compassion or qualms. Many drow, some cloud giants, and goblins are neutral evil.<br>
+          <b>Chaotic evil (CE): </b>creatures act with arbitrary violence, spurred by their greed, hatred, or bloodlust. Demons, red dragons, and orcs are chaotic evil.
+        </p>
+      </div>
     </div>
   </div>
 </div>
