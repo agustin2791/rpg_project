@@ -555,7 +555,7 @@ def campaign_edit(request, username, slug):
         enemies = None
     print(enemies)
     # Invite players
-
+    # Populate modal
     if request.is_ajax and 'call_modal' in request.POST:
         modal = request.POST.get('form')
         context = {'campaign': campaign}
@@ -564,45 +564,47 @@ def campaign_edit(request, username, slug):
                       context)
     # create new enemy
     if request.is_ajax and 'new_enemy' in request.POST:
-        print('new_enemy')
         # attack_type = models.Attack.objects.get(id=request.POST.get('attack_type'))
         # sub_attack_type = models.Attack.objects.get(id=request.POST.get('sub_attack_type'))
         new_enemy = models.Character.objects.create(
             name = request.POST.get('name'),
             hp = request.POST.get('hp'),
             full_hp = request.POST.get('hp'),
-            damage = request.POST.get('damage'),
             speed = request.POST.get('speed'),
-            defence = request.POST.get('defence'),
+            armor_class = request.POST.get('defence'),
             dexterity = request.POST.get('dex'),
             constitution = request.POST.get('constitution'),
             intelligence = request.POST.get('intelligence'),
             charisma = request.POST.get('charm'),
             wisdom = request.POST.get('wisdom'),
-            user = campaign.host,
-            enemy = True,
-            enemy_type = request.POST.get('enemy_type'),
-            attack=0
+            user = campaign.host
         )
         new_enemy.save()
         # creates the enemy's action
-        new_actions = models.CharacterFeature.objects.create(
-            feature='Actions',
-            description=request.POST.get('actions'),
-            character=new_enemy
-        )
+        if request.POST.getlist('actions[]') != None:
+            actions_list = request.POST.getlist('actions[]')
+            json_actions = json.loads(actions_list[0])
+            for i in json_actions:
+                action = models.EnemyAction.objects.create(
+                        enemy=new_enemy,
+                        name=i[u'name'],
+                        description=i[u'desc']
+                    )
+                new_enemy.actions.add(action)
+
         # creating additional information for the enemy
         if request.POST.getlist('additional-info[]') != None:
-            list = request.POST.get('additional-info')
             add_list = request.POST.getlist('additional-info[]')
             json_list = json.loads(add_list[0])
             for i in json_list:
-                char_info = models.CharacterFeature.objects.create(
-                    feature=i[u'name'],
-                    description=i[u'description'],
-                    character=new_enemy
-                )
-        campaign.characters.add(new_enemy)
+                action = models.EnemyAction.objects.create(
+                        enemy=new_enemy,
+                        name=i[u'name'],
+                        description=i[u'desc']
+                    )
+                new_enemy.actions.add(action)
+        new_enemy.save()
+        campaign.enemies.add(new_enemy)
         campaign.save()
         context = {'enemies': campaign.getEnemies}
         return render(request,
