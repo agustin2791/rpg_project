@@ -223,7 +223,7 @@ def request_approval(request):
 def user_profile(request, username):
     user = User.objects.get(username=username)
     campaigns = models.Campaign.objects.filter(host=user)
-    characters = models.Character.objects.filter(user=user, enemy=False)
+    characters = models.Character.objects.filter(user=user)
 
     context = {
         'user': user,

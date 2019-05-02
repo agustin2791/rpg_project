@@ -256,7 +256,7 @@ def user_character_img(instance, filename):
 def user_character_thumb(instance, filename):
     return '{0}/chracter/thumb/{1}'.format(instance.user.id, filename)
 
-class BaseCharacter(models.Model):
+class Character(models.Model):
     user = models.ForeignKey(User,
                              related_name='user_character',
                              on_delete=models.CASCADE)
@@ -272,21 +272,6 @@ class BaseCharacter(models.Model):
     charisma = models.IntegerField(default=5)
     wisdom = models.IntegerField(default=5)
     speed = models.IntegerField(default=5)
-
-    # Get the character's abilities
-    def get_abilities(self):
-        abilities = []
-        # 
-        ability = ['strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom']
-        for a in ability:
-            ab = Character.objects.values_list(a, flat=True).get(id=self.id)
-            mod = views.get_modifier(ab)
-            if mod > 0:
-                mod = '+{0}'.format(mod)
-            abilities.append([a.title(), ab, mod])
-        return abilities
-
-class Character(BaseCharacter):
     c_class = models.ForeignKey(CharacterClass,
                                 on_delete=models.CASCADE,
                                 blank=False,
@@ -358,7 +343,19 @@ class Character(BaseCharacter):
             return campaigns[0]
         except IndexError:
             return None
-    
+
+    # Get the character's abilities
+    def get_abilities(self):
+        abilities = []
+        # 
+        ability = ['strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom']
+        for a in ability:
+            ab = Character.objects.values_list(a, flat=True).get(id=self.id)
+            mod = views.get_modifier(ab)
+            if mod > 0:
+                mod = '+{0}'.format(mod)
+            abilities.append([a.title(), ab, mod])
+        return abilities
     # Get the character's alignment
     def get_alignment(self):
         al = self.alignment.split(': ') # split alignment text and return the name of alignment
@@ -641,7 +638,22 @@ class Campaign(models.Model):
                 enemies.append(char)
         return enemies
 
-class Enemy(BaseCharacter):
+class Enemy(models.Model):
+    enemy_user = models.ForeignKey(User,
+                             related_name='user_enemy',
+                             on_delete=models.CASCADE)
+    name = models.CharField(max_length=150)
+    level = models.IntegerField(default=1)
+    hp = models.IntegerField(default=100)
+    full_hp = models.IntegerField(default=100)
+    armor_class = models.IntegerField(default=5)
+    strength = models.IntegerField(default=5)
+    dexterity = models.IntegerField(default=5)
+    constitution = models.IntegerField(default=5)
+    intelligence = models.IntegerField(default=5)
+    charisma = models.IntegerField(default=5)
+    wisdom = models.IntegerField(default=5)
+    speed = models.IntegerField(default=5)
     actions = models.ManyToManyField('EnemyAction', related_name='enemy_actions')
     info = models.ManyToManyField('EnemyAction', related_name='enemy_info')
 
@@ -701,9 +713,9 @@ class ChapterRoom(models.Model):
         return self.name
 
 class Battle(models.Model):
-    enemies = models.ManyToManyField(Character,
+    battle_enemies = models.ManyToManyField(Character,
                                      related_name='enemies')
-    characters = models.ManyToManyField(Character,
+    battle_characters = models.ManyToManyField(Character,
                                         related_name='battle_character')
     number_of_commoner = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
