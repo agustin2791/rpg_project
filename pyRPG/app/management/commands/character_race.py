@@ -91,10 +91,10 @@ class Command(BaseCommand):
         characters = self.load_characters()
         start_time = dt.datetime.now()
 
-        print '---------- Start ---------'
+        print('---------- Start ---------')
         for index, c in enumerate(characters):
-            data = json.load(open(c, 'r'))
+            data = json.load(open(c, 'r', encoding='latin-1'))
             self.character(index, data)
             print(dt.datetime.now() - start_time)
 
-        print '---------- End -----------'
+        print('---------- End -----------')

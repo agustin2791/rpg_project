@@ -32,6 +32,10 @@
     <div class="selector" data-to-display="traits">
       <div class="selector_title">Traits</div>
     </div>
+    <!-- Class & Race -->
+    <div class="selector" data-to-display="class_race">
+      <div class="selector_title">Class &amp; Race</div>
+    </div>
   </div>
   <div class="display_container">
     <div class="character_info display show">
@@ -54,6 +58,9 @@
     </div>
     <div class="character_traits display">
       {% include 'profile/character/info/traits.html' %}
+    </div>
+    <div class="character_class_race display">
+      {% include 'profile/character/info/character_class.html' %}
     </div>
   </div>
 

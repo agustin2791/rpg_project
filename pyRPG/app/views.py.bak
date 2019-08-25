@@ -8,19 +8,19 @@ from django.db.models import Prefetch
 from django.template import RequestContext
 from django.core.files.base import ContentFile
 from PIL import Image
-from io import StringIO
+from cStringIO import StringIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 # from django.views.generic import Views
 import json
 
-import app.models as models
-import app.forms as forms
+import models
+import forms
 
 def registration(request):
     if request.user.is_authenticated:
         return redirect('/profile/{0}'.format(request.user.username))
     if request.is_ajax and 'new_user' in request.POST:
-        print(request.POST)
+        print request.POST
         new_username = request.POST.get('username')
         new_password = request.POST.get('password')
         new_email = request.POST.get('email')
@@ -30,7 +30,7 @@ def registration(request):
             password=new_password
         )
         user.save()
-        print(user)
+        print user
         user_profile = models.UserProfile.objects.create(
             user=user
         )
@@ -223,7 +223,7 @@ def request_approval(request):
 def user_profile(request, username):
     user = User.objects.get(username=username)
     campaigns = models.Campaign.objects.filter(host=user)
-    characters = models.Character.objects.filter(user=user)
+    characters = models.Character.objects.filter(user=user, enemy=False)
 
     context = {
         'user': user,
@@ -260,13 +260,14 @@ def character_creation(request, username):
         char_class = models.CharacterClass.objects.get(id=request.POST.get('c_class'))
         char_race = models.CharacterRace.objects.get(id=request.POST.get('c_race'))
         alignment = get_alignment(request.POST.get('alignment'))
-        char_hp = int(char_class.hp.split(' + ')[0]) + get_modifier(request.POST.get('cons'))
         character = models.Character.objects.create(
             name=request.POST.get('name'),
             c_class=char_class,
             c_race=char_race,
             level=request.POST.get('level'),
-            full_hp=char_hp,
+            hp=request.POST.get('hit_points'),
+            full_hp=request.POST.get('hit_points'),
+            speed=request.POST.get('speed'),
             strength=request.POST.get('strength'),
             dexterity=request.POST.get('dex'),
             constitution=request.POST.get('cons'),
@@ -280,7 +281,6 @@ def character_creation(request, username):
         )
         character_level = models.CharacterClassLevel.objects.get(char_class=char_class, level=character.level)
         character.proficiency_bonus = character_level.pro_bonus
-        # character.hit_points = char_class.split(' + ')[0] + get_modifier(character.constitution)
         character.save()
         character_skills(character.id)
         currency = models.CharacterCurrency.objects.create(character=character)
@@ -356,10 +356,10 @@ def character_info(request, username, char_id):
     image_upload_form = forms.CharacterUploadImage()
 
     if request.is_ajax and 'file' in request.POST:
-        print('File 1')
+        print 'File 1'
         upload_type = request.POST.get('upload_type')
         img_file = request.FILES['file']
-        print('Image file')
+        print 'Image file'
         character.image = img_file
         character.save()
         return HttpResponse('Success')
@@ -553,9 +553,9 @@ def campaign_edit(request, username, slug):
         enemies = campaign.getEnemies
     except:
         enemies = None
-    print(enemies)
+    print enemies
     # Invite players
-    # Populate modal
+
     if request.is_ajax and 'call_modal' in request.POST:
         modal = request.POST.get('form')
         context = {'campaign': campaign}
@@ -564,47 +564,45 @@ def campaign_edit(request, username, slug):
                       context)
     # create new enemy
     if request.is_ajax and 'new_enemy' in request.POST:
+        print 'new_enemy'
         # attack_type = models.Attack.objects.get(id=request.POST.get('attack_type'))
         # sub_attack_type = models.Attack.objects.get(id=request.POST.get('sub_attack_type'))
         new_enemy = models.Character.objects.create(
             name = request.POST.get('name'),
             hp = request.POST.get('hp'),
             full_hp = request.POST.get('hp'),
+            damage = request.POST.get('damage'),
             speed = request.POST.get('speed'),
-            armor_class = request.POST.get('defence'),
+            defence = request.POST.get('defence'),
             dexterity = request.POST.get('dex'),
             constitution = request.POST.get('constitution'),
             intelligence = request.POST.get('intelligence'),
             charisma = request.POST.get('charm'),
             wisdom = request.POST.get('wisdom'),
-            user = campaign.host
+            user = campaign.host,
+            enemy = True,
+            enemy_type = request.POST.get('enemy_type'),
+            attack=0
         )
         new_enemy.save()
         # creates the enemy's action
-        if request.POST.getlist('actions[]') != None:
-            actions_list = request.POST.getlist('actions[]')
-            json_actions = json.loads(actions_list[0])
-            for i in json_actions:
-                action = models.EnemyAction.objects.create(
-                        enemy=new_enemy,
-                        name=i[u'name'],
-                        description=i[u'desc']
-                    )
-                new_enemy.actions.add(action)
-
+        new_actions = models.CharacterFeature.objects.create(
+            feature='Actions',
+            description=request.POST.get('actions'),
+            character=new_enemy
+        )
         # creating additional information for the enemy
         if request.POST.getlist('additional-info[]') != None:
+            list = request.POST.get('additional-info')
             add_list = request.POST.getlist('additional-info[]')
             json_list = json.loads(add_list[0])
             for i in json_list:
-                action = models.EnemyAction.objects.create(
-                        enemy=new_enemy,
-                        name=i[u'name'],
-                        description=i[u'desc']
-                    )
-                new_enemy.actions.add(action)
-        new_enemy.save()
-        campaign.enemies.add(new_enemy)
+                char_info = models.CharacterFeature.objects.create(
+                    feature=i[u'name'],
+                    description=i[u'description'],
+                    character=new_enemy
+                )
+        campaign.characters.add(new_enemy)
         campaign.save()
         context = {'enemies': campaign.getEnemies}
         return render(request,
@@ -623,7 +621,7 @@ def campaign_edit(request, username, slug):
         enemies = request.POST.getlist('enemies[]')
         try:
             for e in enemies:
-                print(int(e))
+                print int(e)
                 enemy = models.Character.objects.get(id=int(e))
                 new_battle.enemies.add(enemy)
         except:
@@ -673,7 +671,7 @@ def new_campaign_chapter(request, username, slug, campaign_id):
     campaign = models.Campaign.objects.get(id=campaign_id,
                                            host__username=username,
                                            slug=slug)
-    print(campaign)
+    print campaign
 
     context = {
         'user': user,
@@ -699,8 +697,8 @@ def submit_campaign_chapter(request, username, slug, campaign_id):
             campaign=campaign
         )
         new_chapter.save()
-        print('\n')
-        print('New Chapter: ', new_chapter)
+        print '\n'
+        print 'New Chapter: ', new_chapter
         redirect_to = '/campaign/{0}/{1}/chapter/{2}/edit/'.format(username, campaign.slug, new_chapter.slug)
         return HttpResponse(redirect_to)
 

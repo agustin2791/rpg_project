@@ -190,6 +190,21 @@
 		}
 	}
 }
+.char_class_race {
+	width: 100%;
+	display: block;
+	position: relative;
+	.char_class {
+		width: 30%;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.char_race {
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
+	}
+}
 .equipment {
 	width: 100%;
 	position: relative;

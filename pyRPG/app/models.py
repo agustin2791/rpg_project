@@ -1,10 +1,10 @@
 import os
 from django.db import models
 from django.contrib.auth.models import User
-import views
+import app.views as views
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends_list = models.ManyToManyField(User,
                                           related_name='user_friend_list')
     friend_request = models.ManyToManyField(User,
@@ -15,7 +15,7 @@ class ItemCategory(models.Model):
     name = models.CharField(max_length=225)
     slug = models.SlugField(max_length=450)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 # Item Characteristics, can be equiped or stored in inventory
@@ -23,7 +23,8 @@ class Item(models.Model):
     name = models.CharField(max_length=150)
     # melee weapon, light armor etc.
     category = models.ForeignKey(ItemCategory,
-                                 related_name='item_category')
+                                 related_name='item_category',
+                                 on_delete=models.PROTECT)
     cost = models.CharField(max_length=100)
     armor_class = models.CharField(max_length=120,
                                       blank=True,
@@ -49,9 +50,10 @@ class Item(models.Model):
     description = models.TextField(null=True,
                                    blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
+# Spells for characters
 class Spells(models.Model):
     level = models.IntegerField(default=0)
     spell_name = models.CharField(max_length=150)
@@ -67,7 +69,7 @@ class Spells(models.Model):
     description = models.TextField()
     classes = models.ManyToManyField('CharacterClass')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.spell_name
 
 # Character class e.g. Heavy, Archer, Scientist etc.
@@ -90,7 +92,7 @@ class CharacterClass(models.Model):
     skills_limit = models.IntegerField(default=2)
     skills = models.CharField(max_length=150)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_armor(self):
@@ -139,9 +141,10 @@ class CharacterClass(models.Model):
             to_choose.append(equipment)
         return to_choose
 
-
+# Chracter class equipment
 class CharacterClassEquipment(models.Model):
-    char_class = models.ForeignKey(CharacterClass)
+    char_class = models.ForeignKey(CharacterClass,
+                                    on_delete=models.PROTECT)
     desc = models.CharField(max_length=150)
 
 class CharacterClassLevel(models.Model):
@@ -196,7 +199,7 @@ class CharacterClassLevel(models.Model):
     def get_level_features(self):
         features = CharacterClassFeature.objects.filter(char_class=self.id)
 
-    def __unicode__(self):
+    def __str__(self):
         return '{0} at Level {1}'.format(self.char_class.name, self.level)
 
 class CharacterClassFeature(models.Model):
@@ -218,7 +221,7 @@ class CharacterRace(models.Model):
     language = models.TextField()
     sub_race = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def character_traits(self):
@@ -226,7 +229,8 @@ class CharacterRace(models.Model):
 
 class CharacterRaceTraits(models.Model):
     char_race = models.ForeignKey(CharacterRace,
-                                  related_name='character_race_trait')
+                                  related_name='character_race_trait',
+                                  on_delete=models.CASCADE)
     trait = models.CharField(max_length=50)
     desc = models.TextField()
 
@@ -242,7 +246,7 @@ class Attack(models.Model):
     sub = models.BooleanField(default=False)
     enemy = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 # User's Character and Characteristics
@@ -253,20 +257,29 @@ def user_character_thumb(instance, filename):
     return '{0}/chracter/thumb/{1}'.format(instance.user.id, filename)
 
 class Character(models.Model):
+    user = models.ForeignKey(User,
+                             related_name='user_character',
+                             on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
-    c_class = models.ForeignKey(CharacterClass)
-    c_race = models.ForeignKey(CharacterRace)
     level = models.IntegerField(default=1)
     hp = models.IntegerField(default=100)
     full_hp = models.IntegerField(default=100)
-    speed = models.IntegerField(default=5)
-    strength = models.IntegerField(default=5)
     armor_class = models.IntegerField(default=5)
+    strength = models.IntegerField(default=5)
     dexterity = models.IntegerField(default=5)
     constitution = models.IntegerField(default=5)
     intelligence = models.IntegerField(default=5)
     charisma = models.IntegerField(default=5)
     wisdom = models.IntegerField(default=5)
+    speed = models.IntegerField(default=5)
+    c_class = models.ForeignKey(CharacterClass,
+                                on_delete=models.CASCADE,
+                                blank=False,
+                                null=False)
+    c_race = models.ForeignKey(CharacterRace,
+                                on_delete=models.CASCADE,
+                                blank=False,
+                                null=False)
     inventory = models.ManyToManyField(Item,
                                        related_name='char_inventory')
     inventory_limit = models.FloatField(default=50.0)
@@ -274,12 +287,6 @@ class Character(models.Model):
     initiation = models.IntegerField(default=0)
     description = models.TextField(null=True,
                                    blank=True)
-    user = models.ForeignKey(User,
-                             related_name='user_character')
-    enemy = models.BooleanField(default=False)
-    enemy_type = models.CharField(max_length=150,
-                                  blank=True,
-                                  null=True)
     gold = models.IntegerField(default=0)
     spells = models.ManyToManyField(Spells,
                                     blank=True,
@@ -326,21 +333,21 @@ class Character(models.Model):
                                   blank=True)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
+    # Get the campagin in which the character belongs to
     def get_campaign(self):
         campaigns = Campaign.objects.filter(characters__id=self.id)
         try:
             return campaigns[0]
         except IndexError:
             return None
-    def get_alignment(self):
-        al = self.alignment.split(': ')
-        return al[0]
 
+    # Get the character's abilities
     def get_abilities(self):
         abilities = []
+        # 
         ability = ['strength', 'dexterity', 'constitution', 'intelligence', 'charisma', 'wisdom']
         for a in ability:
             ab = Character.objects.values_list(a, flat=True).get(id=self.id)
@@ -349,18 +356,28 @@ class Character(models.Model):
                 mod = '+{0}'.format(mod)
             abilities.append([a.title(), ab, mod])
         return abilities
+    # Get the character's alignment
+    def get_alignment(self):
+        al = self.alignment.split(': ') # split alignment text and return the name of alignment
+        return al[0]
 
+    # Get the character's information Personality traits, ideals etc...
+    # The idea is more for templating ease
     def get_character_info(self):
         info = []
+        # declare traits
         traits = ['Personality Traits', 'Ideals', 'Bonds', 'Flaws']
         for t in traits:
+            # get the character's traits from model
             search = t.lower()
             search = '_'.join(search.split(' '))
             i = Character.objects.values_list(search, flat=True).get(id=self.id)
+            # append the trait and their value
             info.append([search, t, i])
 
         return info
 
+    # get the list of spells that is available for the character's class
     def get_spell_list(self):
         spells = Spells.objects.filter(level__lte=self.level, classes__id__in=[self.c_class.id]).order_by('level')
         levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -375,6 +392,8 @@ class Character(models.Model):
                 spell_levels.append(spell_level)
 
         return spell_levels
+    
+    # def get_spell_slots():
 
     def skills_limit(self):
         if self.skill_set:
@@ -426,7 +445,7 @@ class Character(models.Model):
     def saving_throws_list(self):
         c_class = self.c_class
         st = c_class.saving_throws.lower().split(', ')
-        print st
+        print(st)
         return st
 
     def get_saving_throws(self):
@@ -505,7 +524,6 @@ class Character(models.Model):
     # def get_class_features(self):
     #     feats = CharacterClassFeature.objects.filter(char_class=self.c_class, level=self.level)
     #     return feats
-
 class CharacterSkills(models.Model):
     character = models.OneToOneField(Character,
                                   on_delete=models.CASCADE,
@@ -558,7 +576,7 @@ class CharacterCurrency(models.Model):
     gold = models.IntegerField(default=0)
     platinum = models.IntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.character.name
 
 
@@ -570,7 +588,7 @@ class CharacterBackground(models.Model):
                                   on_delete=models.CASCADE,
                                   related_name='character_background')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.background
 
 class CharacterFeature(models.Model):
@@ -579,14 +597,23 @@ class CharacterFeature(models.Model):
     character = models.ForeignKey(Character,
                                   on_delete=models.CASCADE,
                                   related_name='character_features')
-    def __unicode__(self):
+    def __str__(self):
         return self.feature
 
+
+'''
+///////////////////////////
+///////////////////////////
+Campaign //////////////////
+///////////////////////////
+///////////////////////////
+'''
 class Campaign(models.Model):
     name = models.CharField(max_length=150)
     slug = models.SlugField(max_length=300)
     host = models.ForeignKey(User,
-                             related_name='campaign_host')
+                             related_name='campaign_host',
+                             on_delete=models.CASCADE)
     player_limit = models.IntegerField(default=6)
     users = models.ManyToManyField(User,
                                    related_name='campaign_users')
@@ -594,12 +621,14 @@ class Campaign(models.Model):
                                        related_name='campaign_characters')
     chapters = models.ManyToManyField('CampaignChapter',
                                       related_name='campaign_chapters')
+    enemies = models.ManyToManyField('Enemy',
+                                    related_name='campaign_enemies')
     objective = models.TextField()
     beginning = models.TextField()
     end = models.TextField()
     complete = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def getEnemies(self):
@@ -609,24 +638,41 @@ class Campaign(models.Model):
                 enemies.append(char)
         return enemies
 
+class Enemy(models.Model):
+    enemy_user = models.ForeignKey(User,
+                             related_name='user_enemy',
+                             on_delete=models.CASCADE)
+    name = models.CharField(max_length=150)
+    level = models.IntegerField(default=1)
+    hp = models.IntegerField(default=100)
+    full_hp = models.IntegerField(default=100)
+    armor_class = models.IntegerField(default=5)
+    strength = models.IntegerField(default=5)
+    dexterity = models.IntegerField(default=5)
+    constitution = models.IntegerField(default=5)
+    intelligence = models.IntegerField(default=5)
+    charisma = models.IntegerField(default=5)
+    wisdom = models.IntegerField(default=5)
+    speed = models.IntegerField(default=5)
+    actions = models.ManyToManyField('EnemyAction', related_name='enemy_actions')
+    info = models.ManyToManyField('EnemyAction', related_name='enemy_info')
+
+class EnemyAction(models.Model):
+    enemy = models.ForeignKey(Enemy,
+                                on_delete=models.CASCADE)
+    name = models.CharField(max_length=150)
+    description = models.TextField()
+
 class NonPlayableCharacters(models.Model):
     name = models.CharField(max_length=150)
     script = models.TextField()
     campaign = models.ForeignKey(Campaign,
                                  null=True,
-                                 blank=True)
-
-    def __unicode__(self):
-        return self.name
-
-class CampaignNotes(models.Model):
-    title = models.CharField(max_length=150)
-    note = models.TextField()
-    campaign = models.ForeignKey(Campaign,
+                                 blank=True,
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return self.title
+    def __str__(self):
+        return self.name
 
 class CampaignChapter(models.Model):
     name = models.CharField(max_length=150)
@@ -634,39 +680,42 @@ class CampaignChapter(models.Model):
     description = models.TextField()
     rooms = models.ManyToManyField('ChapterRoom')
     campaign = models.ForeignKey(Campaign,
-                                 related_name='campaign')
+                                 related_name='campaign',
+                                 on_delete=models.CASCADE)
     cleared = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
+# For Future
 class ChapterArea(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
     number_of_rooms = models.IntegerField(default=3)
     cleared = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
+#For Future
 class ChapterRoom(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
     npc = models.ManyToManyField(NonPlayableCharacters,
                                  related_name='room_npc')
     chapter_area = models.ForeignKey(ChapterArea,
-                                     related_name='chapter_area')
+                                     related_name='chapter_area',
+                                     on_delete=models.CASCADE)
     activity = models.BooleanField(default=False)
     cleared = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Battle(models.Model):
-    name = models.CharField(max_length=150)
-    enemies = models.ManyToManyField(Character,
+    battle_enemies = models.ManyToManyField(Character,
                                      related_name='enemies')
-    characters = models.ManyToManyField(Character,
+    battle_characters = models.ManyToManyField(Character,
                                         related_name='battle_character')
     number_of_commoner = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
@@ -676,25 +725,37 @@ class Battle(models.Model):
                                  blank=True,
                                  null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class CampaignNote(models.Model):
+    campaign = models.ForeignKey(Campaign,
+                                    on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     note = models.TextField()
 
-    def __unicode__(self):
+    def __str__(self):
+        return self.title
+
+class ChapterNote(models.Model):
+    chapter = models.ForeignKey(CampaignChapter,
+                                on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    note = models.TextField()
+
+    def __str__(self):
         return self.title
 
 class Forum(models.Model):
     title = models.CharField(max_length=200)
     entry = models.TextField()
-    post_by = models.ForeignKey(UserProfile)
+    post_by = models.ForeignKey(UserProfile,
+                                on_delete=models.PROTECT)
     posted_on = models.DateField(auto_now=True)
     last_edit = models.DateField(auto_now_add=True)
     points = models.IntegerField(default=0)
     
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_comments(self):
@@ -702,16 +763,19 @@ class Forum(models.Model):
 
 
 class ForumComment(models.Model):
-    forum = models.ForeignKey(Forum)
+    forum = models.ForeignKey(Forum,
+                                on_delete=models.CASCADE)
     comment = models.TextField()
     posted_on = models.DateField(auto_now=True)
     last_edit = models.DateField(auto_now_add=True)
-    comment_by = models.ForeignKey(UserProfile)
+    comment_by = models.ForeignKey(UserProfile,
+                                    on_delete=models.PROTECT)
     reply_to = models.ForeignKey('ForumComment',
                                 blank=True,
-                                null=True)
+                                null=True,
+                                on_delete=models.PROTECT)
     
-    def __unicode__(self):
+    def __str__(self):
         return self.forum.title
     
     def get_reply(self):
