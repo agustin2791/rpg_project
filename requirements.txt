@@ -2,7 +2,7 @@ astroid==1.6.5
 backports.functools-lru-cache==1.5
 colorama==0.4.1
 configparser==3.5.0
-Django==1.11.14
+Django==2.2.24
 django-croppie==1.3
 djangorestframework==3.9.0
 enum34==1.1.6
